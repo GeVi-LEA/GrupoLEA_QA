@@ -1,10 +1,10 @@
 <?php
             define('root', __DIR__);
             session_start();
-            require_once (root.'/config/parameters.php');
-            require_once (root.'/config/autoload.php');
-            require_once (root.'/config/db.php');
-            require_once (root.'/utils/utils.php');
+            require_once 'config/parameters.php';
+            require_once 'config/autoload.php';
+            require_once 'config/db.php';
+            require_once 'utils/utils.php';
 
             function show_error() {
                 $error = new errorController();

@@ -220,14 +220,34 @@ function generar(e) {
 		}
 	}
 }
-
+// let clickiframe;
 function abrirCatalogos(e) {
 	e.preventDefault();
-	window.open(
-		__url__ + "views/catalogos/index.php",
-		"Catalogos",
-		"width=1450,height=750"
-	);
+	// window.open(
+	// __url__ + "views/catalogos/index.php",
+	// "Catalogos",
+	// "width=1450,height=750"
+	// );
+	Swal.fire({
+		showCloseButton: false,
+		showCancelButton: false,
+		showConfirmButton: false,
+		width: "90vw",
+		html: `<iframe id="iframe_servicio" style="width:100%; height:80vh;" src="${__url__}views/catalogos/index.php" frameborder="0"></iframe>`,
+		didOpen: () => {
+			$("iframe").on("load", function () {
+				$(this)
+					.contents()
+					.on("mousedown, mouseup, click", function (e) {
+						// clickiframe = e;
+						if (e.target.title == "Cerrar") {
+							swal.close();
+						}
+						// console.log("Click detected inside iframe.   ", e);
+					});
+			});
+		},
+	});
 }
 
 function cambiarInputFile(id, span) {
@@ -385,26 +405,12 @@ if (window.history.replaceState) {
 	window.history.replaceState(null, null, window.location.href);
 }
 
-function padTo2Digits(num) {
-	return num.toString().padStart(2, "0");
-}
-function formatDate(date) {
-	return (
-		[
-			date.getFullYear(),
-			padTo2Digits(date.getMonth() + 1),
-			padTo2Digits(date.getDate()),
-		].join("/") +
-		" " +
-		[
-			padTo2Digits(date.getHours()),
-			padTo2Digits(date.getMinutes()),
-			padTo2Digits(date.getSeconds()),
-		].join(":")
-	);
-}
+//DESCRIPCIÓN: FUNCION PARA CARGAR EL LOADING,
+//AUTOR: LUIS VILLARREAL.
+//FECHA: 18/03/2022
+//MODIFICACIONES: 2
 
-const loadingPage = () => {
+const showLoading_global = (mensaje = "Trabajando ...") => {
 	let htmlLoading_global = ` 
                         <div>
                               <div class="row">
@@ -414,35 +420,42 @@ const loadingPage = () => {
                               </div>
                               <div class="row">
                                     <div class="col-12">
-                                          <img src="http://192.168.0.22/LEAGroupAPP/assets/img/logo_lea_260.png"></img>
+                                          <div><h2>Trabajando ...</h2></div>
                                     </div>
                               </div>
                         </div>
                         `;
+	var el_global = document.createElement("div");
+	el_global.innerHTML = htmlLoading_global;
 
+	var loading_ = htmlLoading_global;
+	if (mensaje != "") {
+		loading_ = loading_.replace("Trabajando ...", mensaje);
+	}
+	////console.log(loading_);
+	var el_global = document.createElement("div");
+	el_global.innerHTML = loading_;
 	Swal.fire({
-		grow: "fullscreen",
-		title: " ",
-		background: "#c3c3c3",
-		html: htmlLoading_global,
-		showCloseButton: false,
-		showConfirmButton: false,
+		title: mensaje,
+		html: "",
+		didOpen: () => {
+			Swal.showLoading();
+		},
 	});
 };
 
-function htmlNum(num) {
-	return Number(num).toLocaleString("en");
-}
-function isNumeric(value) {
-	const regex = /,/g;
-	var num = value.replace(regex, "");
-	var valid = !isNaN(Number(num));
-	return valid;
+function goToByScroll(id) {
+	// Remove "link" from the ID
+	id = id.replace("link", "");
+	// Scroll
+	$("html,body").animate(
+		{
+			scrollTop: $("#" + id).offset().top - 80,
+		},
+		"slow"
+	);
 }
 
-function formatDateToString(date) {
-	return $.datepicker.formatDate("dd/mm/yy", date);
-}
-function formatDateHourToString(date) {
-	return date.toLocaleString();
-}
+const getRandomColor = () => {
+	return "#" + ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0");
+};

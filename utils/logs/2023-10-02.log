@@ -1,0 +1,18 @@
+[02-Oct-2023 15:02:55 America/Mexico_City] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by  e.id desc' at line 1 in C:\xampp\htdocs\GrupoLEA\models\compras\embarque.php:369
+Stack trace:
+#0 C:\xampp\htdocs\GrupoLEA\models\compras\embarque.php(369): mysqli->query('select e.*, (DA...')
+#1 C:\xampp\htdocs\GrupoLEA\models\compras\embarque.php(428): Embarque->getAll(' where e.aduana...')
+#2 C:\xampp\htdocs\GrupoLEA\controllers\ComprasController.php(1358): Embarque->getEmbarqueByFechasProdProv(NULL, NULL, NULL, NULL, NULL)
+#3 C:\xampp\htdocs\GrupoLEA\views\principal\index.php(40): comprasController->buscarEmbarques()
+#4 C:\xampp\htdocs\GrupoLEA\views\principal\index.php(21): llamarController()
+#5 {main}
+  thrown in C:\xampp\htdocs\GrupoLEA\models\compras\embarque.php on line 369
+[02-Oct-2023 15:32:36 America/Mexico_City] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order by  e.id desc' at line 1 in C:\xampp\htdocs\GrupoLEA\models\compras\embarque.php:369
+Stack trace:
+#0 C:\xampp\htdocs\GrupoLEA\models\compras\embarque.php(369): mysqli->query('select e.*, (DA...')
+#1 C:\xampp\htdocs\GrupoLEA\models\compras\embarque.php(428): Embarque->getAll(' where e.aduana...')
+#2 C:\xampp\htdocs\GrupoLEA\controllers\ComprasController.php(1358): Embarque->getEmbarqueByFechasProdProv(NULL, NULL, NULL, NULL, NULL)
+#3 C:\xampp\htdocs\GrupoLEA\views\principal\index.php(40): comprasController->buscarEmbarques()
+#4 C:\xampp\htdocs\GrupoLEA\views\principal\index.php(21): llamarController()
+#5 {main}
+  thrown in C:\xampp\htdocs\GrupoLEA\models\compras\embarque.php on line 369

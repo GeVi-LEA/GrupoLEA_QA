@@ -17,6 +17,8 @@
            <li><a href="<?= principalUrl ?>?controller=Servicios&action=ensacado"><i class="fas fa-circle i-list-circle"></i>Logistica</a></li>
            <li><a href="<?= principalUrl ?>?controller=Servicios&action=serviciosNave"><i class="fas fa-circle i-list-circle"></i>Nave 4</a></li>
            <li><a href="<?= principalUrl ?>?controller=Servicios&action=serviciosAlmacen"><i class="fas fa-circle i-list-circle"></i>Almacenaje</a></li>
+		   <li><a href="<?= principalUrl ?>?controller=Servicios&action=almacenamientoPiso"><i class="fas fa-circle i-list-circle"></i>Alm. Piso</a></li>
+                  <li><a href="<?= principalUrl ?>?controller=Servicios&action=monitorEntradas"><i class="fas fa-circle i-list-circle"></i>Mon. Entradas</a></li>
          </ul>
         <li><div><i class="fas fa-laptop pr-1"></i><span class="hidden">Sistemas</span><i id="dropMenu" class="material-icons expand-menu rotar90">expand_more</i></div></li>
           <ul class="menu-drop transparent hidden" id="subMenu">
