@@ -1,0 +1,45 @@
+[09-May-2022 13:45:34 America/Mexico_City] PHP Notice:  Undefined variable: filenameRem in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 1588
+[09-May-2022 13:45:34 America/Mexico_City] PHP Stack trace:
+[09-May-2022 13:45:34 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[09-May-2022 13:45:34 America/Mexico_City] PHP   2. comprasController->recepcionFletes() C:\wamp64\www\GrupoLEA\index.php:28
+[09-May-2022 13:45:34 America/Mexico_City] PHP Notice:  Undefined variable: filenameRem in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 1589
+[09-May-2022 13:45:34 America/Mexico_City] PHP Stack trace:
+[09-May-2022 13:45:34 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[09-May-2022 13:45:34 America/Mexico_City] PHP   2. comprasController->recepcionFletes() C:\wamp64\www\GrupoLEA\index.php:28
+[09-May-2022 13:45:34 America/Mexico_City] PHP Warning:  rename(views/compras/uploads/remisiones/amortizacion (7).pdf,views/compras/uploads/remisiones/): Acceso denegado. (code: 5) in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 1589
+[09-May-2022 13:45:34 America/Mexico_City] PHP Stack trace:
+[09-May-2022 13:45:34 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[09-May-2022 13:45:34 America/Mexico_City] PHP   2. comprasController->recepcionFletes() C:\wamp64\www\GrupoLEA\index.php:28
+[09-May-2022 13:45:34 America/Mexico_City] PHP   3. rename($old_name = 'views/compras/uploads/remisiones/amortizacion (7).pdf', $new_name = 'views/compras/uploads/remisiones/') C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:1589
+[09-May-2022 13:45:34 America/Mexico_City] PHP Notice:  Undefined variable: filenameRem in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 1590
+[09-May-2022 13:45:34 America/Mexico_City] PHP Stack trace:
+[09-May-2022 13:45:34 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[09-May-2022 13:45:34 America/Mexico_City] PHP   2. comprasController->recepcionFletes() C:\wamp64\www\GrupoLEA\index.php:28
+[09-May-2022 13:57:14 America/Mexico_City] PHP Deprecated:  Unparenthesized `a ? b : c ? d : e` is deprecated. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in C:\wamp64\www\GrupoLEA\views\compras\embarques.php on line 122
+[09-May-2022 13:57:14 America/Mexico_City] PHP Stack trace:
+[09-May-2022 13:57:14 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[09-May-2022 13:57:14 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[09-May-2022 13:57:14 America/Mexico_City] PHP Deprecated:  Unparenthesized `a ? b : c ? d : e` is deprecated. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in C:\wamp64\www\GrupoLEA\views\compras\embarques.php on line 135
+[09-May-2022 13:57:14 America/Mexico_City] PHP Stack trace:
+[09-May-2022 13:57:14 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[09-May-2022 13:57:14 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[09-May-2022 13:57:14 America/Mexico_City] PHP Deprecated:  Unparenthesized `a ? b : c ? d : e` is deprecated. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in C:\wamp64\www\GrupoLEA\views\compras\embarques.php on line 149
+[09-May-2022 13:57:14 America/Mexico_City] PHP Stack trace:
+[09-May-2022 13:57:14 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[09-May-2022 13:57:14 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[09-May-2022 13:57:14 America/Mexico_City] PHP Deprecated:  Unparenthesized `a ? b : c ? d : e` is deprecated. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in C:\wamp64\www\GrupoLEA\views\compras\embarques.php on line 169
+[09-May-2022 13:57:14 America/Mexico_City] PHP Stack trace:
+[09-May-2022 13:57:14 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[09-May-2022 13:57:14 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[09-May-2022 13:57:14 America/Mexico_City] PHP Deprecated:  Unparenthesized `a ? b : c ? d : e` is deprecated. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in C:\wamp64\www\GrupoLEA\views\compras\embarques.php on line 201
+[09-May-2022 13:57:14 America/Mexico_City] PHP Stack trace:
+[09-May-2022 13:57:14 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[09-May-2022 13:57:14 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[09-May-2022 13:57:14 America/Mexico_City] PHP Deprecated:  Unparenthesized `a ? b : c ? d : e` is deprecated. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in C:\wamp64\www\GrupoLEA\views\compras\embarques.php on line 248
+[09-May-2022 13:57:14 America/Mexico_City] PHP Stack trace:
+[09-May-2022 13:57:14 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[09-May-2022 13:57:14 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[09-May-2022 13:57:14 America/Mexico_City] PHP Deprecated:  Unparenthesized `a ? b : c ? d : e` is deprecated. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in C:\wamp64\www\GrupoLEA\views\compras\embarques.php on line 262
+[09-May-2022 13:57:14 America/Mexico_City] PHP Stack trace:
+[09-May-2022 13:57:14 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[09-May-2022 13:57:14 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28

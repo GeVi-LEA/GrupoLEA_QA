@@ -1,0 +1,692 @@
+[01-Feb-2022 09:11:31 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:11:31 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:11:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:11:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:11:31 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:11:31 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:11:31 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:11:31 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:11:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:11:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:11:31 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:11:31 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:11:31 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:11:31 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:11:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:11:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:11:31 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:11:31 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:16:44 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:16:44 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:16:44 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:16:44 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:16:44 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:16:44 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:16:44 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:16:44 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:16:44 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:16:44 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:16:44 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:16:44 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:16:44 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:16:44 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:16:44 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:16:44 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:16:44 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:16:44 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:16:57 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:16:57 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:16:57 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:16:57 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:16:57 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:16:57 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:16:57 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:16:57 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:16:57 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:16:57 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:16:57 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:16:57 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:16:57 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:16:57 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:16:57 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:16:57 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:16:57 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:16:57 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:17:00 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:17:00 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:17:00 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:17:00 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:17:00 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:17:00 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:17:00 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:17:00 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:17:00 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:17:00 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:17:00 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:17:00 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:17:00 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:17:00 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:17:00 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:17:00 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:17:00 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:17:00 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:17:21 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:20:52 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:20:52 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:20:52 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:20:52 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:20:52 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:20:52 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:20:52 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:20:52 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:20:52 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:20:52 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:20:52 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:20:52 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:20:52 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:20:52 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:20:52 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:20:52 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:20:52 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:20:52 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:21:40 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:21:40 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:21:40 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:21:40 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:21:40 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:21:40 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:21:40 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:21:40 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:21:40 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:21:40 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:21:40 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:21:40 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:21:40 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:21:40 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:21:40 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:21:40 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:21:40 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:21:40 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:22:07 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:22:07 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:22:07 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:22:07 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:22:07 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:22:07 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:22:07 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:22:07 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:22:07 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:22:07 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:22:07 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:22:07 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:22:07 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:22:07 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:22:07 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:22:07 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:22:07 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:22:07 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:22:41 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:22:41 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:22:41 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:22:41 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:22:41 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:22:41 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:22:41 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:22:41 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:22:41 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:22:41 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:22:41 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:22:41 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:22:41 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:22:41 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:22:41 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:22:41 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:22:41 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:22:41 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:23:54 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:23:54 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:23:54 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:23:54 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:23:54 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:23:54 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:23:54 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:23:54 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:23:54 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:23:54 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:23:54 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:23:54 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:23:54 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:23:54 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:23:54 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:23:54 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:23:54 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:23:54 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:33:11 America/Mexico_City] PHP Fatal error:  Can't use function return value in write context in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 50
+[01-Feb-2022 09:33:11 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:33:11 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:33:11 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:33:11 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:33:57 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:33:57 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:33:57 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:33:57 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:33:57 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:33:57 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:33:57 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:33:57 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:33:57 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:33:57 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:33:57 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:33:57 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:33:57 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:33:57 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:33:57 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:33:57 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[01-Feb-2022 09:33:57 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[01-Feb-2022 09:33:57 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:40:16 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:40:16 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:40:16 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:40:16 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 09:40:16 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 09:40:16 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:40:16 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:40:16 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:40:16 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:40:16 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 09:40:16 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 09:40:16 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:40:16 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:40:16 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:40:16 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:40:16 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 09:40:16 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 09:40:16 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:42:14 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:42:14 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:42:14 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:42:14 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 09:42:14 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 09:42:14 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:42:14 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:42:14 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:42:14 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:42:14 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 09:42:14 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 09:42:14 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:42:14 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:42:14 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:42:14 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:42:14 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 09:42:14 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 09:42:14 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:47:06 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to undefined function FILTER_SANITIZE_ENCODED2() in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php:52
+Stack trace:
+#0 C:\wamp64\www\GrupoLEA\controllers\SistemasController.php(39): require_once()
+#1 C:\wamp64\www\GrupoLEA\views\principal\index.php(40): sistemasController->solicitudServicio()
+#2 C:\wamp64\www\GrupoLEA\views\principal\index.php(21): llamarController()
+#3 {main}
+  thrown in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 52
+[01-Feb-2022 09:47:21 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to undefined function FILTER_SANITIZE_ENCODED() in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php:52
+Stack trace:
+#0 C:\wamp64\www\GrupoLEA\controllers\SistemasController.php(39): require_once()
+#1 C:\wamp64\www\GrupoLEA\views\principal\index.php(40): sistemasController->solicitudServicio()
+#2 C:\wamp64\www\GrupoLEA\views\principal\index.php(21): llamarController()
+#3 {main}
+  thrown in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 52
+[01-Feb-2022 09:47:22 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to undefined function FILTER_SANITIZE_ENCODED() in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php:52
+Stack trace:
+#0 C:\wamp64\www\GrupoLEA\controllers\SistemasController.php(39): require_once()
+#1 C:\wamp64\www\GrupoLEA\views\principal\index.php(40): sistemasController->solicitudServicio()
+#2 C:\wamp64\www\GrupoLEA\views\principal\index.php(21): llamarController()
+#3 {main}
+  thrown in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 52
+[01-Feb-2022 09:48:28 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:48:28 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:48:28 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:48:28 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 09:48:28 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 09:48:28 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:48:28 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:48:28 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:48:28 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:48:28 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 09:48:28 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 09:48:28 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:48:28 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:48:28 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:48:28 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:48:28 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 09:48:28 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 09:48:28 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:48:38 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:48:38 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:48:38 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:48:38 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 09:48:38 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 09:48:38 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:48:38 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:48:38 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:48:38 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:48:38 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 09:48:38 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 09:48:38 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:48:38 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:48:38 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:48:38 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:48:38 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 09:48:38 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 09:48:38 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:49:07 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:49:07 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:49:07 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:49:07 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 09:49:07 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 09:49:07 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:49:07 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:49:07 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:49:07 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:49:07 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 09:49:07 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 09:49:07 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:49:07 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:49:07 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:49:07 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:49:07 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 09:49:07 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 09:49:07 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:49:09 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:49:09 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:49:09 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:49:09 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 09:49:09 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 09:49:09 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:49:09 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:49:09 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:49:09 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:49:09 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 09:49:09 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 09:49:09 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:49:09 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:49:09 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:49:09 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:49:09 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 09:49:09 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 09:49:09 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:51:43 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:51:43 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:51:43 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:51:43 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 09:51:43 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 09:51:43 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:51:43 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:51:43 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:51:43 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:51:43 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 09:51:43 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 09:51:43 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 09:51:43 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 09:51:43 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 09:51:43 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 09:51:43 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 09:51:43 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 09:51:43 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 10:30:18 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 10:30:18 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 10:30:18 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 10:30:18 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 10:30:18 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 10:30:18 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 10:30:18 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 10:30:18 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 10:30:18 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 10:30:18 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 10:30:18 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 10:30:18 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 10:30:18 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 10:30:18 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 10:30:18 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 10:30:18 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 10:30:18 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 10:30:18 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 10:30:20 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 10:30:21 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 10:30:21 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 10:30:21 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 10:30:21 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 10:30:21 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 10:30:21 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 10:30:21 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 10:30:21 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 10:30:21 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 10:30:21 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 10:30:21 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 10:30:21 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 10:30:21 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 10:30:21 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 10:30:21 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 10:30:21 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 10:30:21 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 10:30:21 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:38:10 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:38:10 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:38:10 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:38:10 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:38:10 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:38:10 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:38:10 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:38:10 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:38:10 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:38:10 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:38:10 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:38:10 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:38:10 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:38:10 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:38:10 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:38:10 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:38:10 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:38:10 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:42:29 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:42:29 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:42:29 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:42:29 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:42:29 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:42:29 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:42:29 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:42:29 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:42:29 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:42:29 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:42:29 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:42:29 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:42:29 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:42:29 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:42:29 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:42:29 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:42:29 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:42:29 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:42:32 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:42:32 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:42:32 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:42:32 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:42:32 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:42:32 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:42:32 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:42:32 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:42:32 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:42:32 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:42:32 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:42:32 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:42:32 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:42:32 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:42:32 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:42:32 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:42:32 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:42:32 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:44:37 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:44:37 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:44:37 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:44:37 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:44:37 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:44:37 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:44:37 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:44:37 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:44:37 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:44:37 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:44:37 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:44:37 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:44:37 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:44:37 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:44:37 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:44:37 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:44:37 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:44:37 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:46:10 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:46:10 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:46:10 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:46:10 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:46:10 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:46:10 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:46:10 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:46:10 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:46:10 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:46:10 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:46:10 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:46:10 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:46:10 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:46:10 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:46:10 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:46:10 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:46:10 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:46:10 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:47:09 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:47:09 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:47:09 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:47:09 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:47:09 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:47:09 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:47:09 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:47:09 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:47:09 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:47:09 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:47:09 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:47:09 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:47:09 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:47:09 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:47:09 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:47:09 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:47:09 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:47:09 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:47:46 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:47:46 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:47:46 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:47:46 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:47:46 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:47:46 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:47:46 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:47:46 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:47:46 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:47:46 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:47:46 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:47:46 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:47:46 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:47:46 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:47:46 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:47:46 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:47:46 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:47:46 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:48:20 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:48:20 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:48:20 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:48:20 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:48:20 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:48:20 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:48:20 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:48:20 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:48:20 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:48:20 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:48:20 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:48:20 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:48:20 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:48:20 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:48:20 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:48:20 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:48:20 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:48:20 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:48:48 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:48:48 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:48:48 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:48:48 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:48:48 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:48:48 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:48:48 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:48:48 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:48:48 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:48:48 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:48:48 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:48:48 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:48:48 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:48:48 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:48:48 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:48:48 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:48:48 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:48:48 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:48:49 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:48:49 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:48:49 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:48:49 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:48:49 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:48:49 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:48:49 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:48:49 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:48:49 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:48:49 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:48:49 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:48:49 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:48:49 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:48:49 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:48:49 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:48:49 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:48:49 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:48:49 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:49:37 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:49:37 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:49:37 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:49:37 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:49:37 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:49:37 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:49:37 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:49:37 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:49:37 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:49:37 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:49:37 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:49:37 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:49:37 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:49:37 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:49:37 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:49:37 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:49:37 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:49:37 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 13:51:57 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 15:48:54 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 15:48:54 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 15:48:54 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 15:48:54 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 15:48:54 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 15:48:54 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 15:48:54 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 15:48:54 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 15:48:54 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 15:48:54 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 15:48:54 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 15:48:54 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39
+[01-Feb-2022 15:48:54 America/Mexico_City] PHP Notice:  Undefined variable: solicitud in C:\wamp64\www\GrupoLEA\views\sistemas\solicitud_servicio.php on line 156
+[01-Feb-2022 15:48:54 America/Mexico_City] PHP Stack trace:
+[01-Feb-2022 15:48:54 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[01-Feb-2022 15:48:54 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[01-Feb-2022 15:48:54 America/Mexico_City] PHP   3. sistemasController->solicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[01-Feb-2022 15:48:54 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:39

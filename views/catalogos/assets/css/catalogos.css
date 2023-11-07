@@ -1,0 +1,583 @@
+
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+.contenedor{
+    font-family: 'Noto Sans', sans-serif;
+}
+
+/* -------------Iconos ------------- */
+.material-icons{
+    user-select: none;
+}
+.i-correcto{
+    padding-right: 15px;
+    font-size: 36px;
+    color: #28b346;
+    vertical-align: middle;
+}
+
+.i-danger{
+    padding-right: 15px;
+    font-size: 36px;
+    color: #d81313;
+    vertical-align: middle;
+}
+
+.i-warning{
+    padding-right: 15px;
+    font-size: 36px;
+    color: #f1c40f;
+    vertical-align: middle;
+}
+
+
+div.jconfirm-content-pane{
+    text-align: center;
+}
+
+.ui-datepicker-trigger{
+    outline: none;
+    border-color:transparent;
+    padding: 0;
+    margin:0 auto;
+    background-color: transparent;
+}
+
+.container{
+max-width: 95%;
+}
+
+button:focus {
+    outline: none;
+}
+
+.i-calendar{
+    font-size:18px;
+    color: #141457;
+    margin-left:3px;
+}
+
+.i-list:active,
+.i-calendar:active{
+    color: #7477f7
+}
+
+.fas:hover,
+.material-icons:hover{
+    opacity: .6;
+    cursor: pointer;
+}
+
+.i-edit{
+    color: #cc9900;
+}
+
+.i-edit:active{
+    color: #e0dc92;
+}
+.i-save{
+    color: #333333;
+}
+
+.i-save:active{
+    color: #b0b0b0;
+}
+
+.i-clear,
+.i-delete{
+    color: #990033;
+}
+
+.i-clear:active,
+.i-delete:active{
+    color: #fc88a5;
+}
+
+.i-search,
+.i-add{
+    color: #141457;
+    font-size: 17px;
+}
+
+.i-list {
+    font-size: 18px;
+    color: #141457;
+    vertical-align: top;
+   }
+   
+.i-add:active{
+    color: #7477f7
+}
+
+.i-close{
+    color: #e90450;
+}
+
+.i-cancel{
+    color: #e90450;
+}
+
+
+.i-cancel:active{
+    color: #fc88a5;
+}
+
+.i-apps{
+    color: #141457;
+    font-size: 30px;
+}
+
+.i-slideUp{
+    color: #141457;
+    transition: 1s;
+}
+
+.i-excel{
+    color: #107c41;
+  }
+  
+.i-excel:active{
+    color: #4d8f6b;
+}
+
+.i-pdf:active{
+    color:#e27b7b;
+}
+
+.i-pdf{
+    color:#d81313;
+}
+
+
+.required{
+    border: 3px solid #920404 !important;
+    box-shadow: 0 0 5px 1px #920404;
+}
+
+.hidden{
+    display:none;
+}
+
+.selected{
+    background-color: #c3c3ce;
+}
+
+.show{
+    opacity: 1;
+}
+
+.rotar{
+    transform: rotate(180deg);
+}
+
+.opaco{
+    opacity:.1;
+}
+
+.transition{
+    transition: 1s ease-out;
+}
+.inputXL{
+    width: 500px;
+}
+
+.inputLarge{
+    width: 400px;
+}
+
+.inputMail{
+    width: 360px;
+}
+
+
+.inputMedium{
+    width: 160px;
+}
+
+.inputBig{
+    width: 250px;
+}
+
+.inputSmall{
+    width: 85px;
+}
+
+.inputXSmall{
+    width: 40px;
+}
+
+.inputSelectMin{
+    width: 105px;
+}
+
+.sec-big{
+    width: 97% !important;
+}
+
+.tabla-big{
+    width: 100%;
+    font-size: 13px;
+}
+
+.tabla-ruta td{
+    padding: 5px;
+    vertical-align:middle;
+}
+
+.btnAgregar{
+    width:7rem;
+    height: 2rem;
+    border-style: hidden;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    background-color:#141457;
+    cursor: pointer;
+    transition: .5s ease-in-out;
+}
+
+.btnAgregar:hover{
+    width:7rem;
+    height: 4rem;
+}
+
+.item-medium{
+    background-color: #141457;
+    width: 100%;
+    height: 130px;
+    text-align: center;
+    transition: 1s;
+}
+
+.item-medium:hover{
+    opacity: .6;
+    font-size: 20px;
+    transform: scale(1.06);
+}
+
+.item-medium span{
+    display: block;
+    color: #fff;
+    font-weight: bold;
+}
+
+.item-medium span:hover{
+    text-decoration: underline;
+}
+
+.item-medium i {
+    display: block;
+    padding-top:25px;
+    color: #fff;
+    font-size: 40px;      
+}
+
+.item-medium a:hover {
+    color: #fff; 
+    text-decoration: none;  
+}
+
+.header{
+    padding-top: 5px;
+}
+
+.header img{
+    height: 3rem;
+}
+
+.titulo{
+    font-size: 30px;
+    margin:0;
+}
+
+nav.menu{
+    display: block;
+    width: 100%;
+    height: 30px;
+    text-align: right;
+    background-color: #141457;
+    transition: 1s;
+}
+
+nav.menu span{
+    margin: 0 5px;
+    padding-right: 30px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav.menu span:hover{
+    opacity: .5;
+    cursor: pointer;
+    font-size: 17px;
+    text-decoration: underline;
+}
+
+
+.divCancelar{
+    width:105%;
+    height: 0px;
+    text-align: right;
+}
+
+.formulario{
+    margin: 0 auto;
+    width:50%;
+    max-width: 1200px;
+    transition:1s;
+}
+
+.formulario label{
+    font-weight: 700;
+}
+
+nav.menu span a{
+    color: #fff;
+}
+
+.formulario input[type="password"],
+.formulario input[type="text"], 
+.formulario select{
+    font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 5px;
+    border-style: hidden;
+    background-color: #c3c3ce;
+    border-radius: .2rem;
+    height: 25px;
+}
+
+.formulario input[type="password"]:hover,
+.formulario input[type="text"]:hover,
+.formulario select:hover,
+.formulario textarea{
+    border: 2px solid #141457;
+}
+
+.formulario input[type="password"]:focus,
+.formulario input[type="text"]:focus,
+select:focus,
+.formulario textarea{
+    outline: 0px;
+    border: 3px solid #141457;
+    background-color: #dbdbe2;
+}
+
+.formulario .error{
+    display: none;
+    width:100%;
+    padding-left: 30px;
+    background-color: #920404;
+    color: #fff;
+    font-size: 15px;
+}
+
+.textarea-observaciones{
+    height:4rem;
+    width:48rem;
+    border-style: hidden;
+    font-size: .9rem;  
+    background-color: #c3c3ce;
+    border-radius: .2rem;
+    resize: none;
+    padding:7px;
+}
+
+.textarea-descripcion{
+    height: 5rem;
+    width: 25rem;
+    border-style: hidden;
+    font-size: .9rem;  
+    background-color: #c3c3ce;
+    border-radius: .2rem;
+    resize: none;
+    padding:7px;
+}
+
+.sec-tabla{
+    overflow-y: scroll;
+    height:520px;
+    margin: 0 auto;
+    margin-top: 15px;
+    width: 85%;
+    transition: 1s;
+}
+
+.sec-tabla table .tr{
+    transition: .5s ease-out;
+}
+
+.sec-tabla table .tr:hover{
+    background-color: #c3c3ce;
+}
+
+.td-datos div{
+    background-color:#21618C;
+    color: #fff;
+    font-weight: 700;
+}
+
+.td-datos label{
+    padding: 5px 0 0 3px;
+}
+
+.img-user{
+    width:120px;
+    height: 170px;
+}
+
+.img-thumb{
+    display:inline-block;
+    width:70px;
+    height:80px;
+}
+
+.img-thumb:hover{
+  transform: scale(1.8);
+  transition:all 1s ease-in-out;
+}
+
+.inputFile{
+    background-color:#444855;
+    color:#fff;
+    border-radius: 5px;
+}
+
+.inputFile:hover{
+    background-color:#fff;
+    color:#444855;
+    cursor:pointer;
+    transition: 1s ease;
+}
+
+.div-img-permisos{
+    display: grid;
+    grid-template-columns: 30% 30% 40%;
+}
+
+.btn-warning{
+    color: #ffff;
+}
+
+.btn-warning:hover{
+    color: #ffc107;
+    border: #ffc107;
+    background-color: #ffff;
+}
+
+.sec-doc{
+display:none;
+}
+
+.view-doc{
+    display: block;
+    height: 700px;
+ }
+
+
+.btn-slideUp{
+    width:100%;
+    margin:10px 0 4px 0;
+    padding: 0px;
+    display: block;
+    height: 15px;
+    text-align: center;
+}
+
+.btn-slideUp span{
+    font-size: 18px;
+}
+
+.jconfirm{
+    text-align:center;
+}
+
+.buscador{
+    border-radius: 5px;
+    border: 1px solid #141457;
+    padding:1px 0 1px 4px;
+    margin-right: 2px;
+    font-size: 15px;
+}
+
+.buscador:focus{
+    border: 2px solid #141457;
+    outline: none;
+}
+
+.modal-busqueda select,
+.modal-busqueda input{
+    font-size: .8rem;  
+    border-style: hidden;
+    background-color: #c3c3ce !important;
+    border-radius: .2rem;
+    padding: 4px;
+}
+
+.modal-busqueda select:hover,
+.modal-busqueda input:hover{
+    border: 2px solid #141457;
+}
+
+.modal-header{
+    color: #fff;
+    background-color: #141457;
+}
+.modal-header .close{
+    color: #fff;
+}
+
+.border-modal{
+    border-top: 1px solid rgba(20,20,87,0.4);
+}
+
+.m-dialog{
+    width: 600px;
+    margin-top: 10px;
+    padding:0;
+}
+
+.m-header{
+    padding:.1rem 2rem .1rem 2rem;
+}
+
+.m-content{
+    width: 560px;
+    height: 200px;
+}
+
+.m-footer{
+    padding: 5px; 
+}
+
+.enviarBtn{
+    opacity: .5;
+    background-color:#141457;
+    color:#fff;
+    font-weight:700;
+    transition: all .5s ease;
+   }
+.enviarBtn span{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+   .enviarBtn:hover{
+     color: #fff;
+     opacity: 1;
+  }
+
+  .div-info label{
+    border-bottom:1px solid;
+    padding: 0px 3px 1px 3px;
+  }
+
+

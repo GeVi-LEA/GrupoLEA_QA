@@ -1,0 +1,37 @@
+.fondo{
+    width:900px;
+    height:550px;
+}
+
+.fondo::before{
+    content: '';
+    position: absolute;
+    opacity: .4;
+    background: url('../../../../assets/img/default.jpg');
+    background-repeat: no-repeat;
+    background-size: center ;
+    background-position: center;
+    background-size: 50%;
+    width:870px;
+    height:550px;
+}
+
+.content{
+    width:800px;
+    height:500px;
+    margin-top: 150px;
+    text-align: center;
+    vertical-align: middle;
+    color: #141457;
+}
+
+.i-danger{
+    font-size: 50px;
+    color: #d81313;
+
+}
+
+.content a{
+    font-size: 25px;
+    color:blue;
+}

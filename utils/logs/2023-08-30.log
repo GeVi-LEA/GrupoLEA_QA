@@ -1,0 +1,39 @@
+[30-Aug-2023 13:31:53 America/Mexico_City] PHP Fatal error:  Maximum execution time of 120 seconds exceeded in C:\wamp64\www\GrupoLEA\models\compras\embarque.php on line 369
+[30-Aug-2023 13:31:53 America/Mexico_City] PHP Stack trace:
+[30-Aug-2023 13:31:53 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[30-Aug-2023 13:31:53 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[30-Aug-2023 13:31:53 America/Mexico_City] PHP   3. comprasController->index() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[30-Aug-2023 13:31:53 America/Mexico_City] PHP   4. Embarque->getUltimosEmbarques() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:32
+[30-Aug-2023 13:31:53 America/Mexico_City] PHP   5. Embarque->getAll($where = ' where e.fecha_alta >= DATE_ADD(curdate(), INTERVAL -1 month) order by e.id desc limit 6') C:\wamp64\www\GrupoLEA\models\compras\embarque.php:384
+[30-Aug-2023 13:38:02 America/Mexico_City] PHP Fatal error:  Maximum execution time of 120 seconds exceeded in C:\wamp64\www\GrupoLEA\models\compras\embarque.php on line 369
+[30-Aug-2023 13:38:02 America/Mexico_City] PHP Stack trace:
+[30-Aug-2023 13:38:02 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[30-Aug-2023 13:38:02 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[30-Aug-2023 13:38:02 America/Mexico_City] PHP   3. comprasController->index() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[30-Aug-2023 13:38:02 America/Mexico_City] PHP   4. Embarque->getUltimosEmbarques() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:32
+[30-Aug-2023 13:38:02 America/Mexico_City] PHP   5. Embarque->getAll($where = ' where e.fecha_alta >= DATE_ADD(curdate(), INTERVAL -1 month) order by e.id desc limit 6') C:\wamp64\www\GrupoLEA\models\compras\embarque.php:384
+[30-Aug-2023 13:48:45 America/Mexico_City] PHP Fatal error:  Maximum execution time of 120 seconds exceeded in C:\wamp64\www\GrupoLEA\models\compras\embarque.php on line 369
+[30-Aug-2023 13:48:45 America/Mexico_City] PHP Stack trace:
+[30-Aug-2023 13:48:45 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[30-Aug-2023 13:48:45 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[30-Aug-2023 13:48:45 America/Mexico_City] PHP   3. comprasController->index() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[30-Aug-2023 13:48:45 America/Mexico_City] PHP   4. Embarque->getUltimosEmbarques() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:32
+[30-Aug-2023 13:48:45 America/Mexico_City] PHP   5. Embarque->getAll($where = ' where e.fecha_alta >= DATE_ADD(curdate(), INTERVAL -1 month) order by e.id desc limit 6') C:\wamp64\www\GrupoLEA\models\compras\embarque.php:384
+[30-Aug-2023 14:03:31 America/Mexico_City] PHP Fatal error:  Maximum execution time of 120 seconds exceeded in C:\wamp64\www\GrupoLEA\models\compras\embarque.php on line 369
+[30-Aug-2023 14:03:31 America/Mexico_City] PHP Stack trace:
+[30-Aug-2023 14:03:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[30-Aug-2023 14:03:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[30-Aug-2023 14:03:31 America/Mexico_City] PHP   3. comprasController->index() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[30-Aug-2023 14:03:31 America/Mexico_City] PHP   4. Embarque->getUltimosEmbarques() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:32
+[30-Aug-2023 14:03:31 America/Mexico_City] PHP   5. Embarque->getAll($where = ' where e.fecha_alta >= DATE_ADD(curdate(), INTERVAL -1 month) order by e.id desc limit 6') C:\wamp64\www\GrupoLEA\models\compras\embarque.php:384
+[30-Aug-2023 15:36:34 America/Mexico_City] PHP Fatal error:  Uncaught mysqli_sql_exception: Server shutdown in progress in C:\wamp64\www\GrupoLEA\models\compras\embarque.php:369
+Stack trace:
+#0 C:\wamp64\www\GrupoLEA\models\compras\embarque.php(369): mysqli->query('select e.*, (DA...')
+#1 C:\wamp64\www\GrupoLEA\models\compras\embarque.php(384): Embarque->getAll(' where e.fecha_...')
+#2 C:\wamp64\www\GrupoLEA\controllers\ComprasController.php(32): Embarque->getUltimosEmbarques()
+#3 C:\wamp64\www\GrupoLEA\views\principal\index.php(40): comprasController->index()
+#4 C:\wamp64\www\GrupoLEA\views\principal\index.php(21): llamarController()
+#5 {main}
+  thrown in C:\wamp64\www\GrupoLEA\models\compras\embarque.php on line 369
+[30-Aug-2023 16:36:52 America/Mexico_City] PHP Fatal error:  Maximum execution time of 120 seconds exceeded in C:\xampp\htdocs\GrupoLEA\models\compras\orden_compra.php on line 195
+[30-Aug-2023 16:37:14 America/Mexico_City] PHP Fatal error:  Maximum execution time of 120 seconds exceeded in C:\xampp\htdocs\GrupoLEA\models\compras\orden_compra.php on line 195

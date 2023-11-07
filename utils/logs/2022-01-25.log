@@ -1,0 +1,152 @@
+[25-Jan-2022 12:50:53 America/Mexico_City] PHP Notice:  Undefined offset: 4 in C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php on line 630
+[25-Jan-2022 12:50:53 America/Mexico_City] PHP Stack trace:
+[25-Jan-2022 12:50:53 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[25-Jan-2022 12:50:53 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[25-Jan-2022 12:50:53 America/Mexico_City] PHP   3. sistemasController->indicadoresCalidadSolicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[25-Jan-2022 12:50:53 America/Mexico_City] PHP   4. Excel::generarReporteIndicadorServicio() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:263
+[25-Jan-2022 12:50:55 America/Mexico_City] PHP Warning:  include(C:/wamp64/www/GrupoLEA/controllers/PhpOffice\PhpSpreadsheet\Style\ConditionalFormatting\Wizard.php): failed to open stream: No such file or directory in C:\wamp64\www\GrupoLEA\config\autoload.php on line 4
+[25-Jan-2022 12:50:55 America/Mexico_City] PHP Stack trace:
+[25-Jan-2022 12:50:55 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[25-Jan-2022 12:50:55 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[25-Jan-2022 12:50:55 America/Mexico_City] PHP   3. sistemasController->indicadoresCalidadSolicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[25-Jan-2022 12:50:55 America/Mexico_City] PHP   4. Excel::generarReporteIndicadorServicio() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:263
+[25-Jan-2022 12:50:55 America/Mexico_City] PHP   5. spl_autoload_call() C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php:722
+[25-Jan-2022 12:50:55 America/Mexico_City] PHP   6. controllers_autoload() C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php:722
+[25-Jan-2022 12:50:55 America/Mexico_City] PHP Warning:  include(): Failed opening 'C:/wamp64/www/GrupoLEA/controllers/PhpOffice\PhpSpreadsheet\Style\ConditionalFormatting\Wizard.php' for inclusion (include_path='.;C:\php\pear') in C:\wamp64\www\GrupoLEA\config\autoload.php on line 4
+[25-Jan-2022 12:50:55 America/Mexico_City] PHP Stack trace:
+[25-Jan-2022 12:50:55 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[25-Jan-2022 12:50:55 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[25-Jan-2022 12:50:55 America/Mexico_City] PHP   3. sistemasController->indicadoresCalidadSolicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[25-Jan-2022 12:50:55 America/Mexico_City] PHP   4. Excel::generarReporteIndicadorServicio() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:263
+[25-Jan-2022 12:50:55 America/Mexico_City] PHP   5. spl_autoload_call() C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php:722
+[25-Jan-2022 12:50:55 America/Mexico_City] PHP   6. controllers_autoload() C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php:722
+[25-Jan-2022 12:50:55 America/Mexico_City] PHP Fatal error:  Uncaught Error: Class 'PhpOffice\PhpSpreadsheet\Style\ConditionalFormatting\Wizard' not found in C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php:722
+Stack trace:
+#0 C:\wamp64\www\GrupoLEA\controllers\SistemasController.php(263): Excel::generarReporteIndicadorServicio(Array, false)
+#1 C:\wamp64\www\GrupoLEA\views\principal\index.php(38): sistemasController->indicadoresCalidadSolicitudes()
+#2 C:\wamp64\www\GrupoLEA\views\principal\index.php(19): llamarController()
+#3 {main}
+  thrown in C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php on line 722
+[25-Jan-2022 12:53:01 America/Mexico_City] PHP Notice:  Undefined offset: 4 in C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php on line 630
+[25-Jan-2022 12:53:01 America/Mexico_City] PHP Stack trace:
+[25-Jan-2022 12:53:01 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[25-Jan-2022 12:53:01 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[25-Jan-2022 12:53:01 America/Mexico_City] PHP   3. sistemasController->indicadoresCalidadSolicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[25-Jan-2022 12:53:01 America/Mexico_City] PHP   4. Excel::generarReporteIndicadorServicio() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:263
+[25-Jan-2022 12:54:15 America/Mexico_City] PHP Notice:  Undefined offset: 4 in C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php on line 630
+[25-Jan-2022 12:54:15 America/Mexico_City] PHP Stack trace:
+[25-Jan-2022 12:54:15 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[25-Jan-2022 12:54:15 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[25-Jan-2022 12:54:15 America/Mexico_City] PHP   3. sistemasController->indicadoresCalidadSolicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[25-Jan-2022 12:54:15 America/Mexico_City] PHP   4. Excel::generarReporteIndicadorServicio() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:263
+[25-Jan-2022 12:55:29 America/Mexico_City] PHP Notice:  Undefined offset: 4 in C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php on line 630
+[25-Jan-2022 12:55:29 America/Mexico_City] PHP Stack trace:
+[25-Jan-2022 12:55:29 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[25-Jan-2022 12:55:29 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[25-Jan-2022 12:55:29 America/Mexico_City] PHP   3. sistemasController->indicadoresCalidadSolicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[25-Jan-2022 12:55:29 America/Mexico_City] PHP   4. Excel::generarReporteIndicadorServicio() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:263
+[25-Jan-2022 12:55:30 America/Mexico_City] PHP Warning:  Use of undefined constant Cumple - assumed 'Cumple' (this will throw an Error in a future version of PHP) in C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php on line 725
+[25-Jan-2022 12:55:30 America/Mexico_City] PHP Stack trace:
+[25-Jan-2022 12:55:30 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[25-Jan-2022 12:55:30 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[25-Jan-2022 12:55:30 America/Mexico_City] PHP   3. sistemasController->indicadoresCalidadSolicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[25-Jan-2022 12:55:30 America/Mexico_City] PHP   4. Excel::generarReporteIndicadorServicio() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:263
+[25-Jan-2022 12:58:49 America/Mexico_City] PHP Notice:  Undefined offset: 4 in C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php on line 630
+[25-Jan-2022 12:58:49 America/Mexico_City] PHP Stack trace:
+[25-Jan-2022 12:58:49 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[25-Jan-2022 12:58:49 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[25-Jan-2022 12:58:49 America/Mexico_City] PHP   3. sistemasController->indicadoresCalidadSolicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[25-Jan-2022 12:58:49 America/Mexico_City] PHP   4. Excel::generarReporteIndicadorServicio() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:263
+[25-Jan-2022 12:58:51 America/Mexico_City] PHP Fatal error:  Uncaught Error: Call to undefined method PhpOffice\PhpSpreadsheet\Style\Conditional::equal() in C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php:725
+Stack trace:
+#0 C:\wamp64\www\GrupoLEA\controllers\SistemasController.php(263): Excel::generarReporteIndicadorServicio(Array, false)
+#1 C:\wamp64\www\GrupoLEA\views\principal\index.php(38): sistemasController->indicadoresCalidadSolicitudes()
+#2 C:\wamp64\www\GrupoLEA\views\principal\index.php(19): llamarController()
+#3 {main}
+  thrown in C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php on line 725
+[25-Jan-2022 12:59:12 America/Mexico_City] PHP Notice:  Undefined offset: 4 in C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php on line 630
+[25-Jan-2022 12:59:12 America/Mexico_City] PHP Stack trace:
+[25-Jan-2022 12:59:12 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[25-Jan-2022 12:59:12 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[25-Jan-2022 12:59:12 America/Mexico_City] PHP   3. sistemasController->indicadoresCalidadSolicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[25-Jan-2022 12:59:12 America/Mexico_City] PHP   4. Excel::generarReporteIndicadorServicio() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:263
+[25-Jan-2022 13:00:56 America/Mexico_City] PHP Notice:  Undefined offset: 4 in C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php on line 630
+[25-Jan-2022 13:00:56 America/Mexico_City] PHP Stack trace:
+[25-Jan-2022 13:00:56 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[25-Jan-2022 13:00:56 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[25-Jan-2022 13:00:56 America/Mexico_City] PHP   3. sistemasController->indicadoresCalidadSolicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[25-Jan-2022 13:00:56 America/Mexico_City] PHP   4. Excel::generarReporteIndicadorServicio() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:263
+[25-Jan-2022 13:01:37 America/Mexico_City] PHP Notice:  Undefined offset: 4 in C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php on line 630
+[25-Jan-2022 13:01:37 America/Mexico_City] PHP Stack trace:
+[25-Jan-2022 13:01:37 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[25-Jan-2022 13:01:37 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[25-Jan-2022 13:01:37 America/Mexico_City] PHP   3. sistemasController->indicadoresCalidadSolicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[25-Jan-2022 13:01:37 America/Mexico_City] PHP   4. Excel::generarReporteIndicadorServicio() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:263
+[25-Jan-2022 13:26:57 America/Mexico_City] PHP Notice:  Undefined offset: 4 in C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php on line 630
+[25-Jan-2022 13:26:57 America/Mexico_City] PHP Stack trace:
+[25-Jan-2022 13:26:57 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[25-Jan-2022 13:26:57 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[25-Jan-2022 13:26:57 America/Mexico_City] PHP   3. sistemasController->indicadoresCalidadSolicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[25-Jan-2022 13:26:57 America/Mexico_City] PHP   4. Excel::generarReporteIndicadorServicio() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:263
+[25-Jan-2022 13:28:22 America/Mexico_City] PHP Notice:  Undefined offset: 4 in C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php on line 630
+[25-Jan-2022 13:28:22 America/Mexico_City] PHP Stack trace:
+[25-Jan-2022 13:28:22 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[25-Jan-2022 13:28:22 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[25-Jan-2022 13:28:22 America/Mexico_City] PHP   3. sistemasController->indicadoresCalidadSolicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[25-Jan-2022 13:28:22 America/Mexico_City] PHP   4. Excel::generarReporteIndicadorServicio() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:263
+[25-Jan-2022 13:40:31 America/Mexico_City] PHP Notice:  Undefined offset: 4 in C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php on line 630
+[25-Jan-2022 13:40:31 America/Mexico_City] PHP Stack trace:
+[25-Jan-2022 13:40:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[25-Jan-2022 13:40:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[25-Jan-2022 13:40:31 America/Mexico_City] PHP   3. sistemasController->indicadoresCalidadSolicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[25-Jan-2022 13:40:31 America/Mexico_City] PHP   4. Excel::generarReporteIndicadorServicio() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:263
+[25-Jan-2022 13:43:05 America/Mexico_City] PHP Notice:  Undefined offset: 4 in C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php on line 630
+[25-Jan-2022 13:43:05 America/Mexico_City] PHP Stack trace:
+[25-Jan-2022 13:43:05 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[25-Jan-2022 13:43:05 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[25-Jan-2022 13:43:05 America/Mexico_City] PHP   3. sistemasController->indicadoresCalidadSolicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[25-Jan-2022 13:43:05 America/Mexico_City] PHP   4. Excel::generarReporteIndicadorServicio() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:263
+[25-Jan-2022 13:44:50 America/Mexico_City] PHP Notice:  Undefined offset: 4 in C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php on line 630
+[25-Jan-2022 13:44:50 America/Mexico_City] PHP Stack trace:
+[25-Jan-2022 13:44:50 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[25-Jan-2022 13:44:50 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[25-Jan-2022 13:44:50 America/Mexico_City] PHP   3. sistemasController->indicadoresCalidadSolicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[25-Jan-2022 13:44:50 America/Mexico_City] PHP   4. Excel::generarReporteIndicadorServicio() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:263
+[25-Jan-2022 13:45:56 America/Mexico_City] PHP Notice:  Undefined offset: 4 in C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php on line 630
+[25-Jan-2022 13:45:56 America/Mexico_City] PHP Stack trace:
+[25-Jan-2022 13:45:56 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[25-Jan-2022 13:45:56 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[25-Jan-2022 13:45:56 America/Mexico_City] PHP   3. sistemasController->indicadoresCalidadSolicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[25-Jan-2022 13:45:56 America/Mexico_City] PHP   4. Excel::generarReporteIndicadorServicio() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:263
+[25-Jan-2022 13:55:13 America/Mexico_City] PHP Notice:  Undefined offset: 4 in C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php on line 630
+[25-Jan-2022 13:55:13 America/Mexico_City] PHP Stack trace:
+[25-Jan-2022 13:55:13 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[25-Jan-2022 13:55:13 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[25-Jan-2022 13:55:13 America/Mexico_City] PHP   3. sistemasController->indicadoresCalidadSolicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[25-Jan-2022 13:55:13 America/Mexico_City] PHP   4. Excel::generarReporteIndicadorServicio() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:263
+[25-Jan-2022 15:42:05 America/Mexico_City] PHP Warning:  A non-numeric value encountered in C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php on line 752
+[25-Jan-2022 15:42:05 America/Mexico_City] PHP Stack trace:
+[25-Jan-2022 15:42:05 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[25-Jan-2022 15:42:05 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:19
+[25-Jan-2022 15:42:05 America/Mexico_City] PHP   3. sistemasController->indicadoresCalidadSolicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:38
+[25-Jan-2022 15:42:05 America/Mexico_City] PHP   4. Excel::generarReporteIndicadorServicio() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:263
+[25-Jan-2022 15:42:05 America/Mexico_City] PHP Fatal error:  Uncaught PhpOffice\PhpSpreadsheet\Exception: Invalid cell coordinate 1 in C:\wamp64\www\GrupoLEA\composer\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Cell\Coordinate.php:40
+Stack trace:
+#0 C:\wamp64\www\GrupoLEA\composer\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php(1254): PhpOffice\PhpSpreadsheet\Cell\Coordinate::coordinateFromString('1')
+#1 C:\wamp64\www\GrupoLEA\composer\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php(1214): PhpOffice\PhpSpreadsheet\Worksheet\Worksheet->createNewCell('1')
+#2 C:\wamp64\www\GrupoLEA\composer\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Worksheet\Worksheet.php(1111): PhpOffice\PhpSpreadsheet\Worksheet\Worksheet->getCell(1)
+#3 C:\wamp64\www\GrupoLEA\utils\toExcel\excel.php(752): PhpOffice\PhpSpreadsheet\Worksheet\Worksheet->setCellValue(1, 'ATENCI\xC3\x93N:')
+#4 C:\wamp64\www\GrupoLEA\controllers\SistemasController.php(263): Excel::generarReporteIndicadorServicio(Array, false)
+#5 C:\wamp64\www\GrupoLEA\views\ in C:\wamp64\www\GrupoLEA\composer\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Cell\Coordinate.php on line 40
+[25-Jan-2022 16:50:35 America/Mexico_City] PHP Fatal error:  Uncaught PhpOffice\PhpSpreadsheet\Calculation\Exception: Indicador servicio!I14 -> Formula Error: Expecting ')' in C:\wamp64\www\GrupoLEA\composer\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Cell\Cell.php:272
+Stack trace:
+#0 C:\wamp64\www\GrupoLEA\composer\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\Xlsx\Worksheet.php(1223): PhpOffice\PhpSpreadsheet\Cell\Cell->getCalculatedValue()
+#1 C:\wamp64\www\GrupoLEA\composer\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\Xlsx\Worksheet.php(1293): PhpOffice\PhpSpreadsheet\Writer\Xlsx\Worksheet->writeCellFormula(Object(PhpOffice\PhpSpreadsheet\Shared\XMLWriter), '=ROUND(G14* 100...', Object(PhpOffice\PhpSpreadsheet\Cell\Cell))
+#2 C:\wamp64\www\GrupoLEA\composer\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\Xlsx\Worksheet.php(1150): PhpOffice\PhpSpreadsheet\Writer\Xlsx\Worksheet->writeCell(Object(PhpOffice\PhpSpreadsheet\Shared\XMLWriter), Object(PhpOffice\PhpSpreadsheet\Worksheet\Worksheet), 'I14', Array)
+#3 C:\wamp64\www\Grupo in C:\wamp64\www\GrupoLEA\composer\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Cell\Cell.php on line 272
+[25-Jan-2022 16:50:51 America/Mexico_City] PHP Fatal error:  Uncaught PhpOffice\PhpSpreadsheet\Calculation\Exception: Indicador servicio!I14 -> Formula Error: Expecting ')' in C:\wamp64\www\GrupoLEA\composer\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Cell\Cell.php:272
+Stack trace:
+#0 C:\wamp64\www\GrupoLEA\composer\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\Xlsx\Worksheet.php(1223): PhpOffice\PhpSpreadsheet\Cell\Cell->getCalculatedValue()
+#1 C:\wamp64\www\GrupoLEA\composer\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\Xlsx\Worksheet.php(1293): PhpOffice\PhpSpreadsheet\Writer\Xlsx\Worksheet->writeCellFormula(Object(PhpOffice\PhpSpreadsheet\Shared\XMLWriter), '=ROUND(G14* 100...', Object(PhpOffice\PhpSpreadsheet\Cell\Cell))
+#2 C:\wamp64\www\GrupoLEA\composer\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Writer\Xlsx\Worksheet.php(1150): PhpOffice\PhpSpreadsheet\Writer\Xlsx\Worksheet->writeCell(Object(PhpOffice\PhpSpreadsheet\Shared\XMLWriter), Object(PhpOffice\PhpSpreadsheet\Worksheet\Worksheet), 'I14', Array)
+#3 C:\wamp64\www\Grupo in C:\wamp64\www\GrupoLEA\composer\vendor\phpoffice\phpspreadsheet\src\PhpSpreadsheet\Cell\Cell.php on line 272

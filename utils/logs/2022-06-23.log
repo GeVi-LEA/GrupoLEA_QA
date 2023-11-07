@@ -1,0 +1,37 @@
+[23-Jun-2022 13:36:42 America/Mexico_City] PHP Notice:  Undefined variable: o in C:\wamp64\www\GrupoLEA\views\compras\compras.php on line 129
+[23-Jun-2022 13:36:42 America/Mexico_City] PHP Stack trace:
+[23-Jun-2022 13:36:42 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[23-Jun-2022 13:36:42 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[23-Jun-2022 13:36:42 America/Mexico_City] PHP   3. comprasController->index() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[23-Jun-2022 13:36:42 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:33
+[23-Jun-2022 13:36:42 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\compras\compras.php on line 129
+[23-Jun-2022 13:36:42 America/Mexico_City] PHP Stack trace:
+[23-Jun-2022 13:36:42 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[23-Jun-2022 13:36:42 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[23-Jun-2022 13:36:42 America/Mexico_City] PHP   3. comprasController->index() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[23-Jun-2022 13:36:42 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:33
+[23-Jun-2022 13:37:17 America/Mexico_City] PHP Notice:  Undefined index: observaciones in C:\wamp64\www\GrupoLEA\controllers\SistemasController.php on line 53
+[23-Jun-2022 13:37:17 America/Mexico_City] PHP Stack trace:
+[23-Jun-2022 13:37:17 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[23-Jun-2022 13:37:17 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:13
+[23-Jun-2022 13:37:17 America/Mexico_City] PHP   3. sistemasController->generarSolicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[23-Jun-2022 13:37:17 America/Mexico_City] PHP Notice:  Undefined index: solucion in C:\wamp64\www\GrupoLEA\controllers\SistemasController.php on line 54
+[23-Jun-2022 13:37:17 America/Mexico_City] PHP Stack trace:
+[23-Jun-2022 13:37:17 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[23-Jun-2022 13:37:17 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:13
+[23-Jun-2022 13:37:17 America/Mexico_City] PHP   3. sistemasController->generarSolicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[23-Jun-2022 13:37:35 America/Mexico_City] PHP Notice:  Undefined index: empresa in C:\wamp64\www\GrupoLEA\controllers\SistemasController.php on line 48
+[23-Jun-2022 13:37:35 America/Mexico_City] PHP Stack trace:
+[23-Jun-2022 13:37:35 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[23-Jun-2022 13:37:35 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:13
+[23-Jun-2022 13:37:35 America/Mexico_City] PHP   3. sistemasController->generarSolicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[23-Jun-2022 13:37:35 America/Mexico_City] PHP Notice:  Undefined index: observaciones in C:\wamp64\www\GrupoLEA\controllers\SistemasController.php on line 53
+[23-Jun-2022 13:37:35 America/Mexico_City] PHP Stack trace:
+[23-Jun-2022 13:37:35 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[23-Jun-2022 13:37:35 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:13
+[23-Jun-2022 13:37:35 America/Mexico_City] PHP   3. sistemasController->generarSolicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[23-Jun-2022 13:37:35 America/Mexico_City] PHP Notice:  Undefined index: solucion in C:\wamp64\www\GrupoLEA\controllers\SistemasController.php on line 54
+[23-Jun-2022 13:37:35 America/Mexico_City] PHP Stack trace:
+[23-Jun-2022 13:37:35 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[23-Jun-2022 13:37:35 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:13
+[23-Jun-2022 13:37:35 America/Mexico_City] PHP   3. sistemasController->generarSolicitudServicio() C:\wamp64\www\GrupoLEA\views\principal\index.php:40

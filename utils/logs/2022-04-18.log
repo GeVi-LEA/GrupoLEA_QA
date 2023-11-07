@@ -1,0 +1,216 @@
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Notice:  Undefined variable: e in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Notice:  Undefined variable: e in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Notice:  Undefined variable: e in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Notice:  Undefined variable: e in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Notice:  Undefined variable: e in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Notice:  Undefined variable: e in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Notice:  Undefined variable: e in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Notice:  Undefined variable: e in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Notice:  Undefined variable: e in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:31 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Notice:  Undefined variable: e in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Notice:  Undefined variable: e in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Notice:  Undefined variable: e in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Notice:  Undefined variable: e in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Notice:  Undefined variable: e in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Notice:  Undefined variable: e in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Notice:  Undefined variable: e in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Notice:  Undefined variable: e in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Notice:  Undefined variable: e in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\sistemas\lista_solicitudes_sistemas.php on line 54
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP Stack trace:
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   3. sistemasController->solicitudes() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[18-Apr-2022 16:24:33 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\SistemasController.php:20

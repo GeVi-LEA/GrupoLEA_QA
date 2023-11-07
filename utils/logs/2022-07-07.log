@@ -1,0 +1,36 @@
+[07-Jul-2022 10:44:49 America/Mexico_City] PHP Notice:  Undefined variable: o in C:\wamp64\www\GrupoLEA\views\compras\compras.php on line 129
+[07-Jul-2022 10:44:49 America/Mexico_City] PHP Stack trace:
+[07-Jul-2022 10:44:49 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[07-Jul-2022 10:44:49 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[07-Jul-2022 10:44:49 America/Mexico_City] PHP   3. comprasController->index() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[07-Jul-2022 10:44:49 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:33
+[07-Jul-2022 10:44:49 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\compras\compras.php on line 129
+[07-Jul-2022 10:44:49 America/Mexico_City] PHP Stack trace:
+[07-Jul-2022 10:44:49 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[07-Jul-2022 10:44:49 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[07-Jul-2022 10:44:49 America/Mexico_City] PHP   3. comprasController->index() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[07-Jul-2022 10:44:49 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:33
+[07-Jul-2022 17:12:33 America/Mexico_City] PHP Notice:  Undefined variable: o in C:\wamp64\www\GrupoLEA\views\compras\compras.php on line 129
+[07-Jul-2022 17:12:33 America/Mexico_City] PHP Stack trace:
+[07-Jul-2022 17:12:33 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[07-Jul-2022 17:12:33 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[07-Jul-2022 17:12:33 America/Mexico_City] PHP   3. comprasController->index() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[07-Jul-2022 17:12:33 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:33
+[07-Jul-2022 17:12:33 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\compras\compras.php on line 129
+[07-Jul-2022 17:12:33 America/Mexico_City] PHP Stack trace:
+[07-Jul-2022 17:12:33 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[07-Jul-2022 17:12:33 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[07-Jul-2022 17:12:33 America/Mexico_City] PHP   3. comprasController->index() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[07-Jul-2022 17:12:33 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:33
+[07-Jul-2022 17:12:54 America/Mexico_City] PHP Notice:  Undefined variable: o in C:\wamp64\www\GrupoLEA\views\compras\compras.php on line 129
+[07-Jul-2022 17:12:54 America/Mexico_City] PHP Stack trace:
+[07-Jul-2022 17:12:54 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[07-Jul-2022 17:12:54 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[07-Jul-2022 17:12:54 America/Mexico_City] PHP   3. comprasController->index() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[07-Jul-2022 17:12:54 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:33
+[07-Jul-2022 17:12:54 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\compras\compras.php on line 129
+[07-Jul-2022 17:12:54 America/Mexico_City] PHP Stack trace:
+[07-Jul-2022 17:12:54 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\views\principal\index.php:0
+[07-Jul-2022 17:12:54 America/Mexico_City] PHP   2. llamarController() C:\wamp64\www\GrupoLEA\views\principal\index.php:21
+[07-Jul-2022 17:12:54 America/Mexico_City] PHP   3. comprasController->index() C:\wamp64\www\GrupoLEA\views\principal\index.php:40
+[07-Jul-2022 17:12:54 America/Mexico_City] PHP   4. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:33

@@ -1,0 +1,9 @@
+{
+    "require": {
+        "phpmailer/phpmailer": "^6.1",
+        "mpdf/mpdf": "^8.0",
+        "luecano/numero-a-letras": "^2.2",
+        "phpoffice/phpspreadsheet": "^1.17",
+        "picqer/php-barcode-generator": "^2.2"
+    }
+}

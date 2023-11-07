@@ -1,0 +1,28 @@
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP Deprecated:  Unparenthesized `a ? b : c ? d : e` is deprecated. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in C:\wamp64\www\GrupoLEA\views\compras\embarques.php on line 122
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP Stack trace:
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP Deprecated:  Unparenthesized `a ? b : c ? d : e` is deprecated. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in C:\wamp64\www\GrupoLEA\views\compras\embarques.php on line 135
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP Stack trace:
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP Deprecated:  Unparenthesized `a ? b : c ? d : e` is deprecated. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in C:\wamp64\www\GrupoLEA\views\compras\embarques.php on line 149
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP Stack trace:
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP Deprecated:  Unparenthesized `a ? b : c ? d : e` is deprecated. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in C:\wamp64\www\GrupoLEA\views\compras\embarques.php on line 169
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP Stack trace:
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP Deprecated:  Unparenthesized `a ? b : c ? d : e` is deprecated. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in C:\wamp64\www\GrupoLEA\views\compras\embarques.php on line 201
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP Stack trace:
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP Deprecated:  Unparenthesized `a ? b : c ? d : e` is deprecated. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in C:\wamp64\www\GrupoLEA\views\compras\embarques.php on line 248
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP Stack trace:
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP Deprecated:  Unparenthesized `a ? b : c ? d : e` is deprecated. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in C:\wamp64\www\GrupoLEA\views\compras\embarques.php on line 262
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP Stack trace:
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[02-Aug-2022 11:28:30 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28

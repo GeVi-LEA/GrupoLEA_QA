@@ -1,0 +1,216 @@
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Notice:  Trying to get property 'num_rows' of non-object in C:\wamp64\www\GrupoLEA\models\compras\orden_compra.php on line 249
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   3. OrdenCompra->getById() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:900
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Notice:  Trying to get property 'requisicion_id' of non-object in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 902
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Notice:  Undefined offset: 0 in C:\wamp64\www\GrupoLEA\models\compras\requisicion.php on line 411
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   3. Requisicion->getReqById($id = NULL) C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:902
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 904
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Notice:  Undefined offset: 0 in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 904
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 906
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 906
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 912
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\compras\recepcion_compras.php on line 33
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   3. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:954
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\compras\recepcion_compras.php on line 33
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   3. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:954
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Notice:  Trying to get property 'folio' of non-object in C:\wamp64\www\GrupoLEA\views\compras\recepcion_compras.php on line 34
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   3. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:954
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\compras\recepcion_compras.php on line 42
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 10:44:28 America/Mexico_City] PHP   3. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:954
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Notice:  Trying to get property 'num_rows' of non-object in C:\wamp64\www\GrupoLEA\models\compras\orden_compra.php on line 249
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   3. OrdenCompra->getById() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:900
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Notice:  Trying to get property 'requisicion_id' of non-object in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 902
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Notice:  Undefined offset: 0 in C:\wamp64\www\GrupoLEA\models\compras\requisicion.php on line 411
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   3. Requisicion->getReqById($id = NULL) C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:902
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 904
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Notice:  Undefined offset: 0 in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 904
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 906
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 906
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 912
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\compras\recepcion_compras.php on line 33
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   3. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:954
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\compras\recepcion_compras.php on line 33
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   3. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:954
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Notice:  Trying to get property 'folio' of non-object in C:\wamp64\www\GrupoLEA\views\compras\recepcion_compras.php on line 34
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   3. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:954
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\compras\recepcion_compras.php on line 42
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:16:59 America/Mexico_City] PHP   3. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:954
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Notice:  Trying to get property 'num_rows' of non-object in C:\wamp64\www\GrupoLEA\models\compras\orden_compra.php on line 249
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   3. OrdenCompra->getById() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:900
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Notice:  Trying to get property 'requisicion_id' of non-object in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 902
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Notice:  Undefined offset: 0 in C:\wamp64\www\GrupoLEA\models\compras\requisicion.php on line 411
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   3. Requisicion->getReqById($id = NULL) C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:902
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 904
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Notice:  Undefined offset: 0 in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 904
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 906
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 906
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 912
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\compras\recepcion_compras.php on line 33
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   3. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:954
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\compras\recepcion_compras.php on line 33
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   3. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:954
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Notice:  Trying to get property 'folio' of non-object in C:\wamp64\www\GrupoLEA\views\compras\recepcion_compras.php on line 34
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   3. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:954
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\compras\recepcion_compras.php on line 42
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:39:11 America/Mexico_City] PHP   3. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:954
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Notice:  Trying to get property 'num_rows' of non-object in C:\wamp64\www\GrupoLEA\models\compras\orden_compra.php on line 249
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   3. OrdenCompra->getById() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:900
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Notice:  Trying to get property 'requisicion_id' of non-object in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 902
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Notice:  Undefined offset: 0 in C:\wamp64\www\GrupoLEA\models\compras\requisicion.php on line 411
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   3. Requisicion->getReqById($id = NULL) C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:902
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 904
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Notice:  Undefined offset: 0 in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 904
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 906
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Warning:  Invalid argument supplied for foreach() in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 906
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\controllers\ComprasController.php on line 912
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\compras\recepcion_compras.php on line 33
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   3. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:954
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\compras\recepcion_compras.php on line 33
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   3. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:954
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Notice:  Trying to get property 'folio' of non-object in C:\wamp64\www\GrupoLEA\views\compras\recepcion_compras.php on line 34
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   3. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:954
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Notice:  Trying to access array offset on value of type null in C:\wamp64\www\GrupoLEA\views\compras\recepcion_compras.php on line 42
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP Stack trace:
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   1. {main}() C:\wamp64\www\GrupoLEA\index.php:0
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   2. comprasController->recepcionCompras() C:\wamp64\www\GrupoLEA\index.php:28
+[05-Oct-2022 15:41:56 America/Mexico_City] PHP   3. require_once() C:\wamp64\www\GrupoLEA\controllers\ComprasController.php:954
