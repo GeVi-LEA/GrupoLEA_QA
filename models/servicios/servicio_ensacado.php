@@ -283,16 +283,17 @@ class ServicioEnsacado
                         , null
                         , null
                         , null
-                        , '{$this->getBultos()}'
-                        , '{$this->getTarimas()}'
-                        , '{$this->getTipoTarima()}'
-                        , '{$this->getParcial()}'
+                        , {$this->getBultos()}
+                        , {$this->getTarimas()}
+                        , {$this->getTipoTarima()}
+                        , {$this->getParcial()}
                         , '{$this->getOrden()}'
                         , '{$this->getDocOrden()}'
                         , '{$this->getObservaciones()}'
                         , '{$_SESSION['usuario']->id}'
                         , NOW()
                   )";
+
         $save   = $this->db->query($sql);
         $result = false;
         if ($save) {
@@ -458,7 +459,7 @@ class ServicioEnsacado
                         from servicios_ensacado se 
                         inner join servicios_entradas s on s.id = se.entrada_id 
                         left join catalogo_productos_resinas_liquidos prod on prod.id = se.producto_id
-                        where s.cliente_id = $clienteId and se.lote != ''
+                        where s.cliente_id = $clienteId and se.lote != '' and get_disponibleByLote(se.lote,$clienteId) >0
                         group by se.lote, se.alias, se.producto_id 
                         order by se.lote";
         $ensacados = $this->db->query($sql);
@@ -475,8 +476,8 @@ class ServicioEnsacado
         $result    = array();
         $sql       = "
                               select 
-                              se.lote, se.producto_id, cat_prod.nombre producto, se.alias 
-                              ,get_disponibleByLote(se.lote,ent.cliente_id) disponible
+                              se.lote, max(se.producto_id)producto_id, max(cat_prod.nombre) producto, max(se.alias) alias 
+                              ,get_disponibleByLote(max(se.lote),max(ent.cliente_id)) disponible
                               from servicios_ensacado se 
                               inner join catalogo_productos_resinas_liquidos cat_prod on cat_prod.id = se.producto_id
                               inner join servicios_entradas ent on ent.id = se.entrada_id

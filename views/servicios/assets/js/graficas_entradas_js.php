@@ -8,14 +8,36 @@ var data_colores = [];
 $(document).ready(function() {
 
 
+    $(".btn-tab").unbind();
+    $(".btn-tab").click(function() {
+        showLoading_global();
+
+        var tipo = $(this).data("tipo");
+        switch (tipo) {
+            case 'grafica':
+                $("#div-lista").hide()
+                $("#div-grafica").show()
+                break;
+
+            default:
+                $("#div-lista").show()
+                $("#div-grafica").hide()
+
+                break;
+        }
+        setTimeout(() => {
+            chart_productos();
+        }, 1000);
+    });
+
     $('#tabEntradas a').unbind();
     $('#tabEntradas a').on('click', function(e) {
-        console.log($(this)[0].id.replace("-tab", ""));
+        // console.log($(this)[0].id.replace("-tab", ""));
         showLoading_global();
         setTimeout(() => {
             chart_productos();
         }, 1000);
-        console.log($(this)[0].id);
+        // console.log($(this)[0].id);
     });
 
     setInterval(() => {
@@ -31,7 +53,7 @@ $(document).ready(function() {
 const chart_productos = () => {
 
     //import * as echarts from 'echarts';
-    console.log($("#chart_entradas"));
+    // console.log($("#chart_entradas"));
     $("#chart_entradas").html("").attr("_echarts_instance_", "");
     data_estatus = [];
     data_colores = [];
@@ -97,7 +119,7 @@ const chart_productos = () => {
     option && myChart.setOption(option);
     myChart.on('click', function(params) {
         // Print name in console
-        console.log("estatus_id:", params.data.id);
+        // console.log("estatus_id:", params.data.id);
         llenatablaestatus(params.data.id, params.data.name, params.data.clave);
     });
     swal.close();
@@ -116,7 +138,7 @@ function llenatablaestatus(id_estatus, estatus, clave) {
         method: 'post',
         dataType: "json",
     }).then(resp => {
-        console.log(resp);
+        // console.log(resp);
         servicios = resp;
         datosGrafica = resp.datosGrafica;
         html = "";
@@ -146,11 +168,14 @@ function llenatablaestatus(id_estatus, estatus, clave) {
                 dom: 'Bfrtip',
                 retrieve: true,
                 url: '<?php echo URL; ?>assets/libs/datatables/es-MX.json',
+                order: [
+                    [3, 'desc']
+                ]
             },
         });
         // chart_productos();
     }).fail(resp => {}).catch(resp => {
-        mensajeError('Ocurrio un problema en la peticion en el servidor, favor de reportar a los administradores... ' + resp);
+        mensajeError('Ocurrio un problema en la peticion en el servidor, favor de reportar a los administradores');
     });
 }
 </script>

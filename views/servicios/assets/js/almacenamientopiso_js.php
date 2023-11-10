@@ -17,6 +17,7 @@ let llenaclientes = 0;
 let detalles;
 let chart_lotes_;
 let jason = {};
+let selectedtab;
 $(document).ready(function() {
     console.log("entra inventario");
     $("#cmbClientes").find("option").remove();
@@ -32,6 +33,7 @@ $(document).ready(function() {
     $('#InventariosTab a').unbind();
     $('#InventariosTab a').on('click', function(e) {
         console.log($(this)[0].id.replace("-tab", ""));
+        selectedtab = $(this)[0].id.replace("-tab", "");
         showLoading_global();
         armaInventarios($(this)[0].id.replace("-tab", "")).then(function() {
             console.log("aqui: ", $(this)[0].id.replace("-tab", ""));
@@ -41,7 +43,7 @@ $(document).ready(function() {
     setInterval(() => {
         // console.log("moving: ", moving);
         // if (moving >= 0) {
-        armaInventarios($(this)[0].id.replace("-tab", ""));
+        armaInventarios(selectedtab);
         console.log("armó los inventarios");
         setTimeout(() => {
             chart_productos();
@@ -328,9 +330,9 @@ const armaInventarios = (latab) => {
                     label: {
                         show: true,
                         formatter: function(param) {
-                            return param.data == 0 ? '' : param.data + 'KG tarimas:' + (Math.floor((param.data / 25) / 55)) + ' sacos:' + (Math.round((((param.data /
+                            return param.data == 0 ? '' : numero2Decimales(param.data) + ' KG (TARIMAS:' + (Math.floor((param.data / 25) / 55)) + ' SACOS:' + (Math.round((((param.data /
                                     25) / 55) -
-                                Math.floor((param.data / 25) / 55)) * 55)) + ' ';
+                                Math.floor((param.data / 25) / 55)) * 55)) + ') ';
                         },
                         shadowColor: 'rgba(0, 0, 0, 0.5)',
                         shadowBlur: 10
@@ -373,9 +375,9 @@ const armaInventarios = (latab) => {
                     label: {
                         show: true,
                         formatter: function(param) {
-                            return param.data == 0 ? '' : param.data + 'KG tarimas:' + (Math.floor((param.data / 25) / 55)) + ' sacos:' + (Math.round((((param.data /
+                            return param.data == 0 ? '' : numero2Decimales(param.data) + ' KG (TARIMAS:' + (Math.floor((param.data / 25) / 55)) + ' SACOS:' + (Math.round((((param.data /
                                     25) / 55) -
-                                Math.floor((param.data / 25) / 55)) * 55)) + ' ';
+                                Math.floor((param.data / 25) / 55)) * 55)) + ') ';
                         },
                     },
                     emphasis: {
@@ -410,9 +412,9 @@ const armaInventarios = (latab) => {
                     label: {
                         show: true,
                         formatter: function(param) {
-                            return param.data == 0 ? '' : param.data + 'KG tarimas:' + (Math.floor((param.data / 25) / 55)) + ' sacos:' + (Math.round((((param.data /
+                            return param.data == 0 ? '' : numero2Decimales(param.data) + ' KG (TARIMAS:' + (Math.floor((param.data / 25) / 55)) + ' SACOS:' + (Math.round((((param.data /
                                     25) / 55) -
-                                Math.floor((param.data / 25) / 55)) * 55)) + ' ';
+                                Math.floor((param.data / 25) / 55)) * 55)) + ') ';
                         },
                     },
                     emphasis: {
@@ -758,6 +760,35 @@ function getrow(cliente, lote) {
             return inventarios.inventarios[x];
         }
 
+    }
+}
+
+function numero2Decimales(str = "", $decimales = false, $numDecimales = 2) {
+    if ($decimales) {
+        $int = parseFloat(str);
+        // return number_format($int, $numDecimales);
+        return $int.toLocaleString("us", {
+            minimumFractionDigits: $numDecimales,
+            maximumFractionDigits: $numDecimales,
+        });
+    } else {
+        console.log("str: ", str);
+        $strArray = str.toString().split("/[.]/");
+        if (parseInt($strArray[1]) == 0) {
+            $int = parseInt(str);
+            return number_format($int);
+            return $int.toLocaleString("us", {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+            });
+        } else {
+            $int = parseFloat(str);
+            return $int.toLocaleString("us", {
+                minimumFractionDigits: $numDecimales,
+                maximumFractionDigits: $numDecimales,
+            });
+            // return number_format($int, $numDecimales);
+        }
     }
 }
 </script>

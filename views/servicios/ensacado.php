@@ -469,13 +469,8 @@ function ROFinaliza($estatus)
                                     <span id="disponible" style="font-size: xx-small;margin-right: 10%;position: absolute;margin-top: 2%;">
                                         Disponible :
                                         <?php
-                                            // if (isset($pesaje) && ($pesaje['EntPesoT'] > 0)) {
-                                            //     echo '<input type="text" name="disponible" id="disponible" class="item-small numhtml" value="' . UtilsHelp::numero2Decimales($pesaje['EntPesoT'], true, 0) . '" /><span class="ml-1">kgs.</span>';
-                                            // } else {
-                                            //     echo '<input type="text" name="disponible" id="disponible" class="item-small numhtml" value="' . UtilsHelp::numero2Decimales($ensacado['peso_cliente'], true, 0) . '" /><span class="ml-1">kgs.</span>';
-                                            // }
                                             if (isset($pesaje) && ($pesaje['EntPesoT'] > 0)) {
-                                                echo UtilsHelp::numero2Decimales($pesaje['EntPesoT'], true, 0);
+                                                echo UtilsHelp::numero2Decimales((intval(Utils::quitarComas($pesoNeto)) - intval(Utils::quitarComas($ensacado['totalensacado']))), true, 0);
                                             } else {
                                                 echo UtilsHelp::numero2Decimales(($ensacado['peso_cliente'] - $ensacado['totalensacado']), true, 0);
                                             }
@@ -495,12 +490,24 @@ function ROFinaliza($estatus)
                             <div>
                                 <div class="row justify-content-between mb-2">
                                     <div><strong class="mr-1">Orden:</strong><input type="text" name="orden" id="orden" class="item-medium" /> </div>
-                                    <div> <strong class="mr-1">Lote:</strong><input type="text" name="lote" id="lote" class="item-medium" />
+                                    <div>
+                                        <strong class="mr-1">Lote:</strong><input type="text" name="lote" id="lote" class="item-medium" />
+                                        <!-- <strong class="mr-1">Lote:</strong><input type="text" name="lote" id="lote" class="item-medium" /> -->
                                         <select name="loteSelect" id="loteSelect" class="item-medium" hidden>
                                             <option>--Selecciona--</option>
                                         </select>
+
+
+
+
+
                                     </div>
-                                    <div><strong class="mr-1">Producto:</strong>
+                                    <div><strong class="mr-1">Existencia:</strong>
+                                        <input type="text" name="existencia" id="existencia" class="item-small numhtml" readonly disabled />
+                                        <span class="ml-1">kgs.</span>
+                                    </div>
+                                    <div>
+                                        <strong class="mr-1">Producto:</strong>
                                         <select name="producto" class="item-medium" id="producto" style="">
                                             <option value="" selected>--Selecciona--</option>
                                             <option value="nuevo"> >>Nuevo Producto<< </option>
@@ -519,10 +526,6 @@ function ROFinaliza($estatus)
                                 <div class="row d-flex justify-content-between mb-2">
                                     <div><strong class="mr-1">Rótulo:</strong>
                                         <input type="text" name="alias" id="alias" class="item-bigger" />
-                                    </div>
-                                    <div><strong class="mr-1">Existencia:</strong>
-                                        <input type="text" name="existencia" id="existencia" class="item-small numhtml" readonly disabled />
-                                        <span class="ml-1">kgs.</span>
                                     </div>
 
                                 </div>

@@ -2,8 +2,10 @@ var respuesta;
 var cantidadinp;
 var windowToOpen;
 var clickiframe;
+var divform;
+var servicios;
 $(document).ready(function () {
-	console.log("entra a servicios js");
+	// console.log("entra a servicios js");
 	if (typeof __url__ !== "undefined" && __url__) {
 		// vriable is set and isnt falsish so it can be used;
 	} else {
@@ -42,10 +44,10 @@ $(document).ready(function () {
 							if (e.target.title == "Cerrar") {
 								swal.close();
 							} else if (e.target.parentElement.id == "btnGuardar") {
-								console.log(
-									"jconfirm: ",
-									$(".jconfirm-box .i-danger").is(":visible")
-								);
+								// console.log(
+								// "jconfirm: ",
+								// $(".jconfirm-box .i-danger").is(":visible")
+								// );
 								if (
 									$(".jconfirm-box .i-danger").is(":visible") == false
 								) {
@@ -263,7 +265,7 @@ $(document).ready(function () {
 				dataType: "json",
 				success: function (r) {
 					if (r.length != 0) {
-						console.log(r[0]);
+						// console.log(r[0]);
 						$("#descripcion").val(r[0].descripcion);
 						$("#clave").val(r[0].clave);
 					}
@@ -298,7 +300,7 @@ $(document).ready(function () {
 		// swal.close();
 	});
 	$("#producto").change(function () {
-		console.log($("#producto option:selected").val());
+		// console.log($("#producto option:selected").val());
 		if ($("#producto option:selected").val() == "nuevo") {
 			windowToOpen = window.open(
 				__url__ +
@@ -308,7 +310,7 @@ $(document).ready(function () {
 			windowToOpen.addEventListener(
 				"submit",
 				(event) => {
-					console.log("aqui si");
+					// console.log("aqui si");
 					llenaComboProductos();
 				},
 				false
@@ -359,7 +361,7 @@ $(document).ready(function () {
 				type: "POST",
 				dataType: "json",
 				success: function (r) {
-					console.log(r);
+					// console.log(r);
 					if (r.error) {
 						mensajeCorrecto(r.mensaje);
 					} else {
@@ -487,6 +489,7 @@ $(document).ready(function () {
 		}
 		return valid;
 	}
+
 	function validarDatosServicio() {
 		var valid = true;
 		if ($("#idTipoServicio").val() == "") {
@@ -682,11 +685,11 @@ $(document).ready(function () {
 			e.preventDefault();
 			var id = tr.find("#idEnsacado").html();
 			if (id != "") {
-				//window.open(
-				//	serv + "?controller=Servicios&action=generarEnsacado&id=" + id,
-				//	"Ensacado",
-				//	"width=1300,height=700"
-				//);
+				// window.open(
+				// serv + "?controller=Servicios&action=generarEnsacado&id=" + id,
+				// "Ensacado",
+				// "width=1300,height=700"
+				// );
 				Swal.fire({
 					showCloseButton: false,
 					showCancelButton: false,
@@ -724,7 +727,7 @@ $(document).ready(function () {
 			var doc = $(docInput).val();
 			$("#tituloDocumento").html("Archivo: " + doc);
 			var url = "views/servicios/uploads/" + ferro + "/" + doc;
-			console.log(docInput);
+			// console.log(docInput);
 			$("#viewDoc").append(
 				'<object class="view-doc" id="objDoc" data=""></object>'
 			);
@@ -739,7 +742,7 @@ $(document).ready(function () {
 		// var doc = $(docInput).val();
 		$("#tituloDocumento").html("Archivo: " + docInput);
 		var url = __url__ + "views/servicios/uploads/" + ferro + "/" + docInput;
-		console.log(docInput);
+		// console.log(docInput);
 		$("#viewDoc").append(
 			'<object class="view-doc" id="objDoc" data=""></object>'
 		);
@@ -795,7 +798,7 @@ $(document).ready(function () {
 								type: "POST",
 								dataType: "json",
 								success: function (r) {
-									console.log(r);
+									// console.log(r);
 									if (r.error) {
 										mensajeCorrecto(r.mensaje);
 										$(doc).val("");
@@ -936,7 +939,7 @@ $(document).ready(function () {
 				type: "POST",
 				dataType: "json",
 				success: function (r) {
-					console.log(r);
+					// console.log(r);
 					if (r != false) {
 						$("#folioServicio").html(r.folio);
 						$(".calctarimas div").attr("hidden", true);
@@ -946,7 +949,7 @@ $(document).ready(function () {
 							$("#formEditarServicio"),
 							r.lote
 						);
-						console.log("2");
+						// console.log("2");
 						var formEditar = $("#formEditarServicio");
 
 						formEditar.find("#loteSelect").attr("hidden", true);
@@ -1105,7 +1108,7 @@ $(document).ready(function () {
 								.val("")
 								.attr("disabled", true);
 							formEditar.find("#aliasServ").attr("disabled", true);
-							console.log("aqui servicio sin lote: ", servicio);
+							// console.log("aqui servicio sin lote: ", servicio);
 						}
 						$("#editarServicioModal").modal("show");
 						formEditar.find("#producto").select2();
@@ -1152,7 +1155,7 @@ $(document).ready(function () {
 	$("#seccionServicios").on("click", "#deleteServicio", function () {
 		var div = $(this).parent("div").parent("div");
 		var id = $(div).find("#idServicio").val();
-		console.log("idserv: ", id);
+		// console.log("idserv: ", id);
 		if (id != "") {
 			$.confirm({
 				title: "<span class='material-icons i-danger'>dangerous</span><span>¡Atención!<span>",
@@ -1174,7 +1177,7 @@ $(document).ready(function () {
 								type: "POST",
 								dataType: "json",
 								success: function (r) {
-									console.log(r);
+									// console.log(r);
 									if (r != false) {
 										mensajeCorrecto(r.mensaje);
 									} else {
@@ -1216,6 +1219,7 @@ $(document).ready(function () {
 		var div = $(this).parent("div").parent("div");
 		var id = $(div).find("#idServicio").val();
 		var nombreServicio = $(div).find("#nombreServicio").text();
+		// console.log("inicia servicio");
 		if (
 			nombreServicio.includes("ENSACADO") ||
 			nombreServicio.includes("ALMACENAJE") ||
@@ -1242,6 +1246,8 @@ $(document).ready(function () {
 				});
 				// mensajeError("Debe de primero agregar ticket.");
 			}
+		} else {
+			iniciarServicio(id);
 		}
 	});
 
@@ -1276,7 +1282,7 @@ $(document).ready(function () {
 							type: "POST",
 							dataType: "json",
 							success: function (r) {
-								console.log(r);
+								// console.log(r);
 								if (r != false) {
 									mensajeCorrecto(r.mensaje);
 								} else {
@@ -1322,7 +1328,7 @@ $(document).ready(function () {
 									type: "POST",
 									dataType: "json",
 									success: function (r) {
-										console.log(r);
+										// console.log(r);
 										if (r.error != false) {
 											mensajeCorrecto(r.mensaje);
 										} else {
@@ -1346,17 +1352,49 @@ $(document).ready(function () {
 			mensajeError("La unidad tiene pendientes, no se puede liberar");
 		}
 	});
+
 	function validaLiberacion() {
+		var sumcantidad = 0;
+		var resultado = true;
+		$(".sumcantidad").each(function () {
+			console.log(this.innerHTML);
+			sumcantidad += parseFloat(quitarComasNumero(this.innerHTML));
+		});
 		if ($("#serv_pendientes").val() > 0) {
-			return false;
-		} else if (
-			$("#serv_pendientes").val() + $("#serv_pendientes").val() <
-			10
-		) {
-			return false;
-		} else {
-			return true;
+			resultado = false;
+		} else if ($("#nombreServicio").html().includes("SALIDA")) {
+			resultado = true;
 		}
+		var idNombreServicio = $("#idNombreServicio")[0].value.trim();
+		var cantidadCliente = 0;
+		switch (idNombreServicio) {
+			case "1":
+				if ($("#pesoVacio")[0].value.trim() == "0") {
+					cantidadCliente = quitarComasNumero(
+						$("#pesoCliente")[0].value.trim()
+					);
+				} else {
+					cantidadCliente = quitarComasNumero(
+						$("#pesoNeto")[0].value.trim()
+					);
+				}
+				break;
+
+			default:
+				cantidadCliente = quitarComasNumero(
+					$("#pesoCliente")[0].value.trim()
+				);
+				break;
+		}
+		var cantpendiente = parseInt(cantidadCliente) - parseInt(sumcantidad);
+		var tolerable = parseInt(cantidadCliente) * 0.03;
+		if (cantpendiente < tolerable) {
+			resultado = true;
+		} else {
+			resultado = false;
+		}
+
+		return resultado;
 	}
 
 	$("#btnIngresar").click(function () {
@@ -1382,7 +1420,7 @@ $(document).ready(function () {
 								type: "POST",
 								dataType: "json",
 								success: function (r) {
-									console.log(r);
+									// console.log(r);
 									if (r.error != false) {
 										mensajeCorrecto(r.mensaje);
 									} else {
@@ -1427,7 +1465,7 @@ $(document).ready(function () {
 								type: "POST",
 								dataType: "json",
 								success: function (r) {
-									console.log(r);
+									// console.log(r);
 									if (r.error != false) {
 										mensajeCorrecto(r.mensaje);
 									} else {
@@ -1451,8 +1489,9 @@ $(document).ready(function () {
 	//agregar a almacen
 
 	$("#seccionServicios").on("click", "#detenerServicio", function () {
-		var divForm = $(this).parents("div")[2];
+		divForm = $(this).parents("div")[2];
 		var nombreServicio = $(divForm).find("#nombreServicio").text();
+		// console.log("nombreServicio: ", nombreServicio);
 		var form = $("#formEnviarAlmacen");
 		if (
 			nombreServicio.includes("ENSACADO") ||
@@ -1466,7 +1505,7 @@ $(document).ready(function () {
 				type: "POST",
 				dataType: "json",
 				success: function (r) {
-					console.log(r);
+					// console.log(r);
 					if (r != false) {
 						select.find("option").not(":first").remove();
 						if (r.length != 0) {
@@ -1499,8 +1538,98 @@ $(document).ready(function () {
 				.find($("#cantidadCliente"))
 				.val($(divForm).find(".sumcantidad").text());
 			$("#enviarAlmacenModal").modal("show");
+		} else {
+			var id = $(divForm).find("#idServicio").val();
+			var kilos = $(divForm).find(".sumcantidad").html();
+			detenerServicio(id, kilos);
 		}
 	});
+
+	let servicio;
+	function detenerServicio(id, kilos = "", almacen_id = "1") {
+		var form = $("#formEnviarAlmacen");
+		var select = $(form).find("#selectAlmacen");
+		$.ajax({
+			url: __url__ + "?ajax&controller=Catalogo&action=getAlmacenes",
+			type: "POST",
+			dataType: "json",
+			success: function (r) {
+				// console.log(r);
+				if (r != false) {
+					select.find("option").not(":first").remove();
+					if (r.length != 0) {
+						$(r).each(function (i, v) {
+							// indice, valor
+							select.append(
+								'<option value="' + v.id + '">' + v.nombre + "</option>"
+							);
+						});
+					} else {
+						select.append(
+							'<option value="" disabled>No hay almacenes registrados</option>'
+						);
+					}
+				}
+			},
+			error: function () {
+				alert("Algo salio mal, contacte al Administrador.");
+			},
+		});
+		$("#idServicioEnviar").val(id);
+		$(form).find(id);
+		$(form).find($("#operacionEnviar")).val("S");
+
+		// let servicio = servicios.filter((el) => el.id_servicio == id)[0];
+		$.confirm({
+			title: "<span class='material-icons i-warning'>warning</span><span>¡Atención!<span>",
+			content: "<b>¿Finalizar servicio?</b>",
+			type: "orange",
+			typeAnimated: true,
+			animation: "zoom",
+			closeAnimation: "right",
+			backgroundDismiss: false,
+			backgroundDismissAnimation: "shake",
+			buttons: {
+				tryAgain: {
+					text: "Finalizar servicio",
+					btnClass: "btn btn-warning",
+					action: function () {
+						$.ajax({
+							// data: $("#formEnviarAlmacen").serialize(),
+							data: {
+								idServicioEnviar: id,
+								operacionEnviar: "S",
+								cantidadAlmacen: kilos.replace(",", ""),
+								almacen: almacen_id,
+							},
+							url: "?ajax&controller=Servicios&action=finalizarServicio",
+							type: "POST",
+							dataType: "json",
+							success: function (r) {
+								// console.log(r);
+								if (r.error != false) {
+									mensajeCorrecto(r.mensaje);
+								} else {
+									mensajeError(r.mensaje);
+								}
+							},
+							error: function (r) {
+								console.log(r.responseText);
+								mensajeError(
+									"Algo salio mal,  contacte al administrador."
+								);
+							},
+						});
+					},
+				},
+				Cancelar: function () {},
+			},
+		});
+		// } else {
+		// erpalert("error", "", "No puede estar un campo vacio.");
+		// }
+		// });
+	}
 
 	$("#enviarFinalizarServicio").click(function () {
 		if (validarDatosEnviarAlmacen()) {
@@ -1524,7 +1653,7 @@ $(document).ready(function () {
 								type: "POST",
 								dataType: "json",
 								success: function (r) {
-									console.log(r);
+									// console.log(r);
 									if (r.error != false) {
 										mensajeCorrecto(r.mensaje);
 									} else {
@@ -1556,7 +1685,7 @@ $(document).ready(function () {
 			if ($(this).val() == null || $(this).val() == "") {
 				$(this).addClass("required");
 				valid = false;
-				console.log(this);
+				// console.log(this);
 			}
 		});
 		return valid;
@@ -1613,8 +1742,8 @@ $(document).ready(function () {
 				type: "POST",
 				dataType: "json",
 				success: function (r) {
-					console.log(r);
-					console.log("aqui");
+					// console.log(r);
+					// console.log("aqui");
 					respuesta = r;
 					if (r != false) {
 						var numero = quitarEspacios(r.EntPlacas.trim());
@@ -1637,7 +1766,7 @@ $(document).ready(function () {
 							$("#fechaPesoSalida").val(
 								formatDateToString(new Date(r.EntFechaS))
 							);
-							console.log("parseInt(r.EntPesoT)", parseInt(r.EntPesoT));
+							// console.log("parseInt(r.EntPesoT)", parseInt(r.EntPesoT));
 							if (parseInt(r.EntPesoT) > 0) {
 								$("#pesoNeto").val(
 									htmlNum(parseInt(r.EntPesoB) - parseInt(r.EntPesoT))
@@ -1682,7 +1811,7 @@ $(document).ready(function () {
 				type: "POST",
 				dataType: "json",
 				success: function (r) {
-					console.log(r);
+					// console.log(r);
 					if (r.error) {
 						mensajeCorrecto(r.mensaje, true);
 					} else {
@@ -1728,7 +1857,7 @@ $(document).ready(function () {
 			type: "POST",
 			dataType: "json",
 			success: function (r) {
-				console.log(r);
+				// console.log(r);
 				if (r.error) {
 					mensajeCorrecto(r.mensaje);
 				} else {
@@ -1758,6 +1887,7 @@ $(document).ready(function () {
 		}
 	});
 
+	$("#loteSelect").unbind();
 	$("#loteSelect").change(function () {
 		var lote = $(this).val();
 		if (lote != "") {
@@ -1768,8 +1898,9 @@ $(document).ready(function () {
 				//   $("#producto").val(loteSelected[0].producto);
 				$("#alias").val(loteSelected[0].alias);
 				$("#existencia").parent("div").show();
-				$("#existencia").val(loteSelected[0].disponible);
+				$("#existencia").val(loteSelected[0].disponible).change();
 				$("#existencia").trigger("blur");
+				validaInventario("#formAgregarServicio");
 			}, 500);
 		}
 	});
@@ -1839,11 +1970,25 @@ $(document).ready(function () {
 		return str.replace(/ /g, "");
 	}
 	//   $("#cantidad, #loteSelect").unbind("change", "");
-	$("#loteSelect, #cantidad").change(function () {
+	// $("#loteSelect, #cantidad").unbind();
+	$("#loteSelect").change(function () {
+		// console.log("cambia1");
+
+		/*calcula tarimas*/
+		$(".calctarimas").attr("style", "display:block");
+	});
+	$("#cantidad").change(function () {
+		// console.log("cambia2");
 		validaInventario("#formAgregarServicio");
 		/*calcula tarimas*/
 		$(".calctarimas").attr("style", "display:block");
 	});
+	// $("#existencia").change(function () {
+	// console.log("cambia3");
+	// validaInventario("#formAgregarServicio");
+	// /*calcula tarimas*/
+	// $(".calctarimas").attr("style", "display:block");
+	// });
 
 	$(".numhtml").unbind();
 	$(".numhtml").blur(function () {
@@ -1884,7 +2029,7 @@ $(document).ready(function () {
 			$("#BarreduraLimpia").val() == ""
 				? 0
 				: quitarComasNumero($("#BarreduraLimpia").val());
-		console.log("total: ", total, " bsucia: ", bsucia, " blimpia: ", blimpia);
+		// console.log("total: ", total, " bsucia: ", bsucia, " blimpia: ", blimpia);
 		cantenviar = parseInt(total) - (parseInt(bsucia) + parseInt(blimpia));
 
 		$("#cantidadEnviar").val(cantenviar);
@@ -1910,7 +2055,7 @@ function getInfoLote(lote) {
 		type: "POST",
 		dataType: "json",
 		success: function (r) {
-			console.log(r);
+			// console.log(r);
 			loteSelected = r;
 			if (r != false) {
 				var cargas = r[0].cargas != null ? r[0].cargas : 0;
@@ -1929,8 +2074,13 @@ function getInfoLote(lote) {
 		},
 	});
 }
+
 function htmlNum(num) {
-	return Number(num).toLocaleString("en");
+	if ($.isNumeric(num)) {
+		return Number(num).toLocaleString("en");
+	} else {
+		return "";
+	}
 }
 
 function agregarLotesEnsacado(form) {
@@ -1939,7 +2089,7 @@ function agregarLotesEnsacado(form) {
 	var lote = $(form).find($("#lote"));
 	//   var selectLote = $(form).find($("#loteSelect"));
 	var selectLote = $(form).find("#loteSelect");
-	console.log("servicio: ", servicio);
+	// console.log("servicio: ", servicio);
 	$(".programacion").attr("style", "display:none !important");
 
 	$("#existencia").val("");
@@ -1954,28 +2104,30 @@ function agregarLotesEnsacado(form) {
 		$("#producto").attr("disabled", true).attr("hidden", true);
 		$("#alias").attr("disabled", true).attr("hidden", true);
 		$("#producto").parent().find(".mr-1").hide();
+		$("#producto").parent().find(".select2 ").hide();
 		$("#alias").parent().find(".mr-1").hide();
 		$("#barreduraSucia").parent("div").hide();
 		$("#barreduraLimpia").parent("div").hide();
 		$("#barredura").parent("div").hide();
 		$("#loteSelect").removeClass("item-small").addClass("item-large");
 		$("#loteSelect").parent().find(".mr-1").html("Lote/Producto/Rótulo:");
+
 		$(".calctarimas div").attr("hidden", false);
 		$("#existencia").val("");
-		$("#loteSelect, #cantidad").change(function () {
-			validaInventario(form);
-		});
+		// $("#loteSelect, #cantidad").change(function () {
+		// validaInventario(form);
+		// });
 
 		var clienteId = $("#cliente").val();
-		console.log("clienteId: ", clienteId);
+		// console.log("clienteId: ", clienteId);
 		$.ajax({
 			data: { idCliente: clienteId },
 			url: "?ajax&controller=Servicios&action=getLotesByClienteStock",
 			type: "POST",
 			dataType: "json",
 			success: function (r) {
-				console.log("getLotesByClienteStock:");
-				console.log(r);
+				// console.log("getLotesByClienteStock:");
+				// console.log(r);
 				if (r != false) {
 					selectLote.find("option").not(":first").remove();
 					if (r.length != 0) {
@@ -2038,15 +2190,15 @@ function agregarLotesEnsacado(form) {
 
 function llenarComboLotesCliente(clienteId, form, lote = "") {
 	var selectLote = $(form).find("#loteSelect");
-	console.log("entra llena combo");
+	// console.log("entra llena combo");
 	$.ajax({
 		data: { idCliente: clienteId },
 		url: "?ajax&controller=Servicios&action=getLotesByClienteStock",
 		type: "POST",
 		dataType: "json",
 		success: function (r) {
-			console.log("getLotesByClienteStock:");
-			console.log(r);
+			// console.log("getLotesByClienteStock:");
+			// console.log(r);
 			if (r != false) {
 				selectLote.find("option").not(":first").remove();
 				if (r.length != 0) {
@@ -2074,7 +2226,7 @@ function llenarComboLotesCliente(clienteId, form, lote = "") {
 			if (lote != "") {
 				$(form).find("#loteSelect").val(lote);
 			}
-			console.log("termina llenacombo");
+			// console.log("termina llenacombo");
 		},
 		error: function () {
 			alert("Algo salio mal, contacte al Administrador.");
@@ -2084,18 +2236,18 @@ function llenarComboLotesCliente(clienteId, form, lote = "") {
 
 function validaInventario(form) {
 	try {
-		console.log("validainv - ", form);
+		// console.log("validainv - ", form);
 		let cantidad = parseFloat(
 			quitarComasNumero($(form).find("#cantidad").val())
 		);
 		var tiposervicio = $("#idTipoServicio option:selected").val();
 		try {
-			console.log(
-				"tiposerv: ",
-				form.find("#idTipoServicio option:selected").val()
-			);
-			console.log("tiposerv: ", $("#idTipoServicio option:selected").val());
-			console.log("cantidad", cantidad);
+			// console.log(
+			// "tiposerv: ",
+			// $(form).find("#idTipoServicio option:selected").val()
+			// );
+			// console.log("tiposerv: ", $("#idTipoServicio option:selected").val());
+			// console.log("cantidad", cantidad);
 			$(form)
 				.find("#bultos")
 				.val(cantidad / 25);
@@ -2109,10 +2261,12 @@ function validaInventario(form) {
 						(cantidad / 25 / 55 - Math.floor(cantidad / 25 / 55)) * 55
 					)
 				);
-		} catch (error) {}
-		console.log("tiposervicio: ", tiposervicio);
+		} catch (error) {
+			console.log("error en el calculo: ", error);
+		}
+		// console.log("tiposervicio: ", tiposervicio);
 		if (tiposervicio == "5") {
-			console.log("entra por carga");
+			// console.log("entra por carga");
 			var sum = 0;
 			$(".sumcantidad").each(function () {
 				sum += parseFloat(this.innerHTML.replace(",", ""));
@@ -2126,7 +2280,7 @@ function validaInventario(form) {
 				$("#btnGenerarServicio").hide();
 			} else {
 				if (
-					loteSelected[0].disponible >
+					loteSelected[0].disponible >=
 					quitarComasNumero($("#cantidad").val())
 				) {
 					$("#btnGenerarServicio").show();
@@ -2146,7 +2300,7 @@ function validaInventario(form) {
 				quitarComasNumero($(form).find("#cantidad").val()) == undefined
 					? "0"
 					: quitarComasNumero($(form).find("#cantidad").val());
-			console.log("total por ensacar: ", sum);
+			// console.log("total por ensacar: ", sum);
 			if (
 				quitarComasNumero($("#disponible").html().replace(/\D/g, "")) >= sum
 			) {
@@ -2158,6 +2312,7 @@ function validaInventario(form) {
 		}
 	} catch (error) {}
 }
+
 function mensajeError(result) {
 	$.confirm({
 		title: "<span class='material-icons i-danger'>dangerous</span><span>¡Atención!<span>",
@@ -2199,6 +2354,7 @@ function mensajeCorrecto(mnsj, reload = true) {
 		},
 	});
 }
+
 function quitarComasNumero(value) {
 	try {
 		const regex = /,/g;
@@ -2232,7 +2388,7 @@ function llenaComboProductos() {
 			dataType: "json",
 		})
 		.then((resp) => {
-			console.log(resp);
+			// console.log(resp);
 			let productos;
 			productos = resp;
 
@@ -2255,6 +2411,7 @@ function llenaComboProductos() {
 			);
 		});
 }
+
 function calcularPesos() {
 	var pesoBruto = quitarComasNumero($("#pesoBruto").val());
 	var pesoVacio = quitarComasNumero($("#pesoVacio").val());
@@ -2302,6 +2459,7 @@ function diferenciaTeoricaColor(diferenciaTeorica, tolerable) {
 		$("#diferenciaTeorica").addClass("green");
 	}
 }
+
 function getClaseEstado($clave) {
 	switch ($clave) {
 		case "G":
@@ -2345,6 +2503,7 @@ function getClaseEstado($clave) {
 			break;
 	}
 }
+
 function getOperacionServicios($servicios) {
 	$operacion =
 		"<i class='fa-solid fa-arrow-right i-green'  title='Descarga'></i>";

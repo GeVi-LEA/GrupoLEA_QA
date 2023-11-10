@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  const serv = __url__; //"http://localhost/GrupoLEA/";
+  const serv = "http://localhost/GrupoLEA/";
 
   if ($("#id").val() != "") {
     $("#proveedor").prop("disabled", false);
@@ -1770,3 +1770,84 @@ $(document).ready(function () {
   };
   $.datepicker.setDefaults($.datepicker.regional["es"]);
 });
+
+// function erpalert(
+//   tipo = "",
+//   title = "Hecho!",
+//   texto = "",
+//   time = "3500",
+//   show = "slideDown",
+//   hide = "slideUp"
+// ) {
+//   if (tipo == "") {
+//     tipo = "success";
+//   }
+//   // console.log("tipo ", tipo);
+//   let Toast = Swal.mixin({
+//     toast: true,
+//     position: "top-right",
+//     iconColor: "white",
+//     customClass: {
+//       popup: "colored-toast",
+//     },
+//     text: texto,
+//     showConfirmButton: false,
+//     timer: time,
+//     timerProgressBar: true,
+//     icon: tipo,
+//     title: title,
+//   }).fire();
+// }
+function erpalert(
+  tipo = "",
+  title = "Hecho!",
+  texto = "",
+  time = "3500",
+  show = "slideDown",
+  hide = "slideUp"
+) {
+  if (tipo == "") {
+    tipo = "success";
+  }
+  let color = "#18c400";
+  switch (tipo) {
+    case "warning":
+      color = "#f19212";
+      break;
+    case "error":
+      color = "#d10000";
+      break;
+    case "info":
+      color = "#12e7f1";
+      break;
+
+    default:
+      break;
+  }
+
+  //   $.toast({
+  //     title: title,
+  //     subtitle: subtitle,
+  //     content: texto,
+  //     type: tipo,
+  //     delay: time,
+
+  //     // pause delay on hover
+  //     pauseDelayOnHover: true,
+  //     dismissible: true,
+  //   });
+  $.toast({
+    heading: `<strong>${title}</strong>`,
+    text: texto,
+    position: "top-right",
+    icon: tipo,
+    showHideTransition: "plain",
+    stack: 5,
+    hideAfter: time,
+    textAlign: "center", // Text alignment i.e. left, right or center
+    loader: true,
+    bgColor: color,
+    textColor: "white",
+    loaderBg: "rgb(64, 64, 223, 0.5)",
+  });
+}

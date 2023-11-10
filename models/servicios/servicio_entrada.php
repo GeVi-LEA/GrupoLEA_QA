@@ -274,9 +274,8 @@ class ServicioEntrada
 
     public function save()
     {
-        $sql    = "insert into servicios_entradas values(
-          null
-        , {$this->getClienteId()}
+        $sql    = "insert into servicios_entradas values(null, 
+        {$this->getClienteId()}
         , {$this->getEstatusId()}
         , {$this->getTipoTransporteId()}
         , '{$this->getNumUnidad()}'
@@ -299,8 +298,7 @@ class ServicioEntrada
         , null
         , null
         , '{$this->getObservaciones()}'
-        , '{$_SESSION['usuario']->id}'
-        , now()
+        , '{$_SESSION['usuario']->id}',now()
          )";
         $save   = $this->db->query($sql);
         $result = false;
@@ -313,12 +311,25 @@ class ServicioEntrada
     public function getAll($where = null)
     {
         $result = array();
-        $sql = 'select se.*, CEIL(se.peso_tara * 0.453592) as pesoTaraKg, c.nombre as nombreCliente, es.clave as clave, es.nombre as estatus, '
-            . 'se.peso_cliente as pesoCliente, CEIL(se.peso_cliente * .003) as tolerable, (se.peso_teorico - se.peso_cliente) as diferenciaTeorica, '
-            . 'TIMESTAMPDIFF(MINUTE, se.fecha_entrada, if(se.fecha_salida is null, now(), se.fecha_salida)) as tiempoTranscurrido  
-            from servicios_entradas se '
-            . 'inner join catalogo_estatus es on es.id = se.estatus_id '
-            . 'inner join catalogo_clientes c on c.id = se.cliente_id ';
+        $sql    = 'select se.*
+                , CEIL(se.peso_tara * 0.453592) as pesoTaraKg
+                , c.nombre as nombreCliente
+                , es.clave as clave
+                , es.nombre as estatus
+                , se.peso_cliente as pesoCliente
+                , CEIL(se.peso_cliente * .003) as tolerable
+                , (se.peso_teorico - se.peso_cliente) as diferenciaTeorica
+                , TIMESTAMPDIFF(MINUTE, se.fecha_entrada, if(se.fecha_salida is null, now(), se.fecha_salida)) as tiempoTranscurrido
+                , case
+                        when tipo_transporte_id = 6 or tipo_transporte_id = 12 then concat(\'<span id="showEnsacado" data-idserv="\',se.id,\'" class="showEnsacado material-icons i-recibir">directions_subway</span>\')
+                        else concat(\'<span id ="showEnsacado"  data-idserv="\',se.id,\'" class = " showEnsacado material-icons i-recibir">local_shipping</span>\')
+                    end as iconounidad 
+                , c.direccion direccion_cliente
+                ,(SELECT sum(ifnull(total_ensacado,cantidad)) FROM grupo_lea_dev.servicios_ensacado where entrada_id = se.id and estatus_id <>0 and servicio_id in(1,4,5) ) totalensacado
+                ,(SELECT count(*) FROM grupo_lea_dev.servicios_ensacado where entrada_id = se.id and estatus_id not in(0, 5)) serv_pendientes
+                from servicios_entradas se 
+                inner join catalogo_estatus es on es.id = se.estatus_id 
+                inner join catalogo_clientes c on c.id = se.cliente_id ';
         if ($where != null) {
             $sql .= $where;
         } else {
