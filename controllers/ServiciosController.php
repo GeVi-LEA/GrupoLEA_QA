@@ -831,6 +831,33 @@ class serviciosController
         return print_r(json_encode($result));
     }
 
+    public function liberarUnidad()
+    {
+        $id = isset($_POST['id']) && $_POST['id'] != '' ? $_POST['id'] : null;
+        if ($id != null) {
+            $servicio = new ServicioEntrada();
+            $servicio->setId($id);
+            $r = $servicio->liberarUnidad();
+            if ($r) {
+                $result = [
+                    'error'   => true,
+                    'mensaje' => 'Se registro la liberación de la unidad.'
+                ];
+            } else {
+                $result = [
+                    'error'   => false,
+                    'mensaje' => 'Ocurrio un error.'
+                ];
+            }
+        } else {
+            $result = [
+                'error'   => false,
+                'mensaje' => 'Ocurrio un error.'
+            ];
+        }
+        return print_r(json_encode($result));
+    }
+
     public function ingresarUnidad()
     {
         $id = isset($_POST['id']) && $_POST['id'] != '' ? $_POST['id'] : null;

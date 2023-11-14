@@ -23,6 +23,7 @@ function ROFinaliza($estatus)
     <link rel="stylesheet" href="<?= root_url ?>views/servicios/assets/css/servicios.css" type="text/css" />
     <link rel="stylesheet" href="<?= root_url ?>assets/libs/select2/css/select2.min.css" type="text/css">
     <link rel="stylesheet" href="<?= root_url ?>assets/js/sweetalert/sweetalert2.all.min.css">
+
     <!-- <link rel="stylesheet" href="<?= root_url ?>assets/css/style.css" type="text/css"> -->
     <script src="<?= root_url ?>assets/js/jquery-3.5.1.min.js"></script>
     <script src="<?= root_url ?>assets/js/jquery-confirm.js"></script>
@@ -32,6 +33,7 @@ function ROFinaliza($estatus)
 
     <script src="<?= root_url ?>assets/js/sweetalert/sweetalert2.all.min.js"></script>
     <script src="<?= root_url ?>views/servicios/assets/js/servicios.js"></script>
+
     <title>Ensacado</title>
 
     <style>
@@ -51,8 +53,11 @@ function ROFinaliza($estatus)
                 <h4>SERVICIOS DE ALMACÉN Y ENSACADO</h4>
             </div>
             <div class="d-flex pt-3">
-                <?php if ($ensacado['fecha_entrada'] != '' && $ensacado['estatus_id'] != '5' && Utils::permisosVigilancia()): ?>
+                <?php if ($ensacado['fecha_entrada'] != '' && $ensacado['estatus_id'] != '5' && $ensacado['estatus_id'] != '15' && Utils::permisosVigilancia()): ?>
                 <div><button class="boton" id="btnSalida" title="Salida de unidad"><span class="fa-solid fa-truck-arrow-right rotarHorizontal material-icons i-danger btn-icon  pr-1"></span></button></div>
+                <?php endif; ?>
+                <?php if ($ensacado['estatus_id'] == '5' && Utils::permisosVigilancia()): ?>
+                <div><button class="boton" id="btnLiberar" title="Liberar unidad"><span class="fa-solid fa-truck-arrow-right rotarHorizontal material-icons i-liberar btn-icon  pr-1"></span></button></div>
                 <?php endif; ?>
                 <?php if ($ensacado['estatus_id'] == '1'): ?>
                 <div><button class="boton" id="btnTransito" title="Poner unidad en transito"><span class="fa-solid fa-arrow-right-arrow-left material-icons i-transit btn-icon pr-1 mr-1"></span></button></div>
@@ -60,10 +65,10 @@ function ROFinaliza($estatus)
                 <?php if ($ensacado['fecha_entrada'] == ''): ?>
                 <div><button class="boton" id="btnIngresar" title="Ingresar unidad"><span class="fa-solid fa-truck-arrow-right material-icons i-iniciar btn-icon pr-1"></span></button></div>
                 <?php endif; ?>
-                <?php if ($ensacado['fecha_entrada'] != '' && $ensacado['estatus_id'] != '5' && Utils::permisosLogistica()): ?>
+                <?php if ($ensacado['fecha_entrada'] != '' && $ensacado['estatus_id'] != '5' && $ensacado['estatus_id'] != '15' && Utils::permisosLogistica()): ?>
                 <div><button class="boton" id="btnNuevoServicio" title="Agregar nuevo servicio"><span class="material-icons i-add btn-icon">add_circle</span></button></div>
                 <?php endif; ?>
-                <?php if (($ensacado['fecha_entrada'] != '' && $ensacado['estatus_id'] != '5' && Utils::permisosLogistica()) || ($ensacado['estatus_id'] == '1')): ?>
+                <?php if (($ensacado['fecha_entrada'] != '' && $ensacado['estatus_id'] != '5' && $ensacado['estatus_id'] != '15' && Utils::permisosLogistica()) || ($ensacado['estatus_id'] == '1')): ?>
                 <div><button class="boton" id="btnGuardar" title="Guardar"><span class="material-icons btn-icon i-save">save</span></button></div>
                 <div><button class="boton" id="btnEliminar" title="Eliminar"><span class="far i-delete material-icons fa-trash-alt btn-icon-s"></span></button></div>
                 <?php endif; ?>
@@ -168,13 +173,20 @@ function ROFinaliza($estatus)
                         <div><strong class="mr-1">Fecha llegada:</strong><input type="text" name="fechaLlegada"
                                 value="<?= isset($ensacado) && $ensacado['fecha_entrada'] != '' ? UtilsHelp::fechaHora($ensacado['fecha_entrada']) : ''; ?>" id="fechaLlegada" class="item-medium fixed" readOnly
                                 disabled /></div>
-                        <div><strong class="mr-1">Fecha salida:</strong><input type="text" name="fechaSalida"
+                        <div>
+                            <strong class="mr-1">Fecha finalizado:</strong><input type="text" name="fechaSalida"
                                 value="<?= isset($ensacado) && $ensacado['fecha_salida'] != '' ? UtilsHelp::fechaHora($ensacado['fecha_salida']) : ''; ?>" id="fechaSalida" class="item-medium fixed" readOnly disabled />
+                        </div>
+                        <div>
+                            <strong class="mr-1">Fecha liberación:</strong><input type="text" name="fechaLiberacion"
+                                value="<?= isset($ensacado) && $ensacado['fecha_liberacion'] != '' ? UtilsHelp::fechaHora($ensacado['fecha_liberacion']) : ''; ?>" id="fecha_liberacion" class="item-medium fixed" readOnly
+                                disabled />
                         </div>
                         <div><strong class="mr-2">En planta:</strong><span>Días: </span><input class="item-ss-small fixed" id="dias" type="text" value="<?= isset($tiempo) ? $tiempo['dias'] : ''; ?>" disabled />
                             <span>Horas: </span><input class="item-ss-small fixed" type="text" value="<?= isset($tiempo) ? $tiempo['horas'] : ''; ?>" disabled />
                             <span>Minutos: </span><input class="item-ss-small fixed" type="text" value="<?= isset($tiempo) ? $tiempo['minutos'] : ''; ?>" disabled />
                         </div>
+
                     </div>
 
                     <div class="row flex-nowrap pb-3">
@@ -338,7 +350,7 @@ function ROFinaliza($estatus)
                         <span class="item-medium fixed"><?= $serv['fecha_inicio'] != null && $serv['fecha_inicio'] != '' ? UtilsHelp::fechaHora($serv['fecha_inicio']) : ''; ?></span>
                     </div>
                     <div>
-                        <strong class="mr-1">Usuario Inicio:</strong>
+                        <strong class="mr-1">Operador Inicio:</strong>
                         <span class="item-medium fixed"><?= $serv['usuario_inicio_nombre'] != null && $serv['usuario_inicio_nombre'] != '' ? $serv['usuario_inicio_nombre'] : ''; ?></span>
                     </div>
                     <div>
@@ -346,7 +358,7 @@ function ROFinaliza($estatus)
                         <span class="item-medium fixed"><?= $serv['fecha_fin'] != null && $serv['fecha_fin'] != '' ? UtilsHelp::fechaHora($serv['fecha_fin']) : ''; ?></span>
                     </div>
                     <div>
-                        <strong class="mr-1">Usuario Fin:</strong>
+                        <strong class="mr-1">Operador Fin:</strong>
                         <span class="item-medium fixed"><?= $serv['usuario_fin_nombre'] != null && $serv['usuario_fin_nombre'] != '' ? $serv['usuario_fin_nombre'] : ''; ?></span>
                     </div>
 
@@ -466,7 +478,7 @@ function ROFinaliza($estatus)
                                     <!-- <div class="col-6"> -->
                                     <strong class="mr-1">Cantidad:</strong>
                                     <input type="text" name="cantidad" id="cantidad" class="item-small numhtml" disabled /><span class="ml-1">kgs.</span>
-                                    <span id="disponible" style="font-size: xx-small;margin-right: 10%;position: absolute;margin-top: 2%;">
+                                    <span id="disponible" style="font-size: xx-small;margin-right: 10%;position: absolute;margin-top: 2%;" hidden>
                                         Disponible :
                                         <?php
                                             if (isset($pesaje) && ($pesaje['EntPesoT'] > 0)) {
@@ -755,7 +767,7 @@ function ROFinaliza($estatus)
                                     </div>
                                 </div>
                                 <div class='col-md-4 col-12'>
-                                    <label for="cantidadSacos" class="pt-1 pr-1"><strong>ensacado:</strong></label>
+                                    <label for="cantidadSacos" class="pt-1 pr-1"><strong>Ensacado:</strong></label>
                                     <div class="input-group mt-4">
                                         <input type="text" name="cantidadSacos[]" class="item-small form-control numhtml" id="cantidadSacos" required />
                                         <div class="input-group-prepend">

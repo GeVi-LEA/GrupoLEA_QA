@@ -422,6 +422,9 @@ class Utils
             case 'SALIDA':
                 return 'estatus-salida';
                 break;
+            case 'LIB':
+                return 'estatus-liberado';
+                break;
         }
     }
 

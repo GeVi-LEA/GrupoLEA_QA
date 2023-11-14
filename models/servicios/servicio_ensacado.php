@@ -264,7 +264,7 @@ class ServicioEnsacado
 
     public function save()
     {
-        $sql    = "insert into servicios_ensacado values(
+        $sql = "insert into servicios_ensacado values(
                         null
                         , {$this->getEntradaId()}
                         , {$this->getServicioId()}

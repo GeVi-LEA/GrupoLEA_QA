@@ -9,11 +9,13 @@ include 'assets/js/graficas_entradas_js.php';
             <div class="col-5 div-estados" id="divEstados">
                 <a class="<?= isset($idEst) ? '' : 'estatus-hover' ?>" href="<?= principalUrl ?>?controller=Servicios&action=ensacado"><i title="Ver todas las entradas" class="i-list-ol fas fa-list-ol"></i></a>
                 <?php if (Utils::permisosSupervisor()): ?>
-                <a class="estatus-gen <?= $idEst == 1 ? 'estatus-hover' : '' ?>" title="Generadas" href="<?= principalUrl ?>?controller=Servicios&action=ensacado&idEst=1">Generados</a>
-                <a class="estatus-acept <?= $idEst == 11 ? 'estatus-hover' : '' ?>" title="En terminal" href="<?= principalUrl ?>?controller=Servicios&action=ensacado&idEst=11">En terminal</a>
-                <a class="estatus-proceso <?= $idEst == 3 ? 'estatus-hover' : '' ?>" title="En proceso" href="<?= principalUrl ?>?controller=Servicios&action=ensacado&idEst=3">En proceso</a>
-                <a class="estatus-fin <?= $idEst == 5 ? 'estatus-hover' : '' ?>" title="Finalizados" href="<?= principalUrl ?>?controller=Servicios&action=ensacado&idEst=5">Finalizados</a>
-                <a class="estatus-cancel <?= $idEst == 2 ? 'estatus-hover' : '' ?>" title="Cancelados" href="<?= principalUrl ?>?controller=Servicios&action=ensacado&idEst=2">Cancelados</a>
+                <a class="estatus-filter estatus-gen <?= $idEst == 1 ? 'estatus-hover' : '' ?>" title="Generadas" href="<?= principalUrl ?>?controller=Servicios&action=ensacado&idEst=1">Generados</a>
+                <a class="estatus-filter estatus-acept <?= $idEst == 11 ? 'estatus-hover' : '' ?>" title="En terminal" href="<?= principalUrl ?>?controller=Servicios&action=ensacado&idEst=11">En terminal</a>
+                <a class="estatus-filter estatus-proceso <?= $idEst == 3 ? 'estatus-hover' : '' ?>" title="En proceso" href="<?= principalUrl ?>?controller=Servicios&action=ensacado&idEst=3">En proceso</a>
+                <a class="estatus-filter estatus-fin <?= $idEst == 5 ? 'estatus-hover' : '' ?>" title="Finalizados" href="<?= principalUrl ?>?controller=Servicios&action=ensacado&idEst=5">Finalizados</a>
+                <a class="estatus-filter estatus-cancel <?= $idEst == 2 ? 'estatus-hover' : '' ?>" title="Cancelados" href="<?= principalUrl ?>?controller=Servicios&action=ensacado&idEst=2">Cancelados</a>
+                <a class="estatus-filter estatus-liberado <?= $idEst == 15 ? 'estatus-hover' : '' ?>" title="Liberadas" href="<?= principalUrl ?>?controller=Servicios&action=ensacado&idEst=15">Liberados</a>
+
                 <?php endif; ?>
             </div>
             <div class="col-3 text-center">

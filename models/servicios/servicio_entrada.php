@@ -441,6 +441,18 @@ class ServicioEntrada
         return $result;
     }
 
+    public function liberarUnidad()
+    {
+        $sql = 'update servicios_entradas set '
+            . " fecha_liberacion = NOW(), estatus_id = 15 where id={$this->getId()}";
+        $save   = $this->db->query($sql);
+        $result = false;
+        if ($save) {
+            $result = true;
+        }
+        return $result;
+    }
+
     public function getClientes()
     {
         $result = array();

@@ -293,6 +293,8 @@ div.jconfirm-content-pane {
 	font-size: 24px;
 	padding-right: 5px;
 	transition: 1s;
+	float: right;
+	text-align: right;
 }
 
 .selected {
@@ -434,6 +436,12 @@ div.jconfirm-content-pane {
 	font-weight: 700;
 	padding: 2px;
 }
+.estatus-liberado {
+	background-color: #001e48;
+	color: #ffffff !important;
+	font-weight: 700;
+	padding: 2px;
+}
 
 .estatus-enviada {
 	background-color: #e7900e;
@@ -475,6 +483,16 @@ div.jconfirm-content-pane {
 	font-weight: 700;
 	padding: 2px;
 }
+
+.estatus-filter {
+	min-width: 80px;
+	padding: 2px !important;
+	min-height: 25px !important;
+	border-radius: 10px !important;
+	text-align: center;
+	margin: 5px !important;
+}
+
 .req-estados .div-estados a {
 	display: inline-block;
 	font-size: 12px;
@@ -495,6 +513,7 @@ div.jconfirm-content-pane {
 .estatus-hover {
 	opacity: 1 !important;
 	transform: scale(1.1);
+	box-shadow: 0px 0px 5px 3px rgba(14, 3, 144, 0.32);
 }
 
 .estatus-tabla {
@@ -785,7 +804,7 @@ button:focus {
 
 @media (min-width: 768px) {
 	.aside {
-		min-width: 9rem;
+		min-width: 10rem;
 		font-size: 1rem;
 		font-weight: 700;
 	}
@@ -816,7 +835,7 @@ button:focus {
 		display: block;
 		max-width: 99%;
 		min-height: 35rem;
-		padding-left: 0.5rem;
+		padding-left: 1.5rem;
 	}
 }
 

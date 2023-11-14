@@ -459,3 +459,35 @@ function goToByScroll(id) {
 const getRandomColor = () => {
 	return "#" + ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0");
 };
+
+function fechaHora($fecha) {
+	if ($fecha != null || $fecha != "") {
+		return (
+			date("d/m/Y", strtotime($fecha)) +
+			" - " +
+			date("H:i:s", strtotime($fecha))
+		);
+	} else {
+		return "";
+	}
+}
+
+function formatDate(date) {
+	return (
+		[
+			date.getFullYear(),
+			padTo2Digits(date.getMonth() + 1),
+			padTo2Digits(date.getDate()),
+		].join("-") +
+		" " +
+		[
+			padTo2Digits(date.getHours()),
+			padTo2Digits(date.getMinutes()),
+			padTo2Digits(date.getSeconds()),
+		].join(":")
+	);
+}
+
+function padTo2Digits(num) {
+	return num.toString().padStart(2, "0");
+}
