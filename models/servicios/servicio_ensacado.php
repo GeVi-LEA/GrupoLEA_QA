@@ -320,14 +320,23 @@ class ServicioEnsacado
     public function getAll($where = null)
     {
         $result = array();
-        $sql = 'select s.*, ce.clave as clave, ce.nombre as estatus, serv.nombre as servicio, serEnt.numUnidad as unidad, serEnt.fecha_entrada as fechaEntrada, '
-            . 'serEnt.fecha_salida as fechaSalida, TIMESTAMPDIFF(DAY, serEnt.fecha_entrada, serEnt.fecha_salida) as transcurridos, '
-            . '(select cli.nombre from catalogo_clientes cli where cli.id =  serEnt.cliente_id) as cliente,serEnt.cliente_id from servicios_ensacado s'
-            . ' left join catalogo_productos_resinas_liquidos prod on prod.id = s.producto_id'
-            . ' inner join servicios_entradas serEnt on serEnt.id = s.entrada_id '
-            . ' inner join catalogo_estatus ce on ce.id = s.estatus_id '
-            . ' inner join catalogo_servicios serv on serv.id = s.servicio_id '
-            . ' left join catalogo_tipos_empaques te on te.id = s.empaque_id ';
+        $sql    = 'select s.*
+        , ce.clave as clave
+        , ce.nombre as estatus
+        , serv.nombre as servicio
+        , serEnt.numUnidad as unidad
+        , serEnt.fecha_entrada as fechaEntrada
+        , serEnt.fecha_salida as fechaSalida
+        #, TIMESTAMPDIFF(DAY, serEnt.fecha_entrada, serEnt.fecha_salida) as transcurridos
+        , TIMESTAMPDIFF(MINUTE, s.fecha_inicio, s.fecha_fin) as transcurridos
+        , (select cli.nombre from catalogo_clientes cli where cli.id =  serEnt.cliente_id) as cliente
+        , serEnt.cliente_id 
+        from servicios_ensacado s
+        left join catalogo_productos_resinas_liquidos prod on prod.id = s.producto_id
+        inner join servicios_entradas serEnt on serEnt.id = s.entrada_id 
+        inner join catalogo_estatus ce on ce.id = s.estatus_id 
+        inner join catalogo_servicios serv on serv.id = s.servicio_id 
+        left join catalogo_tipos_empaques te on te.id = s.empaque_id ';
 
         if ($where != null) {
             $sql .= $where;
@@ -410,11 +419,20 @@ class ServicioEnsacado
 
     public function finalizarServicio()
     {
-        $sql    = "update servicios_ensacado set 
-        fecha_fin = NOW()
-        , estatus_id = 5 
-        , usuario_fin = {$_SESSION['usuario']->id} 
-        where id={$this->getId()}";
+        $sql    = "
+            update servicios_ensacado 
+            set fecha_inicio = NOW()
+            , estatus_id = 3 
+            , usuario_inicio = {$_SESSION['usuario']->id} 
+            where id = {$this->getId()}
+            ";
+        $save   = $this->db->query($sql);
+        $sql    = "
+            update servicios_entradas
+            set estatus_id = 3
+            where id = (select entrada_id from servicios_ensacado where id = {$this->getId()})
+            ;
+        ";
         $save   = $this->db->query($sql);
         $result = false;
         if ($save) {

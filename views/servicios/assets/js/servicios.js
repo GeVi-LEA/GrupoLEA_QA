@@ -652,11 +652,18 @@ $(document).ready(function () {
 			.find("#cantidad")
 			.change(function () {
 				var cant = $(this).val();
-				cantidadinp = $(this);
-				if (cant != "") {
-					$(this).val(htmlNum(quitarComasNumero(cant)));
+				var remainder = quitarComasNumero(cant) % 25;
+				if (remainder != 0) {
+					mensajeError(
+						"Favor de validar la cantidad, no es múltiplo de 25"
+					);
+				} else {
+					cantidadinp = $(this);
+					if (cant != "") {
+						$(this).val(htmlNum(quitarComasNumero(cant)));
+					}
+					validaInventario("#formAgregarServicio");
 				}
-				validaInventario("#formAgregarServicio");
 			});
 		$("#formAgregarServicio")
 			.find("#fechaPrograma1")
@@ -2160,7 +2167,7 @@ function agregarLotesEnsacado(form) {
 		$("#barredura").parent("div").hide();
 		$("#loteSelect").removeClass("item-small").addClass("item-large");
 		$("#loteSelect").parent().find(".mr-1").html("Lote/Producto/Rótulo:");
-
+		$("#loteSelect").select2();
 		$(".calctarimas div").attr("hidden", false);
 		$("#existencia").val("");
 		// $("#loteSelect, #cantidad").change(function () {
