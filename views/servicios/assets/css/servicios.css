@@ -24,6 +24,7 @@ html {
 }
 .success {
 	border: 3px solid #00aa2b !important;
+	border: 3px solid #00aa2b !important;
 	box-shadow: 0 0 5px 1px #048000;
 }
 
@@ -91,6 +92,12 @@ html {
 	color: #ffffff !important;
 	font-weight: 700;
 	padding: 2px;
+}
+
+.estatus-eliminado {
+	background-color: #1b1b1b;
+	color: #ffff;
+	font-weight: 700;
 }
 
 .folio {

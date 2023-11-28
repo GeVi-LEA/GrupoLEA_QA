@@ -275,7 +275,7 @@ class ServicioEnsacado
                         , '{$this->getLote()}'
                         , '{$this->getAlias()}'
                         , {$this->getCantidad()}
-                        , " . (($this->getServicioId() == '5') ? 'now()' : "'{$this->getFechaProgramacion()}'") . "
+                        , " . (($this->getServicioId() == '5') ? 'now()' : (($this->getFechaProgramacion() != 'null') ? "'" . $this->getFechaProgramacion() . "'" : 'null')) . "
                         , null
                         , null
                         , null
@@ -293,7 +293,9 @@ class ServicioEnsacado
                         , '{$_SESSION['usuario']->id}'
                         , NOW()
                   )";
-
+        // print_r('<pre>');
+        // print_r($sql);
+        // print_r('</pre>');
         $save   = $this->db->query($sql);
         $result = false;
         if ($save) {
@@ -331,6 +333,7 @@ class ServicioEnsacado
         , TIMESTAMPDIFF(MINUTE, s.fecha_inicio, s.fecha_fin) as transcurridos
         , (select cli.nombre from catalogo_clientes cli where cli.id =  serEnt.cliente_id) as cliente
         , serEnt.cliente_id 
+        , prod.nombre nombre_producto 
         from servicios_ensacado s
         left join catalogo_productos_resinas_liquidos prod on prod.id = s.producto_id
         inner join servicios_entradas serEnt on serEnt.id = s.entrada_id 
@@ -352,8 +355,9 @@ class ServicioEnsacado
     public function edit()
     {
         $sql = "update servicios_ensacado set 
-        producto_id = {$this->getProductoId()}
-        ,  empaque_id = {$this->getEmpaqueId()}
+          producto_id = {$this->getProductoId()}
+        , empaque_id = {$this->getEmpaqueId()}
+        , orden = '{$this->getOrden()}'
         , estatus_id = {$this->getEstatusId()}
         , lote = '{$this->getLote()}'
         , alias = '{$this->getAlias()}'
@@ -421,9 +425,9 @@ class ServicioEnsacado
     {
         $sql    = "
             update servicios_ensacado 
-            set fecha_inicio = NOW()
-            , estatus_id = 3 
-            , usuario_inicio = {$_SESSION['usuario']->id} 
+            set fecha_fin = NOW()
+            , estatus_id = 5 
+            , usuario_fin = {$_SESSION['usuario']->id} 
             where id = {$this->getId()}
             ";
         $save   = $this->db->query($sql);
@@ -473,11 +477,18 @@ class ServicioEnsacado
     public function getLotesCliente($clienteId)
     {
         $result    = array();
-        $sql       = "select se.lote, se.alias, prod.nombre, get_disponibleByLote(se.lote,$clienteId) disponible 
+        $sql       = "select 
+                        se.lote
+                        , se.alias
+                        , prod.nombre
+                        , get_disponibleByLote(se.lote,$clienteId) disponible 
                         from servicios_ensacado se 
                         inner join servicios_entradas s on s.id = se.entrada_id 
                         left join catalogo_productos_resinas_liquidos prod on prod.id = se.producto_id
-                        where s.cliente_id = $clienteId and se.lote != '' and get_disponibleByLote(se.lote,$clienteId) >0
+                        where 
+                        s.cliente_id = $clienteId 
+                        and se.lote != '' 
+                        and get_disponibleByLote(se.lote,$clienteId) > 0
                         group by se.lote, se.alias, se.producto_id 
                         order by se.lote";
         $ensacados = $this->db->query($sql);

@@ -41,6 +41,7 @@ function ROFinaliza($estatus)
         background-color: #cfd7e9;
     }
     </style>
+
 </head>
 
 <body>
@@ -52,6 +53,7 @@ function ROFinaliza($estatus)
             <div class="text-center w-75 mt-3">
                 <h4>SERVICIOS DE ALMACÉN Y ENSACADO</h4>
             </div>
+            <!-- BOTONES DE ACCIONES -->
             <div class="d-flex pt-3">
                 <?php if ($ensacado['fecha_entrada'] != '' && $ensacado['estatus_id'] != '5' && $ensacado['estatus_id'] != '15' && Utils::permisosVigilancia()): ?>
                 <div><button class="boton" id="btnSalida" title="Salida de unidad"><span class="fa-solid fa-truck-arrow-right rotarHorizontal material-icons i-danger btn-icon  pr-1"></span></button></div>
@@ -75,6 +77,7 @@ function ROFinaliza($estatus)
                 <div><button class="boton" id="btnSalir" title="Salir"><span class="material-icons i-danger btn-icon" title="Cerrar">disabled_by_default</span></button></div>
             </div>
         </header>
+        <!-- SECCION DE DATOS GENERALES -->
         <section id="sectionForm">
             <form id="ensacadoForm" enctype="multipart/form-data" <?php ROFinaliza($ensacado['estatus_id']) ?>>
                 <input type="hidden" name="serv_pendientes" id="serv_pendientes" value="<?= $ensacado['serv_pendientes'] ?>">
@@ -84,14 +87,23 @@ function ROFinaliza($estatus)
                     <input type="hidden" id="ferrotolva" value="<?= $isTren ? 'F' : 'C' ?>" />
                     <div class="datos mt-2 mb-1" <?php ROFinaliza($ensacado['estatus_id']) ?>>
                         <input type="hidden" name="id" value="<?= isset($ensacado) && $ensacado['id'] != '' ? $ensacado['id'] : ''; ?>" id="id" />
-                        <div><strong class="mr-1">Número FT/AT:</strong><input type="text" name="numeroUnidad" <?php ROFinaliza($ensacado['estatus_id']) ?> value="<?= isset($ensacado) ? $ensacado['numUnidad'] : ''; ?>"
-                                id="numeroUnidad" class="item-small" <?= (Utils::permisosLogistica()) ? '' : 'disabled' ?> />
+                        <div>
+                            <strong class="mr-1">Número FT/AT:</strong>
+                            <input type="text" name="numeroUnidad" <?php ROFinaliza($ensacado['estatus_id']) ?> value="<?= isset($ensacado) ? $ensacado['numUnidad'] : ''; ?>" id="numeroUnidad" class="item-small"
+                                <?= (Utils::permisosLogistica()) ? '' : 'disabled' ?> />
                             <label id="addDocumento" title="Agregar Bill of lading" for="documentoBill" class="inputFile mb-1"><i class="fas fa-cloud-upload-alt"></i></label>
                             <input id="documentoBill" name="documentoBill" type="file" <?= (Utils::permisosLogistica()) ? '' : 'disabled' ?> hidden /><input <?php ROFinaliza($ensacado['estatus_id']) ?> type="hidden"
                                 id="archivoBill" name="archivoBill" value="<?= isset($ensacado) && $ensacado['doc_remision'] != '' ? $ensacado['doc_remision'] : ''; ?>">
                             <i id="show" class="i-pdf material-icons fa-solid fa-file-pdf" title="Ver Bill of lading" hidden></i>
                             <i id="delete" class="far i-delete material-icons fa-trash-alt" <?= (Utils::permisosLogistica()) ? '' : 'disabled' ?> hidden></i>
                         </div>
+                        <div id="divRadios" class="div-radios">
+                            <strong for="entrada_salida">Entrada:</strong>
+                            <input class="ml-1 mr-3" id="entrada_salida" type="radio" name="entrada_salida" value="0" disabled <?= ($ensacado['entrada_salida'] == 0) ? 'checked' : ''; ?> />
+                            <strong for="entrada_salida">Salida:</strong>
+                            <input class="ml-1" type="radio" name="entrada_salida" value="1" disabled <?= ($ensacado['entrada_salida'] == 1) ? 'checked' : ''; ?> />
+                        </div>
+
                         <div>
                             <strong class="mr-1">Peso cliente:</strong>
                             <input type="text" <?php ROFinaliza($ensacado['estatus_id']) ?> name="pesoCliente" id="pesoCliente" <?php ROFinaliza($ensacado['estatus_id']) ?>
@@ -121,9 +133,54 @@ function ROFinaliza($estatus)
                     </div>
                     <div class="datos pb-2">
                         <div>
+
+                            <div id="divRadiosT" class="div-radiosT">
+                                <strong class="mr-1">Transporte por:</strong>
+                                <strong for="transp_lea_cliente">LEA:</strong>
+                                <input class="ml-1 mr-3" id="transp_lea_cliente" type="radio" name="transp_lea_cliente" value="0" <?= ($ensacado['transp_lea_cliente'] == 0) ? 'checked' : ''; ?> />
+                                <strong for="transp_lea_clientec">Cliente:</strong>
+                                <input class="ml-1" type="radio" id="transp_lea_clientec" name="transp_lea_cliente" value="1" <?= ($ensacado['transp_lea_cliente'] == 1) ? 'checked' : ''; ?> />
+                            </div>
+                        </div>
+                        <div>
+                            <strong class="mr-1">Producto:</strong>
+                            <div id="divRadiosT" class="div-radiosT">
+                                <div class='row'>
+                                    <div class='col'>
+                                        <strong for="tipo_producto">Polietileno:</strong>
+                                    </div>
+                                    <div class='col'>
+                                        <input class="ml-1 mr-3" id="tipo_producto" type="radio" name="tipo_producto" value="0" <?= ($ensacado['tipo_producto'] == 0) ? 'checked' : ''; ?> />
+                                    </div>
+                                </div>
+                                <div class='row'>
+                                    <div class='col'>
+                                        <strong for="tipo_productoL">Lubricante:</strong>
+                                    </div>
+                                    <div class='col'>
+                                        <input class="ml-1" type="radio" id="tipo_productoL" name="tipo_producto" value="1" <?= ($ensacado['tipo_producto'] == 1) ? 'checked' : ''; ?> />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
                             <strong class="mr-1">Transportista:</strong>
-                            <input <?php ROFinaliza($ensacado['estatus_id']) ?> type="text" name="transportista" value="<?= isset($ensacado['transportista']) ? $ensacado['transportista'] : ''; ?>" id="transportista"
-                                class="item-big" <?= (Utils::permisosLogistica()) ? '' : 'disabled' ?> />
+                            <?php if ($isTren) { ?>
+                            <input <?php ROFinaliza($ensacado['estatus_id']) ?> type="text" name="transportista" value="KANSAS CITY SOUTHERN DE MEXICO" id="transportista" class="item-big" disabled />
+                            <?php } else { ?>
+                            <select <?php ROFinaliza($ensacado['estatus_id']) ?> name="transportista" class="item-big" id="transportista" <?= (Utils::permisosLogistica()) ? '' : 'disabled' ?>>
+                                <option value="" selected>--Selecciona--</option>
+                                <?php
+                                if (!empty($cat_transportistas)):
+                                    foreach ($cat_transportistas as $t):
+                                ?>
+                                <option value="<?= $t->id ?>" <?= ($ensacado['transportista'] == $t->id) ? 'selected' : ''; ?>><?= $t->nombre ?> </option>
+                                <?php
+                                    endforeach;
+                                endif;
+                                                                ?>
+                            </select>
+                            <?php } ?>
                         </div>
                         <div>
                             <strong class="mr-1">Transporte:</strong>
@@ -133,7 +190,8 @@ function ROFinaliza($estatus)
                                     if (!empty($transportes)):
                                         foreach ($transportes as $t):
                                 ?>
-                                <option value="<?= $t->id ?>" <?= isset($ensacado) && $t->id == $ensacado['tipo_transporte_id'] ? 'selected' : ''; ?> data-bascula="<?= $t->bascula ?>"><?= $t->nombre ?>
+                                <option value="<?= $t->id ?>" <?= isset($ensacado) && $t->id == $ensacado['tipo_transporte_id'] ? 'selected' : ''; ?> data-bascula="<?= $t->bascula ?>"
+                                    data-cap_max="<?= $t->cap_maxima ?>"><?= $t->nombre ?>
                                 </option>
                                 <?php
                                         endforeach;
@@ -162,8 +220,26 @@ function ROFinaliza($estatus)
                         </div>
                     </div>
                     <div class="datos pb-2" <?= $isTren ? 'hidden' : '' ?>>
-                        <div><strong class="mr-1">Chofer:</strong><input <?php ROFinaliza($ensacado['estatus_id']) ?>type="text" name="chofer" value="<?= isset($ensacado['chofer']) ? $ensacado['chofer'] : ''; ?>"
-                                id="chofer" class="item-big" <?= $isTren ? 'disabled' : '' ?> /></div>
+                        <div>
+                            <strong class="mr-1">Chofer:</strong>
+                            <?php if ($isTren) { ?>
+                            <input <?php ROFinaliza($ensacado['estatus_id']) ?>type="text" name="chofer" value="<?= isset($ensacado['chofer']) ? $ensacado['chofer'] : ''; ?>" id="chofer" class="item-big"
+                                <?= $isTren ? 'disabled' : '' ?> />
+                            <?php } else { ?>
+                            <select <?php ROFinaliza($ensacado['estatus_id']) ?> name="chofer" class="item-big" id="chofer" <?= $isTren ? 'disabled' : '' ?>>
+                                <option value="" selected>--Selecciona--</option>
+                                <?php
+                                if (!empty($cat_choferes)):
+                                    foreach ($cat_choferes as $t):
+                                ?>
+                                <option value="<?= $t->chof_id ?>" <?= ($ensacado['chofer'] == $t->chof_id) ? 'selected' : ''; ?>><?= $t->chof_nombres . ' ' . $t->chof_apellidos ?> </option>
+                                <?php
+                                    endforeach;
+                                endif;
+                                                                ?>
+                            </select>
+                            <?php } ?>
+                        </div>
                         <div><strong class="mr-1">Placa #1:</strong><input <?php ROFinaliza($ensacado['estatus_id']) ?>name="placa1" class="item-small" id="placa1"
                                 value="<?= isset($ensacado) ? $ensacado['placa1'] : ''; ?>" type="text" /></div>
                         <div><strong class="mr-1">Placa #2:</strong><input <?php ROFinaliza($ensacado['estatus_id']) ?>name="placa2" class="item-small" id="placa2"
@@ -189,7 +265,7 @@ function ROFinaliza($estatus)
 
                     </div>
 
-                    <div class="row flex-nowrap pb-3">
+                    <div class="row flex-nowrap pb-3" id="pnl_peso" <?= isset($ensacado['ticket']) ? '' : 'hidden' ?>>
                         <div class=" col-4 pl-5">
                             <div class="d-flex justify-content-between mb-1">
                                 <div class="pt-2"><strong>Tara Kilos:</strong></div>
@@ -273,10 +349,15 @@ function ROFinaliza($estatus)
                         </div>
                     </div>
                     <?php if (isset($isTren) && !$isTren): ?>
-                    <div class="datos pb-2">
-                        <div><strong class="mr-1">Sello #1:</strong><input name="sello1" class="item-middle" id="sello1" type="text" value="<?= isset($ensacado) ? $ensacado['sello1'] : ''; ?>" /></div>
-                        <div><strong class="mr-1">Sello #2:</strong><input name="sello2" class="item-middle" id="sello2" type="text" value="<?= isset($ensacado) ? $ensacado['sello2'] : ''; ?>" /></div>
-                        <div><strong class="mr-1">Sello #3:</strong><input name="sello3" class="item-middle" id="sello3" type="text" value="<?= isset($ensacado) ? $ensacado['sello3'] : ''; ?>" /></div>
+                    <div class="datos pb-2" id="pnl_sellos" <?= isset($ensacado['sellos']) ? '' : 'hidden' ?>>
+                        <?php
+                        $sellos = json_decode($ensacado['sellos'], true);
+                        if (isset($ensacado['sellos']) && $ensacado['sellos'] != '') {
+                            for ($x = 1; $x < $ensacado['cant_puertas'] + 1; $x++) {
+                                echo '<div><strong class="mr-1">Sello #' . $x . ':</strong><input name="sello' . $x . '" class="item-middle" id="sello' . $x . '" type="text" value="' . (isset($ensacado['sellos']) ? $sellos['sello' . strval($x)] : '') . '" /></div>';
+                            }
+                        }
+                        ?>
                     </div>
                     <?php endif; ?>
                     <div class="datos pb-2">
@@ -286,8 +367,8 @@ function ROFinaliza($estatus)
                 </div>
             </form>
         </section>
+        <!-- SECCION DE SERVICIOS -->
         <section id="seccionServicios">
-
             <?php if (isset($ensacado) && count($ensacado['servicio']) > 0): ?>
             <span class="titulo-div servicios-titulo">Servicios</span>
             <?php foreach ($ensacado['servicio'] as $serv): ?>
@@ -313,19 +394,36 @@ function ROFinaliza($estatus)
                         <span id="editarServicio" class="material-icons i-edit border-btn" title="Editar">edit</span>
                         <span id="deleteServicio" class="material-icons i-delete border-btn" title="Eliminar">delete_forever</span>
                         <?php endif; ?>
-                        <span id="imprimirServicio" class="i-document material-icons border-btn mr-1">description</span>
+                        <span id="imprimirServicio" class="i-document material-icons border-btn mr-1" data-servicio="<?= $serv['id'] ?>">description</span>
                     </div>
                 </div>
                 <div class="datos mt-2">
-                    <div><strong class="mr-1">Orden:</strong><span class="item-small fixed mr-2"><?= isset($serv['orden']) ? $serv['orden'] : ''; ?> </span>
-                        <?php if ($serv['doc_orden'] != ''): ?>
-                        <input type="hidden" /><input name="documentoOrden" type="file" hidden /><input type="hidden" name="archivoOrden" value="<?= $serv['doc_orden']; ?>">
-                        <i id="show" class="i-pdf material-icons fa-solid fa-file-pdf" title="Ver Orden"></i>
-                        <?php endif; ?>
+                    <div>
+                        <strong class="mr-1">Orden:</strong>
+
+                        <input type="text" name="orden" id="orden" class="item-small" value="<?= (isset($serv) && isset($serv['orden'])) ? $serv['orden'] : ''; ?>" />
+
+                        <label id="addDocumento" title="Agregar orden" for="doc_orden" class="inputFile mb-1" hidden><i class="fas fa-cloud-upload-alt"></i></label>
+                        <input id="doc_orden" name="doc_orden" class="nombrearchivo" value="<?= (isset($serv) && isset($serv['doc_orden'])) ? $serv['doc_orden'] : ''; ?>" type="file"
+                            <?= (Utils::permisosLogistica()) ? '' : 'disabled' ?> hidden />
+                        <input <?php ROFinaliza($ensacado['estatus_id']) ?> type="hidden" id="doc_orden" name="doc_orden">
+                        <i id="show" class="i-pdf material-icons fa-solid fa-file-pdf" title="Ver orden" <?= ($serv['doc_orden'] != '') ? '' : 'hidden'; ?>
+                            data-documento="<?= (isset($serv) && isset($serv['doc_orden'])) ? $serv['doc_orden'] : ''; ?>"></i>
+                        <i id="delete" class="far i-delete material-icons fa-trash-alt" <?= (Utils::permisosLogistica()) ? '' : 'disabled' ?> hidden></i>
+
                     </div>
-                    <div><strong class="mr-1">Lote:</strong><span class="item-small fixed"> <?= isset($serv['lote']) ? $serv['lote'] : ''; ?> </span></div>
-                    <div><strong class="mr-1">Producto:</strong><span class="item-small fixed"><?= isset($serv['producto']) ? $serv['producto'] : ''; ?></span></div>
-                    <div><strong class="mr-1">Rótulo:</strong><span class="item-small fixed"><?= isset($serv['alias']) ? $serv['alias'] : ''; ?></span></div>
+                    <div>
+                        <strong class="mr-1">Lote:</strong>
+                        <span class="item-small fixed"> <?= isset($serv['lote']) ? $serv['lote'] : ''; ?> </span>
+                    </div>
+                    <div>
+                        <strong class="mr-1">Producto:</strong>
+                        <span class="item-small fixed"><?= isset($serv['producto']) ? $serv['producto'] : ''; ?></span>
+                    </div>
+                    <div>
+                        <strong class="mr-1">Rótulo:</strong>
+                        <span class="item-small fixed"><?= isset($serv['alias']) ? $serv['alias'] : ''; ?></span>
+                    </div>
                     <div class="d-flex"><strong class="mr-1">Estatus:</strong>
                         <div class="<?= Utils::getClaseEstado($serv['clave']); ?> estatus text-center"><span id="estatus"><?= $serv['estatus']; ?></span></div>
                     </div>
@@ -488,20 +586,20 @@ function ROFinaliza($estatus)
                                             }
                                         ?>
                                     </span>
-                                    <!-- </div>
-                                        <div class="col-6">
-                                            <strong class="mr-1">Disponible :</strong>
-                                            
-                                        </div> -->
-                                    <!-- </div> -->
-
-
-
                                 </div>
                             </div>
                             <div>
                                 <div class="row justify-content-between mb-2">
-                                    <div><strong class="mr-1">Orden:</strong><input type="text" name="orden" id="orden" class="item-medium" /> </div>
+                                    <div>
+                                        <strong class="mr-1">Orden:</strong>
+                                        <input type="text" name="orden" id="orden" class="item-medium" value="<?= isset($ensacado) && isset($ensacado['doc_orden']) ? $ensacado['doc_orden'] : ''; ?>" />
+                                        <label id="addDocumento" title="Agregar orden" for="documentoOrden_e" class="inputFile mb-1"><i class="fas fa-cloud-upload-alt"></i></label>
+                                        <input id="documentoOrden_e" <?php ROFinaliza($ensacado['estatus_id']) ?>name="documentoOrden_e" type="file" hidden />
+                                        <input type="hidden" id="archivoOrden_e" name="archivoOrden_e">
+                                        <i id="show" class="i-pdf material-icons fa-solid fa-file-pdf" title="Ver Bill of lading" hidden></i>
+                                        <i id="delete" class="far i-delete material-icons fa-trash-alt" <?= (Utils::permisosLogistica()) ? '' : 'disabled' ?> hidden></i>
+
+                                    </div>
                                     <div>
                                         <strong class="mr-1">Lote:</strong><input type="text" name="lote" id="lote" class="item-medium" />
                                         <!-- <strong class="mr-1">Lote:</strong><input type="text" name="lote" id="lote" class="item-medium" /> -->
@@ -514,7 +612,8 @@ function ROFinaliza($estatus)
 
 
                                     </div>
-                                    <div><strong class="mr-1">Existencia:</strong>
+                                    <div>
+                                        <strong class="mr-1">Existencia:</strong>
                                         <input type="text" name="existencia" id="existencia" class="item-small numhtml" readonly disabled />
                                         <span class="ml-1">kgs.</span>
                                     </div>
@@ -631,12 +730,15 @@ function ROFinaliza($estatus)
                                 <div><strong class="mr-1">Cantidad:</strong><input type="text" name="cantidad" id="cantidad" class="item-s-small" /><span class="ml-1">kgs.</span></div>
                             </div>
                             <div class="row d-flex justify-content-between mb-2">
-                                <div><strong class="mr-1">Orden:</strong>
-                                    <input type="text" name="orden" id="orden" class="item-medium" />
-                                    <label id="addDocumento" title="Agregar documento orden" for="documentoOrden" class="inputFile mb-1"><i class="fas fa-cloud-upload-alt"></i></label>
-                                    <input id="documentoOrden" name="documentoOrden" type="file" hidden /><input type="hidden" id="archivoOrden" name="archivoOrden">
-                                    <i id="show" class="i-pdf material-icons fa-solid fa-file-pdf" title="Ver documento" hidden></i>
-                                    <i id="delete" class="far i-delete material-icons fa-trash-alt" hidden></i>
+                                <div>
+                                    <strong class="mr-1">Orden:</strong>
+                                    <input type="text" name="orden" id="orden" class="item-medium" value="<?= isset($ensacado) && isset($ensacado['doc_orden']) ? $ensacado['doc_orden'] : ''; ?>" />
+                                    <label id="addDocumento" title="Agregar orden" for="documentoOrden_e" class="inputFile mb-1"><i class="fas fa-cloud-upload-alt"></i></label>
+                                    <input id="documentoOrden_e" <?php ROFinaliza($ensacado['estatus_id']) ?>name="documentoOrden_e" type="file" hidden />
+                                    <input type="hidden" id="archivoOrden_e" name="archivoOrden_e">
+                                    <i id="show" class="i-pdf material-icons fa-solid fa-file-pdf" title="Ver Bill of lading" hidden></i>
+                                    <i id="delete" class="far i-delete material-icons fa-trash-alt" <?= (Utils::permisosLogistica()) ? '' : 'disabled' ?> hidden></i>
+
                                 </div>
 
                                 <div>

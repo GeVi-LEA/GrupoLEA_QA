@@ -4,15 +4,19 @@ require_once utils_root . 'utilsHelp.php';
 require_once config_root . 'db.php';
 require_once models_root . 'catalogos/cliente.php';
 require_once models_root . 'catalogos/producto_resina_liquido.php';
+require_once models_root . 'catalogos/producto.php';
 require_once models_root . 'catalogos/tipo_empaque.php';
 require_once models_root . 'catalogos/tipo_transporte.php';
 require_once models_root . 'catalogos/servicio.php';
 require_once models_root . 'catalogos/unidad.php';
 require_once models_root . 'catalogos/documento_norma.php';
+require_once models_root . 'catalogos/transportistas.php';
+require_once models_root . 'catalogos/choferes.php';
 require_once models_root . 'servicios/servicio_cliente.php';
 require_once models_root . 'servicios/bascula.php';
 require_once models_root . 'servicios/servicio_entrada.php';
 require_once models_root . 'servicios/servicio_ensacado.php';
+require_once models_root . 'servicios/servicio_lubricante.php';
 require_once models_root . 'servicios/servicio_movimiento_almacen.php';
 
 class serviciosController
@@ -114,11 +118,21 @@ class serviciosController
 
         $isTren = in_array($ensacado['tipo_transporte_id'], $arrayIdsTr);
 
+        if ($ensacado['entrada_salida'] == '1') {
+            $serv      = new Servicio();
+            $servicios = $serv->getServiciosSalidas();
+        }
+
         $cliente  = new Cliente();
         $clientes = $cliente->getClienteConServiciosEnsacado();
 
         $producto  = new ProductoResinaLiquido();
         $productos = $producto->getAll();
+
+        if ($ensacado['tipo_producto'] == '1') {
+            $producto  = new Producto();
+            $productos = $producto->getAll();
+        }
 
         $tipoTrans   = new TipoTransporte();
         $transportes = $tipoTrans->getAll();
@@ -132,7 +146,18 @@ class serviciosController
         } else {
             $transportes = $tipoTrans->isCamion();
         }
+
+        $catTransportes     = new CatTransportistas();
+        $cat_transportistas = $catTransportes->getAll();
+
+        $catChoferes  = new CatChoferes();
+        $cat_choferes = $catChoferes->getAll();
         require_once views_root . 'servicios/ensacado.php';
+    }
+
+    public function reglamento()
+    {
+        require_once views_root . 'servicios/reglamento.php';
     }
 
     public function clientesServicios()
@@ -296,32 +321,36 @@ class serviciosController
 
     public function guardarEnsacado()
     {
-        $result        = [];
-        $id            = isset($_POST['id']) && $_POST['id'] != '' ? $_POST['id'] : false;
-        $numeroFerro   = isset($_POST['numeroUnidad']) && $_POST['numeroUnidad'] != '' ? $_POST['numeroUnidad'] : false;
-        $idCliente     = $_POST['cliente'];
-        $productoId    = isset($_POST['producto']) && $_POST['producto'] != '' ? $_POST['producto'] : null;
-        $transportista = isset($_POST['transportista']) && $_POST['transportista'] != '' ? $_POST['transportista'] : null;
-        $chofer        = isset($_POST['chofer']) && $_POST['chofer'] != '' ? $_POST['chofer'] : null;
-        $orden         = isset($_POST['orden']) && $_POST['orden'] != '' ? $_POST['orden'] : null;
-        $lote          = isset($_POST['lote']) && $_POST['lote'] != '' ? $_POST['lote'] : null;
-        $alias         = isset($_POST['alias']) && $_POST['alias'] != '' ? $_POST['alias'] : null;
-        $transporte    = isset($_POST['transporte']) && $_POST['transporte'] != '' ? $_POST['transporte'] : null;
-        $placa1        = isset($_POST['placa1']) && $_POST['placa1'] != '' ? $_POST['placa1'] : null;
-        $placa2        = isset($_POST['placa2']) && $_POST['placa2'] != '' ? $_POST['placa2'] : null;
-        $pesoCliente   = isset($_POST['pesoCliente']) && $_POST['pesoCliente'] != '' ? $_POST['pesoCliente'] : null;
-        $pesoTara      = isset($_POST['tara']) && $_POST['tara'] != '' ? $_POST['tara'] : null;
-        $ticket        = isset($_POST['ticket']) && $_POST['ticket'] != '' ? $_POST['ticket'] : null;
-        $pesoTeorico   = isset($_POST['pesoTeorico']) && $_POST['pesoTeorico'] != '' ? $_POST['pesoTeorico'] : null;
-        $pesoBruto     = isset($_POST['pesoBruto']) && $_POST['pesoBruto'] != '' ? $_POST['pesoBruto'] : null;
-        $pesoNeto      = isset($_POST['pesoNeto']) && $_POST['pesoNeto'] != '' ? $_POST['pesoNeto'] : null;
-        $archivoTicket = isset($_POST['archivoTicket']) && $_POST['archivoTicket'] != '' ? $_POST['archivoTicket'] : null;
-        $archivoBill   = isset($_POST['archivoBill']) && $_POST['archivoBill'] != '' ? $_POST['archivoBill'] : null;
-        $sello1        = isset($_POST['sello1']) && $_POST['sello1'] != '' ? $_POST['sello1'] : null;
-        $sello2        = isset($_POST['sello2']) && $_POST['sello2'] != '' ? $_POST['sello2'] : null;
-        $sello3        = isset($_POST['sello3']) && $_POST['sello3'] != '' ? $_POST['sello3'] : null;
-        $observaciones = isset($_POST['observaciones']) && $_POST['observaciones'] != '' ? $_POST['observaciones'] : null;
-        $estatus       = 1;
+        $result             = [];
+        $id                 = isset($_POST['id']) && $_POST['id'] != '' ? $_POST['id'] : false;
+        $numeroFerro        = isset($_POST['numeroUnidad']) && $_POST['numeroUnidad'] != '' ? $_POST['numeroUnidad'] : false;
+        $idCliente          = $_POST['cliente'];
+        $productoId         = isset($_POST['producto']) && $_POST['producto'] != '' ? $_POST['producto'] : null;
+        $transportista      = isset($_POST['transportista']) && $_POST['transportista'] != '' ? $_POST['transportista'] : null;
+        $chofer             = isset($_POST['chofer']) && $_POST['chofer'] != '' ? $_POST['chofer'] : null;
+        $orden              = isset($_POST['orden']) && $_POST['orden'] != '' ? $_POST['orden'] : null;
+        $lote               = isset($_POST['lote']) && $_POST['lote'] != '' ? $_POST['lote'] : null;
+        $alias              = isset($_POST['alias']) && $_POST['alias'] != '' ? $_POST['alias'] : null;
+        $transporte         = isset($_POST['transporte']) && $_POST['transporte'] != '' ? $_POST['transporte'] : null;
+        $placa1             = isset($_POST['placa1']) && $_POST['placa1'] != '' ? $_POST['placa1'] : null;
+        $placa2             = isset($_POST['placa2']) && $_POST['placa2'] != '' ? $_POST['placa2'] : null;
+        $pesoCliente        = isset($_POST['pesoCliente']) && $_POST['pesoCliente'] != '' ? $_POST['pesoCliente'] : null;
+        $pesoTara           = isset($_POST['tara']) && $_POST['tara'] != '' ? $_POST['tara'] : null;
+        $ticket             = isset($_POST['ticket']) && $_POST['ticket'] != '' ? $_POST['ticket'] : null;
+        $pesoTeorico        = isset($_POST['pesoTeorico']) && $_POST['pesoTeorico'] != '' ? $_POST['pesoTeorico'] : null;
+        $pesoBruto          = isset($_POST['pesoBruto']) && $_POST['pesoBruto'] != '' ? $_POST['pesoBruto'] : null;
+        $pesoNeto           = isset($_POST['pesoNeto']) && $_POST['pesoNeto'] != '' ? $_POST['pesoNeto'] : null;
+        $archivoTicket      = isset($_POST['archivoTicket']) && $_POST['archivoTicket'] != '' ? $_POST['archivoTicket'] : null;
+        $archivoBill        = isset($_POST['archivoBill']) && $_POST['archivoBill'] != '' ? $_POST['archivoBill'] : null;
+        $sello1             = isset($_POST['sello1']) && $_POST['sello1'] != '' ? $_POST['sello1'] : null;
+        $sello2             = isset($_POST['sello2']) && $_POST['sello2'] != '' ? $_POST['sello2'] : null;
+        $sello3             = isset($_POST['sello3']) && $_POST['sello3'] != '' ? $_POST['sello3'] : null;
+        $observaciones      = isset($_POST['observaciones']) && $_POST['observaciones'] != '' ? $_POST['observaciones'] : null;
+        $cant_puertas       = isset($_POST['cant_puertas']) && $_POST['cant_puertas'] != '' ? $_POST['cant_puertas'] : 0;
+        $transp_lea_cliente = isset($_POST['transp_lea_cliente']) && $_POST['transp_lea_cliente'] != '' ? $_POST['transp_lea_cliente'] : 0;
+        $tipo_producto      = isset($_POST['tipo_producto']) && $_POST['tipo_producto'] != '' ? $_POST['tipo_producto'] : 0;
+        $entrada_salida     = isset($_POST['entrada_salida']) && $_POST['entrada_salida'] != '' ? $_POST['entrada_salida'] : 0;
+        $estatus            = 1;
 
         if ($numeroFerro) {
             $ensacado = new ServicioEntrada();
@@ -344,6 +373,10 @@ class serviciosController
             $ensacado->setSello1($sello1);
             $ensacado->setSello2($sello2);
             $ensacado->setSello3($sello3);
+            $ensacado->setCantPuertas($cant_puertas);
+            $ensacado->setTranspLeaCliente($transp_lea_cliente);
+            $ensacado->setEntrada_Salida($entrada_salida);
+            $ensacado->setTipo_Producto($tipo_producto);
             $ensacado->setEstatusId($estatus);
 
             $f = $ensacado->unidadRegistrada();
@@ -499,21 +532,13 @@ class serviciosController
 
     public function generarServicio()
     {
-        $result        = [];
-        $id            = isset($_POST['id']) && $_POST['id'] != '' ? $_POST['id'] : false;
-        $entradaId     = isset($_POST['idEntrada']) && $_POST['idEntrada'] != '' ? $_POST['idEntrada'] : false;
-        $servicioId    = isset($_POST['idTipoServicio']) && $_POST['idTipoServicio'] != '' ? $_POST['idTipoServicio'] : false;
-        $empaqueId     = isset($_POST['idEmpaque']) && $_POST['idEmpaque'] != '' ? $_POST['idEmpaque'] : null;
-        $cantidad      = isset($_POST['cantidad']) && $_POST['cantidad'] != '' ? $_POST['cantidad'] : null;
-        $fechaPrograma = isset($_POST['fechaPrograma']) && $_POST['fechaPrograma'] != '' && $_POST['fechaPrograma'] != 'null' ? date('Y-m-d', strtotime(UtilsHelp::covertDatetoDateSql($_POST['fechaPrograma']))) : 'null';
-        // print_r('<pre>');
-        // print_r('post: {' . $_POST['fechaPrograma'] . '}');
-        // print_r('</pre>');
-        // print_r('<pre>');
-        // print_r('fecha: {' . ($fechaPrograma == null) ? 'null' : $fechaPrograma . '}');
-        // print_r('</pre>');
-        // die ();
-
+        $result          = [];
+        $id              = isset($_POST['id']) && $_POST['id'] != '' ? $_POST['id'] : false;
+        $entradaId       = isset($_POST['idEntrada']) && $_POST['idEntrada'] != '' ? $_POST['idEntrada'] : false;
+        $servicioId      = isset($_POST['idTipoServicio']) && $_POST['idTipoServicio'] != '' ? $_POST['idTipoServicio'] : false;
+        $empaqueId       = isset($_POST['idEmpaque']) && $_POST['idEmpaque'] != '' ? $_POST['idEmpaque'] : null;
+        $cantidad        = isset($_POST['cantidad']) && $_POST['cantidad'] != '' ? $_POST['cantidad'] : null;
+        $fechaPrograma   = isset($_POST['fechaPrograma']) && $_POST['fechaPrograma'] != '' && $_POST['fechaPrograma'] != 'null' ? date('Y-m-d', strtotime(UtilsHelp::covertDatetoDateSql($_POST['fechaPrograma']))) : 'null';
         $totalEnsacado   = isset($_POST['totalEnsacado']) && $_POST['cantidad'] != '' ? $_POST['totalEnsacado'] : null;
         $barreduraLimpia = isset($_POST['barreduraLimpia']) && $_POST['barreduraLimpia'] != '' ? $_POST['barreduraLimpia'] : null;
         $barreduraSucia  = isset($_POST['barreduraSucia']) && $_POST['barreduraSucia'] != '' ? $_POST['barreduraSucia'] : null;
@@ -525,10 +550,18 @@ class serviciosController
         $lote            = isset($_POST['lote']) && $_POST['lote'] != '' ? $_POST['lote'] : false;
         $archivoOrden    = isset($_POST['archivoOrden']) && $_POST['archivoOrden'] != '' ? $_POST['archivoOrden'] : null;
         $orden           = isset($_POST['orden']) && $_POST['orden'] != '' ? $_POST['orden'] : null;
+        $doc_orden       = isset($_POST['doc_orden']) && $_POST['doc_orden'] != '' ? $_POST['doc_orden'] : null;
         $productoId      = isset($_POST['producto']) && $_POST['producto'] != '' ? $_POST['producto'] : null;
         $alias           = isset($_POST['alias']) && $_POST['alias'] != '' ? $_POST['alias'] : null;
         $observaciones   = isset($_POST['observaciones']) && $_POST['observaciones'] != '' ? $_POST['observaciones'] : null;
         $res             = true;
+
+        // print_r('<pre>');
+        // print_r($_POST['archivoOrden_e']);
+        // print_r('</pre>');
+        // if (isset($_POST['archivoOrden_e']) && $_POST['archivoOrden_e'] != '') {
+        // $archivoOrden = $_POST['archivoOrden_e'];
+        // }
 
         if ($entradaId && $servicioId) {
             $ensacado = new ServicioEntrada();
@@ -558,6 +591,26 @@ class serviciosController
 
             if (isset($_FILES['documentoOrden']) && $_FILES['documentoOrden']['size'] > 0) {
                 $file      = $_FILES['documentoOrden'];
+                $mimetype  = $file['type'];
+                $extension = explode('.', $file['name'])[1];
+                $fileOrden = $orden . '.' . $extension;
+
+                if ($mimetype == 'image/jpeg' || $mimetype == 'image/jpg' || $mimetype == 'image/png' || $mimetype == 'application/pdf') {
+                    if (!is_dir('views/servicios/uploads/' . $nomUnidad)) {
+                        mkdir('views/servicios/uploads/' . $nomUnidad . '/', 0777, true);
+                    }
+                    if (file_exists('views/servicios/uploads/' . $nomUnidad . '/' . $fileOrden)) {
+                        unlink('views/servicios/uploads/' . $nomUnidad . '/' . $fileOrden);
+                    }
+                    move_uploaded_file($file['tmp_name'], 'views/servicios/uploads/' . $nomUnidad . '/' . $fileOrden);
+                    $servicio->setDocOrden($fileOrden);
+                }
+            } else {
+                $servicio->setDocOrden($archivoOrden);
+            }
+
+            if (isset($_FILES['documentoOrden_e']) && $_FILES['documentoOrden_e']['size'] > 0) {
+                $file      = $_FILES['documentoOrden_e'];
                 $mimetype  = $file['type'];
                 $extension = explode('.', $file['name'])[1];
                 $fileOrden = $orden . '.' . $extension;
@@ -658,45 +711,6 @@ class serviciosController
         return print_r(json_encode($result));
     }
 
-    // public function finalizarServicio()
-    // {
-    //     $idServicio = isset($_POST['idServicioEnviar']) && $_POST['idServicioEnviar'] != '' ? $_POST['idServicioEnviar'] : null;
-    //     $cantidades = isset($_POST['cantidadAlmacen']) ? $_POST['cantidadAlmacen'] : null;
-    //     $almacenes  = isset($_POST['almacen']) ? $_POST['almacen'] : null;
-    //     $operacion  = isset($_POST['operacionEnviar']) ? $_POST['operacionEnviar'] : null;
-
-    //     $m = new ServicioMovimientoAlmacen();
-
-    //     for ($i = 0; count($almacenes) > $i; $i++) {
-    //         $m->setAlmacen(intval($almacenes[$i]));
-    //         $m->setCantidad(Utils::quitarComas($cantidades[$i]));
-    //         $m->setIdServicio($idServicio);
-    //         $m->setOperacion($operacion);
-    //         $r = $m->save();
-    //     }
-    //     if ($r) {
-    //         $servicio = new ServicioEnsacado();
-    //         $servicio->setId($idServicio);
-    //         $r = $servicio->finalizarServicio();
-    //         if ($r) {
-    //             $result = [
-    //                 'error'   => true,
-    //                 'mensaje' => 'Se finalizo servicio.'
-    //             ];
-    //         } else {
-    //             $result = [
-    //                 'error'   => false,
-    //                 'mensaje' => 'Ocurrio un error, no se pudo finalizar.'
-    //             ];
-    //         }
-    //     } else {
-    //         $result = [
-    //             'error'   => false,
-    //             'mensaje' => 'Ocurrio un error, no se pudo guardar en el almacén.'
-    //         ];
-    //     }
-    //     return print_r(json_encode($result));
-    // }
     public function finalizarServicio()
     {
         $idServicio      = isset($_POST['idServicioEnviar']) && $_POST['idServicioEnviar'] != '' ? $_POST['idServicioEnviar'] : null;
@@ -800,6 +814,9 @@ class serviciosController
 
         $tipoTrans   = new TipoTransporte();
         $transportes = $tipoTrans->getAll();
+
+        $catTransportes     = new CatTransportistas();
+        $cat_transportistas = $catTransportes->getAll();
 
         require_once views_root . 'servicios/cargas_descargas.php';
     }
@@ -1009,11 +1026,25 @@ class serviciosController
     public function getLotesByClienteStock()
     {
         if (isset($_POST['idCliente']) && $_POST['idCliente'] != '') {
-            $s     = new ServicioEnsacado();
-            $idCli = $_POST['idCliente'];
+            $s             = new ServicioEnsacado();
+            $idCli         = $_POST['idCliente'];
+            $tipo_producto = $_POST['tipo_producto'];
+            if ($tipo_producto == '1') {
+                $s = new ServicioLubricante();
+            }
             $lotes = $s->getLotesCliente($idCli);
 
             return print_r(json_encode($lotes));
+        }
+    }
+
+    public function getChoferesByTransporte()
+    {
+        if (isset($_POST['transp_id']) && $_POST['transp_id'] != '') {
+            $s         = new CatChoferes();
+            $transp_id = $_POST['transp_id'];
+            $choferes  = $s->getChoferesByTransporte($transp_id);
+            echo json_encode(['mensaje' => 'OK', 'choferes' => $choferes]);
         }
     }
 
@@ -1051,6 +1082,15 @@ class serviciosController
             $servicio->setTransfer($_POST['almacen_id_from'], $_POST['almacen_id_to'], $_POST['cantidad'], $_POST['lote']);
             echo json_encode(['mensaje' => 'OK']);
         }
+    }
+
+    public function guardarFirmaEntrada()
+    {
+        $servicio_entrada = new ServicioEntrada();
+        $servicio_entrada->setId($_POST['entrada_id']);
+        $servicio_entrada->setFirma_entrada($_POST['firma']);
+        $respuesta = $servicio_entrada->updateFirmaEntrada();
+        echo json_encode(['error' => $respuesta, 'mensaje' => 'Se guardó la firma favor de dar entrada']);
     }
 
     /* MONITOR ENTRADAS */

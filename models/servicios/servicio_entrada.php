@@ -5,6 +5,8 @@ class ServicioEntrada
     private $id;
     private $clienteId;
     private $estatusId;
+    private $entrada_salida;
+    private $tipo_producto;
     private $tipoTransporteId;
     private $numUnidad;
     private $fechaEntrada;
@@ -21,9 +23,11 @@ class ServicioEntrada
     private $pesoNeto;
     private $docTicket;
     private $docRemision;
-    private $sello1;
+    private $sellos;
     private $sello2;
     private $sello3;
+    private $cat_puertas;
+    private $transp_lea_cliente;
     private $observaciones;
     private $db;
 
@@ -222,6 +226,16 @@ class ServicioEntrada
         return $this->tipoTransporteId;
     }
 
+    public function getSellos()
+    {
+        return $this->sellos;
+    }
+
+    public function setSellos($sellos): void
+    {
+        $this->sellos = $this->db->real_escape_string(UtilsHelp::toUpperString($sellos));
+    }
+
     public function getSello1()
     {
         return $this->sello1;
@@ -272,33 +286,103 @@ class ServicioEntrada
         $this->pesoCliente = $pesoCliente;
     }
 
+    // ////
+    public function setFirma_entrada($firma_entrada): void
+    {
+        $this->firma_entrada = $this->db->real_escape_string($firma_entrada);
+    }
+
+    public function getFirma_entrada()
+    {
+        return $this->firma_entrada;
+    }
+
+    public function setFirma_salida($firma_salida): void
+    {
+        $this->firma_salida = $this->db->real_escape_string($firma_salida);
+    }
+
+    public function getFirma_salida()
+    {
+        return $this->firma_salida;
+    }
+
+    public function getCantPuertas()
+    {
+        return $this->cant_puertas;
+    }
+
+    public function setCantPuertas($cant_puertas): void
+    {
+        $this->cant_puertas = $cant_puertas;
+    }
+
+    public function getTranspLeaCliente()
+    {
+        return $this->transp_lea_cliente;
+    }
+
+    public function setTranspLeaCliente($transp_lea_cliente): void
+    {
+        $this->transp_lea_cliente = $transp_lea_cliente;
+    }
+
+    public function getEntrada_Salida()
+    {
+        return $this->entrada_salida;
+    }
+
+    public function setEntrada_Salida($entrada_salida): void
+    {
+        $this->entrada_salida = $entrada_salida;
+    }
+
+    public function getTipo_Producto()
+    {
+        return $this->tipo_producto;
+    }
+
+    public function setTipo_Producto($tipo_producto): void
+    {
+        $this->tipo_producto = $tipo_producto;
+    }
+
     public function save()
     {
-        $sql    = "insert into servicios_entradas values(null, 
-        {$this->getClienteId()}
-        , {$this->getEstatusId()}
-        , {$this->getTipoTransporteId()}
-        , '{$this->getNumUnidad()}'
-        , null 
-        , null
-        , null
-        , '{$this->getTransportista()}'
-        , '{$this->getChofer()}'
-        , '{$this->getPlaca1()}'
-        , '{$this->getPlaca2()}'
-        ,  {$this->getTicket()}
-        ,  {$this->getPesoCliente()}
-        ,  {$this->getPesoTara()}
-        ,  {$this->getPesoTeorico()}
-        ,  {$this->getPesoBruto()}
-        ,  {$this->getPesoNeto()}
-        , '{$this->getDocTicket()}'
-        , '{$this->getDocRemision()}'
-        , null
-        , null
-        , null
-        , '{$this->getObservaciones()}'
-        , '{$_SESSION['usuario']->id}',now()
+        $sql    = "insert into servicios_entradas values(
+            null /*id */
+        , {$this->getClienteId()}/*, cliente_id */
+        , {$this->getEstatusId()}/*, estatus_id */
+        , {$this->getTipoTransporteId()}/*, tipo_transporte_id */
+        , {$this->getEntrada_Salida()}/*, entrada_salida */
+        , {$this->getTipo_Producto()}/*, tipo_producto */
+        , '{$this->getNumUnidad()}' /*, numUnidad */
+        , null  /*, fecha_entrada */
+        , null /*, fecha_salida */
+        , null /*, fecha_liberacion */
+        , '{$this->getTransportista()}' /*, transportista */
+        , '{$this->getChofer()}' /*, chofer */
+        , '{$this->getPlaca1()}' /*, placa1 */
+        , '{$this->getPlaca2()}' /*, placa2 */
+        ,  {$this->getTicket()} /*, ticket */
+        ,  {$this->getPesoCliente()} /*, peso_cliente */
+        ,  {$this->getPesoTara()} /*, peso_tara */
+        ,  {$this->getPesoTeorico()} /*, peso_teorico */
+        ,  {$this->getPesoBruto()} /*, peso_bruto */
+        ,  {$this->getPesoNeto()} /*, peso_neto */
+        , '{$this->getDocTicket()}' /*, doc_ticket */
+        , '{$this->getDocRemision()}' /*, doc_remision */
+        , null /*, sello1 */
+        , null /*, sello2 */
+        , null /*, sello3 */
+        , '{$this->getObservaciones()}' /*, observaciones */
+        , '{$_SESSION['usuario']->id}' /*, usuario_creacion */
+        , now() /*, fecha_creacion */
+        , '' /*, firma_entrada */
+        , '' /*, firma_salida */
+        , {$this->getCantPuertas()} /*, cant_puertas */
+        , {$this->getTranspLeaCliente()} /*, transp_lea_cliente */
+        ,'' /*, sellos */
          )";
         $save   = $this->db->query($sql);
         $result = false;
@@ -325,8 +409,8 @@ class ServicioEntrada
                         else concat(\'<span id ="showEnsacado"  data-idserv="\',se.id,\'" class = " showEnsacado material-icons i-recibir">local_shipping</span>\')
                     end as iconounidad 
                 , c.direccion direccion_cliente
-                ,(SELECT sum(ifnull(total_ensacado,cantidad)) FROM grupo_lea_dev.servicios_ensacado where entrada_id = se.id and estatus_id <>0 and servicio_id in(1,4,5) ) totalensacado
-                ,(SELECT count(*) FROM grupo_lea_dev.servicios_ensacado where entrada_id = se.id and estatus_id not in(0, 5)) serv_pendientes
+                ,(SELECT sum(ifnull(total_ensacado,cantidad)) FROM servicios_ensacado where entrada_id = se.id and estatus_id <>0 and servicio_id in(1,4,5) ) totalensacado
+                ,(SELECT count(*) FROM servicios_ensacado where entrada_id = se.id and estatus_id not in(0, 5)) serv_pendientes
                 from servicios_entradas se 
                 inner join catalogo_estatus es on es.id = se.estatus_id 
                 inner join catalogo_clientes c on c.id = se.cliente_id ';
@@ -349,6 +433,7 @@ class ServicioEntrada
                                 , prod.nombre as producto  
                                 , concat(usuarios_inicio.nombres,' ',usuarios_inicio.apellidos) usuario_inicio_nombre
                                 , concat(usuarios_fin.nombres,' ',usuarios_fin.apellidos) usuario_fin_nombre
+                                
                                 from servicios_ensacado se 
                                 inner join catalogo_estatus ce on ce.id = se.estatus_id 
                                 inner join catalogo_servicios serv on serv.id = se.servicio_id 
@@ -391,11 +476,29 @@ class ServicioEntrada
 
     public function edit()
     {
-        $sql = "update servicios_entradas set numUnidad = '{$this->getNumUnidad()}', cliente_id = {$this->getClienteId()}, "
-            . "transportista = '{$this->getTransportista()}', chofer = '{$this->getChofer()}', placa1 = '{$this->getPlaca1()}', placa2 = '{$this->getPlaca2()}', "
-            . "peso_tara = {$this->getPesoTara()}, ticket = {$this->getTicket()}, peso_teorico = {$this->getPesoTeorico()}, peso_bruto = {$this->getPesoBruto()}, peso_cliente = {$this->getPesoCliente()}, "
-            . "peso_neto = {$this->getPesoNeto()}, tipo_transporte_id = {$this->getTipoTransporteId()}, doc_ticket = '{$this->getDocTicket()}', doc_remision = '{$this->getDocRemision()}', "
-            . "sello1 = '{$this->getSello1()}', sello2 = '{$this->getSello2()}', sello3 = '{$this->getSello3()}', observaciones = '{$this->getObservaciones()}' where id = {$this->getId()}";
+        $sql    = "update servicios_entradas set 
+                numUnidad = '{$this->getNumUnidad()}'
+                , cliente_id = {$this->getClienteId()}
+                , transportista = '{$this->getTransportista()}'
+                , chofer = '{$this->getChofer()}'
+                , tipo_producto = '{$this->getTipo_Producto()}'
+                , entrada_salida = '{$this->getEntrada_Salida()}'
+                , placa1 = '{$this->getPlaca1()}'
+                , placa2 = '{$this->getPlaca2()}'
+                , peso_tara = {$this->getPesoTara()}
+                , ticket = {$this->getTicket()}
+                , peso_teorico = {$this->getPesoTeorico()}
+                , peso_bruto = {$this->getPesoBruto()}
+                , peso_cliente = {$this->getPesoCliente()}
+                , peso_neto = {$this->getPesoNeto()}
+                , tipo_transporte_id = {$this->getTipoTransporteId()}
+                , doc_ticket = '{$this->getDocTicket()}'
+                , doc_remision = '{$this->getDocRemision()}'
+                , sellos = '{$this->getSellos()}'
+                , sello2 = '{$this->getSello2()}'
+                , sello3 = '{$this->getSello3()}'
+                , observaciones = '{$this->getObservaciones()}'
+                 where id = {$this->getId()}";
         $save   = $this->db->query($sql);
         $result = false;
         if ($save) {
@@ -541,6 +644,39 @@ class ServicioEntrada
             foreach ($camiones->fetch_all(MYSQLI_ASSOC) as $e) {
                 array_push($result, $e);
             }
+        }
+        return $result;
+    }
+
+    public function updateSellos()
+    {
+        $sql    = "update servicios_entradas set 
+                    sello1 = '{$this->getSello1()}'
+                    , sello2 = '{$this->getSello2()}'
+                    , sello3 = '{$this->getSello3()}'
+                    , firma_salida = '{$this->getFirma()}'
+                    where id = {$this->getId()}";
+        $save   = $this->db->query($sql);
+        $result = false;
+        if ($save) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
+    }
+
+    public function updateFirmaEntrada()
+    {
+        $sql    = "update servicios_entradas set 
+                firma_entrada = '{$this->getFirma_entrada()}'
+                where id = {$this->getId()}";
+        $save   = $this->db->query($sql);
+        $result = true;
+        if ($save) {
+            $result = false;
+        } else {
+            $result = true;
         }
         return $result;
     }

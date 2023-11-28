@@ -51,7 +51,7 @@ $(document).ready(function() {
                 llenatablaestatus(datosGrafica[0].estatus_id, datosGrafica[0].estatus, datosGrafica[0].clave);
             }, 1000);
         }
-    }, 20000);
+    }, 60000);
 });
 const chart_productos = () => {
 

@@ -10,12 +10,24 @@
     <link rel="stylesheet" href="<?= root_url ?>assets/css/jquery-ui/jquery-ui.min.css">
     <link rel="stylesheet" href="<?= root_url ?>assets/fonts/fontawesome/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="<?= root_url ?>views/servicios/assets/css/servicios.css" />
+    <link rel="stylesheet" href="<?= root_url ?>assets/libs/select2/css/select2.min.css" type="text/css">
     <script src="<?= root_url ?>assets/js/jquery-3.5.1.min.js"></script>
     <script src="<?= root_url ?>assets/js/jquery-confirm.js"></script>
     <script src="<?= root_url ?>assets/js/jquery-ui.min.js"></script>
     <script src="<?= root_url ?>views/servicios/assets/js/servicios.js"></script>
     <script src="<?= root_url ?>assets/js/bootstrap/bootstrap.min.js"></script>
+    <script src="<?= root_url ?>assets/libs/select2/js/select2.min.js"></script>
     <title>Ensacado</title>
+    <style>
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        color: #000 !important;
+        background-color: #cfd7e9 !important;
+    }
+
+    .select2-container {
+        z-index: 100000 !important;
+    }
+    </style>
 </head>
 
 <body>
@@ -43,46 +55,138 @@
                             <strong for="ferrotolvas">Camión:</strong>
                             <input class="ml-1" type="radio" name="ferrotolva" value="A" />
                         </div>
-                        <div><strong class="mr-1"># Unidad:</strong><input type="text" name="numeroUnidad" class="item-small" /> </div>
+                        <div id="divRadios" class="div-radios">
+                            <strong for="entrada_salida">Entrada:</strong>
+                            <input class="ml-1 mr-3" id="entrada_salida" type="radio" name="entrada_salida" value="0" />
+                            <strong for="entrada_salida">Salida:</strong>
+                            <input class="ml-1" type="radio" name="entrada_salida" value="1" />
+                        </div>
+
+                        <div>
+                            <strong class="mr-1"># Unidad:</strong>
+                            <input type="text" id="numeroUnidad" name="numeroUnidad" class="item-small" />
+                        </div>
 
                         <div><strong class="mr-1">Cliente:</strong>
                             <select name="cliente" class="item-big" id="cliente">
                                 <option value="" selected>--Selecciona--</option>
                                 <?php
-                                                    if (!empty($clientes)):
-                                                        foreach ($clientes as $cli):
-                                                ?>
+                                    if (!empty($clientes)):
+                                        foreach ($clientes as $cli):
+                                ?>
                                 <option value="<?= $cli->id ?>"><?= $cli->nombre ?> </option>
                                 <?php
-                                                        endforeach;
-                                                    endif;
-                                                                                                    ?>
+                                        endforeach;
+                                    endif;
+                                                                    ?>
                             </select>
                         </div>
                     </div>
                     <section id="seccionCamion" hidden>
                         <div class="datos mt-2 mb-1">
-                            <div><strong class="mr-1">Peso Cliente:</strong><input id="pesoCliente" name="pesoCliente" class="item-small " type="text" /></div>
-                            <div><strong class="mr-1">Transportista:</strong><input id="transportista" class="item-big" type="text" /></div>
-                            <div><strong class="mr-1">Chofer:</strong><input class="item-big" id="chofer" name="chofer" type="text" /></div>
+                            <div>
+                                <strong class="mr-1">Peso Cliente:</strong>
+                                <input id="pesoCliente" name="pesoCliente" class="item-small " type="text" />
+                            </div>
+                            <div>
+                                <strong class="mr-1">Transporte por:</strong>
+                                <div id="divRadiosT" class="div-radiosT">
+                                    <div class='row'>
+                                        <div class='col'>
+                                            <strong for="transp_lea_cliente">LEA:</strong>
+                                        </div>
+                                        <div class='col'>
+                                            <input class="ml-1 mr-3" id="transp_lea_cliente" type="radio" name="transp_lea_cliente" value="0" />
+
+                                        </div>
+                                    </div>
+                                    <div class='row'>
+                                        <div class='col'>
+                                            <strong for="transp_lea_clientec">Cliente:</strong>
+
+                                        </div>
+                                        <div class='col'>
+                                            <input class="ml-1" type="radio" id="transp_lea_clientec" name="transp_lea_cliente" value="1" />
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div>
+                                <strong class="mr-1">Transportista:</strong>
+                                <!-- <input id="transportista" class="item-big" type="text" /> -->
+                                <select name="transportista" class="item-big" id="transportista">
+                                    <option value="" selected>--Selecciona--</option>
+                                    <?php
+                                        if (!empty($cat_transportistas)):
+                                            foreach ($cat_transportistas as $t):
+                                    ?>
+                                    <option value="<?= $t->id ?>"><?= $t->nombre ?> </option>
+                                    <?php
+                                            endforeach;
+                                        endif;
+                                                                            ?>
+                                </select>
+                            </div>
+                            <div>
+                                <strong class="mr-1">Chofer:</strong>
+                                <!-- <input class="item-big" id="chofer" name="chofer" type="text" /> -->
+                                <select name="chofer" class="item-big" id="chofer">
+                                    <option value="" selected>--Selecciona--</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="datos mt-2 mb-1">
-                            <div><strong class="mr-1">Transporte:</strong>
+                            <div>
+                                <strong class="mr-1">Transporte:</strong>
                                 <select name="transporte" class="item-medium" id="transporte">
                                     <option value="" selected>--Selecciona--</option>
                                     <?php
-if (!empty($transportes)):
-    foreach ($transportes as $t):
-        ?>
-                                    <option value="<?= $t->id ?>"><?= $t->nombre ?> </option>
+                                        if (!empty($transportes)):
+                                            foreach ($transportes as $t):
+                                    ?>
+                                    <option value="<?= $t->id ?>" data-puertas="<?= $t->puertas ?>" data-cap_max="<?= $t->cap_maxima ?>"><?= $t->nombre ?> </option>
                                     <?php
-    endforeach;
-endif;
-?>
+                                            endforeach;
+                                        endif;
+                                                                            ?>
                                 </select>
                             </div>
-                            <div><strong class="mr-1">Placa tractor #1:</strong><input name="placa1" class="item-small" id="placa1" type="text" /></div>
-                            <div><strong class="mr-1">Placa tractor #2:</strong><input name="placa2" class="item-small" id="placa2" type="text" /> </div>
+                            <div>
+                                <strong class="mr-1">Cant. Puertas:</strong>
+                                <input id="cant_puertas" name="cant_puertas" class="item-small" type="number" />
+                            </div>
+                            <div>
+                                <strong class="mr-1">Producto:</strong>
+                                <div id="divRadiosT" class="div-radiosT">
+                                    <div class='row'>
+                                        <div class='col'>
+                                            <strong for="tipo_producto">Polietileno:</strong>
+                                        </div>
+                                        <div class='col'>
+                                            <input class="ml-1 mr-3" id="tipo_producto" type="radio" name="tipo_producto" value="0" />
+                                        </div>
+                                    </div>
+                                    <div class='row'>
+                                        <div class='col'>
+                                            <strong for="tipo_productoL">Lubricante:</strong>
+                                        </div>
+                                        <div class='col'>
+                                            <input class="ml-1" type="radio" id="tipo_productoL" name="tipo_producto" value="1" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <strong class="mr-1">Placa tractor #1:</strong>
+                                <input name="placa1" class="item-small" id="placa1" type="text" />
+                            </div>
+                            <div>
+                                <strong class="mr-1">Placa tractor #2:</strong>
+                                <input name="placa2" class="item-small" id="placa2" type="text" />
+                            </div>
                         </div>
                     </section>
                     <section id="seccionFerrotolva" hidden>
@@ -92,14 +196,14 @@ endif;
                                 <select class="item-medium" id="transporteTren">
                                     <option value="" selected>--Selecciona--</option>
                                     <?php
-if (!empty($transportes)):
-    foreach ($transportes as $t):
-        ?>
+                                        if (!empty($transportes)):
+                                            foreach ($transportes as $t):
+                                    ?>
                                     <option value="<?= $t->id ?>"><?= $t->nombre ?> </option>
                                     <?php
-    endforeach;
-endif;
-?>
+                                            endforeach;
+                                        endif;
+                                                                            ?>
                                 </select>
                             </div>
                         </div>

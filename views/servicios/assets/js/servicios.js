@@ -310,7 +310,21 @@ $(document).ready(function () {
 			windowToOpen.addEventListener(
 				"submit",
 				(event) => {
-					// console.log("aqui si");
+					console.log("aqui si");
+					llenaComboProductos();
+				},
+				false
+			);
+			var timer = setInterval(function () {
+				if (windowToOpen.closed) {
+					clearInterval(timer);
+					llenaComboProductos();
+				}
+			}, 1000);
+			windowToOpen.addEventListener(
+				"closed",
+				(event) => {
+					console.log("aqui se cierra");
 					llenaComboProductos();
 				},
 				false
@@ -2434,7 +2448,15 @@ function validaBasculaUnidad() {
 		$("#ticket").parent().prop("style", "display:block");
 	}
 }
-
+var productos;
+function getMax(arr, prop) {
+	var max;
+	for (var i = 0; i < arr.length; i++) {
+		if (max == null || parseInt(arr[i][prop]) > parseInt(max[prop]))
+			max = arr[i];
+	}
+	return max;
+}
 function llenaComboProductos() {
 	jQuery
 		.ajax({
@@ -2447,19 +2469,29 @@ function llenaComboProductos() {
 		})
 		.then((resp) => {
 			// console.log(resp);
-			let productos;
-			productos = resp;
 
+			productos = resp;
+			var maxid = getMax(productos, "id").id;
 			$("#producto")
 				.empty()
 				.append(
 					`<option value="" selected>--Selecciona--</option> <option value="nuevo"> >>Nuevo Producto<< </option>`
 				);
 			for (let x = 0; x < productos.length; x++) {
-				$("#producto").append(
-					`<option value="${productos[x].id}" selected>${productos[x].nombre}</option>`
+				var newOption = new Option(
+					productos[x].nombre,
+					productos[x].id,
+					true,
+					true
 				);
+				// Append it to the select
+				if (maxid == productos[x].id) {
+					$("#producto").append(newOption).trigger("change");
+				} else {
+					$("#producto").append(newOption);
+				}
 			}
+			$("#producto").val(getMax(productos, "id").id).trigger("change");
 		})
 		.fail((resp) => {})
 		.catch((resp) => {

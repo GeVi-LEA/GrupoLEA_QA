@@ -30,34 +30,11 @@
     <link rel="stylesheet" href="<?php echo URL; ?>assets/libs/datatables/datatables.min.css">
     <script src="<?php echo URL; ?>assets/libs/datatables/datatables.min.js"></script>
 
-
     <link rel="stylesheet" type="text/css" href="<?php echo URL; ?>assets/js/scripts/forms/select2/css/select2.min.css">
     <script src="<?php echo URL; ?>assets/js/scripts/forms/select2/js/select2.min.js" type="text/javascript"></script>
     <script>
     let __url__ = "<?php echo root_url; ?>";
     localStorage.setItem("_URL_", __url__);
-    // var elmenu;
-
-    // function selectedMenu(menu) {
-
-    // menu.target.parentElement.className = "selected";
-    ////console.log(menu.target.parent());
-    // }
-
-    // $(document).ready(function() {
-    // if ((localStorage.getItem("elmenu") != null) && (localStorage.getItem("elmenu") != "")) {
-    // selectedMenu(localStorage.getItem("elmenu"));
-    // }
-    // $("#aside a").click(function(e) {
-    // elmenu = e;
-    // localStorage.setItem("elmenu", elmenu);
-    // console.log("el menu: ", localStorage.getItem("elmenu"));
-    //// e.preventDefault();
-    //// elmenu = e.target.parentElement;
-    // selectedMenu(e);
-
-    // });
-    // });
     </script>
 
 </head>

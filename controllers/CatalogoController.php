@@ -1116,6 +1116,7 @@ class catalogoController
             $trans->setNombre($_POST['nombre']);
             $trans->setClave($_POST['clave']);
             $trans->setDescripcion($_POST['descripcion'] == '' ? 'S/D' : $_POST['descripcion']);
+            $trans->setCap_Maxima($_POST['cap_maxima']);
 
             $transportes = $trans->getAll();
             if (!empty($transportes)) {
