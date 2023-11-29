@@ -4,6 +4,9 @@ var windowToOpen;
 var clickiframe;
 var divform;
 var servicios;
+var servicio_click;
+var serv_entrada;
+
 $(document).ready(function () {
 	// console.log("entra a servicios js");
 	if (typeof __url__ !== "undefined" && __url__) {
@@ -34,7 +37,7 @@ $(document).ready(function () {
 			showConfirmButton: false,
 			position: "top",
 			width: "75vw",
-			html: `<iframe id="iframe_servicio" style="width:100%; height:30vh;" src="${__url__}?controller=Servicios&action=crearEntrada" frameborder="0"></iframe>`,
+			html: `<iframe id="iframe_servicio" style="width:100%; height:50vh;" src="${__url__}?controller=Servicios&action=crearEntrada" frameborder="0"></iframe>`,
 			didOpen: () => {
 				$("iframe").on("load", function () {
 					$(this)
@@ -366,6 +369,7 @@ $(document).ready(function () {
 		if (validarDatosEnsacado()) {
 			$("#ensacadoForm").find("input, select").removeAttr("disabled");
 			var datosForm = new FormData($("#ensacadoForm")[0]);
+			console.log(datosForm);
 			$.ajax({
 				data: datosForm,
 				enctype: "multipart/form-data",
@@ -408,10 +412,12 @@ $(document).ready(function () {
 		var valid = true;
 		if ($("#cliente").val() == "") {
 			$("#cliente").addClass("required");
+			mensajeError("Debe seleccionar un cliente.");
 			valid = false;
 		}
 		if ($("#servicio").val() == "") {
 			$("#servicio").addClass("required");
+			mensajeError("Debe seleccionar un servicio.");
 			valid = false;
 		}
 		if (!isNumeric($("#costo").val()) || $("#servicio").val() == "") {
@@ -421,14 +427,17 @@ $(document).ready(function () {
 		}
 		if ($("#unidad").val() == "") {
 			$("#unidad").addClass("required");
+			mensajeError("Debe seleccionar una unidad.");
 			valid = false;
 		}
 		if ($("#moneda").val() == "") {
 			$("#moneda").addClass("required");
+			mensajeError("Debe seleccionar una moneda.");
 			valid = false;
 		}
 		if ($("#precio").val() == "") {
 			$("#precio").addClass("required");
+			mensajeError("Precio debe de ser número.");
 			valid = false;
 		}
 		return valid;
@@ -485,22 +494,50 @@ $(document).ready(function () {
 
 	function validarDatosEnsacado() {
 		var valid = true;
-		if ($("#numeroUnidad").val() == "") {
+		if (
+			!$('input[name="ferrotolva"]:checked').val() &&
+			$('[name="ferrotolva"]').is(":visible")
+		) {
+			$("#ferrotolva").addClass("required");
+			valid = false;
+		} else {
+			$("#ferrotolva").removeClass("required");
+		}
+
+		if (!$('input[name="entrada_salida"]:checked').val()) {
+			$("#entrada_salida").addClass("required");
+			valid = false;
+		} else {
+			$("#entrada_salida").removeClass("required");
+		}
+
+		if (
+			typeof $("#numeroUnidad").val() === "undefined" ||
+			$("#numeroUnidad").val() == ""
+		) {
 			$("#numeroUnidad").addClass("required");
 			valid = false;
+		} else {
+			$("#numeroUnidad").removeClass("required");
 		}
+
 		if ($("#cliente").val() == "") {
 			$("#cliente").addClass("required");
 			valid = false;
+		} else {
+			$("#cliente").removeClass("required");
 		}
 
 		if (
 			$("#transporte").val() == "" &&
-			$('input[name="ferrotolva"]').val() == "C"
+			$('input[name="ferrotolva"]:checked').val() == "C"
 		) {
 			$("#transporte").addClass("required");
 			valid = false;
+		} else {
+			$("#transporte").removeClass("required");
 		}
+
 		return valid;
 	}
 
@@ -654,11 +691,20 @@ $(document).ready(function () {
 	}
 
 	$("#agregarServicioModal").on("change", "#idTipoServicio", function () {
+		console.log("aqui");
 		agregarLotesEnsacado($("#agregarServicioModal"));
 	});
 
 	$("#btnNuevoServicio").click(function () {
 		$("#existencia").parent("div").hide();
+		serv_entrada = $(this)
+			.parent("div")
+			.parent("div")
+			.parent()
+			.closest("div")
+			.find("[name='tipo_producto']:checked")
+			.val();
+		console.log(serv_entrada);
 		$(".calctarimas div").attr("hidden", true);
 		$("#agregarServicioModal").modal("show");
 		$("#formAgregarServicio #producto").select2();
@@ -745,7 +791,17 @@ $(document).ready(function () {
 			var div = $(this).parent("div");
 			var ferro = $("#numeroUnidad").val();
 			var docInput = $(div).children("input")[2];
+			console.log("docInput: ", docInput);
+			console.log($(this).data("documento"));
+
 			var doc = $(docInput).val();
+			if (
+				typeof $(this).data("documento") !== "undefined" &&
+				$(this).data("documento").length > 0
+			) {
+				doc = $(this).data("documento");
+			}
+			console.log("doc: ", doc);
 			$("#tituloDocumento").html("Archivo: " + doc);
 			var url = "views/servicios/uploads/" + ferro + "/" + doc;
 			// console.log(docInput);
@@ -852,6 +908,12 @@ $(document).ready(function () {
 		agregarArchivo($(this));
 	});
 
+	$("#doc_orden").change(function () {
+		agregarArchivo($(this));
+	});
+	$("#documentoOrden_e").change(function () {
+		agregarArchivo($(this));
+	});
 	$("#documentoTicket").change(function () {
 		agregarArchivo($(this));
 	});
@@ -862,6 +924,7 @@ $(document).ready(function () {
 	});
 
 	function agregarArchivo(inputFile) {
+		console.log("inputFile: ", inputFile);
 		var div = $(inputFile).closest("div");
 		var doc = $(div).children("input")[0];
 		if ($(doc).val() != "") {
@@ -960,7 +1023,7 @@ $(document).ready(function () {
 				type: "POST",
 				dataType: "json",
 				success: function (r) {
-					// console.log(r);
+					console.log(r);
 					if (r != false) {
 						$("#folioServicio").html(r.folio);
 						$(".calctarimas div").attr("hidden", true);
@@ -968,7 +1031,8 @@ $(document).ready(function () {
 						llenarComboLotesCliente(
 							r.cliente_id,
 							$("#formEditarServicio"),
-							r.lote
+							r.lote,
+							serv_entrada
 						);
 						// console.log("2");
 						var formEditar = $("#formEditarServicio");
@@ -1133,7 +1197,8 @@ $(document).ready(function () {
 						}
 						$("#editarServicioModal").modal("show");
 						formEditar.find("#producto").select2();
-						agregarLotesEnsacado($("#formEditarServicio"));
+						console.log("r: ", r);
+						agregarLotesEnsacado($("#formEditarServicio"), serv_entrada);
 						setTimeout(() => {
 							formEditar.find("#loteSelect").val(r.lote);
 						}, 700);
@@ -1429,6 +1494,7 @@ $(document).ready(function () {
 			console.log(this.innerHTML);
 			sumcantidad += parseFloat(quitarComasNumero(this.innerHTML));
 		});
+		console.log("$(#serv_pendientes).val(): ", $("#serv_pendientes").val());
 		if ($("#serv_pendientes").val() > 0) {
 			resultado = false;
 		} else if ($("#nombreServicio").html().includes("SALIDA")) {
@@ -1436,6 +1502,12 @@ $(document).ready(function () {
 		}
 		var idNombreServicio = $("#idNombreServicio")[0].value.trim();
 		var cantidadCliente = 0;
+		console.log(
+			"$('#pesoCliente')[0].value: ",
+			$("#pesoCliente")[0].value,
+			" idNombreServicio: ",
+			idNombreServicio
+		);
 		switch (idNombreServicio) {
 			case "1":
 				if ($("#pesoVacio")[0].value.trim() == "0") {
@@ -1443,9 +1515,15 @@ $(document).ready(function () {
 						$("#pesoCliente")[0].value.trim()
 					);
 				} else {
+					console.log("bbbb--  ", $("#pesoNeto")[0].value.trim());
 					cantidadCliente = quitarComasNumero(
 						$("#pesoNeto")[0].value.trim()
 					);
+					if (!cantidadCliente) {
+						cantidadCliente = quitarComasNumero(
+							$("#pesoCliente")[0].value.trim()
+						);
+					}
 				}
 				break;
 
@@ -1455,14 +1533,26 @@ $(document).ready(function () {
 				);
 				break;
 		}
+		console.log("cantidadCliente: ", cantidadCliente);
 		var cantpendiente = parseInt(cantidadCliente) - parseInt(sumcantidad);
 		var tolerable = parseInt(cantidadCliente) * 0.03;
-		if (cantpendiente < tolerable) {
+		console.log(
+			"cantidadCliente: ",
+			cantidadCliente,
+			" sumcantidad: ",
+			sumcantidad,
+			" if: ",
+			cantpendiente < tolerable
+		);
+		try {
+			if (cantpendiente < tolerable) {
+				resultado = true;
+			} else {
+				resultado = false;
+			}
+		} catch (error) {
 			resultado = true;
-		} else {
-			resultado = false;
 		}
-
 		return resultado;
 	}
 
@@ -1610,20 +1700,21 @@ $(document).ready(function () {
 		} else {
 			var id = $(divForm).find("#idServicio").val();
 			var kilos = $(divForm).find(".sumcantidad").html();
-			detenerServicio(id, kilos);
+			detenerServicio(id, kilos, getUrlParameter("id"));
 		}
 	});
 
 	let servicio;
-	function detenerServicio(id, kilos = "", almacen_id = "1") {
+	function detenerServicio(id, kilos = "", entrada_id = "", almacen_id = "1") {
 		var form = $("#formEnviarAlmacen");
 		var select = $(form).find("#selectAlmacen");
+
 		$.ajax({
 			url: __url__ + "?ajax&controller=Catalogo&action=getAlmacenes",
 			type: "POST",
 			dataType: "json",
 			success: function (r) {
-				// console.log(r);
+				console.log(r);
 				if (r != false) {
 					select.find("option").not(":first").remove();
 					if (r.length != 0) {
@@ -1647,58 +1738,261 @@ $(document).ready(function () {
 		$("#idServicioEnviar").val(id);
 		$(form).find(id);
 		$(form).find($("#operacionEnviar")).val("S");
+		//OBTIENE LOS SERVICIOS PENDIENTES
 
-		// let servicio = servicios.filter((el) => el.id_servicio == id)[0];
-		$.confirm({
-			title: "<span class='material-icons i-warning'>warning</span><span>¡Atención!<span>",
-			content: "<b>¿Finalizar servicio?</b>",
-			type: "orange",
-			typeAnimated: true,
-			animation: "zoom",
-			closeAnimation: "right",
-			backgroundDismiss: false,
-			backgroundDismissAnimation: "shake",
-			buttons: {
-				tryAgain: {
-					text: "Finalizar servicio",
-					btnClass: "btn btn-warning",
-					action: function () {
-						$.ajax({
-							// data: $("#formEnviarAlmacen").serialize(),
-							data: {
-								idServicioEnviar: id,
-								operacionEnviar: "S",
-								cantidadAlmacen: kilos.replace(",", ""),
-								almacen: almacen_id,
+		var cargaspendientes;
+		var espera = 1;
+		// servicio = servicios.servicios[0];
+		$.ajax({
+			// data: $("#formEnviarAlmacen").serialize(),
+			data: {
+				id: id,
+			},
+			url: __url__ + "?ajax&controller=Servicios&action=getCargasPendientes",
+			type: "POST",
+			dataType: "json",
+			success: function (r) {
+				console.log(r);
+				cargaspendientes = r;
+				// let servicio = servicios.filter((el) => el.id_servicio == id)[0];
+				console.log(cargaspendientes);
+				if (cargaspendientes.cargaspendientes[0].pendientes == "1") {
+					var html = `
+                        <div class='row'>
+                            <div class='col-11'>
+                                <h3>Favor de ingresar los sellos de la caja</h3>
+                            </div>
+                        </div>`;
+					for (
+						var x = 0;
+						x < cargaspendientes.cargaspendientes[0].cant_puertas;
+						x++
+					) {
+						html += `
+                                <div class='row'>
+                                    <div class='col-11'>
+
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">Sello ${
+																x + 1
+															}</div>
+                                            <input type="text" name="sello${
+																x + 1
+															}" class="sellos form-control" id="sello${
+							x + 1
+						}" required />
+                                        </div>
+
+                                    </div>
+                                </div>
+                        
+                            `;
+					}
+					html += `
+                        <div class='row'>
+                            <div class='col-11'>
+                                <canvas id="canvas">Su navegador no soporta canvas :( </canvas>     
+                            </div>
+                        </div>
+                    `;
+					Swal.fire({
+						title: "Servicios terminados",
+						html: html,
+						showDenyButton: true,
+						confirmButtonText: "Terminar",
+						denyButtonText: `Cancelar`,
+						didOpen: () => {
+							iniciaCanvas();
+						},
+					}).then((result) => {
+						/* Read more about isConfirmed, isDenied below */
+						if (result.isConfirmed) {
+							$.ajax({
+								// data: $("#formEnviarAlmacen").serialize(),
+								data: {
+									idServicioEnviar: id,
+									operacionEnviar: "S",
+									cantidadAlmacen: kilos.replace(",", ""),
+									almacen: almacen_id,
+									entrada_id: entrada_id,
+									sellos: getSellos(),
+									firma: getTrazado(),
+								},
+								url: "?ajax&controller=Servicios&action=finalizarServicio",
+								type: "POST",
+								dataType: "json",
+								success: function (r) {
+									console.log(r);
+									if (r.error != false) {
+										mensajeCorrecto(r.mensaje);
+									} else {
+										mensajeError(r.mensaje);
+									}
+									getServicios();
+								},
+								error: function (r) {
+									console.log(r);
+									mensajeError("Algo salio mal: " + r);
+									// mensajeError("Algo salio mal,  contacte al administrador.");
+								},
+							});
+						} else if (result.isDenied) {
+						}
+					});
+				} else {
+					// $("#enviarAlmacenModal1").modal("show");
+					// $("#enviarFinalizarServicio").unbind();
+					// $("#enviarFinalizarServicio").click(function() {
+					// if (validarDatosEnviarAlmacen()) {
+
+					$.confirm({
+						title: "<span class='material-icons i-warning'>warning</span><span>¡Atención!<span>",
+						content: "<b>¿Finalizar servicio?</b>",
+						type: "orange",
+						typeAnimated: true,
+						animation: "zoom",
+						closeAnimation: "right",
+						backgroundDismiss: false,
+						backgroundDismissAnimation: "shake",
+						buttons: {
+							tryAgain: {
+								text: "Finalizar servicio",
+								btnClass: "btn btn-warning",
+								action: function () {
+									$.ajax({
+										// data: $("#formEnviarAlmacen").serialize(),
+										data: {
+											idServicioEnviar: id,
+											operacionEnviar: "S",
+											cantidadAlmacen: servicio.kilos.replace(
+												",",
+												""
+											),
+											almacen: almacen_id,
+										},
+										url: "?ajax&controller=Servicios&action=finalizarServicio",
+										type: "POST",
+										dataType: "json",
+										success: function (r) {
+											console.log(r);
+											if (r.error != false) {
+												erpalert("", "", r.mensaje);
+											} else {
+												erpalert("error", "Error", r.mensaje);
+											}
+											getServicios();
+										},
+										error: function (r) {
+											console.log(r.responseText);
+											mensajeError(
+												"Algo salio mal,  contacte al administrador."
+											);
+										},
+									});
+								},
 							},
-							url: "?ajax&controller=Servicios&action=finalizarServicio",
-							type: "POST",
-							dataType: "json",
-							success: function (r) {
-								// console.log(r);
-								if (r.error != false) {
-									mensajeCorrecto(r.mensaje);
-								} else {
-									mensajeError(r.mensaje);
-								}
-							},
-							error: function (r) {
-								console.log(r.responseText);
-								mensajeError(
-									"Algo salio mal,  contacte al administrador."
-								);
-							},
-						});
-					},
-				},
-				Cancelar: function () {},
+							Cancelar: function () {},
+						},
+					});
+				}
+			},
+			error: function (r) {
+				console.log(r.responseText);
+				espera = 0;
+				mensajeError("Algo salio mal,  contacte al administrador.");
 			},
 		});
+
 		// } else {
 		// erpalert("error", "", "No puede estar un campo vacio.");
 		// }
 		// });
 	}
+
+	// function detenerServicio(id, kilos = "", almacen_id = "1") {
+	// 	var form = $("#formEnviarAlmacen");
+	// 	var select = $(form).find("#selectAlmacen");
+	// 	$.ajax({
+	// 		url: __url__ + "?ajax&controller=Catalogo&action=getAlmacenes",
+	// 		type: "POST",
+	// 		dataType: "json",
+	// 		success: function (r) {
+	// 			// console.log(r);
+	// 			if (r != false) {
+	// 				select.find("option").not(":first").remove();
+	// 				if (r.length != 0) {
+	// 					$(r).each(function (i, v) {
+	// 						// indice, valor
+	// 						select.append(
+	// 							'<option value="' + v.id + '">' + v.nombre + "</option>"
+	// 						);
+	// 					});
+	// 				} else {
+	// 					select.append(
+	// 						'<option value="" disabled>No hay almacenes registrados</option>'
+	// 					);
+	// 				}
+	// 			}
+	// 		},
+	// 		error: function () {
+	// 			alert("Algo salio mal, contacte al Administrador.");
+	// 		},
+	// 	});
+	// 	$("#idServicioEnviar").val(id);
+	// 	$(form).find(id);
+	// 	$(form).find($("#operacionEnviar")).val("S");
+
+	// 	// let servicio = servicios.filter((el) => el.id_servicio == id)[0];
+	// 	$.confirm({
+	// 		title: "<span class='material-icons i-warning'>warning</span><span>¡Atención!<span>",
+	// 		content: "<b>¿Finalizar servicio?</b>",
+	// 		type: "orange",
+	// 		typeAnimated: true,
+	// 		animation: "zoom",
+	// 		closeAnimation: "right",
+	// 		backgroundDismiss: false,
+	// 		backgroundDismissAnimation: "shake",
+	// 		buttons: {
+	// 			tryAgain: {
+	// 				text: "Finalizar servicio",
+	// 				btnClass: "btn btn-warning",
+	// 				action: function () {
+	// 					$.ajax({
+	// 						// data: $("#formEnviarAlmacen").serialize(),
+	// 						data: {
+	// 							idServicioEnviar: id,
+	// 							operacionEnviar: "S",
+	// 							cantidadAlmacen: kilos.replace(",", ""),
+	// 							almacen: almacen_id,
+	// 						},
+	// 						url: "?ajax&controller=Servicios&action=finalizarServicio",
+	// 						type: "POST",
+	// 						dataType: "json",
+	// 						success: function (r) {
+	// 							// console.log(r);
+	// 							if (r.error != false) {
+	// 								mensajeCorrecto(r.mensaje);
+	// 							} else {
+	// 								mensajeError(r.mensaje);
+	// 							}
+	// 						},
+	// 						error: function (r) {
+	// 							console.log(r.responseText);
+	// 							mensajeError(
+	// 								"Algo salio mal,  contacte al administrador."
+	// 							);
+	// 						},
+	// 					});
+	// 				},
+	// 			},
+	// 			Cancelar: function () {},
+	// 		},
+	// 	});
+	// 	// } else {
+	// 	// erpalert("error", "", "No puede estar un campo vacio.");
+	// 	// }
+	// 	// });
+	// }
 
 	$("#enviarFinalizarServicio").click(function () {
 		if (validarDatosEnviarAlmacen()) {
@@ -1804,7 +2098,8 @@ $(document).ready(function () {
 		if ($("#ferrotolva").val() == "F") {
 			ferrotolva = 1;
 		}
-		if (ticket != "") {
+		console.log("ticket: ", ticket);
+		if (ticket != "" && typeof ticket !== "undefined") {
 			$.ajax({
 				data: { id: ticket, ferrotolva: ferrotolva },
 				url: "?ajax&controller=Servicios&action=getPesos",
@@ -1857,8 +2152,9 @@ $(document).ready(function () {
 						mensajeError("Ticket no registrado");
 					}
 				},
-				error: function () {
-					mensajeError("Algo salio mal,  contacte al administrador.");
+				error: function (e) {
+					mensajeError("Algo salio mal,  contacte al administrador. ");
+					console.log("error getpesos: ", e);
 				},
 			});
 		}
@@ -1942,6 +2238,7 @@ $(document).ready(function () {
 	});
 
 	$("#tablaRegistros").on("click", "#imprimirServicio", function (e) {
+		console.log("click", e);
 		var tr = $(this).closest("tr");
 		e.preventDefault();
 		var id = tr.find("#idServicio").html();
@@ -1955,22 +2252,39 @@ $(document).ready(function () {
 			);
 		}
 	});
+	$("#seccionServicios").on("click", "#imprimirServicio", function (e) {
+		e.preventDefault();
+		servicio_click = e;
+		var id = e.currentTarget.dataset.servicio;
+		console.log("click", id);
+		if (id != "") {
+			window.open(
+				serv +
+					"?controller=Servicios&action=imprimirServicio&&idServ=" +
+					id,
+				"Imprimir servicio",
+				"width=1300,height=600"
+			);
+		}
+	});
 
 	$("#loteSelect").unbind();
 	$("#loteSelect").change(function () {
-		var lote = $(this).val();
-		if (lote != "") {
-			getInfoLote(lote);
-			setTimeout(() => {
-				$("#lote").val(loteSelected[0].lote);
-				$("#producto").val(loteSelected[0].producto_id);
-				//   $("#producto").val(loteSelected[0].producto);
-				$("#alias").val(loteSelected[0].alias);
-				$("#existencia").parent("div").show();
-				$("#existencia").val(loteSelected[0].disponible).change();
-				$("#existencia").trigger("blur");
-				validaInventario("#formAgregarServicio");
-			}, 500);
+		if (serv_entrada == "0") {
+			var lote = $(this).val();
+			if (lote != "") {
+				getInfoLote(lote);
+				setTimeout(() => {
+					$("#lote").val(loteSelected[0].lote);
+					$("#producto").val(loteSelected[0].producto_id);
+					//   $("#producto").val(loteSelected[0].producto);
+					$("#alias").val(loteSelected[0].alias);
+					$("#existencia").parent("div").show();
+					$("#existencia").val(loteSelected[0].disponible).change();
+					$("#existencia").trigger("blur");
+					validaInventario("#formAgregarServicio");
+				}, 500);
+			}
 		}
 	});
 
@@ -2071,6 +2385,12 @@ $(document).ready(function () {
 		validaBasculaUnidad();
 	});
 
+	$("#transportista").select2();
+	$(".transportista").unbind();
+	$("#transportista").change(function () {
+		getChoferes($("#transportista option:selected").val());
+	});
+
 	$("#formEnviarAlmacen input").keyup(function () {
 		let bsucia = 0;
 		let blimpia = 0;
@@ -2152,10 +2472,13 @@ function htmlNum(num) {
 	}
 }
 
-function agregarLotesEnsacado(form) {
+function agregarLotesEnsacado(form, tipo_producto = "") {
 	$(form).find($("#idTipoServicio")).attr("disabled", false);
 	var servicio = $(form).find("#idTipoServicio option:selected").text();
 	var lote = $(form).find($("#lote"));
+	if (tipo_producto == "") {
+		tipo_producto = serv_entrada;
+	}
 	//   var selectLote = $(form).find($("#loteSelect"));
 	var selectLote = $(form).find("#loteSelect");
 	// console.log("servicio: ", servicio);
@@ -2189,9 +2512,9 @@ function agregarLotesEnsacado(form) {
 		// });
 
 		var clienteId = $("#cliente").val();
-		// console.log("clienteId: ", clienteId);
+		console.log("clienteId: ", clienteId, " tipo_producto: ", tipo_producto);
 		$.ajax({
-			data: { idCliente: clienteId },
+			data: { idCliente: clienteId, tipo_producto: tipo_producto },
 			url: "?ajax&controller=Servicios&action=getLotesByClienteStock",
 			type: "POST",
 			dataType: "json",
@@ -2203,17 +2526,27 @@ function agregarLotesEnsacado(form) {
 					if (r.length != 0) {
 						$(r).each(function (i, v) {
 							// indice, valor
-							selectLote.append(
-								'<option value="' +
-									v.lote +
-									'">' +
-									v.lote +
-									" - " +
-									v.nombre +
-									" - " +
-									v.alias +
-									"</option>"
-							);
+							if (tipo_producto != "1") {
+								selectLote.append(
+									'<option value="' +
+										v.lote +
+										'">' +
+										v.lote +
+										" - " +
+										v.nombre +
+										" - " +
+										v.alias +
+										"</option>"
+								);
+							} else {
+								selectLote.append(
+									'<option value="' +
+										v.id +
+										'">' +
+										v.nombre +
+										"</option>"
+								);
+							}
 						});
 					} else {
 						selectLote.append(
@@ -2260,11 +2593,17 @@ function agregarLotesEnsacado(form) {
 	}
 }
 
-function llenarComboLotesCliente(clienteId, form, lote = "") {
+function llenarComboLotesCliente(
+	clienteId,
+	form,
+	lote = "",
+	tipo_producto = ""
+) {
 	var selectLote = $(form).find("#loteSelect");
+
 	// console.log("entra llena combo");
 	$.ajax({
-		data: { idCliente: clienteId },
+		data: { idCliente: clienteId, tipo_producto: tipo_producto },
 		url: "?ajax&controller=Servicios&action=getLotesByClienteStock",
 		type: "POST",
 		dataType: "json",
@@ -2347,20 +2686,22 @@ function validaInventario(form) {
 				quitarComasNumero($("#cantidad").val()) == undefined
 					? "0"
 					: quitarComasNumero($("#cantidad").val());
-			if (quitarComasNumero($("#pesoCliente").val()) < sum) {
-				mensajeError("La cantidad es mayor de la que ordenó el cliente");
-				$("#btnGenerarServicio").hide();
-			} else {
-				if (
-					loteSelected[0].disponible >=
-					quitarComasNumero($("#cantidad").val())
-				) {
-					$("#btnGenerarServicio").show();
-				} else {
-					mensajeError("La cantidad es mayor a la del inventario");
+			try {
+				if (quitarComasNumero($("#pesoCliente").val()) < sum) {
+					mensajeError("La cantidad es mayor de la que ordenó el cliente");
 					$("#btnGenerarServicio").hide();
+				} else {
+					if (
+						loteSelected[0].disponible >=
+						quitarComasNumero($("#cantidad").val())
+					) {
+						$("#btnGenerarServicio").show();
+					} else {
+						mensajeError("La cantidad es mayor a la del inventario");
+						$("#btnGenerarServicio").hide();
+					}
 				}
-			}
+			} catch (error) {}
 		} else if (tiposervicio == "1") {
 			var sum = 0;
 			$(form)
@@ -2447,6 +2788,66 @@ function validaBasculaUnidad() {
 		$("#tara").parent().prop("style", "display:block");
 		$("#ticket").parent().prop("style", "display:block");
 	}
+	if ($("#transporte option:selected").data("puertas") == "0") {
+		$("#cant_puertas").parent().prop("style", "display:none");
+		$("#cant_puertas").parent().prop("style", "display:none");
+	} else {
+		$("#cant_puertas").parent().prop("style", "display:block");
+		$("#cant_puertas").parent().prop("style", "display:block");
+	}
+	try {
+		if (
+			$("#transporte option:selected").data("cap_max") <
+			$("#pesoCliente").val().replace(/\D/g, "")
+		) {
+			mensajeError(
+				"El peso de la unidad es menor al solicitado por el cliente"
+			);
+			$("#btnGuardar").hide();
+		} else {
+			$("#btnGuardar").show();
+		}
+	} catch (error) {}
+}
+
+function getChoferes(transp_id) {
+	var selectLote = $("#chofer");
+	$.ajax({
+		data: { transp_id: transp_id },
+		url: "?ajax&controller=Servicios&action=getChoferesByTransporte",
+		type: "POST",
+		dataType: "json",
+		success: function (r) {
+			console.log("getChoferes:");
+			console.log(r.choferes);
+			if (r != false) {
+				selectLote.find("option").not(":first").remove();
+				if (r.length != 0) {
+					$(r.choferes).each(function (i, v) {
+						// indice, valor
+						selectLote.append(
+							'<option value="' +
+								v.chof_id +
+								'">' +
+								v.chof_nombres +
+								" " +
+								v.chof_apellidos +
+								"</option>"
+						);
+					});
+				} else {
+					selectLote.append(
+						'<option value="" disabled>No hay choferes registrados</option>'
+					);
+				}
+				$("#chofer").select2();
+			}
+			// console.log("termina llenacombo");
+		},
+		error: function () {
+			alert("Algo salio mal, contacte al Administrador.");
+		},
+	});
 }
 var productos;
 function getMax(arr, prop) {
@@ -2610,4 +3011,145 @@ function getOperacionServicios($servicios) {
 		}
 	} catch (error) {}
 	return $operacion;
+}
+function getSellos() {
+	var jsonObj = [];
+	$(".sellos").each(function () {
+		item = {};
+		item[$(this).attr("name")] = $(this).val();
+		jsonObj.push(item);
+	});
+	var jsonString = JSON.stringify(jsonObj);
+	return '{"sellos":' + jsonString + "}";
+}
+
+function getUrlParameter(sParam) {
+	var sPageURL = window.location.search.substring(1),
+		sURLVariables = sPageURL.split("&"),
+		sParameterName,
+		i;
+
+	for (i = 0; i < sURLVariables.length; i++) {
+		sParameterName = sURLVariables[i].split("=");
+
+		if (sParameterName[0] === sParam) {
+			return sParameterName[1] === undefined
+				? true
+				: decodeURIComponent(sParameterName[1]);
+		}
+	}
+	return false;
+}
+function iniciaCanvas() {
+	let limpiar = document.getElementById("limpiar");
+	let canvas = document.getElementById("canvas");
+	let ctx = canvas.getContext("2d");
+	let cw = (canvas.width = 250),
+		cx = cw / 2;
+	let ch = (canvas.height = 250),
+		cy = ch / 2;
+
+	let dibujar = false;
+	let factorDeAlisamiento = 5;
+	let Trazados = [];
+	let puntos = [];
+	ctx.lineJoin = "round";
+
+	function iniciarTrazado(evt) {
+		dibujar = true;
+		//ctx.clearRect(0, 0, cw, ch);
+		puntos.length = 0;
+		ctx.beginPath();
+	}
+
+	function trazar(evt) {
+		if (dibujar) {
+			let m = oMousePos(canvas, evt);
+			puntos.push(m);
+			ctx.lineTo(m.x, m.y);
+			ctx.stroke();
+		}
+	}
+
+	canvas.addEventListener("mousedown", iniciarTrazado, false);
+	canvas.addEventListener(
+		"touchstart",
+		(event) => iniciarTrazado(event.touches[0]),
+		false
+	);
+
+	canvas.addEventListener("mouseup", redibujarTrazados, false);
+	canvas.addEventListener(
+		"touchend",
+		(event) => redibujarTrazados(event.touches[0]),
+		false
+	);
+
+	canvas.addEventListener("mouseout", redibujarTrazados, false);
+
+	canvas.addEventListener("mousemove", trazar, false);
+	canvas.addEventListener(
+		"touchmove",
+		(event) => trazar(event.touches[0]),
+		false
+	);
+
+	function reducirArray(n, elArray) {
+		let nuevoArray = [];
+		nuevoArray[0] = elArray[0];
+		for (let i = 0; i < elArray.length; i++) {
+			if (i % n == 0) {
+				nuevoArray[nuevoArray.length] = elArray[i];
+			}
+		}
+		nuevoArray[nuevoArray.length - 1] = elArray[elArray.length - 1];
+		Trazados.push(nuevoArray);
+	}
+
+	function calcularPuntoDeControl(ry, a, b) {
+		let pc = {};
+		pc.x = (ry[a].x + ry[b].x) / 2;
+		pc.y = (ry[a].y + ry[b].y) / 2;
+		return pc;
+	}
+
+	function alisarTrazado(ry) {
+		if (ry.length > 1) {
+			let ultimoPunto = ry.length - 1;
+			ctx.beginPath();
+			ctx.moveTo(ry[0].x, ry[0].y);
+			for (let i = 1; i < ry.length - 2; i++) {
+				let pc = calcularPuntoDeControl(ry, i, i + 1);
+				ctx.quadraticCurveTo(ry[i].x, ry[i].y, pc.x, pc.y);
+			}
+			ctx.quadraticCurveTo(
+				ry[ultimoPunto - 1].x,
+				ry[ultimoPunto - 1].y,
+				ry[ultimoPunto].x,
+				ry[ultimoPunto].y
+			);
+			ctx.stroke();
+		}
+	}
+
+	function redibujarTrazados() {
+		dibujar = false;
+		ctx.clearRect(0, 0, cw, ch);
+		reducirArray(factorDeAlisamiento, puntos);
+		for (let i = 0; i < Trazados.length; i++) alisarTrazado(Trazados[i]);
+	}
+
+	function oMousePos(canvas, evt) {
+		let ClientRect = canvas.getBoundingClientRect();
+		return {
+			//objeto
+			x: Math.round(evt.clientX - ClientRect.left),
+			y: Math.round(evt.clientY - ClientRect.top),
+		};
+	}
+}
+/* Enviar el trazado */
+function getTrazado() {
+	return document.getElementById("canvas").toDataURL("image/png");
+	//document.forms['incineracionForm'].submit();
 }

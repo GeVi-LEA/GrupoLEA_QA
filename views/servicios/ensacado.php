@@ -354,7 +354,7 @@ function ROFinaliza($estatus)
                         $sellos = json_decode($ensacado['sellos'], true);
                         if (isset($ensacado['sellos']) && $ensacado['sellos'] != '') {
                             for ($x = 1; $x < $ensacado['cant_puertas'] + 1; $x++) {
-                                echo '<div><strong class="mr-1">Sello #' . $x . ':</strong><input name="sello' . $x . '" class="item-middle" id="sello' . $x . '" type="text" value="' . (isset($ensacado['sellos']) ? $sellos['sello' . strval($x)] : '') . '" /></div>';
+                                echo '<div><strong class="mr-1">Sello #' . $x . ':</strong><input name="sello' . $x . '" class="item-middle" id="sello' . $x . '" type="text" value="' . (isset($ensacado['sellos']) ? $sellos['sellos'][$x - 1]['sello' . strval($x)] : '') . '" /></div>';
                             }
                         }
                         ?>

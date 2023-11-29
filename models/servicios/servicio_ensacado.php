@@ -535,4 +535,15 @@ class ServicioEnsacado
         }
         return $result;
     }
+
+    public function getCargasPendientes($id)
+    {
+        $result    = array();
+        $sql       = 'CALL getCargasPendientes(' . $id . ')';
+        $servicios = $this->db->query($sql);
+        while ($c = $servicios->fetch_object()) {
+            array_push($result, $c);
+        }
+        return $result;
+    }
 }
