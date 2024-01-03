@@ -37,14 +37,39 @@ class comprasController
     public function requisiciones()
     {
         Utils::noLoggin();
+        // $_SESSION['title'] = 'Requisiciones';
         $idEst = null;
         $req   = new Requisicion();
         if (isset($_GET['idEst'])) {
             $idEst = (int) $_GET['idEst'];
         }
         $requisiciones = $req->getByEstatusId($idEst);
+        // $requisiciones = $req->getByEstatusCliente($idEst, '');
 
-        require_once views_root . 'compras/lista_requisiciones.php';
+        $cliente  = new Cliente();
+        $clientes = $cliente->getAll();
+
+        // require_once views_root . 'compras/lista_requisiciones.php';
+        require_once views_root . 'compras/requisiciones.php';
+    }
+
+    public function requisicionesb()
+    {
+        Utils::noLoggin();
+        // $_SESSION['title'] = 'Requisiciones';
+        $idEst = null;
+        $req   = new Requisicion();
+        if (isset($_GET['idEst'])) {
+            $idEst = (int) $_GET['idEst'];
+        }
+        $requisiciones = $req->getByEstatusId($idEst);
+        // $requisiciones = $req->getByEstatusCliente($idEst, '');
+
+        $cliente  = new Cliente();
+        $clientes = $cliente->getAll();
+
+        // require_once views_root . 'compras/lista_requisiciones.php';
+        require_once views_root . 'compras/requisicionesb.php';
     }
 
     public function buscarRequisicion()
@@ -90,14 +115,41 @@ class comprasController
 
         $solicitud   = new TipoSolicitud();
         $solicitudes = $solicitud->getAll();
-
         $proveedor   = new Proveedor();
         $proveedores = $proveedor->getAll();
 
         $unidad   = new Unidad();
         $unidades = $unidad->getAll();
 
-        require_once views_root . 'compras/requisiciones.php';
+        // require_once views_root . 'compras/requisiciones.php';
+        require_once views_root . 'compras/requisicion.php';
+    }
+
+    public function requisicionpop()
+    {
+        Utils::noLoggin();
+        $usuario = new Usuario();
+        if (isset($_SESSION['usuario'])) {
+            $user = $usuario->getById($_SESSION['usuario']->id);
+        } else {
+            header('Location:' . root_url . '?controller=Error&action=noLoggin');
+        }
+        $req = null;
+        if (isset($_GET['id']) && ($_GET['id'] != '0')) {
+            $id        = $_GET['id'];
+            $requicion = new Requisicion();
+            $req       = $requicion->getReqById($id);
+        }
+
+        $solicitud   = new TipoSolicitud();
+        $solicitudes = $solicitud->getAll();
+        $proveedor   = new Proveedor();
+        $proveedores = $proveedor->getAll();
+
+        $unidad   = new Unidad();
+        $unidades = $unidad->getAll();
+
+        require_once views_root . 'compras/requisicion_pop.php';
     }
 
     public function generarRequisicion()
@@ -146,6 +198,7 @@ class comprasController
             $requisicion->setNumProyecto($proyecto);
             $requisicion->setObservaciones($observaciones);
             $requisicion->setMoneda($moneda);
+
             if ($id == null) {
                 // estatus 1
                 $requisicion->setEstatusId(1);
@@ -155,12 +208,20 @@ class comprasController
             }
             if (isset($_FILES['documento']) && $_FILES['documento'] != null) {
                 $file = $_FILES['documento'];
+                // print_r('<pre>');
+                // print_r($file);
+                // print_r('</pre>');
                 if ($folio == null) {
                     $filename = 'Cot-' . $requisicion->getFolio() . '.pdf';
                 } else {
                     $filename = 'Cot-' . $folio . '.pdf';
                 }
                 $mimetype = $file['type'];
+                // print_r('<pre>');
+                // print_r($mimetype);
+                // print_r('</pre>');
+                // phpinfo();
+                // die ();
                 if ($mimetype == 'application/pdf') {
                     if (!is_dir('views/compras/uploads/cotizaciones')) {
                         mkdir('views/compras/uploads/cotizaciones', 0777, true);
@@ -191,27 +252,38 @@ class comprasController
             }
 
             $detalles = array();
-            for ($i = 0; $i < count($d); $i++) {
-                $detalles[] = [
-                    'idDetalle'      => $id_d[$i],
-                    'descripcion'    => ucfirst($d[$i]),
-                    'unidad'         => $u[$i],
-                    'precioUnitario' => $pr_u[$i],
-                    'cantidad'       => $c[$i],
-                    'precio'         => $pr_u[$i] * $c[$i],
-                ];
+            try {
+                // code...
+                for ($i = 0; $i < count($d); $i++) {
+                    $detalles[] = [
+                        'idDetalle'      => $id_d[$i],
+                        'descripcion'    => ucfirst($d[$i]),
+                        'unidad'         => $u[$i],
+                        'precioUnitario' => $pr_u[$i],
+                        'cantidad'       => $c[$i],
+                        'precio'         => $pr_u[$i] * $c[$i],
+                    ];
+                }
+                $requisicion->setDetalles($detalles);
+            } catch (\Throwable $th) {
+                // throw $th;
             }
-            $requisicion->setDetalles($detalles);
+
             if ($id == null) {
                 $saveReq = $requisicion->save();
                 header('Location:' . principalUrl . '?controller=Compras&action=index');
             } else {
                 $requisicion->setId($id);
                 $saveReq = $requisicion->edit();
+                // print_r('<pre>');
+                // print_r($requisicion);
+                // print_r('</pre>');
+                // die ();
+
                 if ($saveReq && ($estatus == 5)) {
                     $save = $this->actualizarOrdenCompra($id);
                 }
-                header('Location:' . principalUrl . '?controller=Compras&action=requisicion&id=' . $id);
+                header('Location:' . principalUrl . '?controller=Compras&action=requisicionpop&id=' . $id);
             }
         }
     }
@@ -292,7 +364,14 @@ class comprasController
             $documentoNorma = new DocumentoNorma();
             $doc            = $documentoNorma->getByCodigo('FO-AB-009');
 
-            PDF::crearPdfRequisicion($r, $doc, $mostrar);
+            try {
+                // code...
+                PDF::crearPdfRequisicion($r, $doc, $mostrar);
+            } catch (Exception $th) {
+                print_r('<pre>');
+                print_r($th);
+                print_r('</pre>');
+            }
         }
     }
 
@@ -488,6 +567,7 @@ class comprasController
     public function ordenesDeCompra()
     {
         Utils::noLoggin();
+        // $_SESSION['title'] = 'Ordenes de Compra';
         $orden = new OrdenCompra();
         $idEst = null;
         if (isset($_GET['embarque'])) {
@@ -1704,5 +1784,55 @@ class comprasController
             $requisicion = $r->getReqById($idReq);
             echo json_encode($requisicion);
         }
+    }
+
+    /* GRAFICAS */
+    public function getRequisiciones()
+    {
+        $req = new Requisicion();
+        // if (isset($_POST['idEst'])) {
+        //     $idEst = (int) $_POST['idEst'];
+        // }
+
+        // $clientes = '';
+        // if (isset($_POST['clientes'])) {
+        //     $clientes = $_POST['clientes'];
+        // }
+
+        $proveedores = '';
+        if (isset($_POST['proveedores'])) {
+            $proveedores = $_POST['proveedores'];
+        }
+
+        $fechaini = '';
+        if (isset($_POST['fechaini'])) {
+            $fechaini = str_replace('/', '', $_POST['fechaini']);
+        }
+
+        $fechafin = '';
+        if (isset($_POST['fechafin'])) {
+            $fechafin = str_replace('/', '', $_POST['fechafin']);
+        }
+
+        // $clientes = $_POST['clientes'];
+
+        $requisiciones = $req->getByEstatusCliente($proveedores, $fechaini, $fechafin);
+
+        echo json_encode(['mensaje' => 'OK', 'requisiciones' => $requisiciones]);
+        return true;
+    }
+
+    public function editarDetalleReq()
+    {
+        $requisicion = New Requisicion();
+        $requisiciones = $requisicion->updateDetalleReq(
+            $_POST['id'],
+            $_POST['unidad_id'],
+            $_POST['descripcion'],
+            $_POST['cantidad'],
+            $_POST['precio_unitario']
+        );
+        echo json_encode(['mensaje' => 'OK', 'requisiciones' => $requisiciones]);
+        // return true;
     }
 }

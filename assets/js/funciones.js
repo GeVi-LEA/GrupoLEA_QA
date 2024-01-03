@@ -16,24 +16,26 @@ var divEspecif =
 	document.getElementById("divEspecificacion") == undefined
 		? null
 		: document.getElementById("divEspecificacion");
-const buscador = document.querySelector("#buscador");
-const buscadorDirectorio = document.querySelector("#buscarDirectorio");
+var buscador = document.querySelector("#buscador");
+var buscadorDirectorio = document.querySelector("#buscarDirectorio");
 if (formRequisicion != null) {
-	var descrEsp = formRequisicion.descEspecif,
-		unidEsp = formRequisicion.unidadEspecif,
-		cantEsp = formRequisicion.cantEspecif,
-		precioEsp = formRequisicion.precioEspecif,
-		moneda = formRequisicion.moneda,
-		idReq = formRequisicion.id,
-		empresa = formRequisicion.empresa,
-		solicitud = formRequisicion.solicitud,
-		proveedor = formRequisicion.proveedor,
-		fechaSolicitud = formRequisicion.fechaSolicitud,
-		fechaRequerida = formRequisicion.fechaRequerida;
+	try {
+		var descrEsp = formRequisicion.descEspecif,
+			unidEsp = formRequisicion.unidadEspecif,
+			cantEsp = formRequisicion.cantEspecif,
+			precioEsp = formRequisicion.precioEspecif,
+			moneda = formRequisicion.moneda,
+			idReq = formRequisicion.id,
+			empresa = formRequisicion.empresa,
+			solicitud = formRequisicion.solicitud,
+			proveedor = formRequisicion.proveedor,
+			fechaSolicitud = formRequisicion.fechaSolicitud,
+			fechaRequerida = formRequisicion.fechaRequerida;
 
-	if (idReq.value != "" && numDetalles > 0) {
-		seccionDesc.style.display = "block";
-	}
+		if (idReq.value != "" && numDetalles > 0) {
+			seccionDesc.style.display = "block";
+		}
+	} catch (error) {}
 }
 var tablaDesc = document.getElementById("tablaDescripcion");
 var abrirCatalogo = document.getElementById("abrirCatalogo");
@@ -410,55 +412,55 @@ if (window.history.replaceState) {
 //FECHA: 18/03/2022
 //MODIFICACIONES: 2
 
-const showLoading_global = (mensaje = "Trabajando ...") => {
-	let htmlLoading_global = ` 
-                        <div>
-                              <div class="row">
-                                    <div class="col-12">
-                                          <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
-                                    </div>
-                              </div>
-                              <div class="row">
-                                    <div class="col-12">
-                                          <div><h2>Trabajando ...</h2></div>
-                                    </div>
-                              </div>
-                        </div>
-                        `;
-	var el_global = document.createElement("div");
-	el_global.innerHTML = htmlLoading_global;
+// const showLoading_global = (mensaje = "Trabajando ...") => {
+// 	let htmlLoading_global = `
+//                         <div>
+//                               <div class="row">
+//                                     <div class="col-12">
+//                                           <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+//                                     </div>
+//                               </div>
+//                               <div class="row">
+//                                     <div class="col-12">
+//                                           <div><h2>Trabajando ...</h2></div>
+//                                     </div>
+//                               </div>
+//                         </div>
+//                         `;
+// 	var el_global = document.createElement("div");
+// 	el_global.innerHTML = htmlLoading_global;
 
-	var loading_ = htmlLoading_global;
-	if (mensaje != "") {
-		loading_ = loading_.replace("Trabajando ...", mensaje);
-	}
-	////console.log(loading_);
-	var el_global = document.createElement("div");
-	el_global.innerHTML = loading_;
-	Swal.fire({
-		title: mensaje,
-		html: "",
-		didOpen: () => {
-			Swal.showLoading();
-		},
-	});
-};
+// 	var loading_ = htmlLoading_global;
+// 	if (mensaje != "") {
+// 		loading_ = loading_.replace("Trabajando ...", mensaje);
+// 	}
+// 	////console.log(loading_);
+// 	var el_global = document.createElement("div");
+// 	el_global.innerHTML = loading_;
+// 	Swal.fire({
+// 		title: mensaje,
+// 		html: "",
+// 		didOpen: () => {
+// 			Swal.showLoading();
+// 		},
+// 	});
+// };
 
-function goToByScroll(id) {
-	// Remove "link" from the ID
-	id = id.replace("link", "");
-	// Scroll
-	$("html,body").animate(
-		{
-			scrollTop: $("#" + id).offset().top - 80,
-		},
-		"slow"
-	);
-}
+// function goToByScroll(id) {
+// 	// Remove "link" from the ID
+// 	id = id.replace("link", "");
+// 	// Scroll
+// 	$("html,body").animate(
+// 		{
+// 			scrollTop: $("#" + id).offset().top - 80,
+// 		},
+// 		"slow"
+// 	);
+// }
 
-const getRandomColor = () => {
-	return "#" + ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0");
-};
+// function getRandomColor() {
+// 	return "#" + ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0");
+// }
 
 function fechaHora($fecha) {
 	if ($fecha != null || $fecha != "") {
@@ -490,4 +492,48 @@ function formatDate(date) {
 
 function padTo2Digits(num) {
 	return num.toString().padStart(2, "0");
+}
+
+function getClaseEstado($clave) {
+	switch ($clave) {
+		case "G":
+			return "estatus-gen";
+			break;
+		case "C":
+			return "estatus-cancel";
+			break;
+		case "A":
+			return "estatus-acept";
+			break;
+		case "P":
+			return "estatus-proceso";
+			break;
+		case "FIN":
+			return "estatus-fin";
+			break;
+		case "E":
+			return "estatus-enviada";
+			break;
+		case "TRS":
+			return "estatus-transito";
+			break;
+		case "PAG":
+			return "estatus-pagado";
+			break;
+		case "EMB":
+			return "estatus-embarque";
+			break;
+		case "TERM":
+			return "estatus-pagado";
+			break;
+		case "PSD":
+			return "estatus-pesado";
+			break;
+		case "PROG":
+			return "estatus-programa";
+			break;
+		case "SALIDA":
+			return "estatus-salida";
+			break;
+	}
 }

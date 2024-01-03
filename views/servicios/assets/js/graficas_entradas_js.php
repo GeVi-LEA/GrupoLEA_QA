@@ -5,6 +5,9 @@ var datosGrafica = <?= json_encode($datosGrafica) ?>;
 var arrayIdsTr = <?= json_encode($arrayIdsTr) ?>;
 var data_estatus = [];
 var data_colores = [];
+var id_estatus_sel = 0;
+var estatus_sel;
+var clave_sel;
 $(document).ready(function() {
 
     $("#div-lista").hide()
@@ -45,10 +48,19 @@ $(document).ready(function() {
 
     setInterval(() => {
         if (!$(".swal2-html-container").is(":visible")) {
-            llenatablaestatus(datosGrafica[0].estatus_id, datosGrafica[0].estatus, datosGrafica[0].clave)
+            if (id_estatus_sel == 0) {
+                llenatablaestatus(datosGrafica[0].estatus_id, datosGrafica[0].estatus, datosGrafica[0].clave);
+            } else {
+                llenatablaestatus(id_estatus_sel, estatus_sel, clave_sel);
+            }
+
             setTimeout(() => {
                 chart_productos();
-                llenatablaestatus(datosGrafica[0].estatus_id, datosGrafica[0].estatus, datosGrafica[0].clave);
+                if (id_estatus_sel == 0) {
+                    llenatablaestatus(datosGrafica[0].estatus_id, datosGrafica[0].estatus, datosGrafica[0].clave);
+                } else {
+                    llenatablaestatus(id_estatus_sel, estatus_sel, clave_sel);
+                }
             }, 1000);
         }
     }, 60000);
@@ -83,7 +95,18 @@ const chart_productos = () => {
         },
         legend: {
             top: '5%',
-            left: 'center'
+            left: 'center',
+
+            textStyle: {
+                color: getColorTheme().fontcolor
+            },
+            itemStyle: {
+                borderColor: getColorTheme().bgcolor
+
+            },
+            selected: {
+                'Liberada': false,
+            },
         },
         series: [{
             name: 'Entradas',
@@ -93,13 +116,15 @@ const chart_productos = () => {
             selectedMode: 'single',
             itemStyle: {
                 borderRadius: 10,
-                borderColor: '#fff',
-                borderWidth: 2
+                borderColor: getColorTheme().bgcolor, //'#fff',
+                borderWidth: 5
             },
             label: {
                 show: true,
                 position: 'right',
-                formatter: '{b}：{{c}}  {d}%'
+                formatter: '{b}：{{c}}  {d}%',
+                borderColor: getColorTheme().bgcolor,
+                color: getColorTheme().fontcolor
                 // formatter: function(d) {
                 // return d.name + ' { ' + d.data.value + ' }  {d}%' + d % ;
                 // }
@@ -123,6 +148,9 @@ const chart_productos = () => {
     myChart.on('click', function(params) {
         // Print name in console
         // console.log("estatus_id:", params.data.id);
+        id_estatus_sel = params.data.id;
+        estatus_sel = params.data.name;
+        clave_sel = params.data.clave;
         llenatablaestatus(params.data.id, params.data.name, params.data.clave);
     });
     swal.close();
@@ -169,6 +197,7 @@ function llenatablaestatus(id_estatus, estatus, clave) {
         new DataTable('#tabla_estatus', {
             dom: 'Bfrtip',
             retrieve: true,
+            scrollY: '40vh',
             language: {
                 url: '<?php echo URL; ?>assets/libs/datatables/es-MX.json',
             },

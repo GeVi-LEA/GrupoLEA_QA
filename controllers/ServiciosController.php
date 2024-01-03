@@ -46,6 +46,8 @@ class serviciosController
 
         $datosGrafica = $ensacado->getDataGraficas();
 
+        // $_SESSION['title'] = 'Ensacado';
+
         require_once views_root . 'servicios/lista_ensacado.php';
     }
 
@@ -552,6 +554,7 @@ class serviciosController
         $orden           = isset($_POST['orden']) && $_POST['orden'] != '' ? $_POST['orden'] : null;
         $doc_orden       = isset($_POST['doc_orden']) && $_POST['doc_orden'] != '' ? $_POST['doc_orden'] : null;
         $productoId      = isset($_POST['producto']) && $_POST['producto'] != '' ? $_POST['producto'] : null;
+        $almacen_id      = isset($_POST['almacen_id']) && $_POST['almacen_id'] != '' ? $_POST['almacen_id'] : null;
         $alias           = isset($_POST['alias']) && $_POST['alias'] != '' ? $_POST['alias'] : null;
         $observaciones   = isset($_POST['observaciones']) && $_POST['observaciones'] != '' ? $_POST['observaciones'] : null;
         $res             = true;
@@ -585,6 +588,7 @@ class serviciosController
             $servicio->setTipoTarima($tipoTarima != null ? Utils::stringToFloat($tipoTarima) : 'null');
             $servicio->setParcial($parcial != null ? Utils::stringToFloat($parcial) : 'null');
             $servicio->setProductoId($productoId);
+            $servicio->setAlmacenId($almacen_id);
             $servicio->setAlias($alias);
             $servicio->setLote($lote);
             $servicio->setOrden($orden);
@@ -711,79 +715,6 @@ class serviciosController
         return print_r(json_encode($result));
     }
 
-    // public function finalizarServicio()
-    // {
-    //     $idServicio      = isset($_POST['idServicioEnviar']) && $_POST['idServicioEnviar'] != '' ? $_POST['idServicioEnviar'] : null;
-    //     $cantidades      = isset($_POST['cantidadAlmacen']) ? $_POST['cantidadAlmacen'] : null;
-    //     $almacenes       = isset($_POST['almacen']) ? $_POST['almacen'] : null;
-    //     $operacion       = isset($_POST['operacionEnviar']) ? $_POST['operacionEnviar'] : null;
-    //     $BarreduraSucia  = isset($_POST['BarreduraSucia']) ? $_POST['BarreduraSucia'] : null;
-    //     $BarreduraLimpia = isset($_POST['BarreduraLimpia']) ? $_POST['BarreduraLimpia'] : null;
-
-    //     if ($operacion != 'E') {
-    //         $m = new ServicioMovimientoAlmacen();
-    //         $m->setAlmacen(intval($almacenes));
-    //         $m->setCantidad(Utils::quitarComas($cantidades));
-    //         $m->setIdServicio($idServicio);
-    //         $m->setOperacion($operacion);
-    //         $r        = $m->save();
-    //         $servicio = new ServicioEnsacado();
-    //         $servicio->setId($idServicio);
-    //         $r = $servicio->finalizarServicio();
-    //         if ($r) {
-    //             $result = [
-    //                 'error'   => true,
-    //                 'mensaje' => 'Se finalizo servicio.'
-    //             ];
-    //         } else {
-    //             $result = [
-    //                 'error'   => false,
-    //                 'mensaje' => 'Ocurrio un error, no se pudo finalizar.'
-    //             ];
-    //         }
-    //     } else {
-    //         $m   = new ServicioMovimientoAlmacen();
-    //         $ser = new ServicioEnsacado();
-    //         for ($i = 0; count($almacenes) > $i; $i++) {
-    //             $m->setAlmacen(intval($almacenes[$i]));
-    //             $m->setCantidad(Utils::quitarComas($cantidades[$i]));
-    //             $m->setIdServicio($idServicio);
-    //             $m->setOperacion($operacion);
-    //             $r = $m->save();
-
-    //             $ser->setId($idServicio);
-    //             $ser->setBarreduraSucia(Utils::quitarComas($BarreduraSucia[$i]));
-    //             $ser->setBarreduraLimpia(Utils::quitarComas($BarreduraLimpia[$i]));
-    //             $ser->setTotalEnsacado(Utils::quitarComas($cantidades[$i]));
-    //             $ser->setTarimas(floor((Utils::quitarComas($cantidades[$i]) / 25) / 55));
-    //             $ser->setBultos(floor(Utils::quitarComas($cantidades[$i]) / 25));
-    //             $ser->setParcial(round((((Utils::quitarComas($cantidades[$i]) / 25) / 55) - floor((Utils::quitarComas($cantidades[$i]) / 25) / 55)) * 55));
-    //             $ser->actualizaBarredura();
-    //         }
-    //         if ($r) {
-    //             $servicio = new ServicioEnsacado();
-    //             $servicio->setId($idServicio);
-    //             $r = $servicio->finalizarServicio();
-    //             if ($r) {
-    //                 $result = [
-    //                     'error'   => true,
-    //                     'mensaje' => 'Se finalizo servicio.'
-    //                 ];
-    //             } else {
-    //                 $result = [
-    //                     'error'   => false,
-    //                     'mensaje' => 'Ocurrio un error, no se pudo finalizar.'
-    //                 ];
-    //             }
-    //         } else {
-    //             $result = [
-    //                 'error'   => false,
-    //                 'mensaje' => 'Ocurrio un error, no se pudo guardar en el almacén.'
-    //             ];
-    //         }
-    //     }
-    //     return print_r(json_encode($result));
-    // }
     public function finalizarServicio()
     {
         $idServicio      = isset($_POST['idServicioEnviar']) && $_POST['idServicioEnviar'] != '' ? $_POST['idServicioEnviar'] : null;
@@ -797,10 +728,11 @@ class serviciosController
         $sello3          = isset($_POST['sello3']) ? $_POST['sello3'] : null;
         $entrada_id      = isset($_POST['entrada_id']) ? $_POST['entrada_id'] : null;
         $firma           = isset($_POST['firma']) ? $_POST['firma'] : null;
+        $almacen_id      = isset($_POST['almacen_id']) && $_POST['almacen_id'] != '' ? $_POST['almacen_id'] : null;
 
         if ($operacion != 'E') {
             $m = new ServicioMovimientoAlmacen();
-            $m->setAlmacen(intval($almacenes));
+            $m->setAlmacen($almacen_id);
             $m->setCantidad(Utils::quitarComas($cantidades));
             $m->setIdServicio($idServicio);
             $m->setOperacion($operacion);
@@ -1020,9 +952,15 @@ class serviciosController
     public function serviciosNave()
     {
         Utils::noLoggin();
-        $idEst     = null;
-        $ensacado  = new ServicioEnsacado();
-        $servicios = $ensacado->getAll();
+        $idEst = null;
+
+        if (isset($_GET['idEst'])) {
+            $idEst = 'where s.estatus_id = ' . $_GET['idEst'];
+        }
+
+        $ensacado = new ServicioEnsacado();
+        // $servicios = $ensacado->getByEstatusId($idEst);
+        $servicios = $ensacado->getAll($idEst);
 
         require_once views_root . 'servicios/lista_servicios_nave.php';
     }

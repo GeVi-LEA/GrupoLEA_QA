@@ -262,6 +262,16 @@ class ServicioEnsacado
         $this->tipoTarima = $tipoTarima;
     }
 
+    public function getAlmacenId()
+    {
+        return $this->almacen_id;
+    }
+
+    public function setAlmacenId($almacen_id): void
+    {
+        $this->almacen_id = $almacen_id;
+    }
+
     public function save()
     {
         $sql = "insert into servicios_ensacado values(
@@ -269,6 +279,7 @@ class ServicioEnsacado
                         , {$this->getEntradaId()}
                         , {$this->getServicioId()}
                         , {$this->getProductoId()}
+                        , {$this->getAlmacenId()}
                         , {$this->getEmpaqueId()}
                         , " . (($this->getServicioId() == '5') ? '13' : $this->getEstatusId()) . "
                         , '{$this->getFolio()}'
@@ -293,9 +304,9 @@ class ServicioEnsacado
                         , '{$_SESSION['usuario']->id}'
                         , NOW()
                   )";
-        // print_r('<pre>');
-        // print_r($sql);
-        // print_r('</pre>');
+        print_r('<pre>');
+        print_r($sql);
+        print_r('</pre>');
         $save   = $this->db->query($sql);
         $result = false;
         if ($save) {
@@ -505,8 +516,13 @@ class ServicioEnsacado
         $result    = array();
         $sql       = "
                               select 
-                              se.lote, max(se.producto_id)producto_id, max(cat_prod.nombre) producto, max(se.alias) alias 
-                              ,get_disponibleByLote(max(se.lote),max(ent.cliente_id)) disponible
+                                se.lote
+                                , max(se.producto_id)producto_id
+                                , max(cat_prod.nombre) producto
+                                , max(se.alias) alias 
+                                , get_disponibleByLote(max(se.lote)
+                                , max(ent.cliente_id)) disponible
+                                , get_almacenIdByLote(max(se.lote)) almacenId
                               from servicios_ensacado se 
                               inner join catalogo_productos_resinas_liquidos cat_prod on cat_prod.id = se.producto_id
                               inner join servicios_entradas ent on ent.id = se.entrada_id

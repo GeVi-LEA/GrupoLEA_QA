@@ -6,6 +6,10 @@ var divform;
 var servicios;
 var servicio_click;
 var serv_entrada;
+var productos;
+
+var loteSelected = [];
+var elparent;
 
 $(document).ready(function () {
 	// console.log("entra a servicios js");
@@ -1700,7 +1704,8 @@ $(document).ready(function () {
 		} else {
 			var id = $(divForm).find("#idServicio").val();
 			var kilos = $(divForm).find(".sumcantidad").html();
-			detenerServicio(id, kilos, getUrlParameter("id"));
+			var almacen_id = $(divForm).find("#almacen_id").val();
+			detenerServicio(id, kilos, getUrlParameter("id"), almacen_id);
 		}
 	});
 
@@ -1813,7 +1818,7 @@ $(document).ready(function () {
 									idServicioEnviar: id,
 									operacionEnviar: "S",
 									cantidadAlmacen: kilos.replace(",", ""),
-									almacen: almacen_id,
+									almacen_id: almacen_id, //loteSelected[0].almacenId,
 									entrada_id: entrada_id,
 									sellos: getSellos(),
 									firma: getTrazado(),
@@ -1868,7 +1873,7 @@ $(document).ready(function () {
 												",",
 												""
 											),
-											almacen: almacen_id,
+											almacen: loteSelected[0].almacenId,
 										},
 										url: "?ajax&controller=Servicios&action=finalizarServicio",
 										type: "POST",
@@ -2275,9 +2280,13 @@ $(document).ready(function () {
 			if (lote != "") {
 				getInfoLote(lote);
 				setTimeout(() => {
+					console.log("loteSelected: ", loteSelected);
+					elparent = $(this).parents("form")[0];
+					// console.log($(this).parents("form")[0].find(".almacen_id"));
 					$("#lote").val(loteSelected[0].lote);
 					$("#producto").val(loteSelected[0].producto_id);
-					//   $("#producto").val(loteSelected[0].producto);
+
+					elparent.elements.almacen_id.value = loteSelected[0].almacenId;
 					$("#alias").val(loteSelected[0].alias);
 					$("#existencia").parent("div").show();
 					$("#existencia").val(loteSelected[0].disponible).change();
@@ -2436,7 +2445,6 @@ $(document).ready(function () {
 	calcularPesos();
 });
 
-var loteSelected = [];
 function getInfoLote(lote) {
 	$.ajax({
 		data: { lote: lote },
@@ -2444,13 +2452,14 @@ function getInfoLote(lote) {
 		type: "POST",
 		dataType: "json",
 		success: function (r) {
-			// console.log(r);
+			console.log(r);
 			loteSelected = r;
 			if (r != false) {
 				var cargas = r[0].cargas != null ? r[0].cargas : 0;
 				var descargas = r[0].descargas != null ? r[0].descargas : 0;
 				$("#stock").val(htmlNum(descargas - cargas));
 				$("#productoServ").val(r[0].producto).attr("disabled", true);
+				$(".almacen_id").val(r[0].almacenId);
 				$("#producto").val(r[0].producto).attr("disabled", true);
 				$("#aliasServ").val(r[0].alias).attr("disabled", true);
 				$("#alias").val(r[0].alias).attr("disabled", true);
@@ -2526,6 +2535,7 @@ function agregarLotesEnsacado(form, tipo_producto = "") {
 					if (r.length != 0) {
 						$(r).each(function (i, v) {
 							// indice, valor
+							console.log("v: ", v);
 							if (tipo_producto != "1") {
 								selectLote.append(
 									'<option value="' +
@@ -2849,7 +2859,7 @@ function getChoferes(transp_id) {
 		},
 	});
 }
-var productos;
+
 function getMax(arr, prop) {
 	var max;
 	for (var i = 0; i < arr.length; i++) {
@@ -2879,6 +2889,7 @@ function llenaComboProductos() {
 					`<option value="" selected>--Selecciona--</option> <option value="nuevo"> >>Nuevo Producto<< </option>`
 				);
 			for (let x = 0; x < productos.length; x++) {
+				console.log(productos[x]);
 				var newOption = new Option(
 					productos[x].nombre,
 					productos[x].id,
@@ -2948,50 +2959,6 @@ function diferenciaTeoricaColor(diferenciaTeorica, tolerable) {
 	} else {
 		$("#diferenciaTeorica").removeClass("warning");
 		$("#diferenciaTeorica").addClass("green");
-	}
-}
-
-function getClaseEstado($clave) {
-	switch ($clave) {
-		case "G":
-			return "estatus-gen";
-			break;
-		case "C":
-			return "estatus-cancel";
-			break;
-		case "A":
-			return "estatus-acept";
-			break;
-		case "P":
-			return "estatus-proceso";
-			break;
-		case "FIN":
-			return "estatus-fin";
-			break;
-		case "E":
-			return "estatus-enviada";
-			break;
-		case "TRS":
-			return "estatus-transito";
-			break;
-		case "PAG":
-			return "estatus-pagado";
-			break;
-		case "EMB":
-			return "estatus-embarque";
-			break;
-		case "TERM":
-			return "estatus-pagado";
-			break;
-		case "PSD":
-			return "estatus-pesado";
-			break;
-		case "PROG":
-			return "estatus-programa";
-			break;
-		case "SALIDA":
-			return "estatus-salida";
-			break;
 	}
 }
 

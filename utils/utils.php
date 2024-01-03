@@ -424,6 +424,8 @@ class Utils
                 break;
             case 'LIB':
                 return 'estatus-liberado';
+            case 'DEL':
+                return 'estatus-eliminado';
                 break;
         }
     }

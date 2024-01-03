@@ -1,9 +1,10 @@
 <?php
 include 'assets/js/graficas_entradas_js.php';
 ?>
+<link rel="stylesheet" href="<?php echo URL; ?>assets/libs/datatables/datatables.min.css">
 
 
-<div class='row' style="margin-top:30px;">
+<div class='row' style="margin-top:50px;">
     <div class='col-12' id="div-lista">
         <div class="row mt-1 req-estados">
             <div class="col-5 div-estados" id="divEstados">
@@ -232,22 +233,6 @@ include 'assets/js/graficas_entradas_js.php';
                 </div>
             </div>
         </div>
-
-        <!-- <div class="modal fade modal-servicio" id="editarServicioModal2" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-            <div class="modal-dialog m-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header m-title justify-content-between">
-                        <h5 class="modal-title ml-2"><span class="material-icons far fa-file-alt i-new"></span></a><span class="ml-2">Folio servicio:</span><span class="ml-2" id="folioServicio"></span></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    </div>
-
-                    <div class="border-modal modal-body">
-                        <iframe id="iframe_servicio" style="width:100%; height:80vh;" src="http://192.168.0.22/GrupoLEA/?controller=Servicios&action=generarEnsacado&id=26" frameborder="0"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
     </div>
     <div class='col-12' id="div-grafica" style="display:none">
         <div class='row'>
@@ -264,27 +249,12 @@ include 'assets/js/graficas_entradas_js.php';
                         <div class="mr-1"><i id="preciosServClientes" title="Precios servicios clientes" class="i-edit material-icons fa-solid fa-file-invoice-dollar"></i></div>
                         <div class="mr-1"><i id="entradaSalida" title="Entrada / Salida" class="i-clip material-icons fa-solid fa-file-circle-plus"></i></div>
                     </div>
-
-                    <!-- <div class='col-md-2 col-12'>
-                        <div class="mr-1"><i id="lista" title="Lista" data-tipo="lista" class="btn-tab material-icons fa-solid fa-list" style="color:orange;"></i></div>
-                    </div>
-                    <div class='col-md-2 col-12'>
-                        <div class="mr-1"><i id="grafica" title="Gráfica" data-tipo="grafica" class="btn-tab material-icons fa-solid fa-chart-simple " style="color:blue;"></i></div>
-                    </div> -->
-
-                    <!-- <div class='col-md-2 col-12'>
-                        <div class="mr-1"><i id="preciosServClientes2" title="Precios servicios clientes" class="i-edit material-icons fa-solid fa-file-invoice-dollar"></i></div>
-                    </div>
-                    <div class='col-md-2 col-12'>
-                        <div class="mr-1"><i id="entradaSalida2" title="Entrada / Salida" class="i-clip material-icons fa-solid fa-file-circle-plus"></i></div>
-                    </div> -->
-
                 </div>
-                <div class='row' style="margin-top: 30px;">
+                <div class='row' style="margin-top: 50px;">
 
 
                     <h1 id="tituloestatus" style="border-radius: 10px; text-align: center; padding: 10px;"></h1>
-                    <table id="tabla_estatus" class='table stripe' style='width:100%'>
+                    <table id="tabla_estatus" class=' stripe' style='width:90%'>
                         <thead>
                             <th hidden>id</th>
                             <th hidden>idensacado</th>

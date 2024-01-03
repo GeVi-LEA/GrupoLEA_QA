@@ -1,11 +1,20 @@
 <div class="row mt-1 req-estados">
     <div class="col-5 div-estados" id="divEstados">
-        <a class="<?= isset($idEst) ? "" : "estatus-hover"?>" href="<?= principalUrl ?>?controller=Servicios&action=ensacado"><i title="Ver todas las entradas" class="i-list-ol fas fa-list-ol"></i></a>
-        <?php if(Utils::permisosCompras()):?>
-        <a class="estatus-gen <?= $idEst == 1 ? "estatus-hover" : "" ?>" title="Generadas" href="<?= principalUrl ?>?controller=Servicios&action=ensacado&idEst=1">Generados</a>
-        <a class="estatus-fin <?= $idEst == 5 ? "estatus-hover" : "" ?>" title="Finalizados" href="<?= principalUrl ?>?controller=Servicios&action=ensacado&idEst=5">Finalizados</a>
-        <a class="estatus-cancel <?= $idEst == 2 ? "estatus-hover" : "" ?>" title="Cancelados" href="<?= principalUrl ?>?controller=Servicios&action=ensacado&idEst=2">Cancelados</a>
-        <?php endif;?>
+        <a class="<?= isset($idEst) ? '' : 'estatus-hover' ?>" href="<?= principalUrl ?>?controller=Servicios&action=serviciosNave"><i title="Ver todas las entradas" class="i-list-ol fas fa-list-ol"></i></a>
+        <?php if (Utils::permisosCompras()): ?>
+        <!-- <a class="estatus-gen <?= $idEst == 1 ? 'estatus-hover' : '' ?>" title="Generadas" href="<?= principalUrl ?>?controller=Servicios&action=serviciosNave&idEst=1">Generados</a> -->
+        <a class="estatus-programa <?= str_replace('where s.estatus_id = ', '', $idEst) == 1 ? 'estatus-hover' : '' ?>" title="Programados"
+            href="<?= principalUrl ?>?controller=Servicios&action=serviciosNave&idEst=1">Programados</a>
+        <a class="estatus-fin <?= str_replace('where s.estatus_id = ', '', $idEst) == 5 ? 'estatus-hover' : '' ?>" title="Finalizados"
+            href="<?= principalUrl ?>?controller=Servicios&action=serviciosNave&idEst=5">Finalizados</a>
+        <a class="estatus-proceso <?= str_replace('where s.estatus_id = ', '', $idEst) == 3 ? 'estatus-hover' : '' ?>" title="En Proceso"
+            href="<?= principalUrl ?>?controller=Servicios&action=serviciosNave&idEst=3">Proceso</a>
+        <a class="estatus-cancel <?= str_replace('where s.estatus_id = ', '', $idEst) == 2 ? 'estatus-hover' : '' ?>" title="Cancelados"
+            href="<?= principalUrl ?>?controller=Servicios&action=serviciosNave&idEst=2">Cancelados</a>
+        <a class="estatus-eliminado <?= str_replace('where s.estatus_id = ', '', $idEst) == 0 ? 'estatus-hover' : '' ?>" title="Eliminados"
+            href="<?= principalUrl ?>?controller=Servicios&action=serviciosNave&idEst=0">Eliminado</a>
+
+        <?php endif; ?>
     </div>
     <div class="col-3 text-center">
         <h5>Servicios programados</h5>
@@ -19,7 +28,8 @@
 </div>
 <section class="sec-tabla text-center">
     <?php if (!empty($servicios)): ?>
-    <table class="table table-condensed tabla-registros tabla-lista-embarques" id="tablaRegistros">
+    <!--  table-condensed tabla-registros tabla-lista-embarques -->
+    <table class="table stripe" id="tablaRegistros">
         <thead>
             <th class="px-0 mx-0"></th>
             <th class="px-0 mx-0">Folio</th>
@@ -47,12 +57,12 @@
                 <td class="px-0 mx-0"><span><?= UtilsHelp::numero2Decimales($s->cantidad, true, 0); ?></span><span> kg.</span></td>
                 <td class="px-0 mx-0"><span><?= UtilsHelp::formatoFecha($s->fecha_programacion); ?></span></td>
                 <td class="d-flex justify-content-center">
-                    <div id="tdEstatus" class="<?=Utils::getClaseEstado($s->clave);?> estatus-tabla estatus-small text-center"><span id="estatus"><?=$s->estatus;?></span></div>
+                    <div id="tdEstatus" class="<?= Utils::getClaseEstado($s->clave); ?> estatus-tabla estatus-small text-center"><span id="estatus"><?= $s->estatus; ?></span></div>
                 </td>
                 <td>
-                    <?php if($s->estatus_id == 13):?>
+                    <?php if ($s->estatus_id == 13): ?>
                     <span id="iniciarServicio" class="material-icons i-iniciar border-btn-verde">play_arrow</span>
-                    <?php endif ;?>
+                    <?php endif; ?>
                 </td>
             </tr>
 
@@ -73,7 +83,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span></button>
             </div>
             <div class="border-modal modal-body">
-                <form id="formBuscar" method="POST" action="<?=principalUrl?>?controller=Compras&action=buscarEmbarques">
+                <form id="formBuscar" method="POST" action="<?= principalUrl ?>?controller=Compras&action=buscarEmbarques">
                     <div class="container">
                         <div class="row d-flex mb-2">
                             <div class="w-25 text-right pr-1"> <label>Fecha entre</label></div>
@@ -87,15 +97,15 @@
                                 <select name="producto" class="item-medium"" id=" producto">
                                     <option value="" selected>--Selecciona--</option>
                                     <?php
-                                    $productos = Utils::getProductos();
-                                    if (!empty($productos)):
-                                        foreach ($productos as $pro):
-                                            ?>
-                                    <option value="<?= $pro->id ?>"><?= $pro->nombre." (".$pro->nombre_refineria.")"?></option>
-                                    <?php
-                                        endforeach;
-                                    endif;
+                                        $productos = Utils::getProductos();
+                                        if (!empty($productos)):
+                                            foreach ($productos as $pro):
                                     ?>
+                                    <option value="<?= $pro->id ?>"><?= $pro->nombre . ' (' . $pro->nombre_refineria . ')' ?></option>
+                                    <?php
+                                            endforeach;
+                                        endif;
+                                                                            ?>
                                 </select>
                             </div>
                         </div>
@@ -105,15 +115,15 @@
                                 <select name="aduanaExp" class="item-medium"" id=" aduana">
                                     <option value="" selected>--Selecciona--</option>
                                     <?php
-                                    $aduanas = Utils::getAduanas();
-                                    if (!empty($aduanas)):
-                                        foreach ($aduanas as $a):
-                                            ?>
-                                    <option value="<?= $a->id ?>"><?= $a->clave?></option>
-                                    <?php
-                                        endforeach;
-                                    endif;
+                                        $aduanas = Utils::getAduanas();
+                                        if (!empty($aduanas)):
+                                            foreach ($aduanas as $a):
                                     ?>
+                                    <option value="<?= $a->id ?>"><?= $a->clave ?></option>
+                                    <?php
+                                            endforeach;
+                                        endif;
+                                                                            ?>
                                 </select>
                             </div>
                         </div>
@@ -123,15 +133,15 @@
                                 <select name="proveedor" class="item-big"" id=" proveedorBuscar">
                                     <option value="" selected>--Selecciona--</option>
                                     <?php
-                                    $proveedores = Utils::getTransportistas();
-                                    if (!empty($proveedores)):
-                                        foreach ($proveedores as $prov):
-                                            ?>
-                                    <option value="<?= $prov->id ?>"><?= $prov->nombre?></option>
-                                    <?php
-                                        endforeach;
-                                    endif;
+                                        $proveedores = Utils::getTransportistas();
+                                        if (!empty($proveedores)):
+                                            foreach ($proveedores as $prov):
                                     ?>
+                                    <option value="<?= $prov->id ?>"><?= $prov->nombre ?></option>
+                                    <?php
+                                            endforeach;
+                                        endif;
+                                                                            ?>
                                 </select>
                             </div>
                         </div>
@@ -169,7 +179,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span></button>
             </div>
             <div class="border-modal modal-body">
-                <form id="formExportar" method="POST" action="<?=principalUrl?>?controller=Compras&action=exportarComprasEmbarquesExcel">
+                <form id="formExportar" method="POST" action="<?= principalUrl ?>?controller=Compras&action=exportarComprasEmbarquesExcel">
                     <div class="container">
                         <div class="row d-flex justify-content-center mb-2">
                             <div>
@@ -199,15 +209,15 @@
                                 <select name="productoExp" class="item-medium"" id=" productoExp">
                                     <option value="" selected>--Selecciona--</option>
                                     <?php
-                                    $productos = Utils::getProductos();
-                                    if (!empty($productos)):
-                                        foreach ($productos as $pro):
-                                            ?>
-                                    <option value="<?= $pro->id ?>"><?= $pro->nombre." (".$pro->nombre_refineria.")"?></option>
-                                    <?php
-                                        endforeach;
-                                    endif;
+                                        $productos = Utils::getProductos();
+                                        if (!empty($productos)):
+                                            foreach ($productos as $pro):
                                     ?>
+                                    <option value="<?= $pro->id ?>"><?= $pro->nombre . ' (' . $pro->nombre_refineria . ')' ?></option>
+                                    <?php
+                                            endforeach;
+                                        endif;
+                                                                            ?>
                                 </select>
                             </div>
                         </div>
@@ -217,15 +227,15 @@
                                 <select name="aduanaExp" class="item-medium"" id=" aduanaExp">
                                     <option value="" selected>--Selecciona--</option>
                                     <?php
-                                    $aduanas = Utils::getAduanas();
-                                    if (!empty($aduanas)):
-                                        foreach ($aduanas as $a):
-                                            ?>
-                                    <option value="<?= $a->id ?>"><?= $a->clave?></option>
-                                    <?php
-                                        endforeach;
-                                    endif;
+                                        $aduanas = Utils::getAduanas();
+                                        if (!empty($aduanas)):
+                                            foreach ($aduanas as $a):
                                     ?>
+                                    <option value="<?= $a->id ?>"><?= $a->clave ?></option>
+                                    <?php
+                                            endforeach;
+                                        endif;
+                                                                            ?>
                                 </select>
                             </div>
                         </div>
@@ -235,15 +245,15 @@
                                 <select name="proveedorExp" class="item-big"" id=" proveedorExp">
                                     <option value="" selected>--Selecciona--</option>
                                     <?php
-                                    $proveedores = Utils::getTransportistas();
-                                    if (!empty($proveedores)):
-                                        foreach ($proveedores as $prov):
-                                            ?>
-                                    <option value="<?= $prov->id ?>"><?= $prov->nombre?></option>
-                                    <?php
-                                        endforeach;
-                                    endif;
+                                        $proveedores = Utils::getTransportistas();
+                                        if (!empty($proveedores)):
+                                            foreach ($proveedores as $prov):
                                     ?>
+                                    <option value="<?= $prov->id ?>"><?= $prov->nombre ?></option>
+                                    <?php
+                                            endforeach;
+                                        endif;
+                                                                            ?>
                                 </select>
                             </div>
                         </div>

@@ -88,7 +88,7 @@
                                 <strong class="mr-1">Peso Cliente:</strong>
                                 <input id="pesoCliente" name="pesoCliente" class="item-small " type="text" />
                             </div>
-                            <div>
+                            <div style="display:none">
                                 <strong class="mr-1">Transporte por:</strong>
                                 <div id="divRadiosT" class="div-radiosT">
                                     <div class='row'>

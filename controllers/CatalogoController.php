@@ -27,6 +27,7 @@ require_once models_root . 'catalogos/tipo_producto_resina_liquido.php';
 require_once models_root . 'catalogos/tipo_empaque.php';
 require_once models_root . 'catalogos/servicio.php';
 require_once models_root . 'catalogos/almacen.php';
+require_once models_root . 'catalogos/proveedor.php';
 
 class catalogoController
 {
@@ -2080,5 +2081,21 @@ class catalogoController
         $a         = new Almacen();
         $almacenes = $a->getAll();
         print_r(json_encode($almacenes));
+    }
+
+    public function getClientes()
+    {
+        $c        = new Cliente();
+        $clientes = $c->getAll();
+
+        echo json_encode(['mensaje' => 'OK', 'clientes' => $clientes]);
+    }
+
+    public function getProveedores()
+    {
+        $c           = new Proveedor();
+        $proveedores = $c->getAll();
+
+        echo json_encode(['mensaje' => 'OK', 'proveedores' => $proveedores]);
     }
 }

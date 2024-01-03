@@ -400,6 +400,7 @@ div.jconfirm-content-pane {
 	color: #ffff;
 	font-weight: 700;
 	padding: 2px;
+	text-align: center;
 }
 
 .estatus-programa {
@@ -484,6 +485,12 @@ div.jconfirm-content-pane {
 	padding: 2px;
 }
 
+.estatus-eliminado {
+	background-color: #1b1b1b;
+	color: #ffff;
+	font-weight: 700;
+}
+
 .estatus-filter {
 	min-width: 80px;
 	padding: 2px !important;
@@ -496,13 +503,13 @@ div.jconfirm-content-pane {
 .req-estados .div-estados a {
 	display: inline-block;
 	font-size: 12px;
-	padding: 2px;
+	padding: 5px;
 	text-decoration: none;
 	color: #fff;
-	border-radius: 3px;
+	border-radius: 10px;
 	transition: 0.5s;
 	opacity: 0.4;
-	margin: 0 1px 0 1px;
+	margin: 0 5px 0 5px;
 }
 
 .req-estados a:hover {
@@ -519,6 +526,22 @@ div.jconfirm-content-pane {
 .estatus-tabla {
 	height: 80%;
 	border-radius: 4px;
+	text-align: center;
+	padding: 3px;
+}
+.estatus-tabla span {
+	padding: 5px;
+	vertical-align: super;
+}
+.menu-iconos {
+	padding: 10px;
+}
+.div-compras section {
+	padding: 20px;
+}
+
+.card {
+	border-radius: 20px;
 }
 
 .estatus-small {
@@ -847,7 +870,7 @@ button:focus {
 .titulo span {
 	font-size: 1.2rem;
 	font-weight: 700;
-	border: 1px solid #141457;
+	/* border: 1px solid #141457; */
 	padding: 0 2px 0 2px;
 }
 
@@ -1216,7 +1239,7 @@ textarea:focus {
 	width: 90px;
 }
 
-.footer {
+/* .footer {
 	grid-area: footer;
 	color: #fff;
 	font-size: 13px;
@@ -1234,7 +1257,7 @@ textarea:focus {
 .footer a {
 	text-decoration: underline;
 	color: #141457;
-}
+} */
 
 .div-compras {
 	display: grid;
@@ -1267,7 +1290,10 @@ textarea:focus {
 
 .titulo-header a {
 	display: flex;
-	color: #fff;
+	color: #fff !important;
+}
+.titulo-header h4 {
+	color: white !important;
 }
 
 .titulo-header i {
@@ -1293,6 +1319,7 @@ textarea:focus {
 .tabla-compras th,
 .tabla-compras td {
 	padding: 0.2rem;
+	text-align: right;
 }
 
 .iconos-tabla span {
@@ -1659,10 +1686,49 @@ tr {
 	-webkit-box-shadow: 15px 15px 14px -8px rgba(0, 0, 0, 0.51) !important;
 	-moz-box-shadow: 15px 15px 14px -8px rgba(0, 0, 0, 0.51) !important;
 	box-shadow: 15px 15px 14px -8px rgba(0, 0, 0, 0.51) !important;
+	border-radius: 20px;
 }
 .estatus-salida {
 	background-color: #e4a700;
 	color: #ffff;
 	font-weight: 700;
 	padding: 2px;
+}
+
+.sombra {
+	-webkit-box-shadow: 5px 5px 16px 0px rgba(153, 153, 153, 1);
+	-moz-box-shadow: 5px 5px 16px 0px rgba(153, 153, 153, 1);
+	box-shadow: 5px 5px 16px 0px rgba(153, 153, 153, 1);
+
+	border-radius: 10px !important;
+	margin-top: 10px;
+	padding: 10px;
+}
+
+.dataTables_filter {
+	width: 50%;
+	float: right;
+	text-align: right;
+}
+
+fieldset {
+	border: 1px solid #c3c3c3 !important;
+	padding: 10px !important;
+	border-radius: 10px !important;
+	margin-bottom: 10px !important;
+}
+
+fieldset > legend {
+	border-bottom: rgba(148, 147, 147, 0.2) solid 0.03rem;
+	margin-left: 10px;
+	padding-left: 20px;
+	width: 98%;
+}
+
+.divtext {
+	/* border: ridge 2px; */
+	padding: 5px;
+	min-width: 100%;
+	min-height: 5em;
+	overflow: auto;
 }

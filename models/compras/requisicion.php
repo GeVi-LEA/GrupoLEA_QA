@@ -429,33 +429,51 @@ class Requisicion
         , p.tipo_solicitud_id as solicitud_id
         , concat(u.nombres,' ', u.apellidos) as usuario
         , u.correo as correoUsuario
-        , (select d.nombre from catalogo_departamentos d where d.id = u.departamento_id) as departamento
-        , (select ts.tipo from catalogo_tipos_solicitudes ts where ts.id = p.tipo_solicitud_id) as solicitud
-        , (select oc.folio from compras_ordenes_compra oc where oc.requisicion_id = r.id) as folio_oc
+        , (select d.nombre from catalogo_departamentos d where d.id = u.departamento_id limit 1) as departamento
+        , (select ts.tipo from catalogo_tipos_solicitudes ts where ts.id = p.tipo_solicitud_id limit 1) as solicitud
+        , (select oc.folio from compras_ordenes_compra oc where oc.requisicion_id = r.id limit 1) as folio_oc
         , e.clave as clave
         , e.nombre as estatus
+        , e.color_estatus as color_estatus
         , e.descripcion as descEstatus
-        , (select cu.ciudad_completa from view_ciudades cu where cu.id = p.ciudad_id) as ciudad
-        , (select c.tipo from catalogo_tipos_compras c inner join catalogo_tipos_solicitudes ts on c.id = ts.tipo_compra_id where ts.id = p.tipo_solicitud_id) as compra 
+        , (select cu.ciudad_completa from view_ciudades cu where cu.id = p.ciudad_id limit 1) as ciudad
+        , (select c.tipo from catalogo_tipos_compras c inner join catalogo_tipos_solicitudes ts on c.id = ts.tipo_compra_id where ts.id = p.tipo_solicitud_id limit 1) as compra
+    
         from compras_requisiciones r
         inner join catalogo_proveedores p on p.id = r.proveedor_id
         inner join catalogo_usuarios u on u.id = r.usuario_id
-        inner join catalogo_estatus e on e.id = r.estatus_id";
+        inner join catalogo_estatus e on e.id = r.estatus_id ";
+
         if ($where != null) {
             $sql .= $where;
         } else {
             $sql .= ' where r.fecha_alta >= DATE_ADD(curdate(), INTERVAL -1 month) order by r.id desc';
         }
+
+        // print_r('<pre>');
+        // print_r($sql);
+        // print_r('</pre>');
         $requisiciones = $this->db->query($sql);
+
+        // code...
+
         if ($requisiciones != null) {
             foreach ($requisiciones->fetch_all(MYSQLI_ASSOC) as $req) {
-                $sql_detalle    = "select * from compras_detalles_requisiciones where requisicion_id = {$req['id']} order by id desc";
-                $detalles       = $this->db->query($sql_detalle);
-                $d              = $detalles->fetch_all(MYSQLI_ASSOC);
-                $req['detalle'] = $d;
+                try {
+                    $sql_detalle = "select * from compras_detalles_requisiciones where requisicion_id = {$req['id']} order by id desc";
+
+                    $detalles       = $this->db->query($sql_detalle);
+                    $d              = $detalles->fetch_all(MYSQLI_ASSOC);
+                    $req['detalle'] = $d;
+                } catch (Exception $th) {
+                    throw $th;
+                }
                 array_push($result, $req);
             }
         }
+
+        // die ();
+
         return $result;
     }
 
@@ -463,13 +481,36 @@ class Requisicion
     {
         if ($idEst != null && $idEst != '') {
             if ($idEst == 5) {
-                $sql = " where estatus_id = {$idEst} and r.fecha_alta >= DATE_ADD(curdate(), INTERVAL -1 month) order by r.id desc";
+                $sql = " where estatus_id = {$idEst} and r.fecha_alta >= DATE_ADD(curdate(), INTERVAL -1 month) order by r.fecha_requerida desc";
             } else {
-                $sql = " where estatus_id = {$idEst} order by r.id desc";
+                $sql = " where estatus_id = {$idEst} order by r.fecha_requerida desc";
             }
         } else {
             $sql = null;
         }
+        $result = $this->getRequiciones($sql);
+        return $result;
+    }
+
+    public function getByEstatusCliente($proveedores = '', $fechaini = '', $fechafin = '')
+    {
+        $sql = null;
+
+        if ($proveedores != '') {
+            $sql .= ' where 
+            r.fecha_solicitud >= ' . ($fechaini != '' ? "'" . $fechaini . "'" : now()) . ' 
+            and r.fecha_solicitud <= ' . ($fechafin != '' ? "'" . $fechafin . "'" : now()) . " 
+            and r.proveedor_id in({$proveedores}) 
+            order by r.id desc";
+        } else {
+            $sql .= ' where 
+            r.fecha_solicitud >= ' . ($fechaini != '' ? "'" . $fechaini . "'" : now()) . ' 
+            and r.fecha_solicitud <= ' . ($fechafin != '' ? "'" . $fechafin . "'" : now()) . ' 
+            order by r.id desc';
+        }
+        // print_r('<pre>');
+        // print_r($sql);
+        // print_r('</pre>');
         $result = $this->getRequiciones($sql);
         return $result;
     }
@@ -589,6 +630,28 @@ class Requisicion
             if ($delete) {
                 $result = true;
             }
+        }
+        return $result;
+    }
+
+    public function updateDetalleReq($_id, $_unidad_id, $_descripcion, $_cantidad, $_precio_unitario)
+    {
+        // /id, unidad_id, descripcion, cantidad, precio_unitario, descuento, precio
+        $sql = "update compras_detalles_requisiciones
+        set unidad_id = {$_unidad_id}
+        , descripcion = '{$_descripcion}'
+        , cantidad = {$_cantidad}
+        , precio_unitario = {$_precio_unitario}
+        , precio = " . ($_cantidad * $_precio_unitario) . "
+        where id = {$_id}";
+        // print_r('<pre>');
+        // print_r($sql);
+        // print_r('</pre>');
+        // die ();
+        $query  = $this->db->query($sql);
+        $result = false;
+        if ($query) {
+            $result = true;
         }
         return $result;
     }

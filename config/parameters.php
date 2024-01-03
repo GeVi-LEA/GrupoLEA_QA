@@ -2,6 +2,8 @@
 $_pattern = '/(.*[\/\x5C]src[\/\x5C]).*/';
 $_root    = str_replace('\\', '/', preg_replace($_pattern, '$1', root));
 $base     = substr($_root, 0, strpos($_root, 'GrupoLEA_QA')) . 'GrupoLEA_QA';
+define('AMBIENTE', 'QA');
+define('APP_NAME', 'GrupoLEA ERP');
 define('base', $base);
 define('root_url', 'http://192.168.0.32/GrupoLEA_QA/');
 define('URL', 'http://192.168.0.32/GrupoLEA_DEV/');
@@ -18,7 +20,8 @@ define('controller_default_catalogos', 'CatalogoController');
 define('action_default', 'index');
 define('catalogosUrl', root_url . 'views/catalogos/');
 define('comprasUrl', root_url . 'views/compras/');
-define('principalUrl', root_url . 'views/principal/');
+// define('principalUrl', root_url . 'views/principal/');
+define('principalUrl', root_url . 'views/master/');
 define('loginUrl', root_url . 'views/views/login/');
 define('controller_login', 'LoginController');
 define('controller_principal', 'PrincipalController');
