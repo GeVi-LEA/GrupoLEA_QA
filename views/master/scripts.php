@@ -30,7 +30,7 @@
 <script src="<?php echo URL; ?>assets/libs/sweetalert2/sweetalert2.min.js"></script>
 
 <!-- Select2 -->
-<script src="<?php echo URL; ?>assets/libs/select2/js/select2.min.js"></script>
+<script src="<?php echo URL; ?>assets/libs/select2/js/select2.full.min.js"></script>
 
 
 <!-- DataTables -->

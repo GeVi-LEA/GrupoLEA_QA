@@ -598,9 +598,9 @@ class ServicioEntrada
     public function unidadRegistrada()
     {
         if (!$this->getId()) {
-            $sql = "select * from servicios_entradas where numUnidad = '{$this->getNumUnidad()}' and estatus_id != 5";
+            $sql = "select * from servicios_entradas where numUnidad = '{$this->getNumUnidad()}' and estatus_id not in( 5,15) ";
         } else {
-            $sql = "select * from servicios_entradas where numUnidad = '{$this->getNumUnidad()}' and estatus_id != 5 and id !=  {$this->getId()}";
+            $sql = "select * from servicios_entradas where numUnidad = '{$this->getNumUnidad()}' and estatus_id not in( 5,15)  and id !=  {$this->getId()}";
         }
         return $this->db->query($sql);
     }

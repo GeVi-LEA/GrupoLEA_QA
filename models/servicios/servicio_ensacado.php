@@ -304,9 +304,9 @@ class ServicioEnsacado
                         , '{$_SESSION['usuario']->id}'
                         , NOW()
                   )";
-        print_r('<pre>');
-        print_r($sql);
-        print_r('</pre>');
+        // print_r('<pre>');
+        // print_r($sql);
+        // print_r('</pre>');
         $save   = $this->db->query($sql);
         $result = false;
         if ($save) {

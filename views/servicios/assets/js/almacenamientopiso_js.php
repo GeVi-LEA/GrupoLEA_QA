@@ -327,9 +327,11 @@ const armaInventarios = (latab) => {
                     label: {
                         show: true,
                         formatter: function(param) {
-                            return param.data == 0 ? '' : numero2Decimales(param.data, 0) + ' KG (TARIMAS:' + (Math.floor((param.data / 25) / 55)) + ' SACOS:' + (Math.round((((param.data /
-                                    25) / 55) -
-                                Math.floor((param.data / 25) / 55)) * 55)) + ') ';
+                            return param.data == 0 ? '' : numero2Decimales(param.data, false, 0) + ' KG (TARIMAS:' + (Math.floor((param.data / 25) / 55)) + ' SACOS:' + (Math
+                                .round((((
+                                        param.data /
+                                        25) / 55) -
+                                    Math.floor((param.data / 25) / 55)) * 55)) + ') ';
                         },
                         shadowColor: 'rgba(0, 0, 0, 0.5)',
                         shadowBlur: 10
@@ -351,7 +353,7 @@ const armaInventarios = (latab) => {
                     total = 0;
                     for (x = 0; x < inventarios.inventarios.length; x++) {
                         if ((clientes[c] == inventarios.inventarios[x].Nombre_Cliente) && inventarios.inventarios[x].Producto == productos[l]) {
-                            total = total + parseFloat(inventarios.inventarios[x].disponible);
+                            total = total + parseFloat(quitarComasNumero(inventarios.inventarios[x].disponible));
                         }
                     }
                     detalle_productos[clientes[c]].data.push(total);
@@ -372,9 +374,10 @@ const armaInventarios = (latab) => {
                     label: {
                         show: true,
                         formatter: function(param) {
-                            return param.data == 0 ? '' : numero2Decimales(param.data, false, 0) + ' KG (TARIMAS:' + (Math.floor((param.data / 25) / 55)) + ' SACOS:' + (Math.round((((param.data /
-                                    25) / 55) -
-                                Math.floor((param.data / 25) / 55)) * 55)) + ') ';
+                            return param.data == 0 ? '' : numero2Decimales(param.data, false, 0) + ' KG (TARIMAS:' + (Math.floor((param.data / 25) / 55)) + ' SACOS:' + (Math
+                                .round((((param.data /
+                                        25) / 55) -
+                                    Math.floor((param.data / 25) / 55)) * 55)) + ') ';
                         },
                     },
                     emphasis: {
@@ -390,7 +393,7 @@ const armaInventarios = (latab) => {
                     total = 0;
                     for (x = 0; x < inventarios.inventarios.length; x++) {
                         if ((clientes[c] == inventarios.inventarios[x].Nombre_Cliente) && inventarios.inventarios[x].Lote == lotes[l]) {
-                            total = total + parseFloat(inventarios.inventarios[x].disponible);
+                            total = total + parseFloat(quitarComasNumero(inventarios.inventarios[x].disponible));
                         }
                     }
                     detalle_lotes[clientes[c]].data.push(total);
@@ -409,9 +412,10 @@ const armaInventarios = (latab) => {
                     label: {
                         show: true,
                         formatter: function(param) {
-                            return param.data == 0 ? '' : numero2Decimales(param.data, false, 0) + ' KG (TARIMAS:' + (Math.floor((param.data / 25) / 55)) + ' SACOS:' + (Math.round((((param.data /
-                                    25) / 55) -
-                                Math.floor((param.data / 25) / 55)) * 55)) + ') ';
+                            return param.data == 0 ? '' : numero2Decimales(param.data, false, 0) + ' KG (TARIMAS:' + (Math.floor((param.data / 25) / 55)) + ' SACOS:' + (Math
+                                .round((((param.data /
+                                        25) / 55) -
+                                    Math.floor((param.data / 25) / 55)) * 55)) + ') ';
                         },
                     },
                     emphasis: {
@@ -425,7 +429,7 @@ const armaInventarios = (latab) => {
                     total = 0;
                     for (x = 0; x < inventarios.inventarios.length; x++) {
                         if ((naves[c] == inventarios.inventarios[x].Nombre_Almacen) && inventarios.inventarios[x].Lote == lotes[l]) {
-                            total = total + parseFloat(inventarios.inventarios[x].disponible);
+                            total = total + parseFloat(quitarComasNumero(inventarios.inventarios[x].disponible));
                         }
                     }
                     detalle_naves[naves[c]].data.push(total);
@@ -744,7 +748,8 @@ function getrow(cliente, lote) {
     }
 }
 
-function numero2Decimales(str = "", $decimales = false, $numDecimales = 2) {
+function numero2Decimales2(str = "", $decimales = false, $numDecimales = 2) {
+    console.log("str: ", str);
     if ($decimales) {
         $int = parseFloat(str);
         // return number_format($int, $numDecimales);
@@ -753,7 +758,7 @@ function numero2Decimales(str = "", $decimales = false, $numDecimales = 2) {
             maximumFractionDigits: $numDecimales,
         });
     } else {
-        // console.log("str: ", str);
+
         $strArray = str.toString().split("/[.]/");
         if (parseInt($strArray[1]) == 0) {
             $int = parseInt(str);
@@ -770,6 +775,18 @@ function numero2Decimales(str = "", $decimales = false, $numDecimales = 2) {
             });
             // return number_format($int, $numDecimales);
         }
+    }
+}
+
+function quitarComasNumero(value) {
+    try {
+        const regex = /,/g;
+        if (value != "") {
+            var num = value.replace(regex, "");
+            return parseFloat(num);
+        }
+    } catch (error) {
+        return "";
     }
 }
 </script>

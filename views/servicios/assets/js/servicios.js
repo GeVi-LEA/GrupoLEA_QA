@@ -2394,7 +2394,9 @@ $(document).ready(function () {
 		validaBasculaUnidad();
 	});
 
-	$("#transportista").select2();
+	try {
+		$("#transportista").select2();
+	} catch (error) {}
 	$(".transportista").unbind();
 	$("#transportista").change(function () {
 		getChoferes($("#transportista option:selected").val());
@@ -2697,7 +2699,10 @@ function validaInventario(form) {
 					? "0"
 					: quitarComasNumero($("#cantidad").val());
 			try {
-				if (quitarComasNumero($("#pesoCliente").val()) < sum) {
+				if (
+					parseFloat(quitarComasNumero($("#pesoCliente").val())) * 1.03 <
+					sum
+				) {
 					mensajeError("La cantidad es mayor de la que ordenó el cliente");
 					$("#btnGenerarServicio").hide();
 				} else {
@@ -2725,7 +2730,11 @@ function validaInventario(form) {
 					: quitarComasNumero($(form).find("#cantidad").val());
 			// console.log("total por ensacar: ", sum);
 			if (
-				quitarComasNumero($("#disponible").html().replace(/\D/g, "")) >= sum
+				parseFloat(
+					quitarComasNumero($("#disponible").html().replace(/\D/g, ""))
+				) *
+					1.03 >=
+				sum
 			) {
 				$("#btnGenerarServicio").show();
 			} else {
@@ -2850,7 +2859,9 @@ function getChoferes(transp_id) {
 						'<option value="" disabled>No hay choferes registrados</option>'
 					);
 				}
-				$("#chofer").select2();
+				try {
+					$("#chofer").select2();
+				} catch (error) {}
 			}
 			// console.log("termina llenacombo");
 		},

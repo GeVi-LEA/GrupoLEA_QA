@@ -1932,6 +1932,7 @@ function erpalert(
 
 //
 function numero2Decimales(str = "", $decimales = false, $numDecimales = 2) {
+	// console.log("str: ", str);
 	if ($decimales) {
 		$int = parseFloat(str);
 		// return number_format($int, $numDecimales);
