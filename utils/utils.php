@@ -355,6 +355,13 @@ class Utils
         return $u->getAll();
     }
 
+    public static function getUsuarioNombre($id)
+    {
+        require_once models_root . 'catalogos/usuario.php';
+        $u = new Usuario();
+        return $u->getById($id);
+    }
+
     public static function getRecepcionesFletes($id)
     {
         require_once models_root . 'compras/recepcion_flete.php';

@@ -18,6 +18,8 @@ var hoy = new moment().format('YYYY/MM/DD');
 var ayer = moment().subtract(1, 'months').format('YYYY/MM/01');
 var table;
 var clickiframe;
+var aceptadaslist = [];
+var selestatus, selsolicitud;
 // <th>ESTATUS</th>
 let htmltable = `<table id="tablaRegistros" class='table stripe' style='width:100%'>
                                 <thead>
@@ -302,6 +304,8 @@ function getRequisiciones() {
 
 function getDetalleGrafica(estatus = "", solicitud = "") {
     console.log("estatus: ", estatus, " solicitud: ", solicitud);
+    selestatus = estatus;
+    selsolicitud = solicitud;
     let tabladetalle = [];
     let html = "";
     $("#tablaRegistros").remove();
@@ -315,7 +319,7 @@ function getDetalleGrafica(estatus = "", solicitud = "") {
             //
             //<a href="<?= principalUrl ?>?controller=Compras&action=requisicion&id='+list_reqs.requisiciones[x].id+'">
             html += `
-             <tr>
+             <tr data-idreq="${list_reqs.requisiciones[x].id}">
                     <td hidden id="idTabla">${list_reqs.requisiciones[x].id}</td>
                     <td >
                         <div class="row" style="width:170px">
@@ -352,7 +356,7 @@ function getDetalleGrafica(estatus = "", solicitud = "") {
                 // <td >${list_reqs.requisiciones[x].estatus} - ${list_reqs.requisiciones[x].solicitud}</td>
 
                 html += `
-                            <tr>
+                            <tr data-idreq="${list_reqs.requisiciones[x].id}">
                                     <td hidden id="idTabla">${list_reqs.requisiciones[x].id}</td>
                                     <td >
                                         <div class="row" style="width:170px">
@@ -389,7 +393,7 @@ function getDetalleGrafica(estatus = "", solicitud = "") {
     $("#tituloestatus").html(estatus + " - " + solicitud);
     $("#div_tabla").html(htmltable);
     $("#tablaRegistros tbody").html(html);
-    $("#tablaRegistros").DataTable({
+    let table_d = $("#tablaRegistros").DataTable({
         dom: 'Bfrtip',
         responsive: true,
         columns: [null, {
@@ -416,11 +420,38 @@ function getDetalleGrafica(estatus = "", solicitud = "") {
                 }
             },
             'pdf',
+
         ],
         language: {
             url: '<?php echo URL; ?>assets/libs/datatables/es-MX.json',
         },
     });
+    aceptadas_list = [];
+    var agregada = 0;
+    table_d.on('click', 'tbody tr', function(e) {
+        e.currentTarget.classList.toggle('selected');
+        clickiframe = e.currentTarget;
+        if (e.currentTarget.classList.toString().indexOf("selected") > 0) {
+            if (jQuery.inArray(e.currentTarget.dataset["idreq"], aceptadas_list) != -1) {
+                console.log("is in array");
+            } else {
+                aceptadas_list.push(e.currentTarget.dataset["idreq"]);
+                if (estatus == "ACEPTADA" && agregada == 0) {
+                    agregada = 1;
+                    $(".dt-buttons").append(
+                        `<button class="btn btn-secondary buttons-genoc" tabindex="0" aria-controls="tablaRegistros" type="button" onclick="crearOC('${estatus}', '${solicitud}')"><span>Generar OC</span></button>`
+                    )
+                }
+
+            }
+        } else {
+            // aceptadas_list[jQuery.inArray(e.currentTarget.dataset["idreq"], aceptadas_list) - 1].remove();
+            aceptadas_list.splice($.inArray(e.currentTarget.dataset["idreq"], aceptadas_list), 1);
+        }
+
+    });
+
+
 
     iniciaEventos();
 
@@ -543,6 +574,7 @@ function ifGetProveedor(proveedor_id) {
 
 function viewReq(_idReq = "0") {
 
+    console.log("_idReq: ", _idReq);
     Swal.fire({
         showCloseButton: false,
         showCancelButton: false,
@@ -551,7 +583,9 @@ function viewReq(_idReq = "0") {
         width: "75vw",
         html: `<iframe id="iframe___url__icio" style="width:100%; height:80vh;" src="${__url__}?controller=Compras&action=requisicionpop&id=${_idReq}" frameborder="0"></iframe>`,
         didOpen: () => {
+            console.log("open");
             $("iframe").on("load", function() {
+
                 $(this)
                     .contents()
                     .on("mousedown, mouseup, click", function(e) {
@@ -594,23 +628,8 @@ function iniciaEventos() {
             // "Requisición",
             // "width=1300,height=650"
             // );
-            Swal.fire({
-                showCloseButton: false,
-                showCancelButton: false,
-                showConfirmButton: false,
-                position: "top",
-                width: "75vw",
-                html: `<iframe id="iframe___url__icio" style="width:100%; height:80vh;" 
-                src="${__url__}?controller=Compras&action=showRequisicion&idReq=${id}" frameborder="0"></iframe>`,
-                didOpen: () => {
-                    $("iframe").on("load", function() {});
 
-                },
-                didClose: () => {
-                    // $("#divEstados a")[0].click();
-                },
-            });
-
+            showRequisicion(id);
         }
     });
 
@@ -666,14 +685,15 @@ function iniciaEventos() {
                                 data: {
                                     idReq: id
                                 },
-                                url: "?ajax&controller=Compras&action=deleteRequision",
+                                url: __url__ + "?ajax&controller=Compras&action=deleteRequision",
                                 type: "POST",
                                 success: function(r) {
                                     tr.hide();
                                     tr.remove();
                                 },
                                 error: function() {
-                                    alert("Algo salio mal, no se logro eliminar");
+                                    // alert("Algo salio mal, no se logro eliminar");
+                                    erpalert("error", "Algo salio mal, no se logro eliminar....");
                                 },
                             });
                         },
@@ -725,6 +745,97 @@ function iniciaEventos() {
         });
     });
 
+
+}
+
+function showRequisicion(id) {
+    Swal.fire({
+        showCloseButton: false,
+        showCancelButton: false,
+        showConfirmButton: false,
+        position: "top",
+        width: "75vw",
+        html: `<iframe id="iframe___url__icio" style="width:100%; height:80vh;" 
+                src="${__url__}?controller=Compras&action=showRequisicion&idReq=${id}" frameborder="0"></iframe>`,
+        didOpen: () => {
+            // $("iframe").on("load", function() {
+            console.log("se abre");
+            var _selestatus = selestatus;
+            var _selsolicitud = selsolicitud;
+            $("iframe").on("load", function() {
+                $(this)
+                    .contents()
+                    .on("mousedown, mouseup, click", function(e) {
+                        clickiframe = e;
+                        if (e.target.id == "btnFirma") {
+                            console.log("se firmó");
+
+                            setTimeout(() => {
+                                getRequisiciones();
+                                console.log("selestatus: ", _selestatus, " selsolicitud: ", _selsolicitud);
+                                setTimeout(() => {
+                                    setTimeout(() => {
+                                        getDetalleGrafica(_selestatus, _selsolicitud);
+                                    }, 1000);
+                                    showRequisicion(id);
+                                    setTimeout(() => {
+                                        $("iframe").contents().scrollTop(1000);
+                                    }, 500);
+                                }, 500);
+                            }, 1000);
+
+                        }
+                    });
+                $(".form-select").select2();
+            });
+            // });
+
+        },
+        didClose: () => {
+            // $("#divEstados a")[0].click();
+        },
+    });
+}
+
+function crearOC(estatus = "", solicitud = "") {
+    var error = 0;
+    for (var x = 0; x <= aceptadas_list.length; x++) {
+        try {
+
+            console.log("idreq: ", aceptadas_list[x]);
+            $.ajax({
+                data: {
+                    idReq: aceptadas_list[x]
+                },
+                url: __url__ + "?ajax&controller=Compras&action=generarOrdenCompra",
+                type: "POST",
+                success: function(r) {
+                    console.log("se generó");
+                    console.log(r);
+                    // aceptadas_list[x].remove();
+                    aceptadas_list.splice($.inArray(aceptadas_list[x], aceptadas_list), 1);
+                    // tr.hide();
+                    // tr.remove();
+                },
+                error: function() {
+                    error = 1;
+                    erpalert("error", "Algo salio mal, no se genero orden de compra....");
+                },
+            });
+
+        } catch (error) {
+
+        }
+
+    }
+    if (error == 0) {
+        erpalert("", "Se generardon las ordenes de compra");
+        getRequisiciones();
+        setTimeout(() => {
+            getDetalleGrafica(estatus, solicitud);
+        }, 1000);
+
+    } else {}
 
 }
 </script>

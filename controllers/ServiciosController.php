@@ -554,7 +554,7 @@ class serviciosController
         $orden           = isset($_POST['orden']) && $_POST['orden'] != '' ? $_POST['orden'] : null;
         $doc_orden       = isset($_POST['doc_orden']) && $_POST['doc_orden'] != '' ? $_POST['doc_orden'] : null;
         $productoId      = isset($_POST['producto']) && $_POST['producto'] != '' ? $_POST['producto'] : null;
-        $almacen_id      = isset($_POST['almacen_id']) && $_POST['almacen_id'] != '' ? $_POST['almacen_id'] : null;
+        $almacen_id      = isset($_POST['almacen_id']) && $_POST['almacen_id'] != '' ? $_POST['almacen_id'] : 'null';
         $alias           = isset($_POST['alias']) && $_POST['alias'] != '' ? $_POST['alias'] : null;
         $observaciones   = isset($_POST['observaciones']) && $_POST['observaciones'] != '' ? $_POST['observaciones'] : null;
         $res             = true;

@@ -250,11 +250,22 @@
                                                             }
                                                         endforeach;
                                                         echo '  <tr id="detalle_' . $nD . '" data-iddetalle="' . $d['id'] . '">
-                                                                <td class="det_descripcion">' . $d['descripcion'] . '</td>
-                                                                <td class="det_unidad">' . $unidad . '</td>
-                                                                <td class="det_cantidad">' . UtilsHelp::numero2Decimales($d['cantidad'], false) . '</td>
-                                                                <td class="det_precio_unitario">' . UtilsHelp::numero2Decimales($d['precio_unitario'], true) . '</td>
+                                                                <td class="det_descripcion">
+                                                                    <input type="hidden" name="descripcion[' . $nD . ']" id="descripcion[' . $nD . ']"  value="' . $d['descripcion'] . '" />
+                                                                </td>
+                                                                <td class="det_unidad" name="unidad[' . $nD . ']" id="unidad[' . $nD . ']" >
+                                                                    <input type="hidden" name="descripcion[' . $nD . ']" id="descripcion[' . $nD . ']" value="' . $unidad . '" />' . $unidad . '
+                                                                </td>
+                                                                <td class="det_cantidad">
+                                                                    <input type="hidden" name="cantidad[' . $nD . ']" min="0" id="cantidad[' . $nD . ']" value="' . UtilsHelp::numero2Decimales($d['cantidad'], false) . '"  />
+                                                                    ' . UtilsHelp::numero2Decimales($d['cantidad'], false) . '
+                                                                </td>
+                                                                <td class="det_precio_unitario">
+                                                                    <input type="hidden" name="precioUnitario[' . $nD . ']" min="0" id="precioUnitario[' . $nD . ']"  value="' . UtilsHelp::numero2Decimales($d['precio_unitario'], true) . '" />
+                                                                    ' . UtilsHelp::numero2Decimales($d['precio_unitario'], true) . '
+                                                                </td>
                                                                 <td>
+                                                                    <input type="hidden" id="idDetalle[' . $nD . ']" name="idDetalle[' . $nD . ']" value="' . $d['id'] . '" />
                                                                     <div>
                                                                         <a id="edit"><span class="material-icons i-edit">edit</span></a>
                                                                         <a id="save" hidden><span class="material-icons i-save">save</span></a>

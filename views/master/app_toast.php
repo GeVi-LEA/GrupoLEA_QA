@@ -1,10 +1,4 @@
 <script type="text/javascript">
-{
-    {
-
-    }
-}
-
 // @if(Session::has('errors') || (isset($errors) && is_array($errors) && $errors -> any()))
 // Swal.fire({
 //     icon: 'error',

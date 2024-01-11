@@ -296,11 +296,33 @@ class Requisicion
 
     public function save()
     {
-        $sql = "insert into compras_requisiciones values(null, {$this->getProvedorId()}, {$this->getUsuarioId()}, {$this->getEstatusId()},"
-            . "'{$this->getFolio()}', {$this->getEmpresa()}, '{$this->getNumProyecto()}', '{$this->getProyecto()}', '{$this->getUrgente()}','{$this->getObservaciones()}',"
-            . "'{$this->getFechaSolicitud()}', '{$this->getFechaRequerida()}', null, curdate(), null, '{$this->getCotizacion()}', "
-            . "null, {$this->getRuta()}, {$this->getAduana()}, {$this->getCliente()}, {$this->getMoneda()}, {$this->getProducto()}, {$this->getTransporteId()}, "
-            . "{$this->getCantidadFlete()}, {$this->getTipoFlete()})";
+        $sql = "insert into compras_requisiciones values(
+            null
+            , {$this->getProvedorId()}
+            , {$this->getUsuarioId()}
+            , {$this->getEstatusId()}
+            , '{$this->getFolio()}'
+            , {$this->getEmpresa()}
+            , '{$this->getNumProyecto()}'
+            , '{$this->getProyecto()}'
+            , '{$this->getUrgente()}'
+            ,'{$this->getObservaciones()}'
+            , '{$this->getFechaSolicitud()}'
+            , '{$this->getFechaRequerida()}'
+            , null
+            , curdate()
+            , null
+            , '{$this->getCotizacion()}'
+            , null
+            , {$this->getRuta()}
+            , {$this->getAduana()}
+            , {$this->getCliente()}
+            , {$this->getMoneda()}
+            , {$this->getProducto()}
+            , {$this->getTransporteId()}
+            , {$this->getCantidadFlete()}
+            , {$this->getTipoFlete()}
+            )";
 
         $save   = $this->db->query($sql);
         $result = false;

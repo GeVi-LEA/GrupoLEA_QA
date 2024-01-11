@@ -68,8 +68,8 @@ class comprasController
         $cliente  = new Cliente();
         $clientes = $cliente->getAll();
 
-        // require_once views_root . 'compras/lista_requisiciones.php';
-        require_once views_root . 'compras/requisicionesb.php';
+        require_once views_root . 'compras/lista_requisiciones.php';
+        // require_once views_root . 'compras/requisicionesb.php';
     }
 
     public function buscarRequisicion()
