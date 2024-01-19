@@ -27,7 +27,7 @@
 
 <!-- Select2 -->
 <link href="<?php echo URL; ?>assets/libs/select2/css/select2.min.css" rel="stylesheet">
-
+<link href="<?php echo URL; ?>assets/libs/select2/css/select2-bootstrap-5-theme.min.css" rel="stylesheet">
 
 <!-- Fonts -->
 

@@ -379,7 +379,7 @@ div.jconfirm-content-pane {
 	background-color: #444855;
 	color: #fff;
 	border-radius: 5px;
-	font-size: 13px;
+	font-size: 10px;
 }
 
 .inputFile:hover {
@@ -586,4 +586,16 @@ button {
 	color: #ffff;
 	font-weight: 700;
 	padding: 2px;
+}
+
+.igt-r {
+	border-top-right-radius: 10px !important;
+
+	border-bottom-right-radius: 10px !important;
+}
+
+.igt-l {
+	border-top-left-radius: 10px !important;
+
+	border-bottom-left-radius: 10px !important;
 }

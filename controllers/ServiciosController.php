@@ -554,7 +554,7 @@ class serviciosController
         $orden           = isset($_POST['orden']) && $_POST['orden'] != '' ? $_POST['orden'] : null;
         $doc_orden       = isset($_POST['doc_orden']) && $_POST['doc_orden'] != '' ? $_POST['doc_orden'] : null;
         $productoId      = isset($_POST['producto']) && $_POST['producto'] != '' ? $_POST['producto'] : null;
-        $almacen_id      = isset($_POST['almacen_id']) && $_POST['almacen_id'] != '' ? $_POST['almacen_id'] : 'null';
+        $almacen_id      = isset($_POST['almacen_id']) && $_POST['almacen_id'] != '' ? $_POST['almacen_id'] : '1';
         $alias           = isset($_POST['alias']) && $_POST['alias'] != '' ? $_POST['alias'] : null;
         $observaciones   = isset($_POST['observaciones']) && $_POST['observaciones'] != '' ? $_POST['observaciones'] : null;
         $res             = true;
@@ -728,7 +728,7 @@ class serviciosController
         $sello3          = isset($_POST['sello3']) ? $_POST['sello3'] : null;
         $entrada_id      = isset($_POST['entrada_id']) ? $_POST['entrada_id'] : null;
         $firma           = isset($_POST['firma']) ? $_POST['firma'] : null;
-        $almacen_id      = isset($_POST['almacen_id']) && $_POST['almacen_id'] != '' ? $_POST['almacen_id'] : null;
+        $almacen_id      = isset($_POST['almacen_id']) && $_POST['almacen_id'] != '' ? $_POST['almacen_id'] : 1;
 
         if ($operacion != 'E') {
             $m = new ServicioMovimientoAlmacen();
@@ -747,7 +747,9 @@ class serviciosController
             $servicio_entrada->setSello3($sello3);
             $servicio_entrada->setFirma_salida($firma);
 
-            $servicio_entrada->updateSellos();
+            if ($sellos != '') {
+                $servicio_entrada->updateSellos();
+            }
 
             if ($r) {
                 $result = [
@@ -1045,7 +1047,24 @@ class serviciosController
 
             $ensacado = new ServicioEnsacado();
             $l        = $ensacado->getInfoLote($lote);
-            return print_r(json_encode($l));
+            // $resultado = [];
+            // if(count($l)<1){
+            // $resultado = [{"mensaje":"no hay lote","error":true}];
+            // }
+            // else{
+            // $resultado = $l;
+            // }
+            // return print_r(json_encode($resultado));
+            // return print_r(json_encode(
+            //                    [
+            //                        'mensaje' => 'OK',
+            //                    ]
+            //                ));
+            // // echo json_encode($resultado);
+            // echo json_encode([
+            //  'mensaje' => 'OK',
+            //  ]);
+            echo json_encode(['mensaje' => 'OK', 'InfoLote' => $l[0]]);
         }
     }
 

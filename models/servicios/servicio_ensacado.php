@@ -378,7 +378,7 @@ class ServicioEnsacado
         , barredura_limpia = {$this->getBarreduraLimpia()}
         , bultos = {$this->getBultos()}, ";
 
-        if ($this->getFechaProgramacion() == null) {
+        if ($this->getFechaProgramacion() == null or $this->getFechaProgramacion() == 'null') {
             $sql .= ' fecha_programacion = null, ';
         } else {
             $sql .= " fecha_programacion  = '{$this->getFechaProgramacion()}', ";
@@ -462,9 +462,9 @@ class ServicioEnsacado
                 set barredura_limpia = '{$this->getBarreduraLimpia()}'
                 ,barredura_sucia = '{$this->getBarreduraSucia()}'
                 ,total_ensacado = '{$this->getTotalEnsacado()}' 
-                ,tarimas = '{$this->getTarimas()}' 
-                ,bultos = '{$this->getBultos()}' 
-                ,parcial = '{$this->getParcial()}' 
+                ,tarimas = '" . (($this->getTarimas() == 'null') ? '0' : $this->getTarimas()) . "' 
+                ,bultos = '" . (($this->getBultos() == 'null') ? '0' : $this->getBultos()) . "' 
+                ,parcial = '" . (($this->getParcial() == 'null') ? '0' : $this->getParcial()) . "' 
                 where id={$this->getId()}";
         $save   = $this->db->query($sql);
         $result = false;
@@ -489,9 +489,11 @@ class ServicioEnsacado
     {
         $result    = array();
         $sql       = "select 
-                        se.lote
+                        trim(se.lote) lote
                         , se.alias
                         , prod.nombre
+                        , se.producto_id
+                        , se.almacen_id
                         , get_disponibleByLote(se.lote,$clienteId) disponible 
                         from servicios_ensacado se 
                         inner join servicios_entradas s on s.id = se.entrada_id 
@@ -500,7 +502,7 @@ class ServicioEnsacado
                         s.cliente_id = $clienteId 
                         and se.lote != '' 
                         and get_disponibleByLote(se.lote,$clienteId) > 0
-                        group by se.lote, se.alias, se.producto_id 
+                        group by se.lote, se.alias, se.producto_id , se.almacen_id
                         order by se.lote";
         $ensacados = $this->db->query($sql);
         if ($ensacados != null) {
@@ -520,8 +522,7 @@ class ServicioEnsacado
                                 , max(se.producto_id)producto_id
                                 , max(cat_prod.nombre) producto
                                 , max(se.alias) alias 
-                                , get_disponibleByLote(max(se.lote)
-                                , max(ent.cliente_id)) disponible
+                                , ifnull(get_disponibleByLote(max(se.lote), max(ent.cliente_id)),0) disponible
                                 , get_almacenIdByLote(max(se.lote)) almacenId
                               from servicios_ensacado se 
                               inner join catalogo_productos_resinas_liquidos cat_prod on cat_prod.id = se.producto_id

@@ -87,8 +87,8 @@ if ($_POST) {
         llamarController();
     } else {
         require_once views_root . 'principal/header.php';
-        require_once views_root . 'principal/_fixed_top.php';
-        require_once views_root . 'principal/_menu_left.php';
+        // require_once views_root . 'principal/_fixed_top.php';
+        require_once views_root . 'principal/aside.php';
         require_once views_root . 'erp/notificaciones.php';
 
         llamarController();

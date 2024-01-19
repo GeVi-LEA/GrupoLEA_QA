@@ -67,8 +67,13 @@ class ServicioMovimientoAlmacen
     public function save()
     {
         // $sql = "insert into servicios_movimientos_almacen values({$this->getIdServicio()}, {$this->getAlmacen()}, {$this->getCantidad()}, '{$this->getOperacion()}', NOW())";
-        $sql = "insert into servicios_movimientos_almacen values({$this->getIdServicio()}, {$this->getAlmacen()}, {$this->getCantidad()}, '{$this->getOperacion()}', NOW(),null)";
-
+        $sql    = "insert into servicios_movimientos_almacen values(
+            {$this->getIdServicio()}
+            , {$this->getAlmacen()}
+            , {$this->getCantidad()}
+            , '{$this->getOperacion()}'
+            , NOW()
+            ,null)";
         $save   = $this->db->query($sql);
         $result = false;
         if ($save) {
