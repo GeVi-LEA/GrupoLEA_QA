@@ -9,7 +9,7 @@ try {
     __url__ = localStorage.getItem("_URL_");
 
 }
-
+var clientesel;
 $(document).ready(function() {
     myModal = document.getElementById('modal_add');
 
@@ -122,7 +122,7 @@ $(document).ready(function() {
                                             if (!empty($productos)):
                                                 foreach ($productos as $pro):
                                         ?>
-                                        <option value="<?= $pro->id ?>"><?= $pro->nombre . ' (' . $pro->nombre_refineria . ')' ?></option>
+                                        <option value="<?= $pro->id ?>"  ><?= $pro->nombre . ' (' . $pro->nombre_refineria . ')' ?></option>
                                         <?php
                                                 endforeach;
                                             endif;
@@ -147,7 +147,7 @@ $(document).ready(function() {
                             <div class="row d-flex mb-2">
                                 <div class="w-25 text-right pr-1"><label for="tipoFlete">Tipo flete:</label></div>
                                 <div>
-                                    <select name="tipoFlete" class="item-big" id=" tipoFlete">
+                                    <select name="tipoFlete" class="item-big" id="tipoFlete">
                                         <option value="" selected disabled>--Selecciona--</option>
                                         <?php
                                             foreach (tipoFlete as $k => $v):
@@ -162,7 +162,7 @@ $(document).ready(function() {
                             <div class="row d-flex mb-2" id="divRutaProducto">
                                 <div class="w-25 text-right pr-1"><label for="rutaProducto">Ruta:</label></div>
                                 <div>
-                                    <select name="rutaProducto" class="item-big" id=" rutaProducto">
+                                    <select name="rutaProducto" class="item-big" id="rutaProducto">
                                         <option value="0" selected>--Selecciona--</option>
                                         <?php
                                             $rutas = Utils::getRutasKansas();
@@ -180,7 +180,7 @@ $(document).ready(function() {
                             <div class="row d-flex mb-2" id="divAduanaProducto">
                                 <div class="w-25 text-right pr-1"><label for="aduana">Aduana:</label></div>
                                 <div>
-                                    <select name="aduana" class="item-big" id=" aduana">
+                                    <select name="aduana" class="item-big" id="aduana">
                                         <option value="0" selected>--Selecciona--</option>
                                         <?php
                                             $aduanas = Utils::getAduanas();
@@ -198,14 +198,14 @@ $(document).ready(function() {
                             <div class="row d-flex">
                                 <div class="w-25 text-right pr-1"><label for="cliente">Cliente:</label></div>
                                 <div>
-                                    <select name="clienteProd" class="item-big" id=" clienteProd">
+                                    <select name="clienteProd" class="item-big" id="clienteProd">
                                         <option value="0" selected>--Selecciona--</option>
                                         <?php
                                             $clientes = Utils::getClientes();
                                             if (!empty($clientes)):
                                                 foreach ($clientes as $c):
                                         ?>
-                                        <option value="<?= $c->id ?>"><?= $c->nombre ?></option>
+                                        <option value="<?= $c->id ?>" data-domicilio="<?= $c->direccion ?>"><?= $c->nombre ?></option>
                                         <?php
                                                 endforeach;
                                             endif;
@@ -223,13 +223,71 @@ $(document).ready(function() {
             showDenyButton: false,
             showCancelButton: true,
             confirmButtonText: "Agregar",
+            didOpen: () => {
+                console.log($("#idProducto").val());
+                // setTimeout(() => {
+
+                $('[name="transporteProducto"]').change(function() {
+                    console.log($("#transporteProducto:checked").val());
+                    if ($("#transporteProducto:checked").val() != "6") {
+                        $("#divRutaProducto").addClass("escondido");
+                        $("#divAduanaProducto").addClass("escondido");
+                    } else {
+                        $("#divRutaProducto").removeClass("escondido");
+                        $("#divAduanaProducto").removeClass("escondido");
+                    }
+                });
+
+                // }, 1000);
+                $("#clienteProd").change(function() {
+                    console.log($("#clienteProd option:selected"));
+                    clientesel = $("#clienteProd option:selected");
+                    $("#proyectoEntregar").val($("#clienteProd option:selected").text());
+                    $("#proyectoDomicilio").val($("#clienteProd option:selected")[0].dataset.domicilio);
+                });
+                var eltr = ($("#tabla_detalle tr").length > 0) ? $("#tabla_detalle tr")[$("#tabla_detalle tr").length - 1] : "";
+                if (eltr != "") {
+                    $("#producto").val(eltr.dataset.producto);
+                    $("#clienteProd").val(eltr.dataset.clienteprod);
+                    $("#tipoFlete").val(eltr.dataset.tipoflete)
+                    $("#aduana").val(eltr.dataset.aduana);
+                    $("#rutaProducto").val(eltr.dataset.rutaproducto);
+                    $("#cantidadPro").val(eltr.dataset.cantidadpro);
+                    $("#transporte").val(eltr.dataset.transporte);
+                    $("#producto").val(eltr.dataset.producto);
+
+                    $('[name="transporteProducto"]').filter(function() {
+                        return this.value == eltr.dataset.transporteproducto
+                    }).prop("checked", true)
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+            },
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 if (validarFormProductos()) {
                     var producto = $("#producto option:selected").text();
+                    var producto_sel = $("#producto option:selected").val();
                     var transporte = $("#transporteProducto:checked").next("label").html();
+                    var transporteProducto = $("#transporteProducto:checked").val();
                     var cantidad = $("#cantidadPro").val();
+                    var cantidadPro = $("#cantidadPro").val();
+                    var clienteProd = $("#clienteProd option:selected").val();
+                    var aduana = $("#aduana option:selected").val();
+                    var rutaProducto = $("#rutaProducto").val();
+                    var tipoFlete = $("#tipoFlete").val();
+
                     if (!isNumeric(cantidad)) {
                         var desc = $("#tablaDescripcion").find("input[id='descripcion[1]'");
                         if ($(desc).val() != "") {
@@ -246,23 +304,17 @@ $(document).ready(function() {
                         $("#flete").val($("#tipoFlete").val());
                         $("#cantidadFlete").val(cantidad);
                         $(this).attr("data-dismiss", "modal");
-                        //$("#tabla_detalle tbody").append(`
-                        //                                    <tr data-iddetalle="${($("#tabla_detalle tbody").find("tr").length+1)}">
-                        //                                        <td class="det_descripcion"><input class="item-x-big" type="text" name="descripcion[${($("#tabla_detalle tbody").find("tr").length+1)}]" id="descripcion[${($("#tabla_detalle tbody").find("tr").length+1)}]" disabled value="${"(" + cantidad + " " + transporte + ") " + producto}" /></td>
-                        //                                        <td class="det_unidad" name="unidad[]" id="unidad[${($("#tabla_detalle tbody").find("tr").length+1)}]">${$("#unidad option:selected").val()}</td>
-                        //                                        <td class="det_cantidad"><input class="item-small" type="text" name="cantidad[${($("#tabla_detalle tbody").find("tr").length+1)}]" min="0" id="cantidad[${($("#tabla_detalle tbody").find("tr").length+1)}]" value="${cantidad}" disabled /></td>
-                        //                                        <td class="det_precio_unitario"><input class="item-medium" type="text" name="precioUnitario[${($("#tabla_detalle tbody").find("tr").length+1)}]" min="0" id="precioUnitario[${($("#tabla_detalle tbody").find("tr").length+1)}]" disabled  /></td>
-                        //
-                        //                                        <td>
-                        //                                            <div>
-                        //                                                <a id="edit"><span class="material-icons i-edit">edit</span></a>
-                        //                                                <a id="save" hidden><span class="material-icons i-save">save</span></a>
-                        //                                                <a id="delete"><span class="material-icons i-delete">delete_forever</span></a>
-                        //                                            </div>
-                        //                                        </td>
-                        //                                    </tr>`);
+
                         $("#tabla_detalle tbody").append(`
-                                                            <tr data-iddetalle="${($("#tabla_detalle tbody").find("tr").length+1)}">
+                                                            <tr data-iddetalle="${($("#tabla_detalle tbody").find("tr").length+1)}" 
+                                                            data-clienteProd="${clienteProd}"  
+                                                            data-tipoFlete="${tipoFlete}"
+                                                            data-aduana="${aduana}" 
+                                                            data-rutaProducto="${rutaProducto}"
+                                                            data-cantidadPro="${cantidadPro}" 
+                                                            data-transporte="${transporte}" 
+                                                            data-transporteProducto="${transporteProducto}"
+                                                            data-producto="${producto_sel}">
                                                                 <td class="det_descripcion">
                                                                     <input type="hidden" 
                                                                     name="descripcion[]" 
@@ -399,7 +451,49 @@ function accionDetalleTabla() {
 
         }, 300);
 
-    })
+    });
+
+    $("#tabla_detalle #delete").unbind();
+    $("#tabla_detalle #delete").click(function() {
+        rowedit = $(this);
+        $.confirm({
+            title: "<span class='material-icons i-danger'>dangerous</span><span>¡Atención!<span>",
+            content: "¿Seguro desea eliminar? " + rowedit.parents("tr").data("iddetalle"),
+            type: "red",
+            typeAnimated: true,
+            animation: "zoom",
+            closeAnimation: "right",
+            backgroundDismiss: false,
+            backgroundDismissAnimation: "shake",
+            buttons: {
+                tryAgain: {
+                    text: "Eliminar",
+                    btnClass: "btn-red",
+                    action: function() {
+                        $.ajax({
+                            data: {
+                                idReq: rowedit.parents("tr").data("iddetalle")
+                            },
+                            url: "?ajax&controller=Compras&action=deleteDetalle",
+                            type: "POST",
+                            dataType: "json",
+                            success: function() {
+                                $("#tabla_detalle [data-iddetalle='" + rowedit.parents("tr").data("iddetalle") + "']").remove();
+                            },
+                            error: function() {
+                                alert(
+                                    "Algo salio mal, no se pudo eliminar, contacte al administrador del sistema"
+                                );
+                            },
+                        });
+                    },
+                },
+                Cancelar: function() {},
+            },
+        });
+    });
+
+
 
 }
 

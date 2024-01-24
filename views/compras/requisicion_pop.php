@@ -65,7 +65,9 @@
     <link rel="stylesheet" href="<?php echo URL; ?>assets/css/style.css">
 
     <style>
-
+    .escondido {
+        display: none !important;
+    }
     </style>
     <script>
     var rowedit;
@@ -156,8 +158,7 @@
                                 <div class='mb-3 col'>
                                     <label for="fechaSolicitud" class="form-label">Fecha solicitud</label>
                                     <div class="input-group mb-3">
-                                        <input type="text" id="fechaSolicitud_pop" name="fechaSolicitud" class="form-control datepick" placeholder="Fecha solicitud"
-                                            value="<?= isset($req) ? date('d/m/Y', strtotime($req['fecha_solicitud'])) : '' ?>" readOnly>
+                                        <input type="text" id="fechaSolicitud_pop" name="fechaSolicitud" class="form-control datepick" placeholder="Fecha solicitud" value="<?= isset($req) ? date('d/m/Y', strtotime($req['fecha_solicitud'])) : '' ?>" readOnly>
                                         <span class="input-group-text" id="basic-addon1"><i class="fa-regular fa-calendar"></i></span>
                                     </div>
                                 </div>
@@ -166,8 +167,7 @@
                                 <div class='mb-3 col'>
                                     <input type='hidden' name="idUsuario" value="<?= isset($req) ? $req['usuario_id'] : $_SESSION['usuario']->id ?>" />
                                     <label for="usuario" class="form-label">Asignado a:</label>
-                                    <input type='text' name="usuario" id="usuario" value="<?= isset($req) ? $req['usuario'] : $_SESSION['usuario']->nombres . ' ' . $_SESSION['usuario']->apellidos ?>"
-                                        class="form-control big" disabled readOnly />
+                                    <input type='text' name="usuario" id="usuario" value="<?= isset($req) ? $req['usuario'] : $_SESSION['usuario']->nombres . ' ' . $_SESSION['usuario']->apellidos ?>" class="form-control big" disabled readOnly />
                                 </div>
                                 <div class='mb-3 col'>
                                     <label for="departamento" class="form-label">Departamento:</label>
@@ -182,8 +182,7 @@
                                 <div class='mb-3 col'>
                                     <label for="fecha_requerida" class="form-label">Fecha requerida:</label>
                                     <div class="input-group mb-3">
-                                        <input type='text' id="fechaRequerida_pop" name="fechaRequerida" value="<?= isset($req) ? date('d/m/Y', strtotime($req['fecha_requerida'])) : '' ?>"
-                                            class="form-control datepick small" readOnly />
+                                        <input type='text' id="fechaRequerida_pop" name="fechaRequerida" value="<?= isset($req) ? date('d/m/Y', strtotime($req['fecha_requerida'])) : '' ?>" class="form-control datepick small" readOnly />
                                         <span class="input-group-text" id="basic-addon1"><i class="fa-regular fa-calendar"></i></span>
                                     </div>
                                 </div>
@@ -251,7 +250,7 @@
                                                         endforeach;
                                                         echo '  <tr id="detalle_' . $nD . '" data-iddetalle="' . $d['id'] . '">
                                                                 <td class="det_descripcion">
-                                                                    <input type="hidden" name="descripcion[' . $nD . ']" id="descripcion[' . $nD . ']"  value="' . $d['descripcion'] . '" />
+                                                                    <input type="hidden" name="descripcion[' . $nD . ']" id="descripcion[' . $nD . ']"  value="' . $d['descripcion'] . '" />' . $d['descripcion'] . '
                                                                 </td>
                                                                 <td class="det_unidad" name="unidad[' . $nD . ']" id="unidad[' . $nD . ']" >
                                                                     <input type="hidden" name="descripcion[' . $nD . ']" id="descripcion[' . $nD . ']" value="' . $unidad . '" />' . $unidad . '
