@@ -7,11 +7,23 @@ class loginController
 {
     public function index()
     {
-        require_once views_root . 'login/login.php';
+        if (isset($_SESSION['usuario'])) {
+            header('Location:' . principalUrl . '?controller=Principal&action=index');
+        } else {
+            require_once views_root . 'login/login.php';
+        }
     }
 
     public function login()
     {
+        // echo hash('md5', 'lvillarreal');
+        // echo '</br>';
+        // $passs = 'LeaMx2024';
+        // // echo ($this->computeHash('lvillarreal'));
+        // echo password_hash($passs, PASSWORD_BCRYPT, ['cost' => 4]);
+        // // password_hash('lvillarreal', PASSWORD_BCRYPT, array('cost' => 4));
+
+        // die ();
         if (isset($_POST['user']) && $_POST['user'] != '' && isset($_POST['password']) && $_POST['password']) {
             $user = trim($_POST['user']);
             $pass = trim($_POST['password']);
@@ -81,5 +93,23 @@ class loginController
     {
         Utils::deleteSession('usuario');
         header('Location:' . root_url);
+    }
+
+    public function verifyHash($password, $hash)
+    {
+        $modifiedPassword = $this->modifyPassword($password);
+        return password_verify($modifiedPassword, $hash);
+    }
+
+    public function modifyPassword($password)
+    {
+        $email = 'XLM';
+        return hash_hmac('whirlpool', str_pad($password, strlen($password) * 4, sha1($email), STR_PAD_BOTH), SALT, true);
+    }
+
+    public function computeHash($password)
+    {
+        $modifiedPassword = $this->modifyPassword($password);
+        return password_hash($modifiedPassword, PASSWORD_BCRYPT, array('cost' => 4));
     }
 }

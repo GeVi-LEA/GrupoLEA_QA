@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= root_url ?>assets/css/bootstrap/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="<?= root_url ?>assets/css/bootstrap/bootstrap.min.css"> -->
+    <link href="<?php echo URL; ?>assets/libs/bootstrap5/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= root_url ?>assets/fonts/material-icons/css/material-icons.css">
     <link rel="stylesheet" href="<?= root_url ?>assets/css/jquery-confirm.css">
     <link rel="stylesheet" href="<?= root_url ?>assets/css/jquery-ui/jquery-ui.min.css">
@@ -14,9 +15,17 @@
     <script src="<?= root_url ?>assets/js/jquery-3.5.1.min.js"></script>
     <script src="<?= root_url ?>assets/js/jquery-confirm.js"></script>
     <script src="<?= root_url ?>assets/js/jquery-ui.min.js"></script>
-    <script src="<?= root_url ?>views/servicios/assets/js/servicios.js"></script>
-    <script src="<?= root_url ?>assets/js/bootstrap/bootstrap.min.js"></script>
+
+    <!-- <script src="<?= root_url ?>assets/js/bootstrap/bootstrap.min.js"></script> -->
+    <script src="<?php echo URL; ?>assets/libs/bootstrap5/js/bootstrap.min.js"></script>
     <script src="<?= root_url ?>assets/libs/select2/js/select2.min.js"></script>
+    <!-- Toastr -->
+    <link href="<?php echo URL; ?>assets/libs/toastr/toastr.min.css" rel="stylesheet">
+    <script src="<?php echo URL; ?>assets/libs/toastr/toastr.min.js"></script>
+    <script src="<?= root_url ?>assets/js/sweetalert/sweetalert2.all.min.js"></script>
+
+    <script src="<?= root_url ?>views/servicios/assets/js/servicios.js"></script>
+
     <title>Ensacado</title>
     <style>
     .select2-container--default .select2-selection--single .select2-selection__rendered {
@@ -48,38 +57,104 @@
             <form id="ensacadoForm" enctype="multipart/form-data">
                 <div class="div-datos pb-2">
                     <span class="titulo-div">Registro de unidades</span>
-                    <div class="datos mt-2 mb-1">
-                        <div id="divRadios" class="div-radios">
-                            <strong for="ferrotolva">Tren:</strong>
-                            <input class="ml-1 mr-3" id="ferrotolva" type="radio" name="ferrotolva" value="F" />
-                            <strong for="ferrotolvas">Camión:</strong>
-                            <input class="ml-1" type="radio" name="ferrotolva" value="A" />
-                        </div>
-                        <div id="divRadios" class="div-radios">
-                            <strong for="entrada_salida">Entrada:</strong>
-                            <input class="ml-1 mr-3" id="entrada_salida" type="radio" name="entrada_salida" value="0" />
-                            <strong for="entrada_salida">Salida:</strong>
-                            <input class="ml-1" type="radio" name="entrada_salida" value="1" />
+                    <div class="datoss mt-2 mb-1">
+                        <div class='row'>
+                            <div class='col-4'>
+                                <div id="divRadios" class="div-radios">
+                                    <div class='row'>
+                                        <div class='col-12'>
+                                            <div class='row'>
+                                                <div class='col-6'>
+                                                    <strong for="ferrotolva">Tren:</strong>
+                                                </div>
+                                                <div class='col-6'>
+                                                    <strong for="ferrotolvas">Camión:</strong>
+                                                </div>
+                                            </div>
+                                            <div class='row'>
+                                                <div class='col-6'>
+                                                    <input class="ml-1 mr-3" id="ferrotolva" type="radio" name="ferrotolva" value="F" />
+                                                </div>
+                                                <div class='col-6'>
+                                                    <input class="ml-1" type="radio" name="ferrotolva" value="A" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class='col-4'>
+                                <div id="divRadios" class="div-radios">
+                                    <div class='row'>
+                                        <div class='col-12'>
+                                            <div class='row'>
+                                                <div class='col-6'>
+                                                    <strong for="entrada_salida">Entrada:</strong>
+                                                </div>
+                                                <div class='col-6'>
+                                                    <strong for="entrada_salida">Salida:</strong>
+                                                </div>
+                                            </div>
+                                            <div class='row'>
+                                                <div class='col-6'>
+                                                    <input class="ml-1 mr-3" id="entrada_salida" type="radio" name="entrada_salida" value="0" />
+                                                </div>
+                                                <div class='col-6'>
+                                                    <input class="ml-1" type="radio" name="entrada_salida" value="1" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='col-4' hidden>
+                                <div>
+                                    <label for="empresa" class="form-label"><strong># Empresa:</strong></label>
+                                    <select name="empresa" class="item-big" id="empresa">
+                                        <option value="" selected>--Selecciona--</option>
+                                        <?php
+                                            if (!empty(empresas)):
+                                                foreach (empresas as $cli):
+                                        ?>
+                                        <option data-cli="<?= $cli ?>" value="<?= $cli['id'] ?>"><?= $cli['nombre'] ?> </option>
+                                        <?php
+                                                endforeach;
+                                            endif;
+                                                                                    ?>
+                                    </select>
+                                </div>
+
+                            </div>
                         </div>
 
-                        <div>
-                            <strong class="mr-1"># Unidad:</strong>
-                            <input type="text" id="numeroUnidad" name="numeroUnidad" class="item-small" />
-                        </div>
+                        <div class='row mt-2'>
+                            <div class='col-4'>
+                                <div>
+                                    <label for="numeroUnidad" class="form-label"><strong># Unidad:</strong></label>
+                                    <input type="text" id="numeroUnidad" name="numeroUnidad" class="item-small" />
+                                    <p><span class="emsg hidden">Número de UNIDAD no Válido (ABCD123456)</span></p>
+                                </div>
 
-                        <div><strong class="mr-1">Cliente:</strong>
-                            <select name="cliente" class="item-big" id="cliente">
-                                <option value="" selected>--Selecciona--</option>
-                                <?php
-                                    if (!empty($clientes)):
-                                        foreach ($clientes as $cli):
-                                ?>
-                                <option value="<?= $cli->id ?>"><?= $cli->nombre ?> </option>
-                                <?php
-                                        endforeach;
-                                    endif;
-                                                                    ?>
-                            </select>
+                            </div>
+                            <div class='col-8'>
+                                <div>
+                                    <label for="cliente" class="form-label"><strong># Cliente:</strong></label>
+                                    <select name="cliente" class="item-big" id="cliente">
+                                        <option value="" selected>--Selecciona--</option>
+                                        <?php
+                                            if (!empty($clientes)):
+                                                foreach ($clientes as $cli):
+                                        ?>
+                                        <option value="<?= $cli->id ?>"><?= $cli->nombre ?> </option>
+                                        <?php
+                                                endforeach;
+                                            endif;
+                                                                                    ?>
+                                    </select>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                     <section id="seccionCamion" hidden>

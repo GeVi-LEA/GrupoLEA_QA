@@ -2,7 +2,7 @@
 include 'assets/js/graficas_entradas_js.php';
 ?>
 <link rel="stylesheet" href="<?php echo URL; ?>assets/libs/datatables/datatables.min.css">
-
+<link rel="stylesheet" href="<?= root_url ?>views/servicios/assets/css/servicios.css" type="text/css" />
 
 <div class='row' style="margin-top:50px;">
     <div class='col-12' id="div-lista">
@@ -56,12 +56,10 @@ include 'assets/js/graficas_entradas_js.php';
                     <tr class="tr">
                         <td id="" hidden><?= $s['id']; ?></td>
                         <td id="idEnsacado" hidden><?= $s['id']; ?></td>
-                        <td class="w-td-30 p-0 m-0"><span id="showEnsacado"
-                                class="material-icons i-recibir"><?= $s['tipo_transporte_id'] != null && in_array($s['tipo_transporte_id'], $arrayIdsTr) ? 'directions_subway' : 'local_shipping'; ?></span></td>
+                        <td class="w-td-30 p-0 m-0"><span id="showEnsacado" class="material-icons i-recibir"><?= $s['tipo_transporte_id'] != null && in_array($s['tipo_transporte_id'], $arrayIdsTr) ? 'directions_subway' : 'local_shipping'; ?></span></td>
                         <td class="w-td-30 px-0 mx-0"><strong><?= Utils::getOperacionServicios($s['servicio']) ?></strong></td>
                         <td class="px-0 mx-0"><strong><?= $s['numUnidad']; ?></strong></td>
-                        <td class="w-td-30 p-0 m-0"><i id="show" class="i-pdf material-icons fa-solid fa-file-pdf" title="Ver orden" data-unidad="<?= $s['numUnidad']; ?>"
-                                data-doc="<?= $s['doc_remision'] != '' ? $s['doc_remision'] : ''; ?>" <?= $s['doc_remision'] == null ? 'hidden' : '' ?>></i>
+                        <td class="w-td-30 p-0 m-0"><i id="show" class="i-pdf material-icons fa-solid fa-file-pdf" title="Ver orden" data-unidad="<?= $s['numUnidad']; ?>" data-doc="<?= $s['doc_remision'] != '' ? $s['doc_remision'] : ''; ?>" <?= $s['doc_remision'] == null ? 'hidden' : '' ?>></i>
                         </td>
                         <td><span><?= $s['nombreCliente']; ?></span></td>
                         <td><?= $s['fecha_entrada'] == '' ? '' : date('d/m/Y', strtotime($s['fecha_entrada'])); ?></td>
@@ -118,9 +116,7 @@ include 'assets/js/graficas_entradas_js.php';
                                                 <div><strong class="mr-1">Peso bruto:</strong><span><?= UtilsHelp::numero2Decimales($s['peso_bruto'], true, 0) ?></span></span><span class="ml-1">kg.</span>
                                                 </div>
                                                 <div><strong class="mr-1">Peso neto:</strong><span><?= UtilsHelp::numero2Decimales($s['peso_neto'], true, 0) ?></span></span><span class="ml-1">kg.</span></div>
-                                                <div><strong
-                                                        class="mr-1">Cantidad:</strong><span><?= UtilsHelp::numero2Decimales($cantidad = UtilsHelp::sumarColumnaArray($s['servicio'], 'cantidad'), true, 0) ?></span><span
-                                                        class="ml-1">kg.</span></div>
+                                                <div><strong class="mr-1">Cantidad:</strong><span><?= UtilsHelp::numero2Decimales($cantidad = UtilsHelp::sumarColumnaArray($s['servicio'], 'cantidad'), true, 0) ?></span><span class="ml-1">kg.</span></div>
                                             </div>
                                         </td>
                                     </tr>
@@ -261,6 +257,7 @@ include 'assets/js/graficas_entradas_js.php';
                             <th>FT/AT</th>
                             <th>NUM. UNIDAD</th>
                             <th>CLIENTE</th>
+                            <th>BÁSCULA</th>
                             <th>FECHA LLEGADA</th>
                         </thead>
                         <tbody>

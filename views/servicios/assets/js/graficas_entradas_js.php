@@ -184,15 +184,16 @@ function llenatablaestatus(id_estatus, estatus, clave) {
                         <strong>${getOperacionServicios(resp.servicios[x].servicio)}</strong>    
                     </td>
 
-                    <td class="px-0 mx-0"><strong>${resp.servicios[x].numUnidad}</strong></td>
+                    <td class="px-0 mx-0"><strong>${resp.servicios[x].numeroUnidad}</strong></td>
                     <td><span>${resp.servicios[x].nombreCliente}</span></td>
+                    <td><span>${(resp.servicios[x].ticket != null) ? '<span class="material-symbols-outlined i-correcto" data-bs-toggle="tooltip" data-bs-title="Ticket: '+resp.servicios[x].ticket+'">scale</span>':'<span class="material-symbols-outlined i-warning" data-bs-toggle="tooltip" data-bs-title="No ha sido pesada">scale</span>'}</span></td>
                     <td>${resp.servicios[x].fecha_entrada == null ? '' : moment(resp.servicios[x].fecha_entrada).format("DD/MM/YYYY hh:mm:ss")}</td>
                 </tr>       `
 
         }
         $("#tituloestatus").html(estatus).removeClass().addClass(getClaseEstado(clave));
         $("#tabla_estatus tbody").html("");
-        // $('#tabla_estatus').DataTable().clear().destroy();
+        $('#tabla_estatus').DataTable().clear().destroy();
         $("#tabla_estatus tbody").html(html);
         new DataTable('#tabla_estatus', {
             dom: 'Bfrtip',
@@ -211,7 +212,10 @@ function llenatablaestatus(id_estatus, estatus, clave) {
                     "width": "15%"
                 },
                 {
-                    "width": "50%"
+                    "width": "45%"
+                },
+                {
+                    "width": "5%"
                 },
                 {
                     "width": "30%"
@@ -229,7 +233,9 @@ function llenatablaestatus(id_estatus, estatus, clave) {
         });
 
     }).fail(resp => {}).catch(resp => {
-        mensajeError('Ocurrio un problema en la peticion en el servidor, favor de reportar a los administradores');
+        // mensajeError('Ocurrio un problema en la peticion en el servidor, favor de reportar a los administradores');
+        erpalert("error", "Ocurrio un problema en la peticion en el servidor, favor de reportar a los administradores");
+        console.log(resp);
     });
 }
 </script>

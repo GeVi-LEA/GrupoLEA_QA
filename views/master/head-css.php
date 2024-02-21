@@ -37,6 +37,9 @@
 <link rel="stylesheet" href="<?php echo URL; ?>assets/fonts/fontawesome/css/all.min.css">
 
 <link rel="stylesheet" href="<?php echo URL; ?>assets/css/style.css">
+
+<!-- DataTables -->
+<!-- <script src="<?php echo URL; ?>assets/libs/datatables/datatables.js"></script> -->
 <link rel="stylesheet" href="<?php echo URL; ?>assets/libs/datatables/datatables.min.css">
 <style>
 th.hide-search input {

@@ -2,10 +2,14 @@
 let inventarios;
 let clientes = [];
 let productos = [];
+let productos_clientes = {};
+let prods_disponibles = [];
 let lotes = [];
 let legends_lotes = [];
 let naves = [];
 let colors = [];
+let colors_productos = [];
+let colors_lotes = [];
 let detalle_productos = {};
 let detalle_lotes = {};
 let detalle_naves = {};
@@ -32,7 +36,7 @@ $(document).ready(function() {
 
     $('#InventariosTab a').unbind();
     $('#InventariosTab a').on('click', function(e) {
-        console.log($(this)[0].id.replace("-tab", ""));
+        //console.log($(this)[0].id.replace("-tab", ""));
         selectedtab = $(this)[0].id.replace("-tab", "");
         showLoading_global();
         armaInventarios($(this)[0].id.replace("-tab", "")).then(function() {
@@ -44,12 +48,12 @@ $(document).ready(function() {
         // console.log("moving: ", moving);
         // if (moving >= 0) {
         armaInventarios(selectedtab);
-        console.log("armó los inventarios");
+        //console.log("armó los inventarios");
         setTimeout(() => {
             chart_productos();
             chart_lotes();
             chart_nave();
-            console.log("terminó las graficas");
+            //console.log("terminó las graficas");
         }, 3000);
 
 
@@ -129,150 +133,6 @@ const muestraGrafica = (latab) => {
     }
 
 }
-const chart_productos = () => {
-
-    //import * as echarts from 'echarts';
-    $("#chart_productos").attr("style", "min-height:" + (productos.length * 100) + "px");
-    console.log($("#chart_productos"));
-    // $("#chart_productos").html("").attr("_echarts_instance_", "");
-    var chartDom = document.getElementById('chart_productos');
-    var myChart = echarts.init(chartDom);
-    var option;
-
-    option = {
-        color: colors, //clientes.map(obj => obj.color),
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                // Use axis to trigger tooltip
-                type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
-            }
-        },
-        legend: {},
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: {
-            type: 'value'
-        },
-        yAxis: {
-            type: 'category',
-            data: productos //['L500', 'LS222ER25']
-        },
-        series: series_productos
-
-    };
-
-    option && myChart.setOption(option);
-    myChart.on('click', function(params) {
-        // Print name in console
-        myChart.on('click', function(params) {
-            // Print name in console
-            // console.log(params);
-            /*obtiene detalles*/
-            abreDetalle(params.seriesName, "null", params.name, "null");
-        });
-    });
-}
-
-const chart_lotes = () => {
-
-    //import * as echarts from 'echarts';
-    $("#chart_lotes").attr("style", "height:" + (lotes.length * 100) + "px");
-    console.log($("#chart_lotes"));
-    // $("#chart_lotes").html("").attr("_echarts_instance_", "");
-    var chartDom = document.getElementById('chart_lotes');
-    chart_lotes_ = echarts.init(chartDom);
-    var option;
-
-    option = {
-        color: colors,
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                // Use axis to trigger tooltip
-                type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
-            }
-        },
-        legend: {},
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: {
-            type: 'value'
-        },
-        yAxis: {
-            type: 'category',
-            data: legends_lotes //['LT45654', 'ABC1', 'ABC2', '678']
-        },
-        series: series_lotes
-
-    };
-
-    option && chart_lotes_.setOption(option);
-    // console.log($("#chart_lotes"));
-    try {
-        chart_lotes_.unbind();
-    } catch ($exception) {}
-    chart_lotes_.on('click', function(params) {
-        // Print name in console
-        // console.log(params);
-        /*obtiene detalles*/
-        abreDetalle(params.seriesName, params.name, "null", "null");
-
-    });
-}
-const chart_nave = () => {
-
-    //import * as echarts from 'echarts';
-    $("#chart_nave").attr("style", "height:" + (lotes.length * 100) + "px");
-    // $("#chart_nave").html("").attr("_echarts_instance_", "");
-    console.log($("#chart_nave"));
-    var chartDom = document.getElementById('chart_nave');
-    var myChart = echarts.init(chartDom);
-    var option;
-
-    option = {
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                // Use axis to trigger tooltip
-                type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
-            }
-        },
-        legend: {},
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: {
-            type: 'value'
-        },
-        yAxis: {
-            type: 'category',
-            data: legends_lotes //['LT45654', 'ABC1', 'ABC2', '678']
-        },
-        series: series_naves
-
-    };
-
-    option && myChart.setOption(option);
-    myChart.on('click', function(params) {
-        // Print name in console
-        // console.log(params);
-        /*obtiene detalles*/
-        abreDetalle("null", params.name, "null", params.seriesName);
-    });
-}
-
 const armaInventarios = (latab) => {
     var dfrd1 = $.Deferred();
     clientes = [];
@@ -282,6 +142,7 @@ const armaInventarios = (latab) => {
     legends_lotes = [];
     naves = [];
     colors = [];
+    colors_productos = [];
     detalle_productos = {};
     detalle_lotes = {};
     detalle_naves = {};
@@ -302,9 +163,15 @@ const armaInventarios = (latab) => {
                 clientes.push(inventarios.inventarios[x].Nombre_Cliente);
                 clientes_id.push(inventarios.inventarios[x].id_cliente);
                 colors.push(inventarios.inventarios[x].color_cliente);
+                // productos_clientes[inventarios.inventarios[x].Nombre_Cliente].push(inventarios.inventarios[x].Producto);
             }
             if (productos.indexOf(inventarios.inventarios[x].Producto) < 0) {
                 productos.push(inventarios.inventarios[x].Producto); // + '{' + inventarios.inventarios[x].total + '}');
+                if (productos_clientes.hasOwnProperty(inventarios.inventarios[x].Nombre_Cliente) <= 0) {
+                    productos_clientes[inventarios.inventarios[x].Nombre_Cliente] = [inventarios.inventarios[x].Producto];
+                } else {
+                    productos_clientes[inventarios.inventarios[x].Nombre_Cliente].push(inventarios.inventarios[x].Producto);
+                }
             }
             if (lotes.indexOf(inventarios.inventarios[x].Lote) < 0) {
                 lotes.push(inventarios.inventarios[x].Lote); // + '{' + inventarios.inventarios[x].total + '}');
@@ -314,24 +181,18 @@ const armaInventarios = (latab) => {
             }
         }
         /* PRODUCTOS */
-        //             ,floor(20000/25) bultos
-        // ,floor((20000/25)/55) tarimas
-        // ,round((((20000/25)/55)-floor((20000/25)/55))*55) parcial
-        for (c = 0; c < clientes.length; c++) {
+        /*for (c = 0; c < productos.length; c++) {
             //console.log(clientes[c]);
-            if (detalle_productos.hasOwnProperty(clientes[c]) <= 0) {
-                detalle_productos[clientes[c]] = ({
-                    name: clientes[c],
+            if ((detalle_productos.hasOwnProperty(productos[c]) <= 0)) {
+                colors_productos.push(getRandomColor());
+                detalle_productos[productos[c]] = ({
+                    name: productos[c],
                     type: 'bar',
                     stack: 'total',
                     label: {
                         show: true,
                         formatter: function(param) {
-                            return param.data == 0 ? '' : numero2Decimales(param.data, false, 0) + ' KG (TARIMAS:' + (Math.floor((param.data / 25) / 55)) + ' SACOS:' + (Math
-                                .round((((
-                                        param.data /
-                                        25) / 55) -
-                                    Math.floor((param.data / 25) / 55)) * 55)) + ') ';
+                            return param.data == 0 ? '' : numero2Decimales(param.data, false, 0) + ' KG (TARIMAS:' + (Math.floor((param.data / 25) / 55)) + ' SACOS:' + (Math.round((((param.data / 25) / 55) - Math.floor((param.data / 25) / 55)) * 55)) + ') ';
                         },
                         shadowColor: 'rgba(0, 0, 0, 0.5)',
                         shadowBlur: 10
@@ -340,32 +201,70 @@ const armaInventarios = (latab) => {
                         focus: 'series'
                     },
                     data: [],
-
-
-
                 });
-                if (llenaclientes == 0) {
-                    $("#cmbClientes").append('<option value="' + clientes_id[c] + '">' + clientes[c] + '</option>');
-                }
                 let total = 0;
-                for (l = 0; l < productos.length; l++) {
+                for (l = 0; l < clientes.length; l++) {
                     // console.log(productos[l]);
+                    //if (llenaclientes == 0) {
+                    //$("#cmbClientes").append('<option value="' + clientes_id[c] + '">' + clientes[c] + '</option>');
+                    //}
                     total = 0;
                     for (x = 0; x < inventarios.inventarios.length; x++) {
-                        if ((clientes[c] == inventarios.inventarios[x].Nombre_Cliente) && inventarios.inventarios[x].Producto == productos[l]) {
+                        if ((clientes[l] == inventarios.inventarios[x].Nombre_Cliente) && inventarios.inventarios[x].Producto == productos[c]) {
+                            // if ((clientes[l] == inventarios.inventarios[x].Nombre_Cliente)) {
                             total = total + parseFloat(quitarComasNumero(inventarios.inventarios[x].disponible));
+                            // detalle_productos[productos[c]].data.push(total);
                         }
                     }
-                    detalle_productos[clientes[c]].data.push(total);
+                    detalle_productos[productos[c]].data.push(total);
                 }
             }
 
+        }*/
+        for (c = 0; c < clientes.length; c++) {
+            detalle_productos[clientes[c]] = ({
+                type: 'bar',
+                data: [], //[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                coordinateSystem: 'polar',
+                name: clientes[c],
+                stack: 'a',
+                emphasis: {
+                    focus: 'series'
+                },
+                label: {
+                    show: true,
+                    position: 'middle',
+                    formatter: '{b}: {c}'
+                }
+            });
+        }
+        for (c = 0; c < clientes.length; c++) {
+            for (p = 0; p < productos.length; p++) {
+                total = 0;
+                for (x = 0; x < inventarios.inventarios.length; x++) {
+                    // console.log(inventarios.inventarios[x].Producto, "==", productos[p]);
+                    if (inventarios.inventarios[x].Producto == productos[p]) {
+                        // if ((detalle_productos.hasOwnProperty(inventarios.inventarios[x].Nombre_Cliente) <= 0)) {
+                        total = total + parseFloat(quitarComasNumero(inventarios.inventarios[x].disponible));
+                        // detalle_productos[inventarios.inventarios[x].Nombre_Cliente].data.push(inventarios.inventarios[x].disponible);
+                    } else {
+                        // detalle_productos[inventarios.inventarios[x].Nombre_Cliente].data.push(0);
+                    }
+                }
+                detalle_productos[clientes[c]].data.push(total);
+            }
+        }
+
+        for (l = 0; l < clientes.length; l++) {
+            // console.log(clientes[l]);
+            if (llenaclientes == 0) {
+                $("#cmbClientes").append('<option value="' + clientes_id[l] + '">' + clientes[l] + '</option>');
+            }
         }
         llenaclientes = 1;
 
         /* LOTES */
         for (c = 0; c < clientes.length; c++) {
-            // console.log(clientes[c]);
             if (detalle_lotes.hasOwnProperty(clientes[c]) <= 0) {
                 detalle_lotes[clientes[c]] = ({
                     name: clientes[c],
@@ -402,20 +301,58 @@ const armaInventarios = (latab) => {
         }
 
         /* NAVES */
-        for (c = 0; c < naves.length; c++) {
+        // for (c = 0; c < naves.length; c++) {
+        //     // console.log(naves[c]);
+        //     if (detalle_naves.hasOwnProperty(naves[c]) <= 0) {
+        //         detalle_naves[naves[c]] = ({
+        //             name: naves[c],
+        //             type: 'bar',
+        //             stack: 'total',
+        //             label: {
+        //                 show: true,
+        //                 formatter: function(param) {
+        //                     return param.data == 0 ? '' : numero2Decimales(param.data, false, 0) + ' KG (TARIMAS:' + (Math.floor((param.data / 25) / 55)) + ' SACOS:' + (Math
+        //                         .round((((param.data /
+        //                                 25) / 55) -
+        //                             Math.floor((param.data / 25) / 55)) * 55)) + ') ';
+        //                 },
+        //             },
+        //             emphasis: {
+        //                 focus: 'series'
+        //             },
+        //             data: []
+        //         });
+        //         let total = 0;
+        //         for (l = 0; l < lotes.length; l++) {
+        //             // console.log(lotes[l]);
+        //             total = 0;
+        //             for (x = 0; x < inventarios.inventarios.length; x++) {
+        //                 if ((naves[c] == inventarios.inventarios[x].Nombre_Almacen) && inventarios.inventarios[x].Lote == lotes[l]) {
+        //                     total = total + parseFloat(quitarComasNumero(inventarios.inventarios[x].disponible));
+        //                 }
+        //             }
+        //             detalle_naves[naves[c]].data.push(total);
+        //         }
+        //     }
+
+
+        // }
+        //for (n = 0; n < naves.length; n++) {
+        for (c = 0; c < clientes.length; c++) {
             // console.log(naves[c]);
-            if (detalle_naves.hasOwnProperty(naves[c]) <= 0) {
-                detalle_naves[naves[c]] = ({
-                    name: naves[c],
+            if (detalle_naves.hasOwnProperty(clientes[c]) <= 0) {
+                detalle_naves[clientes[c]] = ({
+                    name: clientes[c],
                     type: 'bar',
                     stack: 'total',
                     label: {
                         show: true,
                         formatter: function(param) {
-                            return param.data == 0 ? '' : numero2Decimales(param.data, false, 0) + ' KG (TARIMAS:' + (Math.floor((param.data / 25) / 55)) + ' SACOS:' + (Math
-                                .round((((param.data /
+                            // console.log("param: ", param);
+                            return param.data == 0 ? '' : numero2Decimales(param.data.value, false, 0) + ' KG (TARIMAS:' + (Math.floor((param.data.value / 25) / 55)) + ' SACOS:' + (Math
+                                .round((((param.data.value /
                                         25) / 55) -
-                                    Math.floor((param.data / 25) / 55)) * 55)) + ') ';
+                                    Math.floor((param.data.value / 25) / 55)) * 55)) + ') ';
                         },
                     },
                     emphasis: {
@@ -424,33 +361,39 @@ const armaInventarios = (latab) => {
                     data: []
                 });
                 let total = 0;
-                for (l = 0; l < lotes.length; l++) {
+                for (l = 0; l < naves.length; l++) {
                     // console.log(lotes[l]);
                     total = 0;
                     for (x = 0; x < inventarios.inventarios.length; x++) {
-                        if ((naves[c] == inventarios.inventarios[x].Nombre_Almacen) && inventarios.inventarios[x].Lote == lotes[l]) {
+                        if ((naves[l] == inventarios.inventarios[x].Nombre_Almacen) && inventarios.inventarios[x].Nombre_Cliente == clientes[c]) {
                             total = total + parseFloat(quitarComasNumero(inventarios.inventarios[x].disponible));
                         }
                     }
-                    detalle_naves[naves[c]].data.push(total);
+                    detalle_naves[clientes[c]].data.push({
+                        value: total,
+                        itemStyle: {
+                            color: getColorCliente(clientes[c])
+                        },
+                    });
                 }
             }
 
 
         }
+        //}
 
 
         /*DETALLE PRODUCTOS */
         series_productos = [];
         $.each(detalle_productos, function(idx, obj) {
+            //console.log((idx, obj))
             series_productos.push(obj);
-
         });
         series_lotes = [];
-        $.each(detalle_lotes, function(idx, obj) {
-            series_lotes.push(obj);
-
-        });
+        //$.each(detalle_lotes, function(idx, obj) {
+        //    series_lotes.push(obj);
+        //
+        //});
         series_naves = [];
         $.each(detalle_naves, function(idx, obj) {
             series_naves.push(obj);
@@ -467,6 +410,9 @@ const armaInventarios = (latab) => {
                     data: 'Nombre_Cliente'
                 },
                 {
+                    data: 'numUnidad'
+                },
+                {
                     data: 'Nombre_Almacen'
                 },
                 {
@@ -476,9 +422,32 @@ const armaInventarios = (latab) => {
                     data: 'Lote'
                 },
                 {
+                    data: 'Rotulo'
+                },
+                {
                     data: 'disponible'
                 },
-
+                {
+                    data: 'sacoxtarima'
+                },
+                {
+                    data: 'tarimas'
+                },
+                {
+                    data: 'parcial'
+                },
+                /*
+                <th>Nombre del Cliente</th>
+                <th>Num Ferrotolva</th>
+                <th>Almacen</th>
+                <th>Producto</th>
+                <th>Lote</th>
+                <th>Rótulo</th>
+                <th>Cant. Disponible</th>
+                <th>Sacos por Tarima</th>
+                <th>Tarimas</th>
+                <th>Parcial</th>
+                */
 
             ],
             buttons: [
@@ -502,16 +471,377 @@ const armaInventarios = (latab) => {
             icon: 'error'
         });
     });
-    console.log("terminó de armar");
+    //console.log("terminó de armar");
     return $.when(dfrd1).done(function() {
-        console.log('both tasks in function1 are done');
+        //console.log('both tasks in function1 are done');
         // Both asyncs tasks are done
     }).promise();
 }
 
+const chart_productos = () => {
+
+    //import * as echarts from 'echarts';
+    // $("#chart_productos").attr("style", "min-height:" + (productos.length * 100) + "px");
+    console.log($("#chart_productos"));
+    $("#productos .contenido").html("");
+    for (var xchart = 0; xchart < clientes_id.length; xchart++) {
+
+        $("#productos .contenido").append(`<div class='col-md-${(((12/Math.round(clientes_id.length))/1) < 6) ? "6":((12/Math.round(clientes_id.length))/1)}'><div id='chart_productos_${clientes_id[xchart]}' style='min-height:600px;'></div></div>`);
+
+        // $("#chart_productos").html("").attr("_echarts_instance_", "");
+        var chartDom = document.getElementById('chart_productos_' + clientes_id[xchart]);
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        /* ARMA LA DATA POR CLIENTE */
+        var prod_cliente = {};
+        var color_cliente = "";
+        $.each(inventarios.inventarios, function(i, item) {
+            if (item.id_cliente == clientes_id[xchart]) {
+                // console.log(item);
+                color_cliente = item.color_cliente;
+                if (prod_cliente.hasOwnProperty(item.Producto) <= 0) {
+                    prod_cliente[item.Producto] = parseFloat(quitarComasNumero(item.disponible));
+                } else {
+                    prod_cliente[item.Producto] = prod_cliente[item.Producto] + parseFloat(quitarComasNumero(item.disponible));
+                }
+            }
+        });
+        data_estatus = [];
+        data_label = [];
+        data_value = [];
+        $.each(prod_cliente, function(i, item) {
+            // console.log(i, " - ", item);
+            data_label.push(i + " {" + numero2Decimales2(item, false, 0) + " KG}");
+            data_value.push(item);
+            data_estatus.push({
+                'value': item,
+                'name': i + " {" + numero2Decimales2(item, false, 0) + " KG}",
+                // 'id': obj.estatus_id,
+                // 'clave': obj.clave
+            });
+        });
+
+        option = {
+            title: {
+                text: clientes[xchart],
+                // subtext: 'Fake Data',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            xAxis: {
+                type: 'category',
+                data: data_label, //['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                axisLabel: {
+                    interval: 0,
+                    rotate: 90
+                }
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: {
+                    interval: 0,
+                    rotate: 90
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            series: [{
+                data: data_value, //[120, 200, 150, 80, 70, 110, 130],
+                type: 'bar',
+                color: color_cliente,
+                name: clientes[xchart]
+            }]
+        };
+        option && myChart.setOption(option);
+//        myChart.unbind();
+        myChart.on('click', function(params) {
+            // Print name in console
+            //console.log(params);
+            // myChart.on('click', function(params) {
+            // Print name in console
+
+            /*obtiene detalles*/
+            abreDetalle(params.seriesName, "null", params.name.split(" {")[0], "null");
+            // });
+        });
+    }
+}
+
+/*
+    const chart_productos = () => {
+
+        //import * as echarts from 'echarts';
+        // $("#chart_productos").attr("style", "min-height:" + (productos.length * 100) + "px");
+        console.log($("#chart_productos"));
+        // $("#chart_productos").html("").attr("_echarts_instance_", "");
+        var chartDom = document.getElementById('chart_productos');
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        /*option = {
+            color: colors_productos, //clientes.map(obj => obj.color),
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    // Use axis to trigger tooltip
+                    type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
+                }
+            },
+            legend: {},
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value'
+            },
+            yAxis: {
+                type: 'category',
+                data: clientes //['L500', 'LS222ER25']
+            },
+            series: series_productos //clientes //series_productos
+
+        };
+        /
+
+        option = {
+            angleAxis: {},
+            radiusAxis: {
+                type: 'category',
+                data: productos, //["Syrus", "Adland"],
+                z: 10
+            },
+            polar: {},
+            series: series_productos,
+            /*[{
+                    type: 'bar',
+                    data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                    coordinateSystem: 'polar',
+                    name: 'A',
+                    stack: 'a',
+                    emphasis: {
+                        focus: 'series'
+                    }
+                },
+                {
+                    type: 'bar',
+                    data: [2, 4, 6, 8],
+                    coordinateSystem: 'polar',
+                    name: 'B',
+                    stack: 'a',
+                    emphasis: {
+                        focus: 'series'
+                    }
+                },
+                {
+                    type: 'bar',
+                    data: [1, 2, 3, 4],
+                    coordinateSystem: 'polar',
+                    name: 'C',
+                    stack: 'a',
+                    emphasis: {
+                        focus: 'series'
+                    }
+                }
+            ],*
+        legend: {
+            show: true,
+            data: clientes //["PP HYS 6200", "PE MLLD 7118A SUPER", "PE MLLD FLLH18-0|10", "LDPE ADITIVO", "H521GR", "PP RP250", "PP RP650", "PP D115A", "HDI0653U1", "HDB0355"]
+        }
+        };
+
+        option && myChart.setOption(option);
+        myChart.on('click', function(params) {
+            // Print name in console
+            myChart.on('click', function(params) {
+                // Print name in console
+                // console.log(params);
+                /*obtiene detalles*
+                abreDetalle(params.seriesName, "null", params.name, "null");
+            });
+        });
+    }
+*/
+
+const chart_lotes = () => {
+
+    //import * as echarts from 'echarts';
+    // $("#chart_lotes").attr("style", "height:" + (lotes.length * 100) + "px");
+    console.log("#chart_lotes");
+    $("#lotes .contenido").html("");
+    for (var xchart = 0; xchart < clientes_id.length; xchart++) {
+
+        $("#lotes .contenido").append(`<div class='col-md-${(((12/Math.round(clientes_id.length))/1) < 6) ? "6":((12/Math.round(clientes_id.length))/1)}'><div id='chart_lotes_${clientes_id[xchart]}' style='min-height:600px;'></div></div>`);
+
+        // $("#chart_productos").html("").attr("_echarts_instance_", "");
+        var chartDom = document.getElementById('chart_lotes_' + clientes_id[xchart]);
+
+        // $("#chart_lotes").html("").attr("_echarts_instance_", "");
+        var chartDom = document.getElementById('chart_lotes_' + clientes_id[xchart]);
+        chart_lotes_ = echarts.init(chartDom);
+        var option;
+
+        var prod_cliente = {};
+        var color_cliente = "";
+        //console.log("cliente: ", clientes_id[xchart]);
+        $.each(inventarios.inventarios, function(i, item) {
+            if (item.id_cliente == clientes_id[xchart]) {
+                // console.log(item);
+                color_cliente = item.color_cliente;
+                if (prod_cliente.hasOwnProperty(item.Lote) <= 0) {
+                    prod_cliente[item.Lote] = parseFloat(quitarComasNumero(item.disponible));
+                } else {
+                    prod_cliente[item.Lote] = prod_cliente[item.Lote] + parseFloat(quitarComasNumero(item.disponible));
+                }
+            }
+        });
+        data_estatus = [];
+        var data_label = [];
+        var data_value = [];
+        $.each(prod_cliente, function(i, item) {
+            data_label.push(i + " {" + numero2Decimales2(item, false, 0) + " KG}");
+            data_value.push(item);
+        });
+        /*
+        option = {
+            color: colors,
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    // Use axis to trigger tooltip
+                    type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
+                }
+            },
+            legend: {},
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value'
+            },
+            yAxis: {
+                type: 'category',
+                data: legends_lotes //['LT45654', 'ABC1', 'ABC2', '678']
+            },
+            series: series_lotes
+
+        };
+        */
+        option = {
+            title: {
+                text: clientes[xchart],
+                // subtext: 'Fake Data',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            xAxis: {
+                type: 'category',
+                data: data_label, //['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                axisLabel: {
+                    interval: 0,
+                    rotate: 90
+                }
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: {
+                    interval: 0,
+                    rotate: 90
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            series: [{
+                data: data_value, //[120, 200, 150, 80, 70, 110, 130],
+                type: 'bar',
+                color: color_cliente,
+                name: clientes[xchart]
+            }]
+        };
+        option && chart_lotes_.setOption(option);
+        // console.log($("#chart_lotes"));
+        //try {
+        //    chart_lotes_.unbind();
+        //} catch ($exception) {}
+//        chart_lotes.unbind();
+        chart_lotes_.on('click', function(params) {
+            // Print name in console
+            //console.log(params);
+            /*obtiene detalles*/
+            abreDetalle(params.seriesName, params.name.split(" {")[0], "null", "null");
+
+        });
+    }
+}
+const chart_nave = () => {
+
+    //import * as echarts from 'echarts';
+    $("#chart_nave").attr("style", "height:" + (naves.length * 200) + "px");
+    // $("#chart_nave").html("").attr("_echarts_instance_", "");
+    console.log($("#chart_nave"));
+    var chartDom = document.getElementById('chart_nave');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    option = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                // Use axis to trigger tooltip
+                type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
+            }
+        },
+        legend: {},
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'value'
+        },
+        yAxis: {
+            type: 'category',
+            data: naves, //legends_lotes //['LT45654', 'ABC1', 'ABC2', '678']
+        },
+        series: series_naves
+
+    };
+
+    option && myChart.setOption(option);
+//    myChart.unbind();
+    myChart.on('click', function(params) {
+        // Print name in console
+        //console.log(params);
+        /*obtiene detalles*/
+        abreDetalle(params.seriesName, "null", "null", params.name);
+    });
+}
+
+
+
 const abreDetalle = (cliente = "", lote = "", producto = "", almacen = "") => {
-    console.log("entra a detalle");
-    console.log(cliente, lote, producto);
+    //console.log("entra a detalle");
+    //console.log(cliente, lote, producto, almacen);
     let datos = {
         "cliente": cliente,
         "lote": lote,
@@ -524,11 +854,11 @@ const abreDetalle = (cliente = "", lote = "", producto = "", almacen = "") => {
         url: __url__ + "?ajax&controller=Servicios&action=getInventariosDetalle",
         data: datos,
         beforeSend: function(datas) {
-            console.log(datos);
+            //console.log(datos);
         },
         success: function(r) {
             var resp = r;
-            console.log(resp);
+            //console.log(resp);
             detalles = resp;
             Swal.fire({
                 title: "<strong>" + ((cliente != "null") ? cliente : almacen) + "</strong>",
@@ -749,7 +1079,7 @@ function getrow(cliente, lote) {
 }
 
 function numero2Decimales2(str = "", $decimales = false, $numDecimales = 2) {
-    console.log("str: ", str);
+    // console.log("str: ", str);
     if ($decimales) {
         $int = parseFloat(str);
         // return number_format($int, $numDecimales);
@@ -788,5 +1118,18 @@ function quitarComasNumero(value) {
     } catch (error) {
         return "";
     }
+}
+
+function getColorCliente(cliente) {
+    var color = getRandomColor();
+    // console.log("getcolorcliente: ", color);
+    for (x = 0; x < inventarios.inventarios.length; x++) {
+        if (inventarios.inventarios[x].Nombre_Cliente == cliente) {
+            color = inventarios.inventarios[x].color_cliente;
+            break;
+        }
+    }
+    // console.log(color);
+    return color;
 }
 </script>

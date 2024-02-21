@@ -76,7 +76,27 @@ class UtilsHelp
 
     public static function covertDatetoDateSql($fecha)
     {
-        $stringFecha = str_replace('/', '-', $fecha);
+        $stringFecha = 'null';
+        if (($fecha != '') && ($fecha != ' ::00')) {
+            $stringFecha = str_replace('/', '-', $fecha);
+            // print_r('<pre>');
+            // print_r(strlen($stringFecha));
+            // print_r('</pre>');
+            if (strlen($stringFecha) > 10) {
+                if (strlen(explode('-', $stringFecha)[0]) != 4) {
+                    $fecha       = explode(' ', $stringFecha)[0];
+                    $hora        = explode(' ', $stringFecha)[1];
+                    $stringFecha = explode('-', $fecha)[2] . '-' . explode('-', $fecha)[1] . '-' . explode('-', $fecha)[0] . ' ' . $hora;
+                }
+            } else {
+                if (strlen(explode('-', $stringFecha)[0]) != 4) {
+                    $fecha       = explode(' ', $stringFecha)[0];
+                    $stringFecha = explode('-', $fecha)[2] . '-' . explode('-', $fecha)[1] . '-' . explode('-', $fecha)[0] . ' 00:00:00';
+                }
+            }
+        } else {
+            $stringFecha = 'null';
+        }
         return $stringFecha;
     }
 
@@ -127,12 +147,16 @@ class UtilsHelp
             return number_format($int, $numDecimales);
         } else {
             $strArray = preg_split('/[.]/', $str);
-            if (intval($strArray[1]) == 0) {
-                $int = intval($str);
-                return number_format($int);
-            } else {
-                $int = floatval($str);
-                return number_format($int, $numDecimales);
+            try {
+                if (intval($strArray[1]) == 0) {
+                    $int = intval($str);
+                    return number_format($int);
+                } else {
+                    $int = floatval($str);
+                    return number_format($int, $numDecimales);
+                }
+            } catch (Exception $th) {
+                return $int;
             }
         }
     }

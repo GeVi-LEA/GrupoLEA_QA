@@ -28,6 +28,8 @@ require_once models_root . 'catalogos/tipo_empaque.php';
 require_once models_root . 'catalogos/servicio.php';
 require_once models_root . 'catalogos/almacen.php';
 require_once models_root . 'catalogos/proveedor.php';
+require_once models_root . 'catalogos/transportista_cliente.php';
+require_once models_root . 'catalogos/chofer_transportista_cliente.php';
 
 class catalogoController
 {
@@ -2093,9 +2095,105 @@ class catalogoController
 
     public function getProveedores()
     {
-        $c           = new Proveedor();
+        $c = new Proveedor();
         $proveedores = $c->getAll();
 
         echo json_encode(['mensaje' => 'OK', 'proveedores' => $proveedores]);
+    }
+    
+         public function showTransportistasClientes()
+    {
+        $trans= new TransportistasClientes();
+        $transportistas = $trans->getAll();
+        require '../../views/catalogos/transportistas_clientes.php';
+    }
+
+    public function saveChoferTransportistaClientes()
+    {
+        Utils::deleteSession('result');
+        Utils::deleteSession('errores');
+
+        if (isset($_POST['nombre']) && $_POST['nombre'] != '') {
+            $servicio = new Servicio();
+            $servicio->setNombre($_POST['nombre']);
+            $servicio->setDescripcion($_POST['descripcion']);
+            $servicio->setClave($_POST['clave']);
+
+            if ($_POST['id'] != null || $_POST['id'] != '') {
+                $servicio->setId($_POST['id']);
+                $save = $servicio->edit();
+            } else {
+                $save = $servicio->save();
+            }
+
+            if ($save) {
+                $_SESSION['result'] = 'true';
+            } else {
+                $_SESSION['result'] = 'false';
+            }
+            header('Location:' . catalogosUrl . '?controller=Catalogo&action=showServicios');
+        } else {
+            header('Location:' . catalogosUrl . '?controller=Catalogo&action=showServicios');
+        }
+    }
+
+    public function deleteChoferTransportistaClientes()
+    {
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+
+            $servicio = new Servicio();
+            $servicio->setId($id);
+            $servicio->delete();
+        }
+        header('Location:' . catalogosUrl . '?controller=Catalogo&action=showServicios');
+    }
+    
+     public function showChoferesTransportistasClientes()
+    {
+        $chofer = new ChoferTransportistaCliente();
+        $choferes = $chofer->getAll();
+        require '../../views/catalogos/choferes_transportistas_clientes.php';
+    }
+
+    public function saveChoferTransportistaCliente()
+    {
+        Utils::deleteSession('result');
+        Utils::deleteSession('errores');
+
+        if (isset($_POST['nombre']) && $_POST['nombre'] != '') {
+            $servicio = new Servicio();
+            $servicio->setNombre($_POST['nombre']);
+            $servicio->setDescripcion($_POST['descripcion']);
+            $servicio->setClave($_POST['clave']);
+
+            if ($_POST['id'] != null || $_POST['id'] != '') {
+                $servicio->setId($_POST['id']);
+                $save = $servicio->edit();
+            } else {
+                $save = $servicio->save();
+            }
+
+            if ($save) {
+                $_SESSION['result'] = 'true';
+            } else {
+                $_SESSION['result'] = 'false';
+            }
+            header('Location:' . catalogosUrl . '?controller=Catalogo&action=showServicios');
+        } else {
+            header('Location:' . catalogosUrl . '?controller=Catalogo&action=showServicios');
+        }
+    }
+
+    public function deleteChoferTransportistaCliente()
+    {
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+
+            $servicio = new Servicio();
+            $servicio->setId($id);
+            $servicio->delete();
+        }
+        header('Location:' . catalogosUrl . '?controller=Catalogo&action=showServicios');
     }
 }

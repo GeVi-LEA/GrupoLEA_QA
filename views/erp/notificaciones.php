@@ -66,7 +66,7 @@ function difference2Parts(milliseconds) {
 
 function deleteNotificacion(id_not = 0) {
     jQuery.ajax({
-        url: "<?php echo URL; ?>/views/principal/index.php",
+        url: __url__ + '?ajax&controller=Notificaciones&action=getNotificaciones',
         data: {
             opc: "deleteNotification",
             id_not: id_not
@@ -88,7 +88,7 @@ function deleteNotificacion(id_not = 0) {
 
 function seenNotificacion(id_not = 0) {
     jQuery.ajax({
-        url: "<?php echo URL; ?>/views/principal/index.php",
+        url: __url__ + '?ajax&controller=Notificaciones&action=getNotificaciones',
         data: {
             opc: "seenNotification",
             id_not: id_not
@@ -111,12 +111,19 @@ function seenNotificacion(id_not = 0) {
 
 function llamaNotificaciones() {
     jQuery.ajax({
-        url: "<?php echo URL; ?>/views/principal/index.php",
+        url: __url__ + '?ajax&controller=Notificaciones&action=getNotificaciones',
         data: {
             opc: "getNotificacionesIndex"
         },
         method: 'POST',
         dataType: "json",
+        // jQuery.ajax({
+        // url: "?ajax&controller=Notificaciones&action=getNotificaciones", //url: "<?php echo URL; ?>/views/master/index.php",
+        // data: {
+        // "opc": "getNotificaciones"
+        // },
+        // method: 'POST',
+        // dataType: "json",
     }).then(resp => {
         // console.log(resp);
         var_notificaciones = resp.notificaciones;
@@ -129,17 +136,18 @@ function llamaNotificaciones() {
                 if (var_notificaciones[x].status == 2) {
                     cant_unseen++;
                 }
+                // <div class="col-2">
+                //   <i class="fa fa-file warning font-large-2 float-left"></i>
+                //   <span class="material-symbols-outlined"></span>
+                // </div>
                 html += `
                             <div class="text-reset notification-item">
                                 <div class="card status${var_notificaciones[(x)].status}">
                                           <div class="card-content">
                                                 <div class="card-body">
                                                       <div class="row">
-                                                            <div class="col-2">
-                                                                  <i class="ft-file warning font-large-2 float-left"></i>
-                                                                  <span class="material-symbols-outlined"></span>
-                                                            </div>
-                                                            <div class="col-10">
+                                                            
+                                                            <div class="col-12">
                                                                   <div class="row">
                                                                         <div class="col-12">
                                                                               <h6>${var_notificaciones[(x)].titulo}</h6>
@@ -216,13 +224,15 @@ function llamaNotificaciones() {
         });
 
 
-    }).fail(resp => {
-        console.log("fail");
-        console.log(resp);
+    }).fail(function(xhr, textStatus, errorThrown) {
+        console.log("fail"); //{}resp =>
+        console.log("textStatus: ", textStatus, " errorThrown: ", errorThrown);
     }).catch(resp => {
-        swal.fire('Ocurrio un problema en la peticion en el servidor, favor de reportar a los administradores', {
-            icon: 'error'
+        Swal.fire({
+            icon: 'error',
+            text: 'Ocurrio un problema en la peticion en el servidor, favor de reportar a los administradores'
         });
+        //console.log(resp);
 
     });
 

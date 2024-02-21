@@ -42,6 +42,18 @@ html {
 	vertical-align: middle;
 }
 
+.i-green {
+	padding-right: 15px;
+	/* font-size: 36px; */
+	color: #00aa2b;
+	vertical-align: middle;
+}
+
+.pendiente {
+	color: #e49c30;
+	font-style: italic;
+}
+
 .btn-warning {
 	color: #ffff;
 }
@@ -147,6 +159,13 @@ div.jconfirm-content-pane {
 	vertical-align: middle;
 }
 
+.i-warning {
+	padding-right: 15px;
+	font-size: 36px;
+	color: #df9c0c;
+	vertical-align: middle;
+}
+
 div.jconfirm-content-pane {
 	text-align: center;
 }
@@ -170,7 +189,17 @@ div.jconfirm-content-pane {
 .i-calendar {
 	font-size: 18px;
 	color: #141457;
-	background-color: #fff;
+	/* background-color: #fff; */
+	background-color: #444855;
+	color: #fff;
+	border-radius: 5px;
+	border-top-right-radius: 5px !important;
+	border-bottom-right-radius: 5px !important;
+	/* font-size: 10px; */
+	margin-left: -5px;
+	height: 110%;
+	margin-top: -2px;
+	padding: 9px;
 }
 
 .i-calendar:active {
@@ -532,8 +561,12 @@ button {
 
 .div-radios {
 	border: 1px solid #212529;
-	padding: 5px;
+	padding-left: 1%;
+	padding-right: 2%;
 	border-radius: 5px;
+	margin-left: 10px;
+	margin-right: 10px;
+	text-align: center;
 }
 
 .titulo-div.servicios-titulo {
@@ -598,4 +631,20 @@ button {
 	border-top-left-radius: 10px !important;
 
 	border-bottom-left-radius: 10px !important;
+}
+
+.disponible_div .input-group-text {
+	font-size: 0.6rem !important;
+	padding: 8px !important;
+	background-color: transparent !important;
+	border: none !important;
+}
+
+.emsg_input {
+	border: solid #990033 !important;
+}
+
+.emsg {
+	color: #990033 !important;
+	font-style: italic !important;
 }

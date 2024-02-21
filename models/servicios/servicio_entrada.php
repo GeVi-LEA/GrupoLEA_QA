@@ -10,11 +10,13 @@ class ServicioEntrada
     private $tipoTransporteId;
     private $numUnidad;
     private $fechaEntrada;
+    private $fechaLiberacion;
     private $fechaSalida;
     private $transportista;
     private $chofer;
     private $placa1;
     private $placa2;
+    private $peso_obligatorio;
     private $ticket;
     private $pesoCliente;
     private $pesoTara;
@@ -31,19 +33,31 @@ class ServicioEntrada
     private $observaciones;
     private $db;
 
+    /* #region CAMPOS */
     public function __construct()
     {
         $this->db = Database::connect();
     }
 
+    // region user description
     public function getId()
     {
         return $this->id;
     }
 
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
     public function getNumUnidad()
     {
         return $this->numUnidad;
+    }
+
+    public function setNumUnidad($numUnidad): void
+    {
+        $this->numUnidad = $this->db->real_escape_string(UtilsHelp::toUpperString(UtilsHelp::quitarEspacios($numUnidad)));
     }
 
     public function getClienteId()
@@ -56,34 +70,14 @@ class ServicioEntrada
         return $this->fechaEntrada;
     }
 
-    public function getFechaSalida()
-    {
-        return $this->fechaSalida;
-    }
-
-    public function getTicket()
-    {
-        return $this->ticket;
-    }
-
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-
-    public function setNumUnidad($numUnidad): void
-    {
-        $this->numUnidad = $this->db->real_escape_string(UtilsHelp::toUpperString(UtilsHelp::quitarEspacios($numUnidad)));
-    }
-
-    public function setClienteId($clienteId): void
-    {
-        $this->clienteId = $clienteId;
-    }
-
     public function setFechaEntrada($fechaEntrada): void
     {
         $this->fechaEntrada = $fechaEntrada;
+    }
+
+    public function getFechaSalida()
+    {
+        return $this->fechaSalida;
     }
 
     public function setFechaSalida($fechaSalida): void
@@ -91,9 +85,29 @@ class ServicioEntrada
         $this->fechaSalida = $fechaSalida;
     }
 
+    public function getFechaLiberacion()
+    {
+        return $this->fechaLiberacion;
+    }
+
+    public function setFechaLiberacion($fechaLiberacion): void
+    {
+        $this->fechaLiberacion = $fechaLiberacion;
+    }
+
+    public function getTicket()
+    {
+        return $this->ticket;
+    }
+
     public function setTicket($ticket): void
     {
         $this->ticket = $ticket;
+    }
+
+    public function setClienteId($clienteId): void
+    {
+        $this->clienteId = $clienteId;
     }
 
     public function getPesoTara()
@@ -121,14 +135,14 @@ class ServicioEntrada
         return $this->pesoBruto;
     }
 
-    public function getPesoNeto()
-    {
-        return $this->pesoNeto;
-    }
-
     public function setPesoBruto($pesoBruto): void
     {
         $this->pesoBruto = $pesoBruto;
+    }
+
+    public function getPesoNeto()
+    {
+        return $this->pesoNeto;
     }
 
     public function setPesoNeto($pesoNeto): void
@@ -151,24 +165,14 @@ class ServicioEntrada
         return $this->transportista;
     }
 
-    public function getChofer()
-    {
-        return $this->chofer;
-    }
-
-    public function getOrden()
-    {
-        return $this->orden;
-    }
-
-    public function getObservaciones()
-    {
-        return $this->observaciones;
-    }
-
     public function setTransportista($transportista): void
     {
         $this->transportista = $this->db->real_escape_string(UtilsHelp::toUpperString($transportista));
+    }
+
+    public function getChofer()
+    {
+        return $this->chofer;
     }
 
     public function setChofer($chofer): void
@@ -176,9 +180,19 @@ class ServicioEntrada
         $this->chofer = $this->db->real_escape_string(UtilsHelp::toUpperString($chofer));
     }
 
+    public function getOrden()
+    {
+        return $this->orden;
+    }
+
     public function setOrden($orden): void
     {
         $this->orden = $this->db->real_escape_string(UtilsHelp::toUpperString($orden));
+    }
+
+    public function getObservaciones()
+    {
+        return $this->observaciones;
     }
 
     public function setObservaciones($observaciones): void
@@ -191,14 +205,14 @@ class ServicioEntrada
         return $this->placa1;
     }
 
-    public function getPlaca2()
-    {
-        return $this->placa2;
-    }
-
     public function setPlaca1($placa1): void
     {
         $this->placa1 = $this->db->real_escape_string(UtilsHelp::toUpperString($placa1));
+    }
+
+    public function getPlaca2()
+    {
+        return $this->placa2;
     }
 
     public function setPlaca2($placa2): void
@@ -221,9 +235,19 @@ class ServicioEntrada
         return $this->estatusId;
     }
 
+    public function setEstatusId($estatusId): void
+    {
+        $this->estatusId = $estatusId;
+    }
+
     public function getTipoTransporteId()
     {
         return $this->tipoTransporteId;
+    }
+
+    public function setTipoTransporteId($tipoTransporteId): void
+    {
+        $this->tipoTransporteId = Utils::getNullString($tipoTransporteId);
     }
 
     public function getSellos()
@@ -241,34 +265,24 @@ class ServicioEntrada
         return $this->sello1;
     }
 
-    public function getSello2()
-    {
-        return $this->sello2;
-    }
-
-    public function getSello3()
-    {
-        return $this->sello3;
-    }
-
-    public function setEstatusId($estatusId): void
-    {
-        $this->estatusId = $estatusId;
-    }
-
-    public function setTipoTransporteId($tipoTransporteId): void
-    {
-        $this->tipoTransporteId = Utils::getNullString($tipoTransporteId);
-    }
-
     public function setSello1($sello1): void
     {
         $this->sello1 = $this->db->real_escape_string(UtilsHelp::toUpperString($sello1));
     }
 
+    public function getSello2()
+    {
+        return $this->sello2;
+    }
+
     public function setSello2($sello2): void
     {
         $this->sello2 = $this->db->real_escape_string(UtilsHelp::toUpperString($sello2));
+    }
+
+    public function getSello3()
+    {
+        return $this->sello3;
     }
 
     public function setSello3($sello3): void
@@ -287,24 +301,24 @@ class ServicioEntrada
     }
 
     // ////
-    public function setFirma_entrada($firma_entrada): void
-    {
-        $this->firma_entrada = $this->db->real_escape_string($firma_entrada);
-    }
-
     public function getFirma_entrada()
     {
         return $this->firma_entrada;
     }
 
-    public function setFirma_salida($firma_salida): void
+    public function setFirma_entrada($firma_entrada): void
     {
-        $this->firma_salida = $this->db->real_escape_string($firma_salida);
+        $this->firma_entrada = $this->db->real_escape_string($firma_entrada);
     }
 
     public function getFirma_salida()
     {
         return $this->firma_salida;
+    }
+
+    public function setFirma_salida($firma_salida): void
+    {
+        $this->firma_salida = $this->db->real_escape_string($firma_salida);
     }
 
     public function getCantPuertas()
@@ -347,14 +361,37 @@ class ServicioEntrada
         $this->tipo_producto = $tipo_producto;
     }
 
+    public function getEmpresaId()
+    {
+        return $this->empresa_id;
+    }
+
+    public function setEmpresaId($empresa_id): void
+    {
+        $this->empresa_id = $empresa_id;
+    }
+
+    public function getPesoObligatorio()
+    {
+        return $this->peso_obligatorio;
+    }
+
+    public function setPesoObligatorio($peso_obligatorio): void
+    {
+        $this->peso_obligatorio = $peso_obligatorio;
+    }
+
+    /* #endregion */
+
     public function save()
     {
-        $sql    = "insert into servicios_entradas values(
+        $sql = "insert into servicios_entradas values(
             null /*id */
         , {$this->getClienteId()}/*, cliente_id */
         , {$this->getEstatusId()}/*, estatus_id */
         , {$this->getTipoTransporteId()}/*, tipo_transporte_id */
         , {$this->getEntrada_Salida()}/*, entrada_salida */
+        , {$this->getEmpresaId()}/*, empresa */
         , {$this->getTipo_Producto()}/*, tipo_producto */
         , '{$this->getNumUnidad()}' /*, numUnidad */
         , null  /*, fecha_entrada */
@@ -364,7 +401,9 @@ class ServicioEntrada
         , '{$this->getChofer()}' /*, chofer */
         , '{$this->getPlaca1()}' /*, placa1 */
         , '{$this->getPlaca2()}' /*, placa2 */
+        , '{$this->getPesoObligatorio()}' /*, peso_obligatorio */        
         ,  {$this->getTicket()} /*, ticket */
+        , null /*, estatus_bascula */
         ,  {$this->getPesoCliente()} /*, peso_cliente */
         ,  {$this->getPesoTara()} /*, peso_tara */
         ,  {$this->getPesoTeorico()} /*, peso_teorico */
@@ -378,12 +417,15 @@ class ServicioEntrada
         , '{$this->getObservaciones()}' /*, observaciones */
         , '{$_SESSION['usuario']->id}' /*, usuario_creacion */
         , now() /*, fecha_creacion */
-        , '' /*, firma_entrada */
-        , '' /*, firma_salida */
+        , '' /* firma_entrada */
+        , '' /* firma_salida */
         , {$this->getCantPuertas()} /*, cant_puertas */
         , {$this->getTranspLeaCliente()} /*, transp_lea_cliente */
         ,'' /*, sellos */
          )";
+        // print_r('<pre>');
+        // print_r($sql);
+        // print_r('</pre>');
         $save   = $this->db->query($sql);
         $result = false;
         if ($save) {
@@ -411,6 +453,10 @@ class ServicioEntrada
                 , c.direccion direccion_cliente
                 ,(SELECT sum(ifnull(total_ensacado,cantidad)) FROM servicios_ensacado where entrada_id = se.id and estatus_id <>0 and servicio_id in(1,4,5) ) totalensacado
                 ,(SELECT count(*) FROM servicios_ensacado where entrada_id = se.id and estatus_id not in(0, 5)) serv_pendientes
+                , case  
+                    when (tipo_transporte_id = 6 or tipo_transporte_id = 12) and (SELECT count(*) FROM servicios_ensacado where entrada_id = se.id and estatus_id not in(0, 5)) = 0 and se.estatus_bascula <> \'C\' then concat(\'<div class=\"pendiente\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Pendiente pesar en vacío\">\',numUnidad,\'</div>\')
+                    else numUnidad
+                    end numeroUnidad
                 from servicios_entradas se 
                 inner join catalogo_estatus es on es.id = se.estatus_id 
                 inner join catalogo_clientes c on c.id = se.cliente_id ';
@@ -429,6 +475,7 @@ class ServicioEntrada
                                 , serv.nombre as nombreServ
                                 , serv.clave as claveServ
                                 , te.nombre as empaque
+                                , te.id as empaque_id
                                 , TIMESTAMPDIFF(MINUTE, se.fecha_inicio, if(se.fecha_fin is null, now(), se.fecha_fin)) as transcurrido
                                 , prod.nombre as producto  
                                 , concat(usuarios_inicio.nombres,' ',usuarios_inicio.apellidos) usuario_inicio_nombre
@@ -455,11 +502,11 @@ class ServicioEntrada
     public function getByEstatusId($idEst)
     {
         if ($idEst != null && $idEst != '') {
-            if ($idEst == 5) {
-                $sql = " where estatus_id = {$idEst} and se.fecha_salida >= DATE_ADD(curdate(), INTERVAL -1 month) order by se.id desc";
-            } else {
-                $sql = " where estatus_id = {$idEst} order by se.id desc";
-            }
+            // if ($idEst == 5) {
+            //    $sql = " where estatus_id = {$idEst} /*and se.fecha_salida >= DATE_ADD(curdate(), INTERVAL -1 month)*/ order by se.id desc";
+            // } else {
+            $sql = " where estatus_id = {$idEst} order by se.id desc";
+            // }
         } else {
             $sql = null;
         }
@@ -476,9 +523,11 @@ class ServicioEntrada
 
     public function edit()
     {
-        $sql    = "update servicios_entradas set 
+        $sql = "update servicios_entradas set 
                 numUnidad = '{$this->getNumUnidad()}'
                 , cliente_id = {$this->getClienteId()}
+                , fecha_entrada = " . (($this->getFechaEntrada() == 'null') ? 'null' : "'" . $this->getFechaEntrada() . "'") . '
+                , fecha_liberacion = ' . (($this->getFechaLiberacion() == 'null') ? 'null' : "'" . $this->getFechaLiberacion() . "'") . "
                 , transportista = '{$this->getTransportista()}'
                 , chofer = '{$this->getChofer()}'
                 , tipo_producto = '{$this->getTipo_Producto()}'
@@ -498,7 +547,12 @@ class ServicioEntrada
                 , sello2 = '{$this->getSello2()}'
                 , sello3 = '{$this->getSello3()}'
                 , observaciones = '{$this->getObservaciones()}'
+                , peso_obligatorio = '{$this->getPesoObligatorio()}'
                  where id = {$this->getId()}";
+        // print_r('<pre>');
+        // print_r($sql);
+        // print_r('</pre>');
+        // die();
         $save   = $this->db->query($sql);
         $result = false;
         if ($save) {

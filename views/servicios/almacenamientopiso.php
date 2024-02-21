@@ -33,8 +33,7 @@ menusel = 'almacenamientoPiso';
                         </div>
                         <div class='col-md-6 col-12'>
                             <!-- class = 'mt-4 btn btn-success btn-min-width mr-1 mb-1' -->
-                            <button type='button' id='btnExcelInventario' class='mt-4 btn btnExcel' onclick="$('.buttons-excel').trigger('click')" data-toggle='tooltip' data-placement='top'
-                                title='Exportar Inventario a Excel'>
+                            <button type='button' id='btnExcelInventario' class='mt-4 btn btnExcel' onclick="$('.buttons-excel').trigger('click')" data-toggle='tooltip' data-placement='top' title='Exportar Inventario a Excel'>
                                 Excel</button>
                         </div>
                     </div>
@@ -56,10 +55,15 @@ menusel = 'almacenamientoPiso';
                             <!-- Tab panes -->
                             <div class='tab-content'>
                                 <div class='tab-pane container active' id='productos' role='tabpanel' aria-labelledby='productos-tab'>
-                                    <div id='chart_productos' style='min-height:400px;'></div>
+                                    <div class='row contenido'>
+                                    </div>
+                                    <!-- <div id='chart_productos' style='min-height:400px;'></div> -->
                                 </div>
                                 <div class='tab-pane container fade' id='lotes' role='tabpanel' aria-labelledby='lotes-tab'>
-                                    <div id='chart_lotes' style='min-height:400px;'></div>
+                                    <div class='row contenido'>
+                                    </div>
+
+                                    <!-- <div id='chart_lotes' style='min-height:400px;'></div> -->
                                 </div>
                                 <div class='tab-pane container fade' id='naves' role='tabpanel' aria-labelledby='naves-tab'>
                                     <div id='chart_nave' style='min-height:400px;'></div>
@@ -79,10 +83,15 @@ menusel = 'almacenamientoPiso';
     <table class='table' id='tableInventario'>
         <thead>
             <th>Nombre del Cliente</th>
+            <th>Num Ferrotolva</th>
             <th>Almacen</th>
             <th>Producto</th>
             <th>Lote</th>
+            <th>Rótulo</th>
             <th>Cant. Disponible</th>
+            <th>Sacos por Tarima</th>
+            <th>Tarimas</th>
+            <th>Parcial</th>
         </thead>
         <tbody>
         </tbody>

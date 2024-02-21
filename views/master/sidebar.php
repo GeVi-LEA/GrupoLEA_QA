@@ -25,7 +25,7 @@
                 <ul class="navbar-nav" id="navbar-nav">
                     <!-- start Compras Menu -->
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="collapse" href="#sidebarCompras" role="button" aria-expanded="false" aria-controls="sidebarCompras">
+                        <a class="nav-link <?php if (!Utils::permisosCompras()) { echo 'disabled'; } ?>" data-bs-toggle="collapse" href="#sidebarCompras" role="button" aria-expanded="false" aria-controls="sidebarCompras">
                             <i class="fa-solid fa-bag-shopping fa-xl"></i>
                             <span class="item-name">Compras</span>
                             <i class="right-icon">
@@ -49,8 +49,7 @@
                                 </a>
                             </li>
                             <li class=" nav-item ">
-                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Compras&action=ordenesDeCompra', 'Ordenes de Compra') ?>"
-                                    href="<?= principalUrl ?>?controller=Compras&action=ordenesDeCompra">
+                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Compras&action=ordenesDeCompra', 'Ordenes de Compra') ?>" href="<?= principalUrl ?>?controller=Compras&action=ordenesDeCompra">
                                     <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -125,7 +124,7 @@
 
                     <!-- start Almacen Menu -->
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="#sidebarAlmacen" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAlmacen">
+                        <a class="nav-link menu-link <?php if (!Utils::permisosAlmacen()) { echo 'disabled'; } ?>" href=" #sidebarAlmacen" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarAlmacen">
                             <i class="fa-solid fa-warehouse fa-xl"></i>
                             <span class="item-name">Almacén</span>
                             <i class="right-icon">
@@ -156,7 +155,7 @@
 
                     <!-- start Servicios Menu -->
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="#sidebarServicios" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarServicios">
+                        <a class="nav-link menu-link <?php if (!Utils::permisosSupervisor() and !Utils::permisosBascula()) { echo 'disabled'; } ?>" href=" #sidebarServicios" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarServicios">
                             <i class="fa-solid fa-handshake fa-xl"></i>
                             <span class="item-name">Servicios</span>
                             <i class="right-icon">
@@ -195,8 +194,7 @@
                                 </a>
                             </li>
                             <li class=" nav-item ">
-                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Servicios&action=almacenamientoPiso', 'Almacenaje') ?>"
-                                    href="<?= principalUrl ?>?controller=Servicios&action=almacenamientoPiso">
+                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Servicios&action=almacenamientoPiso', 'Almacenaje') ?>" href="<?= principalUrl ?>?controller=Servicios&action=almacenamientoPiso">
                                     <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -210,8 +208,7 @@
                                 </a>
                             </li>
                             <li class=" nav-item " hidden>
-                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Servicios&action=monitorEntradas', 'Monitor Entradas') ?>"
-                                    href="<?= principalUrl ?>?controller=Servicios&action=monitorEntradas">
+                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Servicios&action=monitorEntradas', 'Monitor Entradas') ?>" href="<?= principalUrl ?>?controller=Servicios&action=monitorEntradas">
                                     <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -230,7 +227,7 @@
 
                     <!-- start Sistemas Menu -->
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="#sidebarSistemas" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarSistemas">
+                        <a class="nav-link menu-link <?php if (!Utils::permisosSupervisor()) { echo 'disabled'; } ?>" href=" #sidebarSistemas" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarSistemas">
                             <i class="fa-solid fa-laptop-code fa-xl"></i>
                             <span class="item-name" data-key="t-landing">Sistemas</span>
                             <i class="right-icon">
@@ -255,8 +252,7 @@
                                 </a>
                             </li>
                             <li class=" nav-item ">
-                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Sistemas&action=mantenimientos', 'Mantenimientos') ?>"
-                                    href="<?= principalUrl ?>?controller=Sistemas&action=mantenimientos">
+                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Sistemas&action=mantenimientos', 'Mantenimientos') ?>" href="<?= principalUrl ?>?controller=Sistemas&action=mantenimientos">
                                     <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -276,19 +272,18 @@
 
                     <!-- start Catalogos Menu -->
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="#sidebarCatalogos" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarCatalogos">
-                            <i class="fa-solid fa-book fa-xl"></i>
-                            <span class="item-name" data-key="t-landing">Catálogos</span>
-                            <i class="right-icon">
+                        <a class="nav-link menu-link <?php if (!Utils::permisosSupervisor()) { echo 'disabled'; } ?>" href="#sidebarCatalogos" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarCatalogos">
+                           <i class="fa-solid fa-book fa-xl"></i>
+                            <span class="item-name" data-key="t-landing" id="abrirCatalogo">Catálogos</span>
+                           <!--  <i class="right-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                 </svg>
-                            </i>
+                            </i> -->
                         </a>
-                        <ul class="sub-nav collapse" id="sidebarCatalogos" data-bs-parent="#sidebar">
-                            <li class=" nav-item ">
-                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Catalogo&action=showProveedores', 'Cat. Proveedores') ?>"
-                                    href="<?= principalUrl ?>?controller=Catalogo&action=showProveedores">
+                     <!--    <ul class="sub-nav collapse" id="sidebarCatalogos" data-bs-parent="#sidebar"> 
+                           <li class=" nav-item ">
+                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Catalogo&action=showProveedores', 'Cat. Proveedores') ?>" href="<?= principalUrl ?>?controller=Catalogo&action=showProveedores">
                                     <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -301,8 +296,7 @@
                                 </a>
                             </li>
                             <li class=" nav-item ">
-                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Catalogo&action=showTiposSolicitudes', 'Cat. Servicios / Adquisiciones') ?>"
-                                    href="<?= principalUrl ?>?controller=Catalogo&action=showTiposSolicitudes">
+                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Catalogo&action=showTiposSolicitudes', 'Cat. Servicios / Adquisiciones') ?>" href="<?= principalUrl ?>?controller=Catalogo&action=showTiposSolicitudes">
                                     <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -328,8 +322,7 @@
                                 </a>
                             </li>
                             <li class=" nav-item ">
-                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Catalogo&action=showTipoTransporte', 'Cat. Transportes') ?>"
-                                    href="<?= principalUrl ?>?controller=Catalogo&action=showTipoTransporte">
+                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Catalogo&action=showTipoTransporte', 'Cat. Transportes') ?>" href="<?= principalUrl ?>?controller=Catalogo&action=showTipoTransporte">
                                     <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -394,8 +387,7 @@
                                 </a>
                             </li>
                             <li class=" nav-item ">
-                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Catalogo&action=showProductosResinasLiquidos', 'Cat. Productos resinas/líquidos') ?>"
-                                    href="<?= principalUrl ?>?controller=Catalogo&action=showProductosResinasLiquidos">
+                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Catalogo&action=showProductosResinasLiquidos', 'Cat. Productos resinas/líquidos') ?>" href="<?= principalUrl ?>?controller=Catalogo&action=showProductosResinasLiquidos">
                                     <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -408,8 +400,7 @@
                                 </a>
                             </li>
                             <li class=" nav-item ">
-                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Catalogo&action=showTiposEmpaques', 'Cat. Tipos de Embarques') ?>"
-                                    href="<?= principalUrl ?>?controller=Catalogo&action=showTiposEmpaques">
+                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Catalogo&action=showTiposEmpaques', 'Cat. Tipos de Embarques') ?>" href="<?= principalUrl ?>?controller=Catalogo&action=showTiposEmpaques">
                                     <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -435,8 +426,7 @@
                                 </a>
                             </li>
                             <li class=" nav-item ">
-                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Catalogo&action=showDocumentosNorma', 'Cat. Documentos Norma') ?>"
-                                    href="<?= principalUrl ?>?controller=Catalogo&action=showDocumentosNorma">
+                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Catalogo&action=showDocumentosNorma', 'Cat. Documentos Norma') ?>" href="<?= principalUrl ?>?controller=Catalogo&action=showDocumentosNorma">
                                     <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -449,8 +439,7 @@
                                 </a>
                             </li>
                             <li class=" nav-item ">
-                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Catalogo&action=showDepartamentos', 'Cat. Departamentos') ?>"
-                                    href="<?= principalUrl ?>?controller=Catalogo&action=showDepartamentos">
+                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Catalogo&action=showDepartamentos', 'Cat. Departamentos') ?>" href="<?= principalUrl ?>?controller=Catalogo&action=showDepartamentos">
                                     <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -489,8 +478,7 @@
                                 </a>
                             </li>
                             <li class=" nav-item ">
-                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Catalogo&action=showEquipoComputo', 'Cat. Equipo Computo') ?>"
-                                    href="<?= principalUrl ?>?controller=Catalogo&action=showEquipoComputo">
+                                <a class="nav-link <?php activeRoute(principalUrl . '?controller=Catalogo&action=showEquipoComputo', 'Cat. Equipo Computo') ?>" href="<?= principalUrl ?>?controller=Catalogo&action=showEquipoComputo">
                                     <i class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                                             <g>
@@ -515,7 +503,7 @@
                                     <span class="item-name">Almacénes</span>
                                 </a>
                             </li>
-                        </ul>
+                        </ul>-->
                     </li>
                     <!-- end Catalogos Menu -->
                 </ul>

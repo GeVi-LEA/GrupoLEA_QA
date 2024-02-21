@@ -30,7 +30,7 @@
 
 <?php require_once views_root . 'master/scripts.php'; ?>
 <script>
-let __url__ = "<?php echo root_url; ?>";
+var __url__ = "<?php echo root_url; ?>";
 localStorage.setItem("_URL_", __url__);
 </script>
 
@@ -63,7 +63,7 @@ function llamarController()
         $nombre_controlador = controller_principal;
     } else {
         show_error();
-        exit ();
+        exit();
     }
 
     if (class_exists($nombre_controlador)) {
@@ -81,4 +81,5 @@ function llamarController()
         show_error();
     }
 }
+
 ?>

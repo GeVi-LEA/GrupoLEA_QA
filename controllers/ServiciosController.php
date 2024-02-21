@@ -10,7 +10,7 @@ require_once models_root . 'catalogos/tipo_transporte.php';
 require_once models_root . 'catalogos/servicio.php';
 require_once models_root . 'catalogos/unidad.php';
 require_once models_root . 'catalogos/documento_norma.php';
-require_once models_root . 'catalogos/transportistas.php';
+require_once models_root . 'catalogos/transportista_cliente.php';
 require_once models_root . 'catalogos/choferes.php';
 require_once models_root . 'servicios/servicio_cliente.php';
 require_once models_root . 'servicios/bascula.php';
@@ -74,7 +74,7 @@ class serviciosController
                 $bascula->setFolio($ensacado['ticket']);
                 $pesaje = $bascula->getPesos();
 
-                $pesoNeto = $pesaje['EntPesoB'] - $pesaje['EntPesoT'];
+                $pesoNeto = (!isset($pesaje['EntPesoB']) ? 0 : $pesaje['EntPesoB']) - (!isset($pesaje['EntPesoT']) ? 0 : $pesaje['EntPesoT']);
             }
             $cantidadTotal  = null;
             $isDescarga     = true;
@@ -149,7 +149,7 @@ class serviciosController
             $transportes = $tipoTrans->isCamion();
         }
 
-        $catTransportes     = new CatTransportistas();
+        $catTransportes     = new TransportistasClientes();
         $cat_transportistas = $catTransportes->getAll();
 
         $catChoferes  = new CatChoferes();
@@ -323,20 +323,33 @@ class serviciosController
 
     public function guardarEnsacado()
     {
-        $result             = [];
-        $id                 = isset($_POST['id']) && $_POST['id'] != '' ? $_POST['id'] : false;
-        $numeroFerro        = isset($_POST['numeroUnidad']) && $_POST['numeroUnidad'] != '' ? $_POST['numeroUnidad'] : false;
-        $idCliente          = $_POST['cliente'];
-        $productoId         = isset($_POST['producto']) && $_POST['producto'] != '' ? $_POST['producto'] : null;
-        $transportista      = isset($_POST['transportista']) && $_POST['transportista'] != '' ? $_POST['transportista'] : null;
-        $chofer             = isset($_POST['chofer']) && $_POST['chofer'] != '' ? $_POST['chofer'] : null;
-        $orden              = isset($_POST['orden']) && $_POST['orden'] != '' ? $_POST['orden'] : null;
-        $lote               = isset($_POST['lote']) && $_POST['lote'] != '' ? $_POST['lote'] : null;
-        $alias              = isset($_POST['alias']) && $_POST['alias'] != '' ? $_POST['alias'] : null;
-        $transporte         = isset($_POST['transporte']) && $_POST['transporte'] != '' ? $_POST['transporte'] : null;
-        $placa1             = isset($_POST['placa1']) && $_POST['placa1'] != '' ? $_POST['placa1'] : null;
-        $placa2             = isset($_POST['placa2']) && $_POST['placa2'] != '' ? $_POST['placa2'] : null;
-        $pesoCliente        = isset($_POST['pesoCliente']) && $_POST['pesoCliente'] != '' ? $_POST['pesoCliente'] : null;
+        $result        = [];
+        $id            = isset($_POST['id']) && $_POST['id'] != '' ? $_POST['id'] : false;
+        $numeroFerro   = isset($_POST['numeroUnidad']) && $_POST['numeroUnidad'] != '' ? $_POST['numeroUnidad'] : false;
+        $idCliente     = $_POST['cliente'];
+        $productoId    = isset($_POST['producto']) && $_POST['producto'] != '' ? $_POST['producto'] : null;
+        $transportista = isset($_POST['transportista']) && $_POST['transportista'] != '' ? $_POST['transportista'] : null;
+        $empresa       = isset($_POST['empresa']) && $_POST['empresa'] != '' ? $_POST['empresa'] : 2;
+        $chofer        = isset($_POST['chofer']) && $_POST['chofer'] != '' ? $_POST['chofer'] : null;
+        $orden         = isset($_POST['orden']) && $_POST['orden'] != '' ? $_POST['orden'] : null;
+        $lote          = isset($_POST['lote']) && $_POST['lote'] != '' ? $_POST['lote'] : null;
+        $alias         = isset($_POST['alias']) && $_POST['alias'] != '' ? $_POST['alias'] : null;
+        $transporte    = isset($_POST['transporte']) && $_POST['transporte'] != '' ? $_POST['transporte'] : null;
+        $placa1        = isset($_POST['placa1']) && $_POST['placa1'] != '' ? $_POST['placa1'] : null;
+        $placa2        = isset($_POST['placa2']) && $_POST['placa2'] != '' ? $_POST['placa2'] : null;
+
+        $fecha_entrada_fecha  = isset($_POST['fecha_entrada_fecha']) && $_POST['fecha_entrada_fecha'] != '' ? $_POST['fecha_entrada_fecha'] : null;
+        $fecha_entrada_hora   = isset($_POST['fecha_entrada_hora']) && $_POST['fecha_entrada_hora'] != '' ? $_POST['fecha_entrada_hora'] : null;
+        $fecha_entrada_minuto = isset($_POST['fecha_entrada_minuto']) && $_POST['fecha_entrada_minuto'] != '' ? $_POST['fecha_entrada_minuto'] : null;
+        $fecha_entrada        = UtilsHelp::covertDatetoDateSql($fecha_entrada_fecha . ' ' . $fecha_entrada_hora . ':' . $fecha_entrada_minuto . ':00');  // isset($_POST['fecha_entrada']) && $_POST['fecha_entrada'] != '' && $_POST['fecha_entrada'] != 'null' ? date('Y-m-d', strtotime(UtilsHelp::covertDatetoDateSql($_POST['fecha_entrada']))) : 'null';
+
+        $fecha_liberacion_fecha  = isset($_POST['fecha_liberacion_fecha']) && $_POST['fecha_liberacion_fecha'] != '' ? $_POST['fecha_liberacion_fecha'] : null;
+        $fecha_liberacion_hora   = isset($_POST['fecha_liberacion_hora']) && $_POST['fecha_liberacion_hora'] != '' ? $_POST['fecha_liberacion_hora'] : null;
+        $fecha_liberacion_minuto = isset($_POST['fecha_liberacion_minuto']) && $_POST['fecha_liberacion_minuto'] != '' ? $_POST['fecha_liberacion_minuto'] : null;
+        $fecha_liberacion        = UtilsHelp::covertDatetoDateSql($fecha_liberacion_fecha . ' ' . $fecha_liberacion_hora . ':' . $fecha_liberacion_minuto . ':00');  // isset($_POST['fecha_entrada']) && $_POST['fecha_entrada'] != '' && $_POST['fecha_entrada'] != 'null' ? date('Y-m-d', strtotime(UtilsHelp::covertDatetoDateSql($_POST['fecha_entrada']))) : 'null';
+
+        $pesoCliente = isset($_POST['pesoCliente']) && $_POST['pesoCliente'] != '' ? $_POST['pesoCliente'] : null;
+
         $pesoTara           = isset($_POST['tara']) && $_POST['tara'] != '' ? $_POST['tara'] : null;
         $ticket             = isset($_POST['ticket']) && $_POST['ticket'] != '' ? $_POST['ticket'] : null;
         $pesoTeorico        = isset($_POST['pesoTeorico']) && $_POST['pesoTeorico'] != '' ? $_POST['pesoTeorico'] : null;
@@ -352,7 +365,23 @@ class serviciosController
         $transp_lea_cliente = isset($_POST['transp_lea_cliente']) && $_POST['transp_lea_cliente'] != '' ? $_POST['transp_lea_cliente'] : 0;
         $tipo_producto      = isset($_POST['tipo_producto']) && $_POST['tipo_producto'] != '' ? $_POST['tipo_producto'] : 0;
         $entrada_salida     = isset($_POST['entrada_salida']) && $_POST['entrada_salida'] != '' ? $_POST['entrada_salida'] : 0;
-        $estatus            = 1;
+        // $tipo_trans         = new TipoTransporte();
+        // $tipoT              = $tipo_trans->getById($transporte);
+        // print_r('<pre>');
+        // print_r($_POST['peso_obligatorio']);
+        // print_r('</pre>');
+        $trenArray  = Utils::isTren();
+        $arrayIdsTr = array();
+        foreach ($trenArray as $tr) {
+            array_push($arrayIdsTr, $tr->id);
+        }
+
+        $peso_obligatorio = isset($_POST['peso_obligatorio']) && $_POST['peso_obligatorio'] != '' ? (($_POST['peso_obligatorio'] == 'on') ? 1 : 0) : 0;
+        $isTren           = in_array($transporte, $arrayIdsTr);
+        if ($isTren == 1) {
+            $peso_obligatorio = 1;
+        }
+        $estatus = 1;
 
         if ($numeroFerro) {
             $ensacado = new ServicioEntrada();
@@ -360,6 +389,7 @@ class serviciosController
             $ensacado->setNumUnidad($numeroFerro);
             $ensacado->setClienteId($idCliente);
             $ensacado->setEstatusId($estatus);
+            $ensacado->setEmpresaId($empresa);
             $ensacado->setPesoCliente($pesoCliente != null ? Utils::stringToFloat($pesoCliente) : 'null');
             $ensacado->setPesoTara($pesoTara != null ? Utils::stringToFloat($pesoTara) : 'null');
             $ensacado->setPesoTeorico($pesoTeorico != null ? Utils::stringToFloat($pesoTeorico) : 'null');
@@ -371,6 +401,8 @@ class serviciosController
             $ensacado->setTipoTransporteId($transporte);
             $ensacado->setPlaca1($placa1);
             $ensacado->setPlaca2($placa2);
+            $ensacado->setFechaEntrada($fecha_entrada);
+            $ensacado->setFechaLiberacion($fecha_liberacion);
             $ensacado->setObservaciones($observaciones);
             $ensacado->setSello1($sello1);
             $ensacado->setSello2($sello2);
@@ -379,8 +411,13 @@ class serviciosController
             $ensacado->setTranspLeaCliente($transp_lea_cliente);
             $ensacado->setEntrada_Salida($entrada_salida);
             $ensacado->setTipo_Producto($tipo_producto);
+            $ensacado->setPesoObligatorio($peso_obligatorio);
             $ensacado->setEstatusId($estatus);
 
+            // print_r('<pre>');
+            // print_r($ensacado);
+            // print_r('</pre>');
+            // die();
             $f = $ensacado->unidadRegistrada();
             if ($f->num_rows >= 1) {
                 $result = [
@@ -539,6 +576,7 @@ class serviciosController
         $entradaId       = isset($_POST['idEntrada']) && $_POST['idEntrada'] != '' ? $_POST['idEntrada'] : false;
         $servicioId      = isset($_POST['idTipoServicio']) && $_POST['idTipoServicio'] != '' ? $_POST['idTipoServicio'] : false;
         $empaqueId       = isset($_POST['idEmpaque']) && $_POST['idEmpaque'] != '' ? $_POST['idEmpaque'] : null;
+        $insumo_por      = isset($_POST['insumo_por']) && $_POST['insumo_por'] != '' ? $_POST['insumo_por'] : 1;
         $cantidad        = isset($_POST['cantidad']) && $_POST['cantidad'] != '' ? $_POST['cantidad'] : null;
         $fechaPrograma   = isset($_POST['fechaPrograma']) && $_POST['fechaPrograma'] != '' && $_POST['fechaPrograma'] != 'null' ? date('Y-m-d', strtotime(UtilsHelp::covertDatetoDateSql($_POST['fechaPrograma']))) : 'null';
         $totalEnsacado   = isset($_POST['totalEnsacado']) && $_POST['cantidad'] != '' ? $_POST['totalEnsacado'] : null;
@@ -556,11 +594,13 @@ class serviciosController
         $productoId      = isset($_POST['producto']) && $_POST['producto'] != '' ? $_POST['producto'] : null;
         $almacen_id      = isset($_POST['almacen_id']) && $_POST['almacen_id'] != '' ? $_POST['almacen_id'] : '1';
         $alias           = isset($_POST['alias']) && $_POST['alias'] != '' ? $_POST['alias'] : null;
+        $sacoxtarima     = isset($_POST['sacoxtarima']) && $_POST['sacoxtarima'] != '' ? $_POST['sacoxtarima'] : 55;
+        $tarima_por      = isset($_POST['tarima_por']) && $_POST['tarima_por'] != '' ? $_POST['tarima_por'] : 1;
         $observaciones   = isset($_POST['observaciones']) && $_POST['observaciones'] != '' ? $_POST['observaciones'] : null;
         $res             = true;
 
         // print_r('<pre>');
-        // print_r($_POST['archivoOrden_e']);
+        // print_r($_POST['sacoxtarima']);
         // print_r('</pre>');
         // if (isset($_POST['archivoOrden_e']) && $_POST['archivoOrden_e'] != '') {
         // $archivoOrden = $_POST['archivoOrden_e'];
@@ -575,6 +615,7 @@ class serviciosController
             $servicio->setEntradaId($entradaId);
             $servicio->setServicioId($servicioId);
             $servicio->setEmpaqueId($empaqueId);
+            $servicio->setInsumoPor($insumo_por);
             $servicio->setEstatusId($estatus);
             $servicio->setCantidad($cantidad != null ? Utils::stringToFloat($cantidad) : 'null');
             $servicio->setObservaciones($observaciones);
@@ -591,8 +632,13 @@ class serviciosController
             $servicio->setAlmacenId($almacen_id);
             $servicio->setAlias($alias);
             $servicio->setLote($lote);
+            $servicio->setSacoXTarima($sacoxtarima);
+            $servicio->setTarimaPor($tarima_por);
             $servicio->setOrden($orden);
 
+            // print_r('<pre>');
+            // print_r($servicio);
+            // print_r('</pre>');
             if (isset($_FILES['documentoOrden']) && $_FILES['documentoOrden']['size'] > 0) {
                 $file      = $_FILES['documentoOrden'];
                 $mimetype  = $file['type'];

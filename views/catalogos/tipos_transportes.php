@@ -14,6 +14,7 @@
     </div>
 </header>
 <nav class="menu">
+    <span> <a href="<?= catalogosUrl ?>?controller=Catalogo&action=showTransportistasClientes">Transportistas</span></a>
     <span> <a href="<?= catalogosUrl ?>?controller=Catalogo&action=showCarroTanques">Carro tanques</span></a>
     <span id="mostrarForm">Agregar tipo transporte</span>
 </nav>

@@ -140,7 +140,7 @@ class Notificaciones
         return $result;
     }
 
-    function sendNotificacionesByCveNoti($cve_noti)
+    function sendNotificacionesByCveNoti($cve_noti, $mensaje = '')
     {
         $result = array();
         $sql    = "SELECT * FROM catalogo_tipo_notificaciones tiponoti inner join erp_usuarios_notificaciones usrnoti on usrnoti.id_tipo_notificacion = tiponoti.id where clave_notificacion = '{$cve_noti}';";
@@ -155,7 +155,7 @@ class Notificaciones
                         VALUES(
                         ' . $u->user_id . ",
                         '" . $u->titulo . "',
-                        '" . $u->mensaje . "'
+                        '" . $u->mensaje . (($mensaje != '') ? ' ... ' . $mensaje : '') . "'
                         );";
             $this->db->query($queryins);
         }

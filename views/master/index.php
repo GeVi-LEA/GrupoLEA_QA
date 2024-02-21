@@ -52,7 +52,7 @@ require_once './../../utils/utils.php';
         } catch (error) {
 
         }
-        let __url__ = "<?php echo root_url; ?>";
+        var __url__ = "<?php echo root_url; ?>";
         localStorage.setItem("_URL_", __url__);
     });
     </script>

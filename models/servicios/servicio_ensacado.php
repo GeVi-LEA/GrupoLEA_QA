@@ -272,6 +272,36 @@ class ServicioEnsacado
         $this->almacen_id = $almacen_id;
     }
 
+    public function getInsumoPor()
+    {
+        return $this->insumo_por;
+    }
+
+    public function setInsumoPor($insumo_por): void
+    {
+        $this->insumo_por = $insumo_por;
+    }
+
+    public function getSacoXTarima()
+    {
+        return $this->sacoxtarima;
+    }
+
+    public function setSacoXTarima($sacoxtarima): void
+    {
+        $this->sacoxtarima = $sacoxtarima;
+    }
+
+    public function getTarimaPor()
+    {
+        return $this->tarima_por;
+    }
+
+    public function setTarimaPor($tarima_por): void
+    {
+        $this->tarima_por = $tarima_por;
+    }
+
     public function save()
     {
         $sql = "insert into servicios_ensacado values(
@@ -281,7 +311,8 @@ class ServicioEnsacado
                         , {$this->getProductoId()}
                         , {$this->getAlmacenId()}
                         , {$this->getEmpaqueId()}
-                        , " . (($this->getServicioId() == '5') ? '13' : $this->getEstatusId()) . "
+                        , {$this->getInsumoPor()}
+                        , " . (($this->getServicioId() == '5') ? '13' : (($this->getFechaProgramacion() != 'null') ? '13' : $this->getEstatusId())) . "
                         , '{$this->getFolio()}'
                         , '{$this->getLote()}'
                         , '{$this->getAlias()}'
@@ -297,6 +328,8 @@ class ServicioEnsacado
                         , {$this->getBultos()}
                         , {$this->getTarimas()}
                         , {$this->getTipoTarima()}
+                        , {$this->getSacoXTarima()}
+                        , {$this->getTarimaPor()}
                         , {$this->getParcial()}
                         , '{$this->getOrden()}'
                         , '{$this->getDocOrden()}'
@@ -368,6 +401,7 @@ class ServicioEnsacado
         $sql = "update servicios_ensacado set 
           producto_id = {$this->getProductoId()}
         , empaque_id = {$this->getEmpaqueId()}
+        , insumo_por = {$this->getInsumoPor()}
         , orden = '{$this->getOrden()}'
         , estatus_id = {$this->getEstatusId()}
         , lote = '{$this->getLote()}'
@@ -387,6 +421,8 @@ class ServicioEnsacado
         tarimas = {$this->getTarimas()}
         , parcial = {$this->getParcial()}
         , tipo_tarima = {$this->getTipoTarima()}
+        , sacoxtarima = {$this->getSacoXTarima()}
+        , tarima_por = {$this->getTarimaPor()}
         , doc_orden = '{$this->getDocOrden()}'
         , observaciones = '{$this->getObservaciones()}' 
         where id = {$this->getId()}";
@@ -488,22 +524,7 @@ class ServicioEnsacado
     public function getLotesCliente($clienteId)
     {
         $result    = array();
-        $sql       = "select 
-                        trim(se.lote) lote
-                        , se.alias
-                        , prod.nombre
-                        , se.producto_id
-                        , se.almacen_id
-                        , get_disponibleByLote(se.lote,$clienteId) disponible 
-                        from servicios_ensacado se 
-                        inner join servicios_entradas s on s.id = se.entrada_id 
-                        left join catalogo_productos_resinas_liquidos prod on prod.id = se.producto_id
-                        where 
-                        s.cliente_id = $clienteId 
-                        and se.lote != '' 
-                        and get_disponibleByLote(se.lote,$clienteId) > 0
-                        group by se.lote, se.alias, se.producto_id , se.almacen_id
-                        order by se.lote";
+        $sql       = 'CALL getLotesCliente(' . $clienteId . ');';
         $ensacados = $this->db->query($sql);
         if ($ensacados != null) {
             foreach ($ensacados->fetch_all(MYSQLI_ASSOC) as $e) {

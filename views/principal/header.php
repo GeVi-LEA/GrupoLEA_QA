@@ -17,101 +17,78 @@
     <link rel="stylesheet" href="<?php echo URL; ?>assets/css/jquery-ui/jquery-ui.min.css">
     <script src="<?php echo URL; ?>assets/js/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="<?php echo URL; ?>assets/css/style.css">
-    <!-- <link rel="stylesheet" href="<?php echo URL; ?>assets/css/style-app.css"> -->
+    <link rel="stylesheet" href="<?php echo URL; ?>assets/css/style-app.css">
     <script src="<?php echo URL; ?>assets/js/jquery.js"></script>
     <script src="<?php echo URL; ?>assets/js/bootstrap/bootstrap.min.js"></script>
 
     <!-- <link rel="stylesheet" href="<?php echo URL; ?>assets/js/sweetalert/themes/bulma/bulma.css"> -->
-    <link rel="stylesheet" href="<?php echo URL; ?>assets/js/sweetalert/sweetalert2.all.min.css">
-    <script src="<?php echo URL; ?>assets/js/sweetalert/sweetalert2.all.min.js"></script>
+    <!-- <link rel="stylesheet" href="<?php echo URL; ?>assets/js/sweetalert/sweetalert2.all.min.css"> -->
+    <!-- <script src="<?php echo URL; ?>assets/js/sweetalert/sweetalert2.all.min.js"></script> -->
     <!-- <link rel="stylesheet" href="<?php echo URL; ?>assets/js/toaster/toast.min.css"> -->
     <!-- <script src="<?php echo URL; ?>assets/js/toaster/toast.script.js"></script> -->
-    <link rel="stylesheet" href="<?php echo URL; ?>assets/js/toaster/jquery.toast.css">
-    <script src="<?php echo URL; ?>assets/js/toaster/jquery.toast.js"></script>
-    <link rel="stylesheet" href="<?php echo URL; ?>assets/libs/datatables/datatables.min.css">
-    <script src="<?php echo URL; ?>assets/libs/datatables/datatables.min.js"></script>
+    <!-- <link rel="stylesheet" href="<?php echo URL; ?>assets/js/toaster/jquery.toast.css"> -->
+    <!-- <script src="<?php echo URL; ?>assets/js/toaster/jquery.toast.js"></script> -->
+    <!-- <link rel="stylesheet" href="<?php echo URL; ?>assets/libs/datatables/datatables.min.css"> -->
+    <!-- <script src="<?php echo URL; ?>assets/libs/datatables/datatables.min.js"></script> -->
 
 
-    <link rel="stylesheet" type="text/css" href="<?php echo URL; ?>assets/js/scripts/forms/select2/css/select2.min.css">
-    <script src="<?php echo URL; ?>assets/js/scripts/forms/select2/js/select2.min.js" type="text/javascript"></script>
-
+    <!-- <link rel="stylesheet" type="text/css" href="<?php echo URL; ?>assets/js/scripts/forms/select2/css/select2.min.css"> -->
+    <!-- <script src="<?php echo URL; ?>assets/js/scripts/forms/select2/js/select2.min.js" type="text/javascript"></script> -->
     <script>
-    let __url__ = "<?php echo root_url; ?>";
+    var __url__ = "<?php echo root_url; ?>";
     localStorage.setItem("_URL_", __url__);
-    var var_notificaciones;
+    // var elmenu;
 
-    function erpalert(
-        tipo = "",
-        title = "Hecho!",
-        texto = "",
-        subtitle = "",
-        time = "3500",
-        show = "slideDown",
-        hide = "slideUp"
-    ) {
-        if (tipo == "") {
-            tipo = "success";
-        }
+    // function selectedMenu(menu) {
 
-        $.toast({
+    // menu.target.parentElement.className = "selected";
+    ////console.log(menu.target.parent());
+    // }
 
-            title: title,
+    // $(document).ready(function() {
+    // if ((localStorage.getItem("elmenu") != null) && (localStorage.getItem("elmenu") != "")) {
+    // selectedMenu(localStorage.getItem("elmenu"));
+    // }
+    // $("#aside a").click(function(e) {
+    // elmenu = e;
+    // localStorage.setItem("elmenu", elmenu);
+    // console.log("el menu: ", localStorage.getItem("elmenu"));
+    //// e.preventDefault();
+    //// elmenu = e.target.parentElement;
+    // selectedMenu(e);
 
-            subtitle: subtitle,
-
-            content: texto,
-
-            type: tipo,
-
-            delay: time,
-
-            dismissible: true,
-
-
-        });
-    }
+    // });
+    // });
     </script>
+
 </head>
 
 <body>
     <div class="contenedor">
         <header class="header">
-            <div class='row' style="width:90vw;">
-                <div class='col-7'>
-                    <div> <a href="?controller=Principal&action=index"> <img src="../../assets/img/logo_lea_260.png" alt="Logo LEA"></a></div>
+            <div> <a href="?controller=Principal&action=index"> <img src="<?php echo URL; ?>assets/img/logo_lea_260.png" alt="Logo LEA"></a></div>
+            <nav class="menu">
+                <ul>
+                    <?php if (Utils::permisosCompras()): ?>
+                    <li><a href="" id="abrirDirectorio"><i class="fas fa-address-book icon i-catalogo"></i><span>Directorio</span></a></li>
+                    <li><a href="" id="abrirCatalogo"><i class="fas fa-book-open icon i-catalogo"></i><span>Catálogos</span></a></li>
+                    <?php endif; ?>
+                    <li><a href="<?= root_url ?>?controller=Login&action=logOut"><i class="fas fa-sign-out-alt icon i-exit"></i><span class="hidden">Salir</span></a></li>
+                </ul>
+            </nav>
+            <div class="user">
+                <div>
+                    <?php if (isset($_SESSION['usuario'])): ?>
+                    <span><?= strtok($_SESSION['usuario']->nombres, ' ') . ' ' . strtok($_SESSION['usuario']->apellidos, ' ') ?></span>
+                    <span><?= $_SESSION['usuario']->puesto ?></span>
                 </div>
-                <div class='col-2 '>
-                    <div class='row'>
-                        <div class='col-4 abrirDirectorio'>
-                            <?php if (Utils::permisosCompras()): ?>
-                            <li><a href="" id="abrirDirectorio"><i class="fas fa-address-book icon i-catalogo"></i><span>Directorio</span></a></li>
-                        </div>
-                        <div class='col-4 abrirCatalogo'>
-                            <li><a href="" id="abrirCatalogo"><i class="fas fa-book-open icon i-catalogo"></i><span>Catálogos</span></a></li>
-                            <?php endif; ?>
-                        </div>
-                        <div class='col-4'>
-                            <li><a href="<?= root_url ?>?controller=Login&action=logOut"><i class="fas fa-sign-out-alt icon i-exit"></i><span class="hidden">Salir</span></a></li>
-                        </div>
-                    </div>
+                <div>
+                    <?php if ($_SESSION['usuario']->imagen != null): ?>
+                    <img src="<?= root_url ?>views/catalogos/uploads/imgUsuarios/<?= $_SESSION['usuario']->imagen ?>">
+                    <?php else: ?>
+                    <img src="<?php echo URL; ?>assets/img/user.jpg">
+                    <?php endif; ?>
                 </div>
-                <div class='col-3'>
-                    <div class="user">
-                        <div>
-                            <?php if (isset($_SESSION['usuario'])): ?>
-                            <span><?= strtok($_SESSION['usuario']->nombres, ' ') . ' ' . strtok($_SESSION['usuario']->apellidos, ' ') ?></span>
-                            <span><?= $_SESSION['usuario']->puesto ?></span>
-                        </div>
-                        <div>
-                            <?php if ($_SESSION['usuario']->imagen != null): ?>
-                            <img src="<?= root_url ?>views/catalogos/uploads/imgUsuarios/<?= $_SESSION['usuario']->imagen ?>">
-                            <?php else: ?>
-                            <img src="../../assets/img/user.jpg">
-                            <?php endif; ?>
-                        </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
+                <?php endif; ?>
             </div>
-
         </header>

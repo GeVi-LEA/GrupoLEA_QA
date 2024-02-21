@@ -2,12 +2,13 @@
 
 function ROFinaliza($estatus)
 {
-    if ($estatus == 5) {
+    if ((($estatus == 5) || ($estatus == 15)) && Utils::isAdmin() == false) {
         echo ' readonly disabled ';
     } else {
         echo '';
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,13 +40,19 @@ function ROFinaliza($estatus)
     <script src="<?= root_url ?>assets/js/jquery-ui.min.js"></script>
     <!-- <script src="<?= root_url ?>assets/js/bootstrap/bootstrap.min.js"></script> -->
     <script src="<?php echo URL; ?>assets/libs/bootstrap5/js/bootstrap.min.js"></script>
-    <!-- <script src="<?= root_url ?>assets/libs/select2/js/select2.min.js"></script> -->
+    <script src="<?= root_url ?>assets/libs/select2/js/select2.full.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script> -->
+
+    <!-- Toastr -->
+    <link href="<?php echo URL; ?>assets/libs/toastr/toastr.min.css" rel="stylesheet">
+    <script src="<?php echo URL; ?>assets/libs/toastr/toastr.min.js"></script>
 
     <script src="<?= root_url ?>assets/js/sweetalert/sweetalert2.all.min.js"></script>
     <script src="<?= root_url ?>views/servicios/assets/js/servicios.js"></script>
+
+
 
     <title>Ensacado</title>
 
@@ -83,11 +90,13 @@ function ROFinaliza($estatus)
                 <?php if ($ensacado['fecha_entrada'] != '' && $ensacado['estatus_id'] != '5' && $ensacado['estatus_id'] != '15' && Utils::permisosLogistica()): ?>
                 <div><button class="boton" id="btnNuevoServicio" title="Agregar nuevo servicio"><span class="material-icons i-add btn-icon">add_circle</span></button></div>
                 <?php endif; ?>
-                <?php if (($ensacado['fecha_entrada'] != '' && $ensacado['estatus_id'] != '5' && $ensacado['estatus_id'] != '15' && Utils::permisosLogistica()) || ($ensacado['estatus_id'] == '1')): ?>
+                <?php if ((($ensacado['fecha_entrada'] != '' && $ensacado['estatus_id'] != '5' && $ensacado['estatus_id'] != '15' && Utils::permisosLogistica()) || ($ensacado['estatus_id'] == '1')) || Utils::isAdmin()): ?>
                 <div><button class="boton" id="btnGuardar" title="Guardar"><span class="material-icons btn-icon i-save">save</span></button></div>
                 <div><button class="boton" id="btnEliminar" title="Eliminar"><span class="far i-delete material-icons fa-trash-alt btn-icon-s"></span></button></div>
                 <?php endif; ?>
                 <div><button class="boton" id="btnSalir" title="Salir"><span class="material-icons i-danger btn-icon" title="Cerrar">disabled_by_default</span></button></div>
+                <div><button class="boton" id="btnRefresh" title="Recargar" onClick="window.location.reload();"><span class="fa-solid fa-arrows-rotate  material-icons i-green btn-icon"></span></button></div>
+
             </div>
         </header>
         <!-- SECCION DE DATOS GENERALES -->
@@ -97,7 +106,7 @@ function ROFinaliza($estatus)
                 <input type="hidden" name="totalensacado" id="totalensacado" value="<?= $ensacado['totalensacado'] ?>">
                 <div class="div-datos pb-2">
                     <span class="titulo-div">Datos entrada / salida</span>
-                    <input type="hidden" id="ferrotolva" value="<?= $isTren ? 'F' : 'C' ?>" />
+                    <input type="hidden" id="isferrotolva" data-isTren="<?= $isTren ?>" value="<?= $isTren ? 'F' : 'C' ?>" />
                     <div class="datos mt-2 mb-1" <?php ROFinaliza($ensacado['estatus_id']) ?>>
                         <input type="hidden" name="id" value="<?= isset($ensacado) && $ensacado['id'] != '' ? $ensacado['id'] : ''; ?>" id="id" />
                         <div>
@@ -114,6 +123,11 @@ function ROFinaliza($estatus)
                             <input class="ml-1 mr-3" id="entrada_salida" type="radio" name="entrada_salida" value="0" disabled <?= ($ensacado['entrada_salida'] == 0) ? 'checked' : ''; ?> />
                             <strong for="entrada_salida">Salida:</strong>
                             <input class="ml-1" type="radio" name="entrada_salida" value="1" disabled <?= ($ensacado['entrada_salida'] == 1) ? 'checked' : ''; ?> />
+                        </div>
+                        <div class='form-check form-switch'>
+                            <input class="form-check-input" type="checkbox" role="switch" id="peso_obligatorio" name="peso_obligatorio" <?= ($ensacado['peso_obligatorio'] == 1) ? 'checked' : ''; ?>>
+                            <label class="form-check-label" for="peso_obligatorio">Pesaje Obligatorio</label>
+
                         </div>
 
                         <div>
@@ -144,7 +158,6 @@ function ROFinaliza($estatus)
                     </div>
                     <div class="datos pb-2">
                         <div>
-
                             <div id="divRadiosT" class="div-radiosT">
                                 <strong class="mr-1">Transporte por:</strong>
                                 <strong for="transp_lea_cliente">LEA:</strong>
@@ -250,13 +263,37 @@ function ROFinaliza($estatus)
                         <div><strong class="mr-1">Placa #1:</strong><input <?php ROFinaliza($ensacado['estatus_id']) ?>name="placa1" class="item-small" id="placa1" value="<?= isset($ensacado) ? $ensacado['placa1'] : ''; ?>" type="text" /></div>
                         <div><strong class="mr-1">Placa #2:</strong><input <?php ROFinaliza($ensacado['estatus_id']) ?>name="placa2" class="item-small" id="placa2" value="<?= isset($ensacado) ? $ensacado['placa2'] : ''; ?>" type="text" /> </div>
                     </div>
-                    <div class="datos pb-2">
-                        <div><strong class="mr-1">Fecha llegada:</strong><input type="text" name="fechaLlegada" value="<?= isset($ensacado) && $ensacado['fecha_entrada'] != '' ? UtilsHelp::fechaHora($ensacado['fecha_entrada']) : ''; ?>" id="fechaLlegada" class="item-medium fixed" readOnly disabled /></div>
+                    <div class="datos pb-2" <?php ROFinaliza($ensacado['estatus_id']) ?>>
                         <div>
-                            <strong class="mr-1">Fecha finalizado:</strong><input type="text" name="fechaSalida" value="<?= isset($ensacado) && $ensacado['fecha_salida'] != '' ? UtilsHelp::fechaHora($ensacado['fecha_salida']) : ''; ?>" id="fechaSalida" class="item-medium fixed" readOnly disabled />
+                            <strong class="mr-1">Fecha llegada:</strong>
+                            <!-- <input hidden type="text" name="fecha_entrada" value="<?= isset($ensacado) && $ensacado['fecha_entrada'] != '' ? UtilsHelp::fechaHora($ensacado['fecha_entrada']) : ''; ?>" id="fecha_entrada" class="item-medium fixed" /> -->
+                            <input hidden type="text" name="fecha_entrada" id="fecha_entrada" />
+                            <input <?php ROFinaliza($ensacado['estatus_id']) ?> <?= (isset($ensacado['fecha_entrada']) ? '' : 'disabled') ?> type="text" id="fecha_entrada_fecha" name="fecha_entrada_fecha" style="max-width:120px;"
+                                value="<?= isset($ensacado) && $ensacado['fecha_entrada'] != '' ? explode(' ', UtilsHelp::fechaHora($ensacado['fecha_entrada']))[0] : ''; ?>">
+                            <input <?php ROFinaliza($ensacado['estatus_id']) ?> <?= (isset($ensacado['fecha_entrada']) ? '' : 'disabled') ?> type="number" id="fecha_entrada_hora" name="fecha_entrada_hora" min="0" max="23" style="max-width:60px;"
+                                value="<?= isset($ensacado) && $ensacado['fecha_entrada'] != '' ? explode(':', explode(' ', $ensacado['fecha_entrada'])[1])[0] : ''; ?>" />
+                            <input <?php ROFinaliza($ensacado['estatus_id']) ?> <?= (isset($ensacado['fecha_entrada']) ? '' : 'disabled') ?> type="number" id="fecha_entrada_minuto" name="fecha_entrada_minuto" min="0" max="59" style="max-width:60px;"
+                                value="<?= isset($ensacado) && $ensacado['fecha_entrada'] != '' ? explode(':', explode(' ', $ensacado['fecha_entrada'])[1])[1] : ''; ?>" />
                         </div>
                         <div>
-                            <strong class="mr-1">Fecha liberación:</strong><input type="text" name="fechaLiberacion" value="<?= isset($ensacado) && $ensacado['fecha_liberacion'] != '' ? UtilsHelp::fechaHora($ensacado['fecha_liberacion']) : ''; ?>" id="fecha_liberacion" class="item-medium fixed" readOnly disabled />
+                            <strong class="mr-1">Fecha finalizado:</strong>
+                            <!-- <input type="text" name="fechaSalida" value="<?= isset($ensacado) && $ensacado['fecha_salida'] != '' ? UtilsHelp::fechaHora($ensacado['fecha_salida']) : ''; ?>" id="fechaSalida" class="item-medium fixed" readOnly disabled /> -->
+                            <input hidden type="text" name="fecha_salida" id="fecha_salida" />
+                            <input disabled type="text" id="fecha_salida_fecha" name="fecha_salida_fecha" style="max-width:120px;" value="<?= isset($ensacado) && $ensacado['fecha_salida'] != '' ? explode(' ', UtilsHelp::fechaHora($ensacado['fecha_salida']))[0] : ''; ?>">
+                            <input disabled type="number" id="fecha_salida_hora" name="fecha_salida_hora" min="0" max="23" style="max-width:60px;" value="<?= isset($ensacado) && $ensacado['fecha_salida'] != '' ? explode(':', explode(' ', $ensacado['fecha_salida'])[1])[0] : ''; ?>" />
+                            <input disabled type="number" id="fecha_salida_minuto" name="fecha_salida_minuto" min="0" max="59" style="max-width:60px;" value="<?= isset($ensacado) && $ensacado['fecha_salida'] != '' ? explode(':', explode(' ', $ensacado['fecha_salida'])[1])[1] : ''; ?>" />
+
+                        </div>
+                        <div>
+                            <strong class="mr-1">Fecha liberación:</strong>
+                            <!-- <input type="text" name="fechaLiberacion" value="<?= isset($ensacado) && $ensacado['fecha_liberacion'] != '' ? UtilsHelp::fechaHora($ensacado['fecha_liberacion']) : ''; ?>" id="fecha_liberacion" class="item-medium fixed" readOnly disabled /> -->
+                            <input <?php ROFinaliza($ensacado['estatus_id']) ?> <?= (isset($ensacado['fecha_liberacion']) ? '' : 'disabled') ?> type="text" id="fecha_liberacion_fecha" name="fecha_liberacion_fecha" style="max-width:120px;"
+                                value="<?= isset($ensacado) && $ensacado['fecha_liberacion'] != '' ? explode(' ', UtilsHelp::fechaHora($ensacado['fecha_liberacion']))[0] : ''; ?>">
+                            <input <?php ROFinaliza($ensacado['estatus_id']) ?> <?= (isset($ensacado['fecha_liberacion']) ? '' : 'disabled') ?> type="number" id="fecha_liberacion_hora" name="fecha_liberacion_hora" min="0" max="23" style="max-width:60px;"
+                                value="<?= isset($ensacado) && $ensacado['fecha_liberacion'] != '' ? explode(':', explode(' ', $ensacado['fecha_liberacion'])[1])[0] : ''; ?>" />
+                            <input <?php ROFinaliza($ensacado['estatus_id']) ?> <?= (isset($ensacado['fecha_liberacion']) ? '' : 'disabled') ?> type="number" id="fecha_liberacion_minuto" name="fecha_liberacion_minuto" min="0" max="59" style="max-width:60px;"
+                                value="<?= isset($ensacado) && $ensacado['fecha_liberacion'] != '' ? explode(':', explode(' ', $ensacado['fecha_liberacion'])[1])[1] : ''; ?>" />
+
                         </div>
                         <div><strong class="mr-2">En planta:</strong><span>Días: </span><input class="item-ss-small fixed" id="dias" type="text" value="<?= isset($tiempo) ? $tiempo['dias'] : ''; ?>" disabled />
                             <span>Horas: </span><input class="item-ss-small fixed" type="text" value="<?= isset($tiempo) ? $tiempo['horas'] : ''; ?>" disabled />
@@ -265,7 +302,7 @@ function ROFinaliza($estatus)
 
                     </div>
 
-                    <div class="row flex-nowrap pb-3" id="pnl_peso" <?= isset($ensacado['ticket']) ? '' : 'hidden' ?>>
+                    <div class="row flex-nowrap pb-3" id="pnl_peso" <?= isset($ensacado['ticket']) ? '' : 'style="display:none"' ?>>
                         <div class=" col-4 pl-5">
                             <div class="d-flex justify-content-between mb-1">
                                 <div class="pt-2"><strong>Tara Kilos:</strong></div>
@@ -362,14 +399,14 @@ function ROFinaliza($estatus)
             <?php if (isset($ensacado) && count($ensacado['servicio']) > 0): ?>
             <span class="titulo-div servicios-titulo">Servicios</span>
             <?php foreach ($ensacado['servicio'] as $serv): ?>
-            <div class="div-datos mt-2">
+            <div class="div-datos mt-2" id="servicio-<?= $serv['id'] ?>">
                 <div class="d-flex justify-content-between mt-1">
                     <input type="hidden" value="<?= $serv['id'] ?>" id="idServicio" />
                     <input type="hidden" value="<?= $serv['almacen_id'] ?>" id="almacen_id" css="almacen_id" name="almacen_id">
                     <div class="ml-2" <?php ROFinaliza($ensacado['estatus_id']) ?>><strong class="mr-1">Folio:</strong><span class="fixed item-medium folio"> <?= $serv['folio'] ?></span></div>
                     <div class="ml-2" <?php ROFinaliza($ensacado['estatus_id']) ?>><strong class="mr-1">Servicio:</strong><input type="hidden" id="idNombreServicio" value="<?= $serv['servicio_id'] ?> " /> <span id="nombreServicio" class="fixed item-medium">
                             <?= $serv['nombreServ'] ?></span></div>
-                    <div><strong class="mr-1">Empaque:</strong><span class="fixed item-medium"> <?= $serv['empaque'] ?></span></div>
+                    <div><strong class="mr-1">Empaque:</strong><span class="fixed item-medium" id="empaque_id" data-empaqueid="<?= $serv['empaque_id'] ?>"> <?= $serv['empaque'] ?></span></div>
                     <div><strong class="mr-1">Cantidad:</strong><span class="item-s-small fixed sumcantidad"><?= $serv['cantidad'] != null ? UtilsHelp::numero2Decimales($serv['cantidad']) : ''; ?></span><span class="ml-1">kgs.</span></div>
                     <div>
                         <?php if ($serv['fecha_inicio'] == '' && $serv['fecha_programacion'] != '' && $serv['fecha_programacion'] != '0000-00-00 00:00:00'): ?>
@@ -467,17 +504,32 @@ function ROFinaliza($estatus)
                 </div>
                 <div class="datos mt-1">
                     <div>
-                        <strong class="mr-1">Tarimas:</strong>
-                        <span class="item-small fixed"><?= $serv['tarimas'] != '' ? UtilsHelp::string2Entero($serv['tarimas']) : ''; ?></span>
+                        <strong class="mr-1">Tipo Tarima:</strong>
+                        <span class="item-small fixed">
+                            <?php
+                            foreach (tipo_tarimas as $i => $m):
+                                if ($i == $serv['tipo_tarima']) {
+                                    echo $m;
+                                }
+                            endforeach;
+                            ?>
+                            <!-- <= $serv['tipo_tarima'] != '' ? $serv['tipo_tarima'] : '' > -->
+                        </span>
                     </div>
                     <div>
-                        <strong class="mr-1">Tipo Tarima:</strong>
-                        <span class="item-small fixed"><?= $serv['tipo_tarima'] != '' ? $serv['tipo_tarima'] : '' ?></span>
+                        <strong class="mr-1">Sacos x Tarima:</strong>
+                        <span class="item-small fixed sacoxtarima"><?= $serv['sacoxtarima'] != '' ? UtilsHelp::string2Entero($serv['sacoxtarima']) : ''; ?></span>
                     </div>
                     <div>
                         <strong class="mr-1">Bultos:</strong>
                         <span class="item-small fixed"><?= $serv['bultos'] != '' ? UtilsHelp::string2Entero($serv['bultos']) : ''; ?></span>
                     </div>
+
+                    <div>
+                        <strong class="mr-1">Tarimas:</strong>
+                        <span class="item-small fixed"><?= $serv['tarimas'] != '' ? UtilsHelp::string2Entero($serv['tarimas']) : ''; ?></span>
+                    </div>
+
                     <div>
                         <strong class="mr-1">Parcial:</strong>
                         <span class="item-small fixed"><?= $serv['parcial'] != '' ? UtilsHelp::string2Entero($serv['parcial']) : ''; ?></span>
@@ -500,7 +552,7 @@ function ROFinaliza($estatus)
             <div class="modal-content m-content" id="viewDoc">
                 <div class="modal-header m-header">
                     <h5 class="modal-title" id="tituloDocumento"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -513,8 +565,27 @@ function ROFinaliza($estatus)
         <div class="modal-dialog m-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header m-title justify-content-between">
-                    <h5 class="modal-title ml-2"><span class="material-icons far fa-file-alt i-new"></span></a><span class="ml-2">Agregar nuevo servicio</span></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title ml-2">
+                        <span class="material-icons far fa-file-alt i-new"></span>
+                        </a>
+                        <span class="ml-2">Agregar nuevo servicio</span>
+                        <p>
+                            <span class="ml-2"><strong class="mr-1">Número FT/AT:</strong> <?= isset($ensacado) ? $ensacado['numUnidad'] : ''; ?>
+                                <br />
+                                <span class="ml-2"><strong class="mr-1">Cliente:</strong>
+                                    <?php
+                                        if (!empty($clientes)) {
+                                            foreach ($clientes as $cli) {
+                                                if (isset($ensacado) && $cli->id == $ensacado['cliente_id']) {
+                                                    echo $cli->nombre;
+                                                }
+                                            }
+                                        }
+                                    ?>
+                                </span>
+                        </p>
+                    </h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="border-modal modal-body">
                     <form id="formAgregarServicio" method="POST" enctype="multipart/form-data">
@@ -523,165 +594,287 @@ function ROFinaliza($estatus)
                         <input type="hidden" id="almacen_id" css="almacen_id" name="almacen_id">
                         <input type="hidden" id="producto_id" css="producto_id" name="producto_id">
                         <div class='row'>
-                            <div class='col-md-4 col-12'>
-                                <label for="idTipoServicio" class="form-label">Servicio</label>
-                                <select name="idTipoServicio" class="form-select" id="idTipoServicio">
-                                    <option value="" selected>--Selecciona--</option>
-                                    <?php
-                                        if (!empty($servicios)):
-                                            foreach ($servicios as $s):
-                                    ?>
-                                    <option value="<?= $s->id ?>"><?= $s->clave . ' - ' . $s->nombre ?> </option>
-                                    <?php
-                                            endforeach;
-                                        endif;
-                                                                            ?>
-                                </select>
-                            </div>
-                            <div class='col-md-4 col-12'>
-                                <label for="idEmpaque" class="form-label">Empaque</label>
-                                <select name="idEmpaque" class="form-select" id="idEmpaque">
-                                    <option value="" selected>--Selecciona--</option>
-                                    <option value="">N/A</option>
-                                    <?php
-                                        if (!empty($tiposEmpaques)):
-                                            foreach ($tiposEmpaques as $tp):
-                                    ?>
-                                    <option value="<?= $tp->id ?>"><?= $tp->nombre ?> </option>
-                                    <?php
-                                            endforeach;
-                                        endif;
-                                                                            ?>
-                                </select>
-                            </div>
-                            <div class='col-md-4 col-12'>
-                                <label for="cantidad" class="form-label">Cantidad</label>
-                                <div class="input-group mb-3">
-                                    <input type="text" name="cantidad" id="cantidad" class="form-control numhtml" disabled />
-                                    <span class="input-group-text">kgs.</span>
-                                </div>
-                                <span id="disponible" style="font-size: xx-small;margin-right: 10%;position: absolute;margin-top: 2%;" hidden>
-                                    Disponible :
-                                    <?php
-                                        if (isset($pesaje) && ($pesaje['EntPesoT'] > 0)) {
-                                            echo UtilsHelp::numero2Decimales((intval(Utils::quitarComas($pesoNeto)) - intval(Utils::quitarComas($ensacado['totalensacado']))), true, 0);
-                                        } else {
-                                            echo UtilsHelp::numero2Decimales(($ensacado['peso_cliente'] - $ensacado['totalensacado']), true, 0);
-                                        }
-                                    ?>
-                                </span>
+                            <div class='row'>
 
+                                <div class='col-md-4 col-12'>
+                                    <label for="idTipoServicio" class="form-label">Servicio</label>
+                                    <select name="idTipoServicio" class="form-select" id="idTipoServicio">
+                                        <option value="" selected>--Selecciona--</option>
+                                        <?php
+                                            if (!empty($servicios)):
+                                                foreach ($servicios as $s):
+                                        ?>
+                                        <option value="<?= $s->id ?>"><?= $s->clave . ' - ' . $s->nombre ?> </option>
+                                        <?php
+                                                endforeach;
+                                            endif;
+                                                                                    ?>
+                                    </select>
+                                </div>
+                                <div class='col-md-4 col-12'>
+                                    <div class='row'>
+                                        <div class='col-md-6 col-12'>
+                                            <label for="idEmpaque" class="form-label">Empaque</label>
+                                            <select name="idEmpaque" class="form-select" id="idEmpaque">
+                                                <option value="" selected>--Selecciona--</option>
+                                                <option value="">N/A</option>
+                                                <?php
+                                                    if (!empty($tiposEmpaques)):
+                                                        foreach ($tiposEmpaques as $tp):
+                                                ?>
+                                                <option value="<?= $tp->id ?>"><?= $tp->nombre ?> </option>
+                                                <?php
+                                                        endforeach;
+                                                    endif;
+                                                                                                    ?>
+                                            </select>
+                                        </div>
+                                        <div class='col-md-6 col-12'>
+                                            <div class='row'>
+                                                <label for="insumos_por" class="form-label">Insumo por</label>
+                                            </div>
+                                            <div class='row' style="font-size: 0.9rem; margin-top: 0.5rem;">
+                                                <div class='col-12'>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="insumos_por" id="insumos_por_0" value="0" checked>
+                                                        <label class="form-check-label" for="insumos_por_0">LEADER</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="insumos_por" id="insumos_por_1" value="1">
+                                                        <label class="form-check-label" for="insumos_por_1">Cliente</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class='col-md-4 col-12'>
+                                    <div class='row'>
+
+                                        <div class='col-12'>
+
+
+                                            <label for="cantidad" class="form-label">Cantidad</label>
+                                            <div class="input-group mb-3">
+                                                <input type="text" name="cantidad" id="cantidad" class="form-control numhtml" disabled />
+                                                <span class="input-group-text">kgs.</span>
+                                            </div>
+                                        </div>
+                                        <div class='col-12'>
+                                            <div class='row disponible_div' hidden>
+                                                <div class='col-4'>
+                                                    <span id="disponible" style="font-size: xx-small;margin-top: 2%;">
+                                                        <div class="input-group mb-3">
+                                                            <strong>Disponible:</strong>
+                                                            <span class="input-group-text" style="margin-right: 4px;">
+                                                                <?php
+                                                                    if (isset($pesaje) && ($pesaje['EntPesoT'] > 0)) {
+                                                                        echo UtilsHelp::numero2Decimales((intval(Utils::quitarComas($pesoNeto)) - intval(Utils::quitarComas($ensacado['totalensacado']))), true, 0);
+                                                                    } else {
+                                                                        echo UtilsHelp::numero2Decimales(($ensacado['peso_cliente'] - $ensacado['totalensacado']), true, 0);
+                                                                    }
+                                                                ?></span>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                                <div class='col-4'>
+                                                    <span id="peso_cliente" style="font-size: xx-small;margin-top: 2%;">
+                                                        <div class="input-group mb-3">
+                                                            <strong>Peso Cliente:</strong>
+                                                            <span class="input-group-text"><?php echo UtilsHelp::numero2Decimales($ensacado['peso_cliente']); ?></span>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                                <div class='col-4'>
+                                                    <span id="peso_bruto_real" style="font-size: xx-small;margin-top: 2%;">
+                                                        <div class="input-group mb-3">
+                                                            <strong>Peso Bruto/Real:</strong>
+                                                            <span class="input-group-text">
+                                                                <?php
+                                                                    if (isset($pesaje) && ($pesaje['EntPesoT'] > 0)) {
+                                                                        echo UtilsHelp::numero2Decimales($pesaje['EntPesoT'], true, 0);
+                                                                    } else if (isset($pesaje)) {
+                                                                        echo UtilsHelp::numero2Decimales($pesaje['EntPesoB'], true, 0);
+                                                                    } else {
+                                                                        echo '0';
+                                                                    }
+                                                                ?>
+                                                            </span>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
+
+                </div>
+                <div class='row'>
+                    <div class='col-md-4 col-12'>
+                        <label for="orden" class="form-label">Orden</label>
+                        <div class="input-group ">
+                            <input type="text" name="orden" id="orden" class="form-control" value="<?= isset($ensacado) && isset($ensacado['doc_orden']) ? $ensacado['doc_orden'] : ''; ?>" />
+                            <span class=" input-group-text igt-r ">
+                                <label id="addDocumento" title="Agregar orden" for="documentoOrden_e" class="inputFile mb-1">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                </label>
+                                <input id="documentoOrden_e" <?php ROFinaliza($ensacado['estatus_id']) ?>name="documentoOrden_e" type="file" hidden />
+
+
+                                <!-- <label id="addDocumento" title="Agregar orden" for="documentoOrden_e" class="inputFile mb-1"><i class="fas fa-cloud-upload-alt"></i></label> -->
+
+                                <input type="hidden" id="archivoOrden_e" name="archivoOrden_e">
+                                <i id="show" class="input-group-text i-pdf material-icons fa-solid fa-file-pdf" title="Ver Bill of lading" hidden></i>
+                                <i id="delete" class="input-group-text far i-delete material-icons fa-trash-alt" <?= (Utils::permisosLogistica()) ? '' : 'disabled' ?> hidden></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class='col-md-8 col-12'>
                         <div class='row'>
-                            <div class='col-md-4 col-12'>
-                                <label for="orden" class="form-label">Orden</label>
-                                <div class="input-group ">
-                                    <input type="text" name="orden" id="orden" class="form-control" value="<?= isset($ensacado) && isset($ensacado['doc_orden']) ? $ensacado['doc_orden'] : ''; ?>" />
-                                    <span class=" input-group-text igt-r ">
-                                        <label id="addDocumento" title="Agregar orden" for="documentoOrden_e" class="inputFile mb-1">
-                                            <i class="fas fa-cloud-upload-alt"></i>
-                                        </label>
-                                        <input id="documentoOrden_e" <?php ROFinaliza($ensacado['estatus_id']) ?>name="documentoOrden_e" type="file" hidden />
-
-
-                                        <!-- <label id="addDocumento" title="Agregar orden" for="documentoOrden_e" class="inputFile mb-1"><i class="fas fa-cloud-upload-alt"></i></label> -->
-
-                                        <input type="hidden" id="archivoOrden_e" name="archivoOrden_e">
-                                        <i id="show" class="input-group-text i-pdf material-icons fa-solid fa-file-pdf" title="Ver Bill of lading" hidden></i>
-                                        <i id="delete" class="input-group-text far i-delete material-icons fa-trash-alt" <?= (Utils::permisosLogistica()) ? '' : 'disabled' ?> hidden></i>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class='col-md-4 col-12'>
+                            <div class='col-md- <?= ($ensacado['entrada_salida'] == '0') ? '12' : '8' ?> col-12'>
                                 <label for="loteSelect" class="form-label">Lote</label>
                                 <input type="text" name="lote" id="lote" class="form-control" />
                                 <select name="loteSelect" id="loteSelect" class="form-select loteSelect" hidden>
                                     <option>--Selecciona--</option>
                                 </select>
-                            </div>
-                            <div class='col-md-4 col-12' id="div_producto">
-                                <label for="producto" class="form-label">Producto</label>
-                                <select name="producto" class="form-select" id="producto" style="">
-                                    <option value="" selected>--Selecciona--</option>
-                                    <option value="nuevo"> >>Nuevo Producto<< </option>
-                                            <?php
-                                                if (!empty($productos)):
-                                                    foreach ($productos as $p):
-                                            ?>
-                                    <option value="<?= $p->id ?>"><?= $p->nombre ?> </option>
-                                    <?php
-                                                    endforeach;
-                                                endif;
-                                                                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class='row'>
-                            <div class='col-12'>
-                                <label for="alias" class="form-label">Rotulo</label>
-                                <input type="text" name="alias" id="alias" class="form-control" />
-                            </div>
-                        </div>
-                        <div class='row programacion' style="display:none !important;">
-                            <div class='col-md-6 col-12'>
-                                <label for="fechaPrograma" class="form-label">Fecha programación</label>
-                                <input type="text" name="fechaPrograma" id="fechaPrograma1" class="form-control fechaPrograma" readonly>
-                            </div>
-                            <div class='col-md-2 col-12'>
-                                <label for="tipoTarima" class="form-label">Tipo Tarima</label>
-                                <select name="tipoTarima" class="item-small" id="tipoTarima">
-                                    <option value="">-Selecciona-</option>
-                                    <?php
-                                        foreach (tipo_tarimas as $i => $m):
-                                    ?>
-                                    <option value="<?= $i ?>"><?= $m ?></option>
-                                    <?php
-                                        endforeach;
-                                                                            ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class='row calctarimas'>
-                            <div class='col-md-4 col-12'>
-                                <label for="bultos" class="form-label">Bultos</label>
-                                <input type="text" name="bultos" id="bultos" class="form-control " readonly disabled />
-                            </div>
-                            <div class='col-md-4 col-12'>
-                                <label for="tarimas" class="form-label">Tarimas</label>
-                                <input type="text" name="tarimas" id="tarimas" class="form-control " readonly disabled />
-                            </div>
-                            <div class='col-md-4 col-12'>
-                                <label for="parcial" class="form-label">Parcial</label>
-                                <input type="text" name="parcial" id="parcial" class="form-control " readonly disabled />
-                            </div>
-                        </div>
-                        <div class='row'>
-                            <div class='col-12'>
-                                <label for="observaciones" class="form-label">Observaciones</label>
-                                <input type="text" name="observaciones" class="form-control" />
-                            </div>
-                        </div>
 
-                    </form>
-                    <div class=" border-modal modal-footer text-center">
-                        <button type="button" class="btn btn-funcion btn-rojo" data-dismiss="modal"><span class="material-icons pr-2">close</span><span>Cancelar</span></button>
-                        <button class="btn btn-funcion btn-azul" id="btnGenerarServicio"><span class="material-icons pr-2">save</span><span>Guardar</span></button>
+                            </div>
+                            <div class='col-md-4 col-12' <?= ($ensacado['entrada_salida'] == '0') ? 'hidden' : '' ?>>
+                                <label for="disponible_lote" class="form-label">Disponible</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" name="disponible_lote" id="disponible_lote" class="form-control numhtml" disabled />
+                                    <span class="input-group-text">kgs.</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <div class='col-md-8 col-12' id="div_producto">
+                        <label for="producto" class="form-label">Producto</label>
+                        <select name="producto" class="form-select" id="producto" style="">
+                            <option value="" selected>--Selecciona--</option>
+                            <option value="nuevo"> >>Nuevo Producto<< </option>
+                                    <?php
+                                        if (!empty($productos)):
+                                            foreach ($productos as $p):
+                                    ?>
+                            <option value="<?= $p->id ?>"><?= $p->nombre ?> </option>
+                            <?php
+                                            endforeach;
+                                        endif;
+                                                                    ?>
+                        </select>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-12'>
+                        <label for="alias" class="form-label">Rotulo</label>
+                        <input type="text" name="alias" id="alias" class="form-control" />
+                    </div>
+                </div>
+                <div class='row programacion' style="display:none !important;">
+                    <div class='col-md-4 col-12'>
+                        <label for="fechaPrograma" class="form-label">Fecha programación</label>
+                        <div class="input-group mb-3">
+                            <input type="text" name="fechaPrograma" id="fechaPrograma1" class="form-control fechaPrograma" readonly>
+                        </div>
+                    </div>
+                    <div class='col-md-2 col-12'>
+                        <label for="tipoTarima" class="form-label">Tipo Tarima</label>
+                        <select name="tipoTarima" class="form-select" id="tipoTarima">
+                            <option value="">-Selecciona-</option>
+                            <?php
+                                foreach (tipo_tarimas as $i => $m):
+                            ?>
+                            <option value="<?= $i ?>"><?= $m ?></option>
+                            <?php
+                                endforeach;
+                                                            ?>
+                        </select>
+                    </div>
+                    <div class='col-md-2 col-12'>
+                        <label for="cantidad" class="form-label">Sacos X Tarima</label>
+                        <input type="number" name="sacoxtarima" id="sacoxtarima" class="form-control numhtml" />
+
+                    </div>
+                    <div class='col-md-4 col-12'>
+                        <div class='row'>
+                            <label for="tarima_por" class="form-label">Tarimas por</label>
+                        </div>
+                        <div class='row' style="font-size: 0.9rem; margin-top: 0.5rem;">
+                            <div class='col-12'>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="tarima_por" id="tarima_por_0" value="0" checked>
+                                    <label class="form-check-label" for="tarima_por_0">LEADER</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="tarima_por" id="tarima_por_1" value="1">
+                                    <label class="form-check-label" for="tarima_por_1">Cliente</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='row calctarimas'>
+                    <div class='col-md-4 col-12'>
+                        <label for="bultos" class="form-label">Bultos</label>
+                        <input type="text" name="bultos" id="bultos" class="form-control " readonly disabled />
+                    </div>
+                    <div class='col-md-4 col-12'>
+                        <label for="tarimas" class="form-label">Tarimas</label>
+                        <input type="text" name="tarimas" id="tarimas" class="form-control " readonly disabled />
+                    </div>
+                    <div class='col-md-4 col-12'>
+                        <label for="parcial" class="form-label">Parcial</label>
+                        <input type="text" name="parcial" id="parcial" class="form-control " readonly disabled />
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-12'>
+                        <label for="observaciones" class="form-label">Observaciones</label>
+                        <input type="text" name="observaciones" class="form-control" />
+                    </div>
+                </div>
+
+                </form>
+                <div class=" border-modal modal-footer text-center">
+                    <button type="button" class="btn btn-funcion btn-rojo" data-bs-dismiss="modal"><span class="material-icons pr-2">close</span><span>Cancelar</span></button>
+                    <button class="btn btn-funcion btn-azul" id="btnGenerarServicio"><span class="material-icons pr-2">save</span><span>Guardar</span></button>
                 </div>
             </div>
         </div>
     </div>
     </div>
 
-
     <!-- Modal editar servicio-->
-    <div class="modal fade modal-servicio" id="editarServicioModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal fade modal-servicio" id="editarServicioModal" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
         <div class="modal-dialog m-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header m-title justify-content-between">
-                    <h5 class="modal-title ml-2"><span class="material-icons far fa-file-alt i-new"></span></a><span class="ml-2">Folio servicio:</span><span class="ml-2" id="folioServicio"></span></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title ml-2">
+                        <span class="material-icons far fa-file-alt i-new"></span>
+                        </a><span class="ml-2">Folio servicio:</span>
+                        <span class="ml-2" id="folioServicio"></span>
+                        <p>
+                            <span class="ml-2"><strong class="mr-1">Número FT/AT:</strong> <?= isset($ensacado) ? $ensacado['numUnidad'] : ''; ?>
+                                <br />
+                                <span class="ml-2"><strong class="mr-1">Cliente:</strong>
+                                    <?php
+                                        if (!empty($clientes)) {
+                                            foreach ($clientes as $cli) {
+                                                if (isset($ensacado) && $cli->id == $ensacado['cliente_id']) {
+                                                    echo $cli->nombre;
+                                                }
+                                            }
+                                        }
+                                    ?>
+                                </span>
+                        </p>
+                    </h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="border-modal modal-body">
                     <form id="formEditarServicio" method="POST" enctype="multipart/form-data">
@@ -708,23 +901,45 @@ function ROFinaliza($estatus)
                                                                             ?>
                                 </select>
                             </div>
-                            <div class='col-md-2 col-12'>
-                                <label for="idEmpaque" class="form-label">Empaque</label>
-                                <select name="idEmpaque" class="form-select" id="idEmpaque">
-                                    <option value="" selected>--Selecciona--</option>
-                                    <option value="">N/A</option>
-                                    <?php
-                                        if (!empty($tiposEmpaques)):
-                                            foreach ($tiposEmpaques as $tp):
-                                    ?>
-                                    <option value="<?= $tp->id ?>"><?= $tp->nombre ?> </option>
-                                    <?php
-                                            endforeach;
-                                        endif;
-                                                                            ?>
-                                </select>
+                            <div class='col-md-4 col-12'>
+                                <div class='row'>
+                                    <div class='col-md-6 col-12'>
+                                        <label for="idEmpaque" class="form-label">Empaque</label>
+                                        <select name="idEmpaque" class="form-select" id="idEmpaque">
+                                            <option value="" selected>--Selecciona--</option>
+                                            <option value="">N/A</option>
+                                            <?php
+                                                if (!empty($tiposEmpaques)):
+                                                    foreach ($tiposEmpaques as $tp):
+                                            ?>
+                                            <option value="<?= $tp->id ?>"><?= $tp->nombre ?> </option>
+                                            <?php
+                                                    endforeach;
+                                                endif;
+                                                                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class='col-md-6 col-12'>
+                                        <div class='row'>
+                                            <label for="insumo_por" class="form-label">Insumo por</label>
+                                        </div>
+                                        <div class='row' style="font-size: 0.9rem; margin-top: 0.5rem;">
+                                            <div class='col-12'>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="insumo_por" id="insumo_por_0" value="0">
+                                                    <label class="form-check-label" for="insumo_por_0">LEADER</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="insumo_por" id="insumo_por_1" value="1">
+                                                    <label class="form-check-label" for="insumo_por_1">Cliente</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class='col-md-3 col-12'>
+                            <div class='col-md-2 col-12'>
                                 <label for="cantidad" class="form-label">Cantidad</label>
                                 <div class="input-group mb-3">
                                     <input type="text" name="cantidad" id="cantidad" class="form-control numhtml" disabled />
@@ -742,7 +957,7 @@ function ROFinaliza($estatus)
                                     ?>
                                 </span>
                             </div>
-                            <div class='col-md-3 col-12'>
+                            <div class='col-md-2 col-12'>
                                 <label for="orden" class="form-label">Orden</label>
                                 <div class="input-group ">
                                     <input type="text" name="orden" id="orden" class="form-control" value="<?= isset($ensacado) && isset($ensacado['doc_orden']) ? $ensacado['doc_orden'] : ''; ?>" />
@@ -765,10 +980,9 @@ function ROFinaliza($estatus)
                                 <select name="lote" id="loteSelect" class="form-select loteSelect" hidden>
                                     <option>--Selecciona--</option>
                                 </select>
-                                <!-- <input type="text" name="lote" id="lote" class="form-control" /> -->
+                                <input type="text" name="lote" id="lote" class="form-control" hidden />
 
                             </div>
-
                             <div class='col-md-2 col-12'>
                                 <label for="existencia" class="form-label">Existencia</label>
                                 <div class="input-group mb-3">
@@ -776,75 +990,96 @@ function ROFinaliza($estatus)
                                     <span class="input-group-text">kgs.</span>
                                 </div>
                             </div>
+                            <div class='col-md-2 col-12 div_producto'>
+                                <label for="producto" class="form-label">Producto</label>
+                                <select name="producto" class="form-select" id="producto" style="">
+                                    <option value="" selected>--Selecciona--</option>
+                                    <option value="nuevo"> >>Nuevo Producto<< </option>
+                                            <?php
+                                                if (!empty($productos)):
+                                                    foreach ($productos as $p):
+                                            ?>
+                                    <option value="<?= $p->id ?>"><?= $p->nombre ?> </option>
+                                    <?php
+                                                    endforeach;
+                                                endif;
+                                                                                    ?>
+                                </select>
+                            </div>
                         </div>
-                        <div class='row'>
-
+                        <div class="row div-form" hidden>
+                            <div class='col-12'>
+                                <label for="alias" class="form-label">Rótulo</label>
+                                <input type="text" name="alias" id="alias" class="form-control" />
+                            </div>
                         </div>
 
-                        <div class="container div-form" hidden>
-                            <div>
-                                <div class="row justify-content-between1111s mb-2">
+                        <div class="row div-form" hidden>
+                            <div class='col-md-4 col-12'>
+                                <label for="fechaPrograma" class="form-label">Fecha programación</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" name="fechaPrograma" id="fechaPrograma" class="form-control fechaPrograma" readonly>
+                                </div>
+                            </div>
+                            <div class='col-md-2 col-12'>
+                                <label for="tipoTarima" class="form-label">Tipo Tarima</label>
+                                <select name="tipoTarima" class="form-select" id="tipoTarima">
+                                    <option value="">-Selecciona-</option>
+                                    <?php
+                                        foreach (tipo_tarimas as $i => $m):
+                                    ?>
+                                    <option value="<?= $i ?>"><?= $m ?></option>
+                                    <?php
+                                        endforeach;
+                                                                            ?>
+                                </select>
+                            </div>
+                            <div class='col-md-2 col-12'>
+                                <label for="sacoxtarima" class="form-label">Sacos X Tarima</label>
+                                <input type="number" name="sacoxtarima" id="sacoxtarima" class="form-control numhtml" />
 
-                                    <div class='row'>
-                                        <div class='col-12'>
-                                            <!-- <div class="col-md-3"> -->
-                                            <strong class="mr-1">Producto:</strong>
-                                            <select name="producto" class="item-medium" id="producto" style="">
-                                                <option value="" selected>--Selecciona--</option>
-                                                <option value="nuevo"> >>Nuevo Producto<< </option>
-                                                        <?php
-                                                            if (!empty($productos)):
-                                                                foreach ($productos as $p):
-                                                        ?>
-                                                <option value="<?= $p->id ?>"><?= $p->nombre ?> </option>
-                                                <?php
-                                                                endforeach;
-                                                            endif;
-                                                                                                            ?>
-                                            </select>
+                            </div>
+                            <div class='col-md-4 col-12'>
+                                <div class='row'>
+                                    <label for="tarima_por" class="form-label">Tarimas por</label>
+                                </div>
+                                <div class='row' style="font-size: 0.9rem; margin-top: 0.5rem;">
+                                    <div class='col-12'>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="tarima_por" id="tarima_por_0" value="0">
+                                            <label class="form-check-label" for="tarima_por_0">LEADER</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="tarima_por" id="tarima_por_1" value="1">
+                                            <label class="form-check-label" for="tarima_por_1">Cliente</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row d-flex justify-content-between mb-2">
-                                <div><strong class="mr-1">Rótulo:</strong>
-                                    <input type="text" name="alias" id="alias" class="item-bigger" />
-                                </div>
-
-                            </div>
-                            <div class="row d-flex justify-content-between mb-2 programacion" style="display:none !important;">
-                                <div>
-                                    <strong class="mr-1">Fecha programación:</strong>
-                                    <input type="text" name="fechaPrograma" id="fechaPrograma" class="item-small fechaPrograma" readonly>
-                                </div>
-                                <div>
-                                    <strong class="mr-1">Tipo Tarima:</strong>
-                                    <select name="tipoTarima" class="item-small" id="tipoTarima">
-                                        <option value="">-Selecciona-</option>
-                                        <?php
-                                            foreach (tipo_tarimas as $i => $m):
-                                        ?>
-                                        <option value="<?= $i ?>"><?= $m ?></option>
-                                        <?php
-                                            endforeach;
-                                                                                    ?>
-                                    </select>
-                                </div>
-
-                            </div>
-
                             <div class="row d-flex justify-content-between mb-2 calctarimas">
-                                <div><strong class="mr-1 ">Bultos:</strong><input type="text" name="bultos" id="bultos" class="item-small " readonly disabled /></div>
-                                <div><strong class="mr-1 ">Tarimas:</strong><input type="text" name="tarimas" id="tarimas" class="item-small " readonly disabled /></div>
-                                <div><strong class="mr-1 ">Parcial:</strong><input type="text" name="parcial" id="parcial" class="item-small " readonly disabled /></div>
+                                <div class="col">
+                                    <strong class="mr-1 ">Bultos:</strong>
+                                    <input type="text" name="bultos" id="bultos" class="item-small " readonly disabled />
+                                </div>
+                                <div class="col">
+                                    <strong class="mr-1 ">Tarimas:</strong>
+                                    <input type="text" name="tarimas" id="tarimas" class="item-small " readonly disabled />
+                                </div>
+                                <div class="col">
+                                    <strong class="mr-1 ">Parcial:</strong>
+                                    <input type="text" name="parcial" id="parcial" class="item-small " readonly disabled />
+                                </div>
                             </div>
                             <div class="row d-flex justify-content-between mb-2">
-                                <div><strong class="mr-1">Observaciones:</strong><input type="text" name="observaciones" class="item-bigger" /></div>
+                                <div>
+                                    <strong class="mr-1">Observaciones:</strong>
+                                    <input type="text" name="observaciones" class="form-control" style="width:100%;" />
+                                </div>
                             </div>
                         </div>
                     </form>
                     <div class=" border-modal modal-footer text-center">
-                        <button type="button" class="btn btn-funcion1 btn-danger" data-dismiss="modal"><span class="material-icons pr-2">close</span><span>Cancelar</span></button>
+                        <button type="button" class="btn btn-funcion1 btn-danger" data-bs-dismiss="modal"><span class="material-icons pr-2">close</span><span>Cancelar</span></button>
                         <button class="btn btn-funcion1 btn-success" id="btnEditarServicio"><span class="material-icons pr-2">save</span><span>Guardar</span></button>
                     </div>
                 </div>
@@ -852,181 +1087,13 @@ function ROFinaliza($estatus)
         </div>
     </div>
 
-    <!-- <div class="modal fade modal-servicio" id="editarServicioModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-        <div class="modal-dialog m-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header m-title justify-content-between">
-                    <h5 class="modal-title ml-2"><span class="material-icons far fa-file-alt i-new"></span></a><span class="ml-2">Folio servicio:</span><span class="ml-2" id="folioServicio"></span></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="border-modal modal-body">
-                    <form id="formEditarServicio" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="id" id="id" />
-                        <input type="hidden" id="idEntrada" name="idEntrada" />
-                        <input type="hidden" id="estatus" name="estatus" />
-                        <input type="hidden" id="almacen_id" css="almacen_id" name="almacen_id">
-                        <input type="hidden" id="producto_id" css="producto_id" name="producto_id">
-                        <input type="hidden" id="lote" css="lote" name="lote">
-                        <input type="hidden" id="alias" css="alias" name="alias">
-                        <div class="container div-form">
-                            <div class="row justify-content-between mb-3">
-                                <div class="d-flex">
-                                    <div class="mr-1">
-                                        <strong>Servicio:</strong>
-                                    </div>
-                                    <div>
-                                        <select name="idTipoServicio" class="item-big" id="idTipoServicio" disabled>
-                                            <option value="" selected>--Selecciona--</option>
-                                            <?php
-                                                if (!empty($servicios)):
-                                                    foreach ($servicios as $s):
-                                            ?>
-                                            <option value="<?= $s->id ?>"><?= $s->clave . ' - ' . $s->nombre ?> </option>
-                                            <?php
-                                                    endforeach;
-                                                endif;
-                                                                                            ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="mr-1"><strong>Empaque:</strong></div>
-                                    <div><select name="idEmpaque" class="item-medium" id="idEmpaque">
-                                            <option value="" selected>--Selecciona--</option>
-                                            <option value="">N/A</option>
-                                            <?php
-                                                if (!empty($tiposEmpaques)):
-                                                    foreach ($tiposEmpaques as $tp):
-                                            ?>
-                                            <option value="<?= $tp->id ?>"><?= $tp->nombre ?> </option>
-                                            <?php
-                                                    endforeach;
-                                                endif;
-                                                                                            ?>
-                                        </select></div>
-                                </div>
-                                <div class="d-flex">
-                                    !-- <div class='row'> -->
-    <!-- <div class="col-6"> --
-    <strong class="mr-1">Cantidad:</strong>
-    <input type="text" name="cantidad" id="cantidad" class="item-small numhtml" disabled /><span class="ml-1">kgs.</span>
-    <span id="disponible" style="font-size: xx-small;margin-right: 10%;position: absolute;margin-top: 2%;" hidden>
-        Disponible :
-        <?php
-            if (isset($pesaje) && ($pesaje['EntPesoT'] > 0)) {
-                echo UtilsHelp::numero2Decimales((intval(Utils::quitarComas($pesoNeto)) - intval(Utils::quitarComas($ensacado['totalensacado']))), true, 0);
-            } else {
-                echo UtilsHelp::numero2Decimales(($ensacado['peso_cliente'] - $ensacado['totalensacado']), true, 0);
-            }
-        ?>
-    </span>
-    </div>
-    </div>
-    <div>
-        <div class="row justify-content-between mb-2">
-            <div>
-                <strong class="mr-1">Orden:</strong>
-                <input type="text" name="orden" id="orden" class="item-medium" value="<?= isset($ensacado) && isset($ensacado['doc_orden']) ? $ensacado['doc_orden'] : ''; ?>" />
-                <label id="addDocumento" title="Agregar orden" for="documentoOrden_e" class="inputFile mb-1"><i class="fas fa-cloud-upload-alt"></i></label>
-                <input id="documentoOrden_e" <?php ROFinaliza($ensacado['estatus_id']) ?>name="documentoOrden_e" type="file" hidden />
-                <input type="hidden" id="archivoOrden_e" name="archivoOrden_e">
-                <i id="show" class="i-pdf material-icons fa-solid fa-file-pdf" title="Ver Bill of lading" hidden></i>
-                <i id="delete" class="far i-delete material-icons fa-trash-alt" <?= (Utils::permisosLogistica()) ? '' : 'disabled' ?> hidden></i>
-
-            </div>
-        </div>
-    </div>
-    <div>
-        <div class="row justify-content-between1111s mb-2">
-            <div class='row'>
-                <div class='col-6'>
-                    <strong class="mr-1">Lote:</strong>
-                    <input type="text" name="lote" id="lote" class="item-medium" />
-                  
-                    <select name="loteSelect" id="loteSelect" class="item-biggg loteSelect" hidden>
-                        <option>--Selecciona--</option>
-                    </select>
-                </div>
-                <div class='col-6'>
-                    <strong class="mr-1">Existencia:</strong>
-                    <input type="text" name="existencia" id="existencia" class="item-smallss mt-4 numhtml" readonly disabled />
-                    <span class="ml-1">kgs.</span>
-                </div>
-            </div>
-            <div class='row'>
-                <div class='col-12'>
-                    
-                    <strong class="mr-1">Producto:</strong>
-                    <select name="producto" class="item-medium" id="producto" style="">
-                        <option value="" selected>--Selecciona--</option>
-                        <option value="nuevo"> >>Nuevo Producto<< </option>
-                                <?php
-                                    if (!empty($productos)):
-                                        foreach ($productos as $p):
-                                ?>
-                        <option value="<?= $p->id ?>"><?= $p->nombre ?> </option>
-                        <?php
-                                        endforeach;
-                                    endif;
-                                                            ?>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row d-flex justify-content-between mb-2">
-        <div><strong class="mr-1">Rótulo:</strong>
-            <input type="text" name="alias" id="alias" class="item-bigger" />
-        </div>
-
-    </div>
-    <div class="row d-flex justify-content-between mb-2 programacion" style="display:none !important;">
-        <div>
-            <strong class="mr-1">Fecha programación:</strong>
-            <input type="text" name="fechaPrograma" id="fechaPrograma" class="item-small fechaPrograma" readonly>
-        </div>
-        <div>
-            <strong class="mr-1">Tipo Tarima:</strong>
-            <select name="tipoTarima" class="item-small" id="tipoTarima">
-                <option value="">-Selecciona-</option>
-                <?php
-                    foreach (tipo_tarimas as $i => $m):
-                ?>
-                <option value="<?= $i ?>"><?= $m ?></option>
-                <?php
-                    endforeach;
-                                    ?>
-            </select>
-        </div>
-
-    </div>
-
-    <div class="row d-flex justify-content-between mb-2 calctarimas">
-        <div><strong class="mr-1 ">Bultos:</strong><input type="text" name="bultos" id="bultos" class="item-small " readonly disabled /></div>
-        <div><strong class="mr-1 ">Tarimas:</strong><input type="text" name="tarimas" id="tarimas" class="item-small " readonly disabled /></div>
-        <div><strong class="mr-1 ">Parcial:</strong><input type="text" name="parcial" id="parcial" class="item-small " readonly disabled /></div>
-    </div>
-    <div class="row d-flex justify-content-between mb-2">
-        <div><strong class="mr-1">Observaciones:</strong><input type="text" name="observaciones" class="item-bigger" /></div>
-    </div>
-    </div>
-    </form>
-    <div class=" border-modal modal-footer text-center">
-        <button type="button" class="btn btn-funcion btn-rojo" data-dismiss="modal"><span class="material-icons pr-2">close</span><span>Cancelar</span></button>
-        <button class="btn btn-funcion btn-azul" id="btnEditarServicio"><span class="material-icons pr-2">save</span><span>Guardar</span></button>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div> -->
-
     <!-- Modal enviar a almacen -->
     <div class="modal fade" id="enviarAlmacenModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Enviar a almacen y finalizar servicio:</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -1116,7 +1183,7 @@ function ROFinaliza($estatus)
 
                     <div><button id="agregarAlmacen" type="button" class="btn-azul folio p-1">Agregar almacén</button></div>
                     <div>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         <button type="button" class="btn btn-primary" id="enviarFinalizarServicio">Finalizar</button>
                     </div>
                 </div>
