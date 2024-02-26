@@ -459,13 +459,16 @@ class ServicioEntrada
                     end numeroUnidad
                 from servicios_entradas se 
                 inner join catalogo_estatus es on es.id = se.estatus_id 
-                inner join catalogo_clientes c on c.id = se.cliente_id ';
+                left join catalogo_clientes c on c.id = se.cliente_id ';
         if ($where != null) {
             $sql .= $where;
         } else {
             $sql .= ' order by se.id desc';
         }
 
+        // print_r('<pre>');
+        // print_r($sql);
+        // print_r('</pre>');
         $ensacados = $this->db->query($sql);
         if ($ensacados != null) {
             foreach ($ensacados->fetch_all(MYSQLI_ASSOC) as $e) {

@@ -180,7 +180,7 @@ class CatChoferes
 
     public function getById($id)
     {
-        $tipoTransportes = $this->db->query("select * from catalogo_choferes where id= {$id}");
+        $tipoTransportes = $this->db->query("select concat(chof.nombres,' ',chof.apellidos) nombre ,chof.* from catalogo_choferes chof where id= {$id}");
         return $tipoTransportes->fetch_object();
     }
 

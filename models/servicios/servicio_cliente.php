@@ -213,7 +213,7 @@ class ServicioCliente
         $sql = 'select ser.id as id, ser.nombre as nombre, ser.clave as clave from servicios_clientes s '
             . ' inner join catalogo_servicios ser on ser.id = s.servicio_id'
             . ' inner join catalogo_clientes cli on cli.id = s.cliente_id '
-            . " where s.cliente_id = {$this->getClienteId()} "
+            . ' where s.cliente_id = IFNULL(' . (($this->getClienteId() != null) ? $this->getClienteId() : 'null') . ',s.cliente_id) '
             . ' union select servicio.id as id, servicio.nombre as nombre, servicio.clave as clave from '
             . " catalogo_servicios servicio where servicio.clave like '%AJUSTE%'";
         $serv = $this->db->query($sql);

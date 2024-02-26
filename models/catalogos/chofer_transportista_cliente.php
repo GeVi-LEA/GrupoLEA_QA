@@ -18,13 +18,13 @@ class ChoferTransportistaCliente
     {
         $this->db = Database::connect();
     }
-    
-   function getTransportistaId()
+
+    function getTransportistaId()
     {
         return $this->transportista_id;
     }
 
-     function setTransportistaId($transportista_id): void
+    function setTransportistaId($transportista_id): void
     {
         $this->transportista_id = $transportista_id;
     }
@@ -180,7 +180,11 @@ class ChoferTransportistaCliente
 
     public function getById($id)
     {
-        $tipoTransportes = $this->db->query("select * from catalogo_choferes where id= {$id}");
+        $query = "select concat(chof.nombres,' ',chof.apellidos) nombre , chof.* from catalogo_choferes chof where id = {$id}";
+        //print_r('<pre>');
+        //print_r($query);
+        //print_r('</pre>');
+        $tipoTransportes = $this->db->query($query);
         return $tipoTransportes->fetch_object();
     }
 

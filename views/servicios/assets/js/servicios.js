@@ -495,7 +495,7 @@ $(document).ready(function () {
 				var tipoempaque = $("#formAgregarServicio").find("#idEmpaque option:selected").val();
 				console.log("tipoempaque: ", tipoempaque);
 				var remainder = quitarComasNumero(cant) % 25;
-				if (remainder != 0 && $("#formAgregarServicio #idTipoServicio").val() != "11") {
+				if (tipoempaque == "2" && remainder != 0 && $("#formAgregarServicio #idTipoServicio").val() != "11") {
 					mensajeError("Favor de validar la cantidad, no es múltiplo de 25");
 				} else {
 					cantidadinp = $(this);
@@ -3062,4 +3062,26 @@ function formatDate(date) {
 
 function padTo2Digits(num) {
 	return num.toString().padStart(2, "0");
+}
+
+function getPDFEntrada(idEnt) {
+	$.ajax({
+		// data: $("#formEnviarAlmacen").serialize(),
+		data: {
+			url: "http://192.168.0.32/GrupoLEA_DEV/?controller=Servicios&action=getFormatoEntrada&idEnt=" + idEnt,
+			path: "views/servicios/uploads/" + $("#numeroUnidad").val(),
+			filename: $("#numeroUnidad").val(),
+			mostrar: "true",
+		},
+		url: "?ajax&controller=Servicios&action=imprimirURL",
+		type: "POST",
+		dataType: "json",
+		success: function (r) {
+			console.log(r);
+		},
+		error: function (r) {
+			console.log(r);
+			mensajeError("Algo salio mal,  contacte al administrador.  ");
+		},
+	});
 }

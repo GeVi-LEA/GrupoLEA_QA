@@ -11,7 +11,8 @@ require_once models_root . 'catalogos/servicio.php';
 require_once models_root . 'catalogos/unidad.php';
 require_once models_root . 'catalogos/documento_norma.php';
 require_once models_root . 'catalogos/transportista_cliente.php';
-require_once models_root . 'catalogos/choferes.php';
+// require_once models_root . 'catalogos/chofer.php';
+require_once models_root . 'catalogos/chofer_transportista_cliente.php';
 require_once models_root . 'servicios/servicio_cliente.php';
 require_once models_root . 'servicios/bascula.php';
 require_once models_root . 'servicios/servicio_entrada.php';
@@ -152,7 +153,7 @@ class serviciosController
         $catTransportes     = new TransportistasClientes();
         $cat_transportistas = $catTransportes->getAll();
 
-        $catChoferes  = new CatChoferes();
+        $catChoferes  = new ChoferTransportistaCliente();
         $cat_choferes = $catChoferes->getAll();
         require_once views_root . 'servicios/ensacado.php';
     }
@@ -594,7 +595,7 @@ class serviciosController
         $productoId      = isset($_POST['producto']) && $_POST['producto'] != '' ? $_POST['producto'] : null;
         $almacen_id      = isset($_POST['almacen_id']) && $_POST['almacen_id'] != '' ? $_POST['almacen_id'] : '1';
         $alias           = isset($_POST['alias']) && $_POST['alias'] != '' ? $_POST['alias'] : null;
-        $sacoxtarima     = isset($_POST['sacoxtarima']) && $_POST['sacoxtarima'] != '' ? $_POST['sacoxtarima'] : 55;
+        $sacoxtarima     = isset($_POST['sacoxtarima']) && $_POST['sacoxtarima'] != '' ? $_POST['sacoxtarima'] : null;
         $tarima_por      = isset($_POST['tarima_por']) && $_POST['tarima_por'] != '' ? $_POST['tarima_por'] : 1;
         $observaciones   = isset($_POST['observaciones']) && $_POST['observaciones'] != '' ? $_POST['observaciones'] : null;
         $res             = true;
@@ -883,7 +884,7 @@ class serviciosController
         $tipoTrans   = new TipoTransporte();
         $transportes = $tipoTrans->getAll();
 
-        $catTransportes     = new CatTransportistas();
+        $catTransportes     = new TransportistasClientes();
         $cat_transportistas = $catTransportes->getAll();
 
         require_once views_root . 'servicios/cargas_descargas.php';
@@ -1217,5 +1218,34 @@ class serviciosController
             $datosGrafica = $ensacado->getDataGraficas();
             echo json_encode(['mensaje' => 'OK', 'servicios' => $servicios, 'datosGrafica' => $datosGrafica]);
         }
+    }
+
+    public function getFormatoEntrada()
+    {
+        // Utils::noLoggin();
+        $idEnt      = null;
+        $trenArray  = Utils::isTren();
+        $arrayIdsTr = array();
+        foreach ($trenArray as $tr) {
+            array_push($arrayIdsTr, $tr->id);
+        }
+        $ensacado = new ServicioEntrada();
+        if (isset($_GET['idEnt'])) {
+            $idEnt = (int) $_GET['idEnt'];
+        }
+        $ensacado->setId($idEnt);
+        $servicios = $ensacado->getById();
+        require_once views_root . 'servicios/formato_registro.php';
+    }
+
+    public function imprimirURL()
+    {
+        $url      = $_POST['url'];
+        $path     = $_POST['path'];
+        $filename = $_POST['filename'];
+        $mostrar  = $_POST['mostrar'];
+        require_once utils_root . 'toPDF/pdf.php';
+        $respuesta = PDF::crearPdfEntrada($url, $path, $filename, $mostrar);
+        echo $respuesta;
     }
 }
