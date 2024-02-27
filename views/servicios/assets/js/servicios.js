@@ -1441,7 +1441,7 @@ $(document).ready(function () {
 				getInfoLote(lote, "1337");
 				setTimeout(() => {
 					// getInfoLote(lote, "2287");
-					//console.log("loteSelected: ", loteSelected);
+					console.log("loteSelected: ", loteSelected);
 					elparent = $(this).parents("form")[0];
 					// console.log($(this).parents("form")[0]);
 					$("#" + $(this).closest("form").attr("id"))
@@ -1453,7 +1453,7 @@ $(document).ready(function () {
 
 					elparent.elements.almacen_id.value = loteSelected.almacenId;
 					elparent.elements.producto_id.value = loteSelected.producto_id;
-					elparent.elements._alias.value = loteSelected.alias;
+					elparent.elements.alias.value = loteSelected.alias;
 					$("#" + $(this).closest("form").attr("id"))
 						.find("#alias")
 						.val(loteSelected.alias);
@@ -1474,7 +1474,7 @@ $(document).ready(function () {
 						//	validaInventario("#" + $(this).closest("form").attr("id"), "2300");
 						//$("#formEditarServicio").find("#loteSelect").val(servicio_edit.lote).trigger("change");
 					}, 500);
-				}, 500);
+				}, 1000);
 			}
 		}
 		// $(".calctarimas").attr("style", "display:block");
@@ -1574,6 +1574,10 @@ $(document).ready(function () {
 
 			$("#cantidadEnviar").val(cantenviar);
 			$("#cantidadEnviar").trigger("blur");
+			if ($(this).val().substring(0, 1) == "0" && $(this).val().length > 1) {
+				$(this).val($(this).val().substring(1));
+			}
+			//$(this).trigger("blur");
 		} else {
 			$("#cantidadEnviar").attr("readonly", false);
 		}
@@ -1848,7 +1852,9 @@ function llenarComboLotesCliente(clienteId, form, lote = "", tipo_producto = "")
 
 function validaInventario(form, linea = "") {
 	try {
-		form = "#" + form;
+		if (!form.includes("#")) {
+			form = "#" + form;
+		}
 		console.log("validainv - ", form);
 		let cantidad = parseFloat(quitarComasNumero($(form).find("#cantidad").val()));
 
@@ -1858,6 +1864,11 @@ function validaInventario(form, linea = "") {
 			console.log($(form).find("#loteSelect").find(":selected").attr("data-sacoxtarima"));
 			// "tiposerv: ",
 			var sacoxtarima = $(form).find("#loteSelect").find(":selected").attr("data-sacoxtarima");
+
+			if (sacoxtarima == null) {
+				sacoxtarima = 55;
+			}
+			console.log("sacoxtarima: ", sacoxtarima);
 			$(form)
 				.find("#disponible_lote")
 				.val(htmlNum($(form).find("#loteSelect").find(":selected").attr("data-disponible")));
@@ -2554,12 +2565,18 @@ function validarDatosServicio() {
 			$("#cantidad").removeClass("required").addClass("success");
 		}
 
-		// if ($("#orden").val() == "") {
-		// valid = false;
-		// $("#orden").addClass("required");
-		// } else {
-		// $("#orden").removeClass("required").addClass("success");
-		// }
+		if ($("#orden").val() == "") {
+			valid = false;
+			$("#orden").addClass("required");
+		} else {
+			$("#orden").removeClass("required").addClass("success");
+		}
+		if ($("#formAgregarServicio #documentoOrden_e").prop("files").length < 1) {
+			valid = false;
+			$("#formAgregarServicio .inputFile").addClass("required");
+		} else {
+			$("#formAgregarServicio .inputFile").removeClass("required").addClass("success");
+		}
 
 		if ($("#producto").val() == "") {
 			valid = false;
@@ -2847,6 +2864,7 @@ function detenerServicio(id, kilos = "", entrada_id = "", almacen_id = "1") {
 								cantidadAlmacen: kilos.replace(",", ""),
 								almacen_id: almacen_id, //loteSelected[0].almacenId,
 								entrada_id: entrada_id,
+								lote: entrada_id,
 								sellos: getSellos(),
 								firma: getTrazado(),
 							},

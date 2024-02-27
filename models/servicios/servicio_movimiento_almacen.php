@@ -68,12 +68,11 @@ class ServicioMovimientoAlmacen
     {
         // $sql = "insert into servicios_movimientos_almacen values({$this->getIdServicio()}, {$this->getAlmacen()}, {$this->getCantidad()}, '{$this->getOperacion()}', NOW())";
         $sql    = "insert into servicios_movimientos_almacen values(
-            {$this->getIdServicio()}
-            , {$this->getAlmacen()}
+            {$this->getIdServicio()},{$this->getAlmacen()}
             , {$this->getCantidad()}
             , '{$this->getOperacion()}'
             , NOW()
-            ,null)";
+            , (select lote from servicios_ensacado se where se.id = {$this->getIdServicio()}))";
         $save   = $this->db->query($sql);
         $result = false;
         if ($save) {

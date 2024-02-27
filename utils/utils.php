@@ -15,7 +15,7 @@ class Utils
     {
         if (!isset($_SESSION['usuario']) || $_SESSION['usuario'] == null) {
             header('Location:' . root_url . '?controller=Error&action=noLoggin');
-            die ();
+            die();
         } else {
             return true;
         }
@@ -524,5 +524,19 @@ class Utils
             $operacion = "<i class='fa-solid fa-minus i-clip'></i>";
         }
         return $operacion;
+    }
+
+    public static function getChofer($id)
+    {
+        require_once models_root . 'catalogos/chofer_transportista_cliente.php';
+        $chofer = new ChoferTransportistaCliente();
+        return $chofer->getById($id);
+    }
+
+    public static function getTransportistaCliente($id)
+    {
+        require_once models_root . 'catalogos/transportista_cliente.php';
+        $chofer = new TransportistasClientes();
+        return $chofer->getById($id);
     }
 }

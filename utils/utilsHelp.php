@@ -148,14 +148,18 @@ class UtilsHelp
         } else {
             $strArray = preg_split('/[.]/', $str);
             try {
-                if (intval($strArray[1]) == 0) {
-                    $int = intval($str);
-                    return number_format($int);
+                if (count($strArray) > 1) {
+                    if (intval($strArray[1]) == 0) {
+                        $int = intval($str);
+                        return number_format($int);
+                    } else {
+                        $int = floatval($str);
+                        return number_format($int, $numDecimales);
+                    }
                 } else {
-                    $int = floatval($str);
-                    return number_format($int, $numDecimales);
+                    return $str;
                 }
-            } catch (Exception $th) {
+            } catch (\Throwable $th) {
                 return $int;
             }
         }
