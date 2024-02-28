@@ -23,10 +23,26 @@ menusel = 'almacenamientoPiso';
                 <div class='card-body'>
                     <!-- <p>Seleccione el filtro de inventario segun su necesidad </p> -->
                     <div class='row'>
-                        <div class='col-6'>
+                        <div class='col-3'>
                             <label for='cmbClientes'>
                                 Seleccione los clientes deseados
                                 <select id='cmbClientes' name='clientessel[]' multiple='multiple' aria-hidden='true' style='width: 75%'>
+
+                                </select>
+                            </label>
+                        </div>
+                        <div class='col-3' hidden>
+                            <label for='cmbProductos'>
+                                Seleccione los productos deseados
+                                <select id='cmbProductos' name='cmbProductos[]' multiple='multiple' aria-hidden='true' style='width: 75%'>
+
+                                </select>
+                            </label>
+                        </div>
+                        <div class='col-3' hidden>
+                            <label for='cmbLotes'>
+                                Seleccione los lotes deseados
+                                <select id='cmbLotes' name='cmbLotes[]' multiple='multiple' aria-hidden='true' style='width: 75%'>
 
                                 </select>
                             </label>

@@ -4,6 +4,8 @@ let clientes = [];
 let productos = [];
 let productos_clientes = {};
 let prods_disponibles = [];
+var productos_sel_join = "";
+var lotes_sel_join = "";
 let lotes = [];
 let legends_lotes = [];
 let naves = [];
@@ -30,6 +32,14 @@ $(document).ready(function() {
         placeholder: 'Todos los clientes',
         width: 'resolve'
     });
+    $("#cmbProductos").select2({
+        placeholder: 'Todos los productos',
+        width: 'resolve'
+    });
+    $("#cmbLotes").select2({
+        placeholder: 'Todos los lotes',
+        width: 'resolve'
+    });
     setTimeout(() => {
         chart_productos();
     }, 2000);
@@ -38,6 +48,9 @@ $(document).ready(function() {
     $('#InventariosTab a').on('click', function(e) {
         //console.log($(this)[0].id.replace("-tab", ""));
         selectedtab = $(this)[0].id.replace("-tab", "");
+        $("#cmbProductos").parent().parent().attr("hidden", true);
+        $("#cmbLotes").parent().parent().attr("hidden", true);
+        productos_sel_join = "";
         showLoading_global();
         armaInventarios($(this)[0].id.replace("-tab", "")).then(function() {
             console.log("aqui: ", $(this)[0].id.replace("-tab", ""));
@@ -66,12 +79,16 @@ $(document).ready(function() {
         moving = 1;
     });
     $("#cmbClientes").change(function() {
+        $("#cmbProductos").parent().parent().attr("hidden", true);
+        $("#cmbLotes").parent().parent().attr("hidden", true);
         armaInventarios().done(function() {
             switch ($('#InventariosTab .active')[0].id.replace("-tab", "")) {
                 case "productos":
                     setTimeout(() => {
                         $("#chart_productos").html("").attr("_echarts_instance_", "");
                         chart_productos();
+                        armaFiltros("Productos");
+
                         swal.close();
                     }, 500);
 
@@ -80,6 +97,8 @@ $(document).ready(function() {
                     setTimeout(() => {
                         $("#chart_lotes").html("").attr("_echarts_instance_", "");
                         chart_lotes();
+                        $("#cmbLotes").parent().parent().attr("hidden", false);
+                        armaFiltros("Lotes");
                         swal.close();
                     }, 500);
 
@@ -89,6 +108,7 @@ $(document).ready(function() {
                     setTimeout(() => {
                         $("#chart_nave").html("").attr("_echarts_instance_", "");
                         chart_nave();
+                        // armaFiltros("naves");
                         swal.close();
                     }, 500);
 
@@ -98,6 +118,48 @@ $(document).ready(function() {
             }
 
         });
+    });
+
+    $("#cmbProductos, #cmbLotes").change(function() {
+        // $("#cmbProductos").parent().parent().attr("hidden", true);
+        // $("#cmbLotes").parent().parent().attr("hidden", true);
+        //armaInventarios().done(function() {
+        switch ($('#InventariosTab .active')[0].id.replace("-tab", "")) {
+            case "productos":
+                setTimeout(() => {
+                    $("#chart_productos").html("").attr("_echarts_instance_", "");
+                    chart_productos();
+                    // armaFiltros("Productos");
+
+                    swal.close();
+                }, 500);
+
+                break;
+            case "lotes":
+                setTimeout(() => {
+                    $("#chart_lotes").html("").attr("_echarts_instance_", "");
+                    chart_lotes();
+                    $("#cmbLotes").parent().parent().attr("hidden", false);
+                    // armaFiltros("Lotes");
+                    swal.close();
+                }, 500);
+
+
+                break;
+            case "naves":
+                setTimeout(() => {
+                    $("#chart_nave").html("").attr("_echarts_instance_", "");
+                    chart_nave();
+                    // armaFiltros("naves");
+                    swal.close();
+                }, 500);
+
+                break;
+            default:
+                break;
+        }
+
+        //});
     });
 });
 
@@ -149,6 +211,8 @@ const armaInventarios = (latab) => {
     series_productos = [];
     series_lotes = [];
     series_naves = [];
+    // $("#cmbProductos").parent().parent().attr("hidden", true);
+    // $("#cmbLotes").parent().parent().attr("hidden", true);
     jQuery.ajax({
         url: __url__ + '?ajax&controller=Servicios&action=getInventarios',
         data: {
@@ -496,14 +560,18 @@ const chart_productos = () => {
         /* ARMA LA DATA POR CLIENTE */
         var prod_cliente = {};
         var color_cliente = "";
+        var productos_sel = (($("#cmbProductos").val().length > 0) ? $("#cmbProductos").val().join(",").split(",") : "");
+        productos_sel_join = (($("#cmbProductos").val().length > 0) ? $("#cmbProductos").val().join(",") : "");
         $.each(inventarios.inventarios, function(i, item) {
             if (item.id_cliente == clientes_id[xchart]) {
                 // console.log(item);
                 color_cliente = item.color_cliente;
-                if (prod_cliente.hasOwnProperty(item.Producto) <= 0) {
+                if ((prod_cliente.hasOwnProperty(item.Producto) <= 0) && (productos_sel.length == 0 || jQuery.inArray($.trim(item.Producto), productos_sel) >= 0)) {
                     prod_cliente[item.Producto] = parseFloat(quitarComasNumero(item.disponible));
                 } else {
-                    prod_cliente[item.Producto] = prod_cliente[item.Producto] + parseFloat(quitarComasNumero(item.disponible));
+                    if (productos_sel.length == 0 || jQuery.inArray($.trim(item.Producto), productos_sel) >= 0) {
+                        prod_cliente[item.Producto] = prod_cliente[item.Producto] + parseFloat(quitarComasNumero(item.disponible));
+                    }
                 }
             }
         });
@@ -560,7 +628,7 @@ const chart_productos = () => {
             }]
         };
         option && myChart.setOption(option);
-//        myChart.unbind();
+        //        myChart.unbind();
         myChart.on('click', function(params) {
             // Print name in console
             //console.log(params);
@@ -572,6 +640,7 @@ const chart_productos = () => {
             // });
         });
     }
+    // armaFiltros("Productos");
 }
 
 /*
@@ -692,15 +761,19 @@ const chart_lotes = () => {
 
         var prod_cliente = {};
         var color_cliente = "";
+        var lotes_sel = (($("#cmbLotes").val().length > 0) ? $("#cmbLotes").val().join(",").split(",") : "");
+        lotes_sel_join = (($("#cmbLotes").val().length > 0) ? $("#cmbLotes").val().join(",") : "");
         //console.log("cliente: ", clientes_id[xchart]);
         $.each(inventarios.inventarios, function(i, item) {
             if (item.id_cliente == clientes_id[xchart]) {
                 // console.log(item);
                 color_cliente = item.color_cliente;
-                if (prod_cliente.hasOwnProperty(item.Lote) <= 0) {
+                if ((prod_cliente.hasOwnProperty(item.Lote) <= 0) && (lotes_sel.length == 0 || jQuery.inArray($.trim(item.Lote), lotes_sel) >= 0)) {
                     prod_cliente[item.Lote] = parseFloat(quitarComasNumero(item.disponible));
                 } else {
-                    prod_cliente[item.Lote] = prod_cliente[item.Lote] + parseFloat(quitarComasNumero(item.disponible));
+                    if (lotes_sel.length == 0 || jQuery.inArray($.trim(item.Lote), lotes_sel) >= 0) {
+                        prod_cliente[item.Lote] = prod_cliente[item.Lote] + parseFloat(quitarComasNumero(item.disponible));
+                    }
                 }
             }
         });
@@ -781,7 +854,7 @@ const chart_lotes = () => {
         //try {
         //    chart_lotes_.unbind();
         //} catch ($exception) {}
-//        chart_lotes.unbind();
+        //        chart_lotes.unbind();
         chart_lotes_.on('click', function(params) {
             // Print name in console
             //console.log(params);
@@ -790,6 +863,7 @@ const chart_lotes = () => {
 
         });
     }
+
 }
 const chart_nave = () => {
 
@@ -828,7 +902,7 @@ const chart_nave = () => {
     };
 
     option && myChart.setOption(option);
-//    myChart.unbind();
+    //    myChart.unbind();
     myChart.on('click', function(params) {
         // Print name in console
         //console.log(params);
@@ -837,6 +911,33 @@ const chart_nave = () => {
     });
 }
 
+const armaFiltros = (filtro = "") => {
+    console.log("aqui");
+    $("#cmbProductos, #cmbLotes").find("option").remove();
+    $("#cmb" + filtro).parent().parent().attr("hidden", false);
+    var _lotes = [];
+    var _productos = [];
+    for (var x = 0; x < inventarios.inventarios.length; x++) {
+        if (parseFloat(quitarComasNumero(inventarios.inventarios[x].disponible)) > 0) {
+            if (jQuery.inArray($.trim(inventarios.inventarios[x].Producto), _productos) < 0) {
+                _productos.push(inventarios.inventarios[x].Producto);
+            }
+            if (jQuery.inArray($.trim(inventarios.inventarios[x].Lote), _lotes) < 0) {
+                _lotes.push(inventarios.inventarios[x].Lote);
+            }
+
+        }
+    }
+    if (filtro == "Lotes") {
+        for (x = 0; x < _lotes.length; x++) {
+            $("#cmbLotes").append('<option value="' + $.trim(_lotes[x]) + '">' + $.trim(_lotes[x]) + '</option>');
+        }
+    } else {
+        for (x = 0; x < _productos.length; x++) {
+            $("#cmbProductos").append('<option value="' + $.trim(_productos[x]) + '">' + $.trim(_productos[x]) + '</option>');
+        }
+    }
+}
 
 
 const abreDetalle = (cliente = "", lote = "", producto = "", almacen = "") => {
