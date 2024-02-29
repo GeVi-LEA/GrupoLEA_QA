@@ -29,7 +29,7 @@ require_once models_root . 'catalogos/servicio.php';
 require_once models_root . 'catalogos/almacen.php';
 require_once models_root . 'catalogos/proveedor.php';
 require_once models_root . 'catalogos/transportista_cliente.php';
-require_once models_root . 'catalogos/chofer_transportista_cliente.php';
+require_once models_root . 'catalogos/chofer_transportista.php';
 
 class catalogoController
 {
@@ -2108,22 +2108,34 @@ class catalogoController
         require '../../views/catalogos/transportistas_clientes.php';
     }
 
-    public function saveChoferTransportistaClientes()
+            public function deleteTransportistaCliente()
+    {
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+
+           $trans= new TransportistasClientes();
+            $trans->setId($id);
+            $trans->delete();
+        }
+        header('Location:' . catalogosUrl . '?controller=Catalogo&action=showTransportistasClientes');
+    }
+
+    public function saveTransportistaCliente()
     {
         Utils::deleteSession('result');
         Utils::deleteSession('errores');
 
         if (isset($_POST['nombre']) && $_POST['nombre'] != '') {
-            $servicio = new Servicio();
-            $servicio->setNombre($_POST['nombre']);
-            $servicio->setDescripcion($_POST['descripcion']);
-            $servicio->setClave($_POST['clave']);
+            $trans = new TransportistasClientes();
+            $trans->setNombre($_POST['nombre']);
+            $trans->setComentarios($_POST['descripcion']);
+
 
             if ($_POST['id'] != null || $_POST['id'] != '') {
-                $servicio->setId($_POST['id']);
-                $save = $servicio->edit();
+                $trans->setId($_POST['id']);
+                $save = $trans->edit();
             } else {
-                $save = $servicio->save();
+                $save = $trans->save();
             }
 
             if ($save) {
@@ -2131,30 +2143,38 @@ class catalogoController
             } else {
                 $_SESSION['result'] = 'false';
             }
-            header('Location:' . catalogosUrl . '?controller=Catalogo&action=showServicios');
+            header('Location:' . catalogosUrl . '?controller=Catalogo&action=showTransportistasClientes');
         } else {
-            header('Location:' . catalogosUrl . '?controller=Catalogo&action=showServicios');
+            header('Location:' . catalogosUrl . '?controller=Catalogo&action=showTransportistasClientes');
         }
     }
 
-    public function deleteChoferTransportistaClientes()
+     public function showChoferesTransportistas()
     {
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
+        $p = new Proveedor();
+        $transportistasLea = $p->getTransportistas();
+        
+        $transportistas = array();
 
-            $servicio = new Servicio();
-            $servicio->setId($id);
-            $servicio->delete();
-        }
-        header('Location:' . catalogosUrl . '?controller=Catalogo&action=showServicios');
-    }
+        foreach ($transportistasLea as $t) {
+            $transportista[] = [
+                'idTransportista'      => $t->id,
+                'nombreTransportista'    =>  $t->nombre,
+                'is_lea'       => 'S'
+            ];
+             array_push($transportistas, $transportista);
+         } 
     
-     public function showChoferesTransportistasClientes()
-    {
-        $chofer = new ChoferTransportistaCliente();
+         for ($i; count($transportistas) > $i; $i++) {
+            var_dump($transportistas[$i]);
+         }
+         die();
+
+        $chofer = new ChoferTransportista();
         $choferes = $chofer->getAll();
-        require '../../views/catalogos/choferes_transportistas_clientes.php';
+        require '../../views/catalogos/choferes_transportistas.php';
     }
+
 
     public function saveChoferTransportistaCliente()
     {
@@ -2185,7 +2205,7 @@ class catalogoController
         }
     }
 
-    public function deleteChoferTransportistaCliente()
+        public function deleteChoferTransportistaClientes()
     {
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
@@ -2196,4 +2216,6 @@ class catalogoController
         }
         header('Location:' . catalogosUrl . '?controller=Catalogo&action=showServicios');
     }
+    
+
 }

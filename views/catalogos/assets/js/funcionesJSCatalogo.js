@@ -43,6 +43,7 @@
             serie = form.serie === undefined ? null : form.serie,
             modelo = form.modelo  === undefined ? null : form.modelo,
             marca = form.marca  === undefined ? null : form.marca;
+            transportista = form.transportista  === undefined ? null : form.transportista;
     }
 
     function cerrarVentana(e) {
@@ -199,6 +200,16 @@
                 form.numero.classList.add('required');
                 error.style.display = 'block';
                 error.innerHTML += '<li>Por favor, ingresa un <b>número de carro tanque</b></li>';
+                e.preventDefault();
+                validar = false;
+            }
+        }
+
+      if (transportista != null) {
+            if (transportista.value === "" || transportista.value === null) {
+                form.transportista.classList.add('required');
+                error.style.display = 'block';
+                error.innerHTML += '<li>Por favor, ingresa un <b>transportista</b></li>';
                 e.preventDefault();
                 validar = false;
             }

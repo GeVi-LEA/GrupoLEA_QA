@@ -528,15 +528,30 @@ class Utils
 
     public static function getChofer($id)
     {
-        require_once models_root . 'catalogos/chofer_transportista_cliente.php';
-        $chofer = new ChoferTransportistaCliente();
-        return $chofer->getById($id);
+        require_once models_root . 'catalogos/chofer_transportista.php';
+        $chofer = new ChoferTransportista();
+        if ($id == '') {
+            // $data = ['nombre' => ''];
+            // return json_encode($data);
+            $id = '0';
+        } else {
+        }
+        $data = $chofer->getById($id);
+        print_r('<pre>');
+        print_r($data);
+        print_r('</pre>');
+        return $data;
     }
 
     public static function getTransportistaCliente($id)
     {
         require_once models_root . 'catalogos/transportista_cliente.php';
-        $chofer = new TransportistasClientes();
-        return $chofer->getById($id);
+        $chofer = new TransportistaCliente();
+        if ($id == '') {
+            $data = ['nombre' => ''];
+            return json_encode($data);
+        } else {
+            return $chofer->getById($id);
+        }
     }
 }

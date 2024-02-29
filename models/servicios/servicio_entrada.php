@@ -551,6 +551,7 @@ class ServicioEntrada
                 , sello3 = '{$this->getSello3()}'
                 , observaciones = '{$this->getObservaciones()}'
                 , peso_obligatorio = '{$this->getPesoObligatorio()}'
+                , transp_lea_cliente = '{$this->getTranspLeaCliente()}'
                  where id = {$this->getId()}";
         // print_r('<pre>');
         // print_r($sql);
@@ -592,7 +593,9 @@ class ServicioEntrada
     public function salidaUnidad()
     {
         $sql = 'update servicios_entradas set '
-            . " fecha_salida = NOW(), estatus_id = 5 where id={$this->getId()}";
+            . " fecha_salida = NOW(), estatus_id = 5 where id={$this->getId()};
+            
+            ";
         $save   = $this->db->query($sql);
         $result = false;
         if ($save) {

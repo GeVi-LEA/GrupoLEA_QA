@@ -420,6 +420,7 @@ $(document).ready(function () {
 		var ferro = $(this).val();
 		var seccionCamion = $("#seccionCamion");
 		var seccionFerrotolva = $("#seccionFerrotolva");
+		console.log("ferro: ", ferro);
 		if (ferro == "F") {
 			$("#numeroUnidad").trigger("keyup");
 			$("#transportistaTren").attr("name", "transportista").val("Kansas City Southern De Mexico");
@@ -461,6 +462,17 @@ $(document).ready(function () {
 						$(this).show();
 					}
 				});
+		}
+		if (($('input[name="ferrotolva"]:checked').val() != null && $('input[name="ferrotolva"]:checked').val() != "F") || $("#isferrotolva").length == 0) {
+			try {
+				$("#transportista").select2({
+					// theme: "bootstrap-5",
+				});
+			} catch (error) {}
+			$(".transportista").unbind();
+			$("#transportista").change(function () {
+				getChoferes($("#transportista option:selected").val());
+			});
 		}
 	});
 
@@ -2709,56 +2721,59 @@ function validaLiberacion() {
 		sumcantidad += parseFloat(quitarComasNumero(this.innerHTML));
 	});
 	//console.log("$(#serv_pendientes).val(): ", $("#serv_pendientes").val());
-	if ($("#serv_pendientes").val() > 0) {
-		resultado = false;
-	} else if ($("#nombreServicio").html().includes("SALIDA")) {
-		resultado = true;
-	}
-	var idNombreServicio = $("#idNombreServicio")[0].value.trim();
-	var cantidadCliente = 0;
-	// //console.log(
-	// "$('#pesoCliente')[0].value: ",
-	// $("#pesoCliente")[0].value,
-	// " idNombreServicio: ",
-	// idNombreServicio
-	// );
-	switch (idNombreServicio) {
-		case "1":
-			if ($("#pesoVacio")[0].value.trim() == "0") {
-				cantidadCliente = quitarComasNumero($("#pesoCliente")[0].value.trim());
-			} else {
-				//console.log("bbbb--  ", $("#pesoNeto")[0].value.trim());
-				cantidadCliente = quitarComasNumero($("#pesoNeto")[0].value.trim());
-				if (!cantidadCliente) {
-					cantidadCliente = quitarComasNumero($("#pesoCliente")[0].value.trim());
-				}
-			}
-			break;
-
-		default:
-			cantidadCliente = quitarComasNumero($("#pesoCliente")[0].value.trim());
-			break;
-	}
-	//console.log("cantidadCliente: ", cantidadCliente);
-	var cantpendiente = parseInt(cantidadCliente) - parseInt(sumcantidad);
-	var tolerable = parseInt(cantidadCliente) * 0.03;
-	// //console.log(
-	// "cantidadCliente: ",
-	// cantidadCliente,
-	// " sumcantidad: ",
-	// sumcantidad,
-	// " if: ",
-	// cantpendiente < tolerable
-	// );
 	try {
-		if (cantpendiente < tolerable) {
-			resultado = true;
-		} else {
+		if ($("#serv_pendientes").val() > 0) {
 			resultado = false;
+		} else if ($("#nombreServicio").html().includes("SALIDA")) {
+			resultado = true;
 		}
-	} catch (error) {
-		resultado = true;
-	}
+		var idNombreServicio = $("#idNombreServicio")[0].value.trim();
+		var cantidadCliente = 0;
+		// //console.log(
+		// "$('#pesoCliente')[0].value: ",
+		// $("#pesoCliente")[0].value,
+		// " idNombreServicio: ",
+		// idNombreServicio
+		// );
+		switch (idNombreServicio) {
+			case "1":
+				if ($("#pesoVacio")[0].value.trim() == "0") {
+					cantidadCliente = quitarComasNumero($("#pesoCliente")[0].value.trim());
+				} else {
+					//console.log("bbbb--  ", $("#pesoNeto")[0].value.trim());
+					cantidadCliente = quitarComasNumero($("#pesoNeto")[0].value.trim());
+					if (!cantidadCliente) {
+						cantidadCliente = quitarComasNumero($("#pesoCliente")[0].value.trim());
+					}
+				}
+				break;
+
+			default:
+				cantidadCliente = quitarComasNumero($("#pesoCliente")[0].value.trim());
+				break;
+		}
+		//console.log("cantidadCliente: ", cantidadCliente);
+		var cantpendiente = parseInt(cantidadCliente) - parseInt(sumcantidad);
+		var tolerable = parseInt(cantidadCliente) * 0.03;
+		// //console.log(
+		// "cantidadCliente: ",
+		// cantidadCliente,
+		// " sumcantidad: ",
+		// sumcantidad,
+		// " if: ",
+		// cantpendiente < tolerable
+		// );
+		try {
+			if (cantpendiente < tolerable) {
+				resultado = true;
+			} else {
+				resultado = false;
+			}
+		} catch (error) {
+			resultado = true;
+		}
+	} catch (error) {}
+
 	return resultado;
 }
 
