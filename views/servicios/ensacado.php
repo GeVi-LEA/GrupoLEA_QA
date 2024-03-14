@@ -75,6 +75,9 @@ function ROFinaliza($estatus)
             </div>
             <!-- BOTONES DE ACCIONES -->
             <div class="d-flex pt-3">
+                <div><button class="boton" id="btnFolder" title="Carpeta Documentos"><span class="material-icons i-green btn-icon" title="Carpeta Documentos">topic</span></button></div>
+                <div><button class="boton" id="btnRefresh" title="Recargar" onClick="window.location.reload();"><span class="fa-solid fa-arrows-rotate  material-icons i-green btn-icon"></span></button></div>
+
                 <?php if ($ensacado['fecha_entrada'] != '' && $ensacado['estatus_id'] != '5' && $ensacado['estatus_id'] != '15' && Utils::permisosVigilancia()): ?>
                 <div><button class="boton" id="btnSalida" title="Salida de unidad"><span class="fa-solid fa-truck-arrow-right rotarHorizontal material-icons i-danger btn-icon  pr-1"></span></button></div>
                 <?php endif; ?>
@@ -95,7 +98,6 @@ function ROFinaliza($estatus)
                 <div><button class="boton" id="btnEliminar" title="Eliminar"><span class="far i-delete material-icons fa-trash-alt btn-icon-s"></span></button></div>
                 <?php endif; ?>
                 <div><button class="boton" id="btnSalir" title="Salir"><span class="material-icons i-danger btn-icon" title="Cerrar">disabled_by_default</span></button></div>
-                <div><button class="boton" id="btnRefresh" title="Recargar" onClick="window.location.reload();"><span class="fa-solid fa-arrows-rotate  material-icons i-green btn-icon"></span></button></div>
 
             </div>
         </header>
@@ -194,6 +196,7 @@ function ROFinaliza($estatus)
                             <?php } else { ?>
                             <select <?php ROFinaliza($ensacado['estatus_id']) ?> name="transportista" class="item-big" id="transportista" <?= (Utils::permisosLogistica()) ? '' : 'disabled' ?>>
                                 <option value="" selected>--Selecciona--</option>
+                                <option value="nuevo" selected>--Nuevo Transportista--</option>
                                 <?php
                                 if (!empty($cat_transportistas)):
                                     foreach ($cat_transportistas as $t):
@@ -942,7 +945,7 @@ function ROFinaliza($estatus)
                             <div class='col-md-2 col-12'>
                                 <label for="cantidad" class="form-label">Cantidad</label>
                                 <div class="input-group mb-3">
-                                    <input type="text" name="cantidad" id="cantidad" class="form-control numhtml" disabled />
+                                    <input type="text" name="cantidad" id="cantidad" class="form-control numhtml" />
                                     <span class="input-group-text">kgs.</span>
                                 </div>
 

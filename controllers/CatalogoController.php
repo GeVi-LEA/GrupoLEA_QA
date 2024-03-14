@@ -2095,25 +2095,25 @@ class catalogoController
 
     public function getProveedores()
     {
-        $c = new Proveedor();
+        $c           = new Proveedor();
         $proveedores = $c->getAll();
 
         echo json_encode(['mensaje' => 'OK', 'proveedores' => $proveedores]);
     }
-    
-         public function showTransportistasClientes()
+
+    public function showTransportistasClientes()
     {
-        $trans= new TransportistasClientes();
+        $trans          = new TransportistaCliente();
         $transportistas = $trans->getAll();
         require '../../views/catalogos/transportistas_clientes.php';
     }
 
-            public function deleteTransportistaCliente()
+    public function deleteTransportistaCliente()
     {
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
 
-           $trans= new TransportistasClientes();
+            $trans = new TransportistaCliente();
             $trans->setId($id);
             $trans->delete();
         }
@@ -2126,10 +2126,9 @@ class catalogoController
         Utils::deleteSession('errores');
 
         if (isset($_POST['nombre']) && $_POST['nombre'] != '') {
-            $trans = new TransportistasClientes();
+            $trans = new TransportistaCliente();
             $trans->setNombre($_POST['nombre']);
             $trans->setComentarios($_POST['descripcion']);
-
 
             if ($_POST['id'] != null || $_POST['id'] != '') {
                 $trans->setId($_POST['id']);
@@ -2149,32 +2148,31 @@ class catalogoController
         }
     }
 
-     public function showChoferesTransportistas()
+    public function showChoferesTransportistas()
     {
-        $p = new Proveedor();
+        $p                 = new Proveedor();
         $transportistasLea = $p->getTransportistas();
-        
+
         $transportistas = array();
 
         foreach ($transportistasLea as $t) {
             $transportista[] = [
-                'idTransportista'      => $t->id,
-                'nombreTransportista'    =>  $t->nombre,
-                'is_lea'       => 'S'
+                'idTransportista'     => $t->id,
+                'nombreTransportista' => $t->nombre,
+                'is_lea'              => 'S'
             ];
-             array_push($transportistas, $transportista);
-         } 
-    
-         for ($i; count($transportistas) > $i; $i++) {
-            var_dump($transportistas[$i]);
-         }
-         die();
+            array_push($transportistas, $transportista);
+        }
 
-        $chofer = new ChoferTransportista();
+        for ($i; count($transportistas) > $i; $i++) {
+            var_dump($transportistas[$i]);
+        }
+        die();
+
+        $chofer   = new ChoferTransportista();
         $choferes = $chofer->getAll();
         require '../../views/catalogos/choferes_transportistas.php';
     }
-
 
     public function saveChoferTransportistaCliente()
     {
@@ -2205,7 +2203,7 @@ class catalogoController
         }
     }
 
-        public function deleteChoferTransportistaClientes()
+    public function deleteChoferTransportistaClientes()
     {
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
@@ -2216,6 +2214,4 @@ class catalogoController
         }
         header('Location:' . catalogosUrl . '?controller=Catalogo&action=showServicios');
     }
-    
-
 }

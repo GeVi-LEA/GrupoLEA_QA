@@ -1,0 +1,22 @@
+{
+    "material icons": {
+        "normal": "material_icons_normal_b696605a0c39dbb3f8107e1bfffdab97"
+    },
+    "font awesome 6 brands": {
+        "normal": "font_awesome_6_brands_normal_0360f8014329355f07f316f9ec466511"
+    },
+    "font awesome 6 free": {
+        "normal": "\/var\/www\/html\/GrupoLEA_DEV\/vendor\/dompdf\/dompdf\/lib\/fonts\/font_awesome_6_free_normal_e5073d9fbc9ad73a35ff0652e2be0082",
+        "900": "font_awesome_6_free_900_3dbb7d50abfefa085cc0a33654e25c6b"
+    },
+    "font awesome 5 brands": {
+        "normal": "font_awesome_5_brands_normal_0360f8014329355f07f316f9ec466511"
+    },
+    "font awesome 5 free": {
+        "900": "\/var\/www\/html\/GrupoLEA_DEV\/vendor\/dompdf\/dompdf\/lib\/fonts\/font_awesome_5_free_900_3dbb7d50abfefa085cc0a33654e25c6b",
+        "normal": "font_awesome_5_free_normal_e5073d9fbc9ad73a35ff0652e2be0082"
+    },
+    "fontawesome": {
+        "normal": "fontawesome_normal_c0d1a9c8a02a0e4b60273c65612e7468"
+    }
+}

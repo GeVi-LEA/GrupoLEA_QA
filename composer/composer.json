@@ -1,9 +1,26 @@
 {
-    "require": {
-        "phpmailer/phpmailer": "^6.1",
-        "mpdf/mpdf": "^8.0",
-        "luecano/numero-a-letras": "^2.2",
-        "phpoffice/phpspreadsheet": "^1.17",
-        "picqer/php-barcode-generator": "^2.2"
-    }
+	"require": {
+		"phpmailer/phpmailer": "^6.1",
+		"mpdf/mpdf": "^8.0",
+		"luecano/numero-a-letras": "^2.2",
+		"phpoffice/phpspreadsheet": "^1.17",
+		"picqer/php-barcode-generator": "^2.2"
+	},
+	"name": "ideatic/jquery_fm",
+	"description": "Advanced jQuery File Upload & Manager",
+	"keywords": [
+		"js",
+		"jquery",
+		"file manager",
+		"file upload"
+	],
+	"type": "library",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Javier Marín",
+			"email": "contacto@ideatic.net",
+			"homepage": "http://www.ideatic.net/"
+		}
+	]
 }

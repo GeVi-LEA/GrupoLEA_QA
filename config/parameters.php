@@ -26,6 +26,8 @@ define('loginUrl', root_url . 'views/views/login/');
 define('controller_login', 'LoginController');
 define('controller_principal', 'PrincipalController');
 
+define('SALT', 'SALT');
+
 ini_set('display_errors', 1);
 
 define('GLM', array('id'                  => 1,                                  'clave'   => 'GLM',     'nombre' => 'GRUPO LEA DE MÉXICO S. DE R.L. DE C.V.',             'direccion' => 'CARRETERA  A  COLOMBIA KM.  30.2',

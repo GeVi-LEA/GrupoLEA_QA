@@ -83,7 +83,45 @@ $(document).ready(function () {
 			},
 		});
 	});
-
+	$("#btnFolder").click(function () {
+		var id = getUrlParameter("id");
+		console.log(getUrlParameter("id"));
+		Swal.fire({
+			showCloseButton: false,
+			showCancelButton: false,
+			showConfirmButton: false,
+			position: "top",
+			width: "75vw",
+			html: `<iframe id="iframe_servicio" style="width:100%; height:50vh;" src="${__url__}?controller=Servicios&action=getCarpeta&id=${id} frameborder="0"></iframe>`,
+			didOpen: () => {
+				$("iframe").on("load", function () {
+					$(this)
+						.contents()
+						.on("mousedown, mouseup, click", function (e) {
+							// clickiframe = e;
+							if (e.target.title == "Cerrar") {
+								swal.close();
+							} else if (e.target.parentElement.id == "btnGuardar") {
+								// //console.log(
+								// "jconfirm: ",
+								// $(".jconfirm-box .i-danger").is(":visible")
+								// );
+								if ($(".jconfirm-box .i-danger").is(":visible") == false) {
+									// $("#divEstados a")[0].click();
+									setTimeout(() => {
+										// swal.close();
+									}, 1000);
+								}
+							}
+							// //console.log("Click detected inside iframe.   ", e);
+						});
+				});
+			},
+			didClose: () => {
+				$("#divEstados a")[0].click();
+			},
+		});
+	});
 	$("#fechaPrograma").datepicker({
 		showOn: "button",
 		minDate: 0,
@@ -354,6 +392,71 @@ $(document).ready(function () {
 		}
 	});
 
+	// try {
+	// $("#transportista").select2({
+	// //theme: "bootstrap-5",
+	// });
+	// } catch (error) {}
+	$("#transportista").change(function () {
+		// //console.log($("#producto option:selected").val());
+		if ($("#transportista option:selected").val() == "nuevo") {
+			windowToOpen = window.open(__url__ + "views/catalogos/?controller=Catalogo&action=showTransportistasClientes", "_blank");
+			windowToOpen.addEventListener(
+				"submit",
+				(event) => {
+					//console.log("aqui si");
+					llenaComboTransportes();
+				},
+				false
+			);
+			var timer = setInterval(function () {
+				if (windowToOpen.closed) {
+					clearInterval(timer);
+					llenaComboTransportes();
+				}
+			}, 1000);
+			windowToOpen.addEventListener(
+				"closed",
+				(event) => {
+					//console.log("aqui se cierra");
+					llenaComboTransportes();
+				},
+				false
+			);
+		} else {
+			getChoferes($("#transportista option:selected").val());
+		}
+	});
+	$("#chofer").change(function () {
+		if ($("#chofer option:selected").val() == "nuevo") {
+			windowToOpen = window.open(__url__ + "views/catalogos/?controller=Catalogo&action=showChoferesTransportistas", "_blank");
+			windowToOpen.addEventListener(
+				"submit",
+				(event) => {
+					//console.log("aqui si");
+					getChoferes($("#transportista option:selected").val());
+				},
+				false
+			);
+			var timer = setInterval(function () {
+				if (windowToOpen.closed) {
+					clearInterval(timer);
+					getChoferes($("#transportista option:selected").val());
+				}
+			}, 1000);
+			windowToOpen.addEventListener(
+				"closed",
+				(event) => {
+					//console.log("aqui se cierra");
+					getChoferes($("#transportista option:selected").val());
+				},
+				false
+			);
+		} else {
+			getChoferes($("#transportista option:selected").val());
+		}
+	});
+
 	if ($("#diferenciaTeorica").val() != "" && $("#diferenciaTeorica").val() != undefined) {
 		var diferenciaTeorica = quitarComasNumero($("#diferenciaTeorica").val());
 		var tolerable = quitarComasNumero($("#tolerable").val());
@@ -471,7 +574,62 @@ $(document).ready(function () {
 			} catch (error) {}
 			$(".transportista").unbind();
 			$("#transportista").change(function () {
-				getChoferes($("#transportista option:selected").val());
+				if ($("#transportista option:selected").val() == "nuevo") {
+					windowToOpen = window.open(__url__ + "views/catalogos/?controller=Catalogo&action=showTransportistasClientes", "_blank");
+					windowToOpen.addEventListener(
+						"submit",
+						(event) => {
+							//console.log("aqui si");
+							llenaComboProductos();
+						},
+						false
+					);
+					var timer = setInterval(function () {
+						if (windowToOpen.closed) {
+							clearInterval(timer);
+							llenaComboProductos();
+						}
+					}, 1000);
+					windowToOpen.addEventListener(
+						"closed",
+						(event) => {
+							//console.log("aqui se cierra");
+							llenaComboProductos();
+						},
+						false
+					);
+				} else {
+					getChoferes($("#transportista option:selected").val());
+				}
+			});
+			$("#chofer").change(function () {
+				if ($("#chofer option:selected").val() == "nuevo") {
+					windowToOpen = window.open(__url__ + "views/catalogos/?controller=Catalogo&action=showChoferesTransportistas", "_blank");
+					windowToOpen.addEventListener(
+						"submit",
+						(event) => {
+							//console.log("aqui si");
+							getChoferes($("#transportista option:selected").val());
+						},
+						false
+					);
+					var timer = setInterval(function () {
+						if (windowToOpen.closed) {
+							clearInterval(timer);
+							getChoferes($("#transportista option:selected").val());
+						}
+					}, 1000);
+					windowToOpen.addEventListener(
+						"closed",
+						(event) => {
+							//console.log("aqui se cierra");
+							getChoferes($("#transportista option:selected").val());
+						},
+						false
+					);
+				} else {
+					getChoferes($("#transportista option:selected").val());
+				}
 			});
 		}
 	});
@@ -1548,7 +1706,62 @@ $(document).ready(function () {
 		} catch (error) {}
 		$(".transportista").unbind();
 		$("#transportista").change(function () {
-			getChoferes($("#transportista option:selected").val());
+			if ($("#transportista option:selected").val() == "nuevo") {
+				windowToOpen = window.open(__url__ + "views/catalogos/?controller=Catalogo&action=showProductosResinasLiquidos", "_blank");
+				windowToOpen.addEventListener(
+					"submit",
+					(event) => {
+						//console.log("aqui si");
+						llenaComboProductos();
+					},
+					false
+				);
+				var timer = setInterval(function () {
+					if (windowToOpen.closed) {
+						clearInterval(timer);
+						llenaComboProductos();
+					}
+				}, 1000);
+				windowToOpen.addEventListener(
+					"closed",
+					(event) => {
+						//console.log("aqui se cierra");
+						llenaComboProductos();
+					},
+					false
+				);
+			} else {
+				getChoferes($("#transportista option:selected").val());
+			}
+		});
+		$("#chofer").change(function () {
+			if ($("#chofer option:selected").val() == "nuevo") {
+				windowToOpen = window.open(__url__ + "views/catalogos/?controller=Catalogo&action=showChoferesTransportistas", "_blank");
+				windowToOpen.addEventListener(
+					"submit",
+					(event) => {
+						//console.log("aqui si");
+						getChoferes($("#transportista option:selected").val());
+					},
+					false
+				);
+				var timer = setInterval(function () {
+					if (windowToOpen.closed) {
+						clearInterval(timer);
+						getChoferes($("#transportista option:selected").val());
+					}
+				}, 1000);
+				windowToOpen.addEventListener(
+					"closed",
+					(event) => {
+						//console.log("aqui se cierra");
+						getChoferes($("#transportista option:selected").val());
+					},
+					false
+				);
+			} else {
+				getChoferes($("#transportista option:selected").val());
+			}
 		});
 	}
 
@@ -1629,6 +1842,7 @@ $(document).ready(function () {
 		$(this).val($(this).val().toUpperCase());
 	});
 
+	getPesos();
 	calcularPesos();
 });
 
@@ -2048,6 +2262,7 @@ function getChoferes(transp_id) {
 			console.log(r.choferes);
 			if (r != false) {
 				selectChofer.find("option").not(":first").remove();
+				selectChofer.append('<option value="nuevo"> >>Nuevo Chofer<< </option>');
 				if (r.length != 0) {
 					$(r.choferes).each(function (i, v) {
 						// indice, valor
@@ -2104,6 +2319,39 @@ function llenaComboProductos() {
 				}
 			}
 			$("#producto").val(getMax(productos, "id").id).trigger("change");
+		})
+		.fail((resp) => {})
+		.catch((resp) => {
+			swal("Ocurrio un problema en la peticion en el servidor, favor de reportar a los administradores", { icon: "error" });
+		});
+}
+
+function llenaComboTransportes() {
+	jQuery
+		.ajax({
+			url: __url__ + "?ajax&controller=Catalogo&action=getTransportistasClientes",
+			data: { opc: "s2" },
+			method: "s3",
+			dataType: "json",
+		})
+		.then((resp) => {
+			console.log(resp);
+
+			productos = resp.transportistas;
+			var maxid = getMax(productos, "id").id;
+			$("#transportista").empty().append('<option value="" selected>--Selecciona--</option> <option value="nuevo"> >>Nuevo Transportista<< </option>');
+			for (let x = 0; x < productos.length; x++) {
+				////console.log(productos[x]);
+				var newOption = new Option(productos[x].nombre, productos[x].id, true, true);
+				// Append it to the select
+				if (maxid == productos[x].id) {
+					$("#transportista").append(newOption).trigger("change");
+				} else {
+					$("#transportista").append(newOption);
+				}
+			}
+			$("#transportista").val(getMax(productos, "id").id).trigger("change");
+			getChoferes(getMax(productos, "id").id);
 		})
 		.fail((resp) => {})
 		.catch((resp) => {
@@ -3101,9 +3349,9 @@ function getPDFEntrada(idEnt) {
 	$.ajax({
 		// data: $("#formEnviarAlmacen").serialize(),
 		data: {
-			url: "http://192.168.0.32/GrupoLEA_DEV/?controller=Servicios&action=getFormatoEntrada&idEnt=" + idEnt,
+			url: __url__ + "?controller=Servicios&action=getFormatoEntrada&idEnt=" + idEnt,
 			path: "views/servicios/uploads/" + $("#numeroUnidad").val(),
-			filename: $("#numeroUnidad").val(),
+			filename: "registro_" + $("#numeroUnidad").val(),
 			mostrar: "true",
 		},
 		url: "?ajax&controller=Servicios&action=imprimirURL",

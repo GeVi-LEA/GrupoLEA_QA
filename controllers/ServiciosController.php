@@ -152,6 +152,7 @@ class serviciosController
         }
 
         $catTransportes = new TransportistaCliente();
+
         $cat_transportistas = $catTransportes->getAll();
 
         $catChoferes  = new ChoferTransportista();
@@ -446,7 +447,8 @@ class serviciosController
 
                     if ($nomUnidad != $e['numUnidad']) {
                         if (!is_dir('views/servicios/uploads/' . $nomUnidad)) {
-                            mkdir('views/servicios/uploads/' . $nomUnidad, 0777, true);
+                            // mkdir('views/servicios/uploads/' . $nomUnidad, 0777, true);
+                            mkdir('views/servicios/uploads/' . $nomUnidad);
                         }
                         $archivos = glob('views/servicios/uploads/' . $e['numUnidad'] . '/*');
 
@@ -834,6 +836,16 @@ class serviciosController
                 $servicio->setId($idServicio);
                 $r = $servicio->finalizarServicio();
 
+                /* GENERA DOCUMENTO DE ENSACADO PARA LA UNIDAD  14/03/2024 */
+                require_once utils_root . 'toPDF/pdf.php';
+                $serv = new ServicioEnsacado();
+                $serv->setId($idServicio);
+                $s                = $serv->getById();
+                $servicio_entrada = new ServicioEntrada();
+                $servicio_entrada->setId($s->entrada_id);
+                $se = $servicio_entrada->getById();
+                PDF::crearPdfServicio($s, false, $se);
+
                 if ($r) {
                     $result = [
                         'error'   => true,
@@ -953,9 +965,16 @@ class serviciosController
             $servicio->setId($id);
             $r = $servicio->ingresarUnidad();
             if ($r) {
+                $imp       = $servicio->getById($id);
+                $_url      = URL . '?controller=Servicios&action=getFormatoEntrada&idEnt=' . $id;
+                $_path     = 'views/servicios/uploads/' . $imp['numUnidad'];
+                $_filename = 'registro_' . $imp['numUnidad'];
+                $_mostrar  = false;
+                $this->imprimirURL($_url, $_path, $_filename, $_mostrar);
                 $result = [
                     'error'   => true,
-                    'mensaje' => 'Se registro la entrada de la unidad.'
+                    'mensaje' => 'Se registro la entrada de la unidad.',
+                    // 'mensaje_imp' => $mensaje
                 ];
             } else {
                 $result = [
@@ -1239,14 +1258,34 @@ class serviciosController
         require_once views_root . 'servicios/formato_registro.php';
     }
 
-    public function imprimirURL()
+    public function imprimirURL($_url = '', $_path = '', $_filename = '', $_mostrar = '')
     {
-        $url      = $_POST['url'];
-        $path     = $_POST['path'];
-        $filename = $_POST['filename'];
-        $mostrar  = $_POST['mostrar'];
+        $url      = isset($_POST['url']) ? $_POST['url'] : $_url;
+        $path     = isset($_POST['path']) ? $_POST['path'] : $_path;
+        $filename = isset($_POST['filename']) ? $_POST['filename'] : $_filename;
+        $mostrar  = isset($_POST['mostrar']) ? $_POST['mostrar'] : $_mostrar;
         require_once utils_root . 'toPDF/pdf.php';
         $respuesta = PDF::crearPdfEntrada($url, $path, $filename, $mostrar);
-        echo $respuesta;
+        if ($mostrar) {
+            echo $respuesta;
+        }
+    }
+
+    public function getCarpeta()
+    {
+        // Utils::noLoggin();
+        $idEnt      = null;
+        $trenArray  = Utils::isTren();
+        $arrayIdsTr = array();
+        foreach ($trenArray as $tr) {
+            array_push($arrayIdsTr, $tr->id);
+        }
+        $ensacado = new ServicioEntrada();
+        if (isset($_GET['id'])) {
+            $idEnt = (int) $_GET['id'];
+        }
+        $ensacado->setId($idEnt);
+        $servicios = $ensacado->getById();
+        require_once views_root . 'servicios/carpetas.php';
     }
 }

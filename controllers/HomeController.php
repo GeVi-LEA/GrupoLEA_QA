@@ -5,6 +5,5 @@ class homeController{
             Utils::noLoggin();
             require_once views_root.'home/index.php';
 
-      
     }
 }

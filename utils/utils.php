@@ -533,14 +533,17 @@ class Utils
         if ($id == '') {
             // $data = ['nombre' => ''];
             // return json_encode($data);
-            $id = '0';
+            // OTROS //
+            $id   = '61';
+            $data = ['nombre' => ''];
         } else {
+            $data = $chofer->getById($id);
         }
-        $data = $chofer->getById($id);
-        print_r('<pre>');
-        print_r($data);
-        print_r('</pre>');
-        return $data;
+
+        //print_r('<pre>');
+        //print_r($data);
+        //print_r('</pre>');
+        return json_encode($data);
     }
 
     public static function getTransportistaCliente($id)
