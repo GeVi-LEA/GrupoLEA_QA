@@ -9,6 +9,10 @@ require_once utils_root . 'folder_tree/src/jQueryFM/FileProvider/FS.php';
 require_once utils_root . 'folder_tree/src/jQueryFM/FileManager.php';
 $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
+// print_r('<pre>');
+// print_r($servicios['numUnidad']);
+// print_r('</pre>');
+
 $manager = new jQueryFM_FileManager(views_root . 'servicios/uploads/' . $servicios['numUnidad']);
 // $manager                = new jQueryFM_FileManager(URL . '/views/servicios/uploads/' . $servicios['numUnidad']);
 $manager->ajax_endpoint = $actual_link . '&isolated=true';

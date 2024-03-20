@@ -965,12 +965,14 @@ class serviciosController
             $servicio->setId($id);
             $r = $servicio->ingresarUnidad();
             if ($r) {
-                $imp       = $servicio->getById($id);
-                $_url      = URL . '?controller=Servicios&action=getFormatoEntrada&idEnt=' . $id;
-                $_path     = 'views/servicios/uploads/' . $imp['numUnidad'];
-                $_filename = 'registro_' . $imp['numUnidad'];
-                $_mostrar  = false;
-                $this->imprimirURL($_url, $_path, $_filename, $_mostrar);
+                $imp = $servicio->getById($id);
+                if ($imp['tipo_transporte_id'] != '12' && $imp['tipo_transporte_id'] != '6') {
+                    $_url      = URL . '?controller=Servicios&action=getFormatoEntrada&idEnt=' . $id;
+                    $_path     = 'views/servicios/uploads/' . $imp['numUnidad'];
+                    $_filename = 'registro_' . $imp['numUnidad'];
+                    $_mostrar  = false;
+                    $this->imprimirURL($_url, $_path, $_filename, $_mostrar);
+                }
                 $result = [
                     'error'   => true,
                     'mensaje' => 'Se registro la entrada de la unidad.',
@@ -1286,6 +1288,54 @@ class serviciosController
         }
         $ensacado->setId($idEnt);
         $servicios = $ensacado->getById();
+
         require_once views_root . 'servicios/carpetas.php';
+    }
+
+    /* REPORTES */
+    public function rep_serv_ensacado()
+    {
+        Utils::noLoggin();
+        $idEst      = null;
+        $trenArray  = Utils::isTren();
+        $arrayIdsTr = array();
+        foreach ($trenArray as $tr) {
+            array_push($arrayIdsTr, $tr->id);
+        }
+        $ensacado = new ServicioEntrada();
+        if (isset($_GET['idEst'])) {
+            $idEst = (int) $_GET['idEst'];
+        }
+        // $servicios    = $ensacado->getByEstatusId($idEst);
+        // $datosGrafica = $ensacado->getDataGraficas();
+        // $_SESSION['title'] = 'Ensacado';
+        require_once views_root . 'servicios/rep_serv_ensacado.php';
+    }
+
+    public function imprimirReporteServicios()
+    {
+        $fecha_ini = isset($_GET['fechas']) && $_GET['fechas'] != '' ? explode(' - ', $_GET['fechas'])[0] : null;
+        $fecha_fin = isset($_GET['fechas']) && $_GET['fechas'] != '' ? explode(' - ', $_GET['fechas'])[1] : null;
+        $clientes  = isset($_GET['clientes']) && $_GET['clientes'] != '' ? $_GET['clientes'] : null;
+        $serv      = new ServicioEnsacado();
+        $s         = $serv->getServicios($fecha_ini, $fecha_fin, $clientes);
+
+        require_once utils_root . 'toPDF/pdf.php';
+        PDF::pdfReporteServicios($s, $mostrar);
+        // require_once views_root . 'servicios/formato_reporte_servicios.php';
+    }
+
+    public function getServicios()
+    {
+        $fecha_ini = isset($_POST['fechas']) && $_POST['fechas'] != '' ? explode(' - ', $_POST['fechas'])[0] : null;
+        $fecha_fin = isset($_POST['fechas']) && $_POST['fechas'] != '' ? explode(' - ', $_POST['fechas'])[1] : null;
+        $clientes  = isset($_POST['clientes']) && $_POST['clientes'] != '' ? $_POST['clientes'] : null;
+
+        $servicio = new ServicioEnsacado();
+        $s        = $servicio->getServicios($fecha_ini, $fecha_fin, $clientes);
+        $sg       = $servicio->getServiciosGrafica($fecha_ini, $fecha_fin, $clientes);
+
+        echo json_encode(['mensaje' => 'OK', 'servicios' => $s, 'servicios_grafica' => $sg]);
+        return true;
     }
 }

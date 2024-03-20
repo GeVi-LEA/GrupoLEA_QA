@@ -23,6 +23,7 @@
                     </a>
                 </li>
                 <ul class="navbar-nav" id="navbar-nav">
+
                     <!-- start Compras Menu -->
                     <li class="nav-item">
                         <a class="nav-link <?php if (!Utils::permisosCompras()) { echo 'disabled'; } ?>" data-bs-toggle="collapse" href="#sidebarCompras" role="button" aria-expanded="false" aria-controls="sidebarCompras">
@@ -77,6 +78,7 @@
                         </ul>
                     </li>
                     <!-- end Compras Menu -->
+
                     <!-- start Laboratorio Menu -->
                     <li class="nav-item">
                         <a class="nav-link menu-link disabled" href="#sidebarLaboratorio" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLaboratorio">
@@ -100,6 +102,7 @@
                             </ul> -->
                     </li>
                     <!-- end Laboratorio Menu -->
+
                     <!-- start Produccion Menu -->
                     <li class="nav-item">
                         <a class="nav-link menu-link disabled" href="#sidebarProduccion" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarProduccion">
@@ -174,7 +177,6 @@
                                             </g>
                                         </svg>
                                     </i>
-
                                     <i class="sidenav-mini-icon">E</i>
                                     <span class="item-name">Ensacado</span>
                                 </a>
@@ -207,6 +209,37 @@
                                     <span class="item-name">Almacenaje</span>
                                 </a>
                             </li>
+                            <!-- start Reportes Menu -->
+                            <li class=" nav-item ">
+                                <a class="nav-link menu-link <?php activeSubMenu('rep') ?> <?php if (!Utils::permisosSupervisor()) { echo 'disabled'; } ?>" href=" #sidebarServiciosReportes" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarServiciosReportes">
+                                    <i class="fa-solid fa-square-poll-vertical fa-xl"></i>
+                                    <span class="item-name">Reportes</span>
+                                    <i class="right-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                        </svg>
+                                    </i>
+                                </a>
+                                <ul class="sub-nav collapse" id="sidebarServiciosReportes" data-bs-parent="#sidebarServicios">
+                                    <li class=" nav-item ">
+                                        <a class="nav-link <?php activeRoute(principalUrl . '?controller=Servicios&action=rep_serv_ensacado', 'Reporte Servicios Ensacado') ?>" href="<?= principalUrl ?>?controller=Servicios&action=rep_serv_ensacado">
+                                            <i class="icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
+                                                    <g>
+                                                        <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                                                    </g>
+                                                </svg>
+                                            </i>
+
+                                            <i class="sidenav-mini-icon">RSE</i>
+                                            <span class="item-name">Rep. Serv. Ensacado</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            <!-- end Reportes Menu -->
+
                             <li class=" nav-item " hidden>
                                 <a class="nav-link <?php activeRoute(principalUrl . '?controller=Servicios&action=monitorEntradas', 'Monitor Entradas') ?>" href="<?= principalUrl ?>?controller=Servicios&action=monitorEntradas">
                                     <i class="icon">
@@ -224,6 +257,7 @@
                         </ul>
                     </li>
                     <!-- end Servicios Menu -->
+
 
                     <!-- start Sistemas Menu -->
                     <li class="nav-item">
@@ -273,15 +307,15 @@
                     <!-- start Catalogos Menu -->
                     <li class="nav-item">
                         <a class="nav-link menu-link <?php if (!Utils::permisosSupervisor()) { echo 'disabled'; } ?>" href="#sidebarCatalogos" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarCatalogos">
-                           <i class="fa-solid fa-book fa-xl"></i>
+                            <i class="fa-solid fa-book fa-xl"></i>
                             <span class="item-name" data-key="t-landing" id="abrirCatalogo">Catálogos</span>
-                           <!--  <i class="right-icon">
+                            <!--  <i class="right-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                 </svg>
                             </i> -->
                         </a>
-                     <!--    <ul class="sub-nav collapse" id="sidebarCatalogos" data-bs-parent="#sidebar"> 
+                        <!--    <ul class="sub-nav collapse" id="sidebarCatalogos" data-bs-parent="#sidebar"> 
                            <li class=" nav-item ">
                                 <a class="nav-link <?php activeRoute(principalUrl . '?controller=Catalogo&action=showProveedores', 'Cat. Proveedores') ?>" href="<?= principalUrl ?>?controller=Catalogo&action=showProveedores">
                                     <i class="icon">
@@ -538,6 +572,32 @@ function activeRoute($url, $titulo = '')
     if ($accion_url == $accion_actual_link) {
         $respuesta         = 'active';
         $_SESSION['title'] = $titulo;
+    }
+
+    echo $respuesta;
+}
+
+function activeSubMenu($url)
+{
+    $actual_link         = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    $respuesta           = '';
+    $accion_url          = '';
+    $accion_actual_link  = '';
+    $explode_actual_link = explode('&', $actual_link);
+    foreach ($explode_actual_link as $value) {
+        if (str_contains(strtolower($value), 'action')) {
+            $accion_actual_link = explode('=', $value)[1];
+        }
+    }
+    $explode_url = explode('&', $url);
+    foreach ($explode_url as $value) {
+        if (str_contains(strtolower($value), 'action')) {
+            $accion_url = explode('=', $value)[1];
+        }
+    }
+
+    if (str_contains($accion_actual_link, $url)) {
+        $respuesta = 'active';
     }
 
     echo $respuesta;

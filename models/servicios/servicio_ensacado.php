@@ -470,14 +470,15 @@ class ServicioEnsacado
 
     public function finalizarServicio()
     {
-        $sql    = "
+        $sql  = "
             update servicios_ensacado 
             set fecha_fin = NOW()
             , estatus_id = 5 
             , usuario_fin = {$_SESSION['usuario']->id} 
             where id = {$this->getId()}
             ";
-        $save   = $this->db->query($sql);
+        $save = $this->db->query($sql);
+
         $sql    = "
             update servicios_entradas
             set estatus_id = 3
@@ -581,6 +582,92 @@ class ServicioEnsacado
         $servicios = $this->db->query($sql);
         while ($c = $servicios->fetch_object()) {
             array_push($result, $c);
+        }
+        return $result;
+    }
+
+    public function getServicios($fecha_ini, $fecha_fin, $clientes)
+    {
+        ini_set('memory_limit', '-1');
+        $result = array();
+        $sql    = "      
+                select                
+                ens.folio
+                ,ent.numUnidad
+                ,cli.nombre as nom_cliente
+                ,cli.id id_cliente
+                ,ens.lote
+                ,prod.nombre as nom_prod
+                ,ens.alias
+                ,FORMAT(ens.cantidad,2) cantidad
+                ,ens.fecha_inicio
+                ,concat(usu_ini.nombres, ' ', usu_ini.apellidos) usu_ini
+                ,ens.fecha_fin
+                ,concat(usu_fin.nombres, ' ', usu_fin.apellidos) usu_fin
+                ,ens.tarimas
+                ,ens.parcial
+                ,FORMAT(ens.barredura_sucia,2) barredura_sucia
+                ,FORMAT(ens.barredura_limpia,2) barredura_limpia
+                
+                from servicios_ensacado ens
+                inner join servicios_entradas ent on ent.id = ens.entrada_id
+                inner join catalogo_clientes cli on cli.id = ent.cliente_id
+                inner join catalogo_productos_resinas_liquidos prod on prod.id = ens.producto_id
+                inner join catalogo_usuarios usu_ini on usu_ini.id = ens.usuario_inicio
+                inner join catalogo_usuarios usu_fin on usu_fin.id = ens.usuario_fin
+                where 
+                ens.fecha_fin >= '" . $fecha_ini . " 00:00:00'
+                and ens.fecha_fin <= '" . $fecha_fin . " 23:00:00'
+                ";
+        if ($clientes != '') {
+            $sql .= ' and ent.cliente_id in (' . $clientes . ') order by ens.fecha_fin desc';
+        } else {
+            $sql .= 'order by ens.fecha_fin desc ';
+        }
+
+        // print_r('<pre>');
+        // print_r($sql);
+        // print_r('</pre>');
+        // die();
+        $ensacados = $this->db->query($sql);
+        if ($ensacados != null) {
+            foreach ($ensacados->fetch_all(MYSQLI_ASSOC) as $e) {
+                array_push($result, $e);
+            }
+        }
+        return $result;
+    }
+
+    public function getServiciosGrafica($fecha_ini, $fecha_fin, $clientes)
+    {
+        ini_set('memory_limit', '-1');
+        $result = array();
+        $sql    = "      
+            select                
+            cli.nombre as nom_cliente
+            ,count(*) cantidad
+            ,max(cli.colorweb) colorweb
+            from servicios_ensacado ens
+            inner join servicios_entradas ent on ent.id = ens.entrada_id
+            inner join catalogo_clientes cli on cli.id = ent.cliente_id
+            where 
+            ens.fecha_fin >= '" . $fecha_ini . " 00:00:00'
+            and ens.fecha_fin <= '" . $fecha_fin . " 23:00:00'
+            ";
+        if ($clientes != '') {
+            $sql .= ' and ent.cliente_id in (' . $clientes . ') group by cli.nombre';
+        } else {
+            $sql .= 'group by cli.nombre ';
+        }
+        // print_r('<pre>');
+        // print_r($sql);
+        // print_r('</pre>');
+        // die();
+        $ensacados = $this->db->query($sql);
+        if ($ensacados != null) {
+            foreach ($ensacados->fetch_all(MYSQLI_ASSOC) as $e) {
+                array_push($result, $e);
+            }
         }
         return $result;
     }

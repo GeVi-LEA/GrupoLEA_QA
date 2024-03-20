@@ -35,7 +35,8 @@ span {
                     <div><img style="height:80px; opacity: .8;" src="<?= root_url ?>/assets/img/default.jpg" /></div>
                 </td>
                 <td style="width:80%; font-family: Arial; text-align: center;">
-                    <strong style="font-size: 18px; font-weight: bold"><?= isset($empresa) ? $empresa['nombre'] : '' ?></strong>
+                    <!-- <strong style="font-size: 18px; font-weight: bold"><?= isset($empresa) ? $empresa['nombre'] : '' ?></strong> -->
+                    <strong style="font-size: 18px; font-weight: bold">LEADER DE LUBRICANTES DE MÉXICO S. DE R.L. DE C.V.</strong>
                 </td>
                 <!-- <td style="width:20%; height:90px;"></td> -->
             </tr>
@@ -61,8 +62,7 @@ span {
             <tr style="width:100%; height:25px;">
                 <td style="height:25px;  border-bottom:2px solid; border-right:1px solid; text-align:center;"><span style="font-size:12px;"><?= isset($s) && $s->unidad != '' ? $s->unidad : ''; ?></span></td>
                 <td style="height:25px;  border-bottom:2px solid; border-right:1px solid; text-align: center;"> <span style="font-size:12px;"><?= isset($s) && $s->unidad != '' ? ($s->fechaEntrada) : ''; ?></span></td>
-                <td style="height:25px;  border-bottom:2px solid; border-right:1px solid; text-align:center;"><span
-                        style="font-size:12px;"><?= isset($s) && $s->fechaSalida != '' ? UtilsHelp::fechaHora($s->fechaSalida) : ''; ?></span></td>
+                <td style="height:25px;  border-bottom:2px solid; border-right:1px solid; text-align:center;"><span style="font-size:12px;"><?= isset($s) && $s->fechaSalida != '' ? UtilsHelp::fechaHora($s->fechaSalida) : ''; ?></span></td>
                 <td style="height:25px;  border-bottom:2px solid; border-right:1px solid; text-align: center;"> <span style="font-size:12px;"><?= isset($s) && $s->fechaSalida != '' ? 'NO' : 'SI'; ?></span></td>
                 <td style="height:25px;  border-bottom:2px solid; text-align: center;"> <span style="font-size:12px;"><?= isset($s) && $s->transcurridos != '' ? $s->transcurridos : ''; ?></span></td>
             </tr>
@@ -72,8 +72,7 @@ span {
             <tr style="width:100%; height:25px; font-size:16px;">
                 <td colspan=2 style="width:50%; height:25px; border-right:1px solid; border-left:1px solid; text-align:left; padding-left:10px; border-bottom:1px solid;"></td>
                 <td style="width:25%; height:25px; border-right:1px solid; border-left:1px solid; text-align:left; padding-left:10px; border-bottom:1px solid;"><strong style="font-size:12px;">Fecha:</strong></td>
-                <td colspan=3 style="width:25%; height:25px; text-align: left; padding-left:10px; border-bottom:1px solid;"> <span
-                        style="font-size:12px;"><?= isset($s) && $s->fecha_programacion != '' ? UtilsHelp::formatoFecha($s->fecha_programacion) : ''; ?></span></td>
+                <td colspan=3 style="width:25%; height:25px; text-align: left; padding-left:10px; border-bottom:1px solid;"> <span style="font-size:12px;"><?= isset($s) && $s->fecha_programacion != '' ? UtilsHelp::formatoFecha($s->fecha_programacion) : ''; ?></span></td>
             </tr>
             <tr style="width:100%; height:25px;">
                 <td style="height:25px; border-bottom:1px solid; border-right:1px solid; text-align:center;"><strong style="font-size:12px;">Tipo:</strong></td>

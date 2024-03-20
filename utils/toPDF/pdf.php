@@ -146,6 +146,32 @@ class PDF
         }
     }
 
+    public static function pdfReporteServicios($s, $mostrar = false, $servicio_entrada = null)
+    {
+        $empresa = empresas[intval(1)];
+
+        $pdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'Letter-L', 'tempDir' => '/tmp']);
+        ob_start();
+        require_once views_root . 'servicios/formato_reporte_servicios.php';
+
+        $html = ob_get_clean();
+
+        ob_end_clean();
+        $pdf->writeHTML($html);
+
+        $pdf->output('ReporteServicios.pdf', 'I');
+
+        // if ($mostrar) {
+        //     $pdf->output($s->folio . '.pdf', 'I');
+        // } else {
+        //     $path = views_root . 'servicios/uploads/' . $servicio_entrada['numUnidad'];
+        //     if (!is_dir($path)) {
+        //         mkdir($path, 0777, true);
+        //     }
+        //     $pdf->output(views_root . 'servicios/uploads/' . $servicio_entrada['numUnidad'] . '/' . $s->folio . '_' . $servicio_entrada['numUnidad'] . '.pdf', 'F');
+        // }
+    }
+
     public static function crearPdfEntrada($url = __DIR__, $path = '', $filename = 'temp', $mostrar = true)
     {
         try {

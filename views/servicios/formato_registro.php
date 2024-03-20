@@ -154,6 +154,7 @@
     <!-- <page backtop="0mm" backbottom="0mm" backleft="0mm" backright="0mm" pagegroup="new"> -->
 
     <div class='caja contenedor keep-together'>
+
         <table style="width:100%;">
             <tr>
                 <td style="width:20%;"><img class="imglogo" src="<?= root_url ?>assets/images/logo_lea-sm.png" alt="" height="80"></td>
@@ -218,11 +219,20 @@
                 <table style="width:100%">
                     <tr>
                         <td colspan="2">
-                            <b>NOMBRE DEL OPERADOR: </b><?= strtoupper(isset(json_decode(Utils::getChofer($servicios['chofer']))->nombre) ? json_decode(Utils::getChofer($servicios['chofer']))->nombre : '...') ?>
+                            <?php
+                                if ($servicios['tipo_transporte_id'] != '12') {
+                                    echo '<b>NOMBRE DEL OPERADOR: </b>' . strtoupper(isset(json_decode(Utils::getChofer($servicios['chofer']))->nombre) ? json_decode(Utils::getChofer($servicios['chofer']))->nombre : '...');
+                                }
+                            ?>
                         </td>
 
-                        <td> <b>LINEA TRANSPORTISTA: </b><?= strtoupper(isset(Utils::getTransportistaCliente($servicios['transportista'])->nombre) ? Utils::getTransportistaCliente($servicios['transportista'])->nombre : '...') ?></td>
-
+                        <td>
+                            <?php
+                                if ($servicios['tipo_transporte_id'] != '12') {
+                                    echo '<b>LINEA TRANSPORTISTA: </b>' . strtoupper(isset(Utils::getTransportistaCliente($servicios['transportista'])->nombre) ? Utils::getTransportistaCliente($servicios['transportista'])->nombre : '...');
+                                }
+                            ?>
+                        </td>
                     </tr>
                     <tr>
                         <td><b>PLACAS DE UNIDAD/TRACTOR: </b><?= $servicios['numUnidad'] ?></td>
