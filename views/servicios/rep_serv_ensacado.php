@@ -70,6 +70,7 @@ menusel = 'rep_serv_ensacado';
                 <th>USUARIO INICIO</th>
                 <th>FECHA FIN</th>
                 <th>USUARIO FIN</th>
+                <th>TIEMPO INVERTIDO</th>
                 <th>TARIMAS</th>
                 <th>PARCIAL</th>
                 <th>BARREDURA SUCIA</th>

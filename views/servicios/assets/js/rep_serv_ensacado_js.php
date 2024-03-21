@@ -27,7 +27,7 @@ $(document).ready(function() {
     $("#fechas-startend").attr("data-fend", datahoyparseend);
     //    2021-12-01|2021-12-29
     ////console.log(moment(startDate).format("YYYY-MM-DD") + "|" + datahoyparse);
-    $("#fechas-startend").val(moment(startDate).format("YYYY-MM-DD") + "|" + datahoyparse);
+    $("#fechas-startend").val(moment(startDate).format("YYYY-MM-DD") + " - " + datahoyparse);
 
 
     $('.shawCalRanges').daterangepicker({
@@ -81,7 +81,7 @@ $(document).ready(function() {
         var start = start.format('YYYY-MM-DD');
         var end = end.format('YYYY-MM-DD');
         ////console.log(start + "|" + end);
-        $("#fechas-startend").val(start + "|" + end);
+        $("#fechas-startend").val(start + " - " + end);
         buscaServicios();
         llenaclientes = 0;
     });
@@ -102,12 +102,13 @@ const buscaServicios = () => {
     showLoading_global();
     clientes = [];
     clientes_id = [];
-
+    console.log("fechas: ", $("#rangoFechas").val());
+    console.log("fechas: ", $("#fechas-startend").val());
     jQuery.ajax({
         url: __url__ + '?ajax&controller=Servicios&action=getServicios',
         data: {
             clientes: $("#cmbClientes").val().join(", "),
-            fechas: $("#rangoFechas").val()
+            fechas: $("#fechas-startend").val()
         },
         method: 'POST',
         dataType: "json",
@@ -174,6 +175,8 @@ const buscaServicios = () => {
                 },
                 {
                     data: 'usu_fin'
+                }, {
+                    data: 'tiempo_invertido'
                 },
                 {
                     data: 'tarimas'

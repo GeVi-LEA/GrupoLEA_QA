@@ -604,19 +604,21 @@ class ServicioEnsacado
                 ,concat(usu_ini.nombres, ' ', usu_ini.apellidos) usu_ini
                 ,ens.fecha_fin
                 ,concat(usu_fin.nombres, ' ', usu_fin.apellidos) usu_fin
+                ,get_DiffDates(ens.fecha_inicio, ens.fecha_fin) tiempo_invertido
                 ,ens.tarimas
                 ,ens.parcial
                 ,FORMAT(ens.barredura_sucia,2) barredura_sucia
                 ,FORMAT(ens.barredura_limpia,2) barredura_limpia
                 
                 from servicios_ensacado ens
-                inner join servicios_entradas ent on ent.id = ens.entrada_id
+                inner join servicios_entradas ent on ent.id = ens.entrada_id and ent.entrada_salida = 0
                 inner join catalogo_clientes cli on cli.id = ent.cliente_id
                 inner join catalogo_productos_resinas_liquidos prod on prod.id = ens.producto_id
                 inner join catalogo_usuarios usu_ini on usu_ini.id = ens.usuario_inicio
                 inner join catalogo_usuarios usu_fin on usu_fin.id = ens.usuario_fin
                 where 
-                ens.fecha_fin >= '" . $fecha_ini . " 00:00:00'
+                ens.servicio_id = 1
+                and ens.fecha_fin >= '" . $fecha_ini . " 00:00:00'
                 and ens.fecha_fin <= '" . $fecha_fin . " 23:00:00'
                 ";
         if ($clientes != '') {
@@ -648,10 +650,11 @@ class ServicioEnsacado
             ,count(*) cantidad
             ,max(cli.colorweb) colorweb
             from servicios_ensacado ens
-            inner join servicios_entradas ent on ent.id = ens.entrada_id
+            inner join servicios_entradas ent on ent.id = ens.entrada_id and ent.entrada_salida = 0
             inner join catalogo_clientes cli on cli.id = ent.cliente_id
             where 
-            ens.fecha_fin >= '" . $fecha_ini . " 00:00:00'
+            ens.servicio_id = 1
+            and ens.fecha_fin >= '" . $fecha_ini . " 00:00:00'
             and ens.fecha_fin <= '" . $fecha_fin . " 23:00:00'
             ";
         if ($clientes != '') {
