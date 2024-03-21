@@ -453,7 +453,7 @@ $(document).ready(function () {
 				false
 			);
 		} else {
-			getChoferes($("#transportista option:selected").val());
+			// getChoferes($("#transportista option:selected").val());
 		}
 	});
 

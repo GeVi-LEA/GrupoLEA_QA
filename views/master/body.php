@@ -57,6 +57,9 @@ require_once views_root . 'erp/notificaciones.php';
 function llamarController()
 {
     $_SESSION['title'] = '';
+    if ($_GET['controller'] == 'Home') {
+        $_SESSION['title'] = strtoupper($_GET['action']);
+    }
     if (isset($_GET['controller'])) {
         $nombre_controlador = $_GET['controller'] . 'Controller';
     } elseif (!isset($_GET['controller']) && !isset($_GET['action'])) {

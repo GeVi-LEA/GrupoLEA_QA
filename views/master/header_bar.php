@@ -1,6 +1,6 @@
 <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar navs-sticky">
     <div class="container-fluid navbar-inner">
-        <a href="<?= URL ?>views/master/?controller=Compras&action=index" class="navbar-brand">
+        <a href="<?= URL ?>views/master/?controller=Home&action=home" class="navbar-brand">
             <img src="<?= URL ?>assets/images/logo_lea-sm.png" alt="" height="22">
             <h4 class="logo-title"><?= APP_NAME ?></h4>
         </a>

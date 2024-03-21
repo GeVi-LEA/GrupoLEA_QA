@@ -6,6 +6,8 @@ class TipoTransporte
     private $nombre;
     private $clave;
     private $descripcion;
+    private $bascula;
+    private $puertas;
     private $cap_maxima;
     private $db;
 
@@ -65,9 +67,28 @@ class TipoTransporte
         $this->cap_maxima = preg_replace('~\D~', '', $cap_maxima);
     }
 
+    public function getBascula() {
+        return $this->bascula;
+    }
+
+    public function getPuertas() {
+        return $this->puertas;
+    }
+
+    public function setBascula($bascula): void {
+        $this->bascula = $bascula;
+    }
+
+    public function setPuertas($puertas): void {
+        $this->puertas = $puertas;
+    }
+
     public function save()
     {
-        $sql    = "insert into catalogo_tipos_transportes values(null, '{$this->getNombre()}', '{$this->getClave()}', '{$this->getDescripcion()}', '{$this->getCap_Maxima()}')";
+        $sql    = "insert into catalogo_tipos_transportes values(null, '{$this->getNombre()}', '{$this->getClave()}', '{$this->getDescripcion()}',  
+                   {$this->getCap_Maxima()}, {$this->getBascula()}, {$this->getPuertas()})";
+                   var_dump($sql);
+                   die();
         $save   = $this->db->query($sql);
         $result = false;
         if ($save) {
@@ -82,7 +103,9 @@ class TipoTransporte
                     nombre = '{$this->getNombre()}'
                     , clave= '{$this->getClave()}'
                     ,  descripcion = '{$this->getDescripcion()}'
-                    ,  cap_maxima = '{$this->getCap_Maxima()}' 
+                    ,  bascula = {$this->getBascula()} 
+                    ,  puertas = {$this->getPuertas()}
+                    ,  cap_maxima = {$this->getCap_Maxima()}  
                     where id={$this->getId()}";
         $save   = $this->db->query($sql);
         $result = false;

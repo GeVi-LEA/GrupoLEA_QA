@@ -1,6 +1,6 @@
 <aside class="sidebar sidebar-default sidebar-base sidebar-boxed navs-pill-all sidebar-transparent">
     <div class="sidebar-header d-flex align-items-center justify-content-start">
-        <a href="<?php echo URL; ?>views/master/?controller=Compras&action=index" class="navbar-brand">
+        <a href="<?php echo URL; ?>views/master/?controller=Home&action=home" class="navbar-brand">
             <img src="<?php echo URL; ?>assets/images/logo_lea-sm.png" alt="" height="42">
             <h4 class="logo-title"><?= APP_NAME ?></h4>
         </a>
