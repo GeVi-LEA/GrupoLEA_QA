@@ -152,7 +152,7 @@ const chart_servicios = () => {
     // $("#chart_clientes").attr("style", "height:" + (naves.length * 200) + "px");
     // $("#chart_nave").html("").attr("_echarts_instance_", "");
     $("#chart_clientes").html("").attr("_echarts_instance_", "");
-    console.log($("#chart_clientes"));
+    //console.log($("#chart_clientes"));
     var chartDom = document.getElementById('chart_clientes');
     var myChart = echarts.init(chartDom);
     var option;

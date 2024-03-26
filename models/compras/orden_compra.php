@@ -355,4 +355,20 @@ class OrdenCompra
         $result = $this->getAll($sql);
         return $result;
     }
+
+    public function getOC_MES()
+    {
+        ini_set('memory_limit', '-1');
+        $result = array();
+        $sql    = '              
+                CALL getOC_Mes();
+            ';
+        $getoc  = $this->db->query($sql);
+        if ($getoc != null) {
+            foreach ($getoc->fetch_all(MYSQLI_ASSOC) as $e) {
+                array_push($result, $e);
+            }
+        }
+        return $result;
+    }
 }

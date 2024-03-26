@@ -51,7 +51,7 @@ const armaInventarios = () => {
 
         /* NAVES */
         for (c = 0; c < clientes.length; c++) {
-            console.log(naves[c]);
+            //console.log(naves[c]);
             if (detalle_naves.hasOwnProperty(clientes[c]) <= 0) {
                 detalle_naves[clientes[c]] = ({
                     name: clientes[c],
@@ -120,7 +120,7 @@ const chart_nave = () => {
     //import * as echarts from 'echarts';
     $("#chart_nave").attr("style", "height:" + (naves.length * 200) + "px");
     $("#chart_nave").html("").attr("_echarts_instance_", "");
-    console.log($("#chart_nave"));
+    //console.log($("#chart_nave"));
     var chartDom = document.getElementById('chart_nave');
     var myChart = echarts.init(chartDom);
     var option;

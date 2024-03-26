@@ -684,7 +684,7 @@ class comprasController
                     foreach ($r['detalle'] as $d) {
                         $cantidad += floatval($d['cantidad']);
                     }
-                    $exenta   = $importeOrden - ($cantidad * 1000 * .374675);
+                    $exenta   = $importeOrden - ($cantidad * 1000 * 0.374675);
                     $ivaOrden = $exenta * impuestos['iva'];
                 } else {
                     if ($o->otro_iva == null) {
@@ -794,7 +794,7 @@ class comprasController
                     foreach ($r['detalle'] as $d) {
                         $cantidad += floatval($d['cantidad']);
                     }
-                    $exenta   = $importeOrden - ($cantidad * 1000 * .374675);
+                    $exenta   = $importeOrden - ($cantidad * 1000 * 0.374675);
                     $ivaOrden = $exenta * impuestos['iva'];
                     $orden->setOtroIva('null');
                 } else {
@@ -1578,7 +1578,7 @@ class comprasController
                     $this->actualizarOrdenCompra($idReq);
                 } else {
                     echo $saveDetalle;
-                    die ();
+                    die();
                 }
             }
             $evaluacion = array(
@@ -1834,5 +1834,12 @@ class comprasController
         );
         echo json_encode(['mensaje' => 'OK', 'requisiciones' => $requisiciones]);
         // return true;
+    }
+
+    public function getOC_MES()
+    {
+        $orden   = new OrdenCompra();
+        $ordenes = $orden->getOC_MES();
+        echo json_encode(['mensaje' => 'OK', 'ordenes' => $ordenes]);
     }
 }
