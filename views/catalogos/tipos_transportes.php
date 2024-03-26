@@ -50,10 +50,32 @@
         </div>
         <div class="row p-1 ">
             <div class="col-3 text-right">
-                <label for="descripcion">Cap Máxima:</label>
+                <label for="cap_maxima">Cap Máxima:</label>
             </div>
             <div class="col-9">
-                <input type="number" name="cap_maxima" class="inputLarge" id="cap_maxima" placeholder="Escribe la capacidad máxima" />
+                <input type="number" name="cap_maxima" class="inputMedium" id="cap_maxima" placeholder="Ej. 40,000" />
+            </div>
+        </div>
+        <div class="row d-flex justify-content-left p-1">
+            <div class="col-3 text-right">
+                <label for="puertas">Puertas:</label>
+            </div>
+            <div class="col-2">
+                  <select name="puertas" class="inputSmall" id="puertas"> 
+                    <option value="" selected>-</option>
+                    <option value="1">SI</option>
+                    <option value="0">NO</option>
+                </select>
+             </div>
+            <div class="col-1 text-left">
+                <label for="bascula">Bascula:</label>
+            </div>
+            <div class="col-5 text-left">
+                  <select name="bascula" class="inputSmall" id="bascula"> 
+                    <option value="" selected>-</option>
+                    <option value="1">SI</option>
+                    <option value="0">NO</option>
+                </select>
             </div>
         </div>
         <div class="row p-1">
@@ -85,6 +107,8 @@ Utils::deleteSession('errores');
             <th>Nombre</th>
             <th>Clave</th>
             <th>Descripción</th>
+            <th>Bascula</th>
+            <th>Puertas</th>
             <th>Cap Máxima</th>
             <th></th>
         </thead>
@@ -95,6 +119,8 @@ Utils::deleteSession('errores');
                 <td id="nombreTabla"><?= $t->nombre; ?></td>
                 <td id="claveTabla"><?= $t->clave; ?></td>
                 <td id="descripcionTabla"><?= $t->descripcion; ?></td>
+                <td id="puertasTabla" hidden><?= $t->puertas; ?></td> <td><?= $t->puertas == 0 ? "NO" : "SI"; ?></td>
+                <td id="basculaTabla" hidden><?= $t->bascula; ?></td> <td><?= $t->bascula == 0 ? "NO" : "SI"; ?></td>
                 <td id="cap_maximaTabla"><?= UtilsHelp::numero2Decimales($t->cap_maxima, true, 0); ?> KGs/LTs</td>
                 <td>
                     <div>

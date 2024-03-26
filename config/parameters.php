@@ -51,11 +51,18 @@ define('ubicaciones_kansas', array(1 => 'Laredo, Tx.', 11 => 'Matamoros', 2 => '
 
 // Sistemas
 define('prioriodades', array(1          => 'Alta',         2 => 'Media',          3 => 'Baja'));
-define('tipoSolicitud', array(1         => 'Preventivo',   2 => 'Correctivo',     3 => 'Configuración', 4 => 'Instalación'));
-define('requerimientos', array(1        => 'Aplicaciones', 2 => 'Equipo cómputo', 3 => 'Red'));
+define('tipoSolicitud', array(1         => 'Preventivo',   2 => 'Correctivo',     3 => 'Configuración', 4 => 'Instalación', 5=> 'Desarrollo'));
+define('requerimientos', array(1        => 'Aplicaciones', 2 => 'Equipo cómputo', 3 => 'Red' ,  4 => 'Programación'));
 define('marcas_sistemas', array(1       => 'HP',           2 => 'Dell',           3 => 'Lenovo', 4 => 'ASUS',      5 => 'APPLE', 6 => 'Brother'));
 define('equipos_sistemas', array(1      => 'Laptop',       2 => 'PC',             3 => 'Movil',  4 => 'Impresora', 5 => 'Servidor'));
 define('aplicaciones_sistemas', array(1 => 'WIN PRO',      2 => 'Office 365',     3 => 'Antivirus'));
 
 // Servicios
 define('tipo_tarimas', array(1 => 'Tratada', 2 => 'Normal'));
+                                    
+//Laboratorio
+define('unidades_medida', array(1 => '&deg;C', 2 => '%', 3 =>'&deg;API', 4 => 'cm/in', 5 =>'cm&#713;&#185;', 6 =>'Color ASTM',
+        7 =>'ft/min', 8 =>'g', 9 =>'g/cm&sup3;', 10 =>'hPa/&deg;C/%HR', 11 =>'Kg', 12 =>'KV', 13 =>'L/min', 14 =>'mm&sup2;/s',
+        15 =>'mN/m', 16 =>'&deg;C/%HR', 17 =>'p.p.m', 18 =>'s'));
+
+define('estatus_equipos', array(1 => 'Activo', 2 =>'Inactivo', 3 => 'Baja'));        

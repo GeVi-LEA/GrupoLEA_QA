@@ -737,25 +737,33 @@ function ROFinaliza($estatus)
                         </div>
                     </div>
                     <div class='col-md-8 col-12'>
-                        <div class='row'>
-                            <div class='col-md- <?= ($ensacado['entrada_salida'] == '0') ? '12' : '8' ?> col-12'>
-                                <label for="loteSelect" class="form-label">Lote</label>
-                                <input type="text" name="lote" id="lote" class="form-control" />
-                                <select name="loteSelect" id="loteSelect" class="form-select loteSelect" hidden>
-                                    <option>--Selecciona--</option>
-                                </select>
-
-                            </div>
-                            <div class='col-md-4 col-12' <?= ($ensacado['entrada_salida'] == '0') ? 'hidden' : '' ?>>
-                                <label for="disponible_lote" class="form-label">Disponible</label>
-                                <div class="input-group mb-3">
-                                    <input type="text" name="disponible_lote" id="disponible_lote" class="form-control numhtml" disabled />
-                                    <span class="input-group-text">kgs.</span>
+                        <!-- <div class='row'> -->
+                        <div class='col-md- <?= ($ensacado['entrada_salida'] == '0') ? '12' : '8' ?> col-12'>
+                            <div class='row'>
+                                <div class='col'>
+                                    <label for="loteSelect" class="form-label">Lote</label>
+                                    <input type="text" name="lote" id="lote" class="form-control" />
+                                    <select name="loteSelect" id="loteSelect" class="form-select loteSelect" hidden>
+                                        <option>--Selecciona--</option>
+                                    </select>
+                                </div>
+                                <div class='col' hidden>
+                                    <label for="lote_confirm" class="form-label">Confirmar Lote</label>
+                                    <input type="text" name="lote_confirm" id="lote_confirm" class="form-control" />
                                 </div>
                             </div>
                         </div>
+                        <!-- </div> -->
+                        <div class='col-md-4 col-12' <?= ($ensacado['entrada_salida'] == '0') ? 'hidden' : '' ?>>
+                            <label for="disponible_lote" class="form-label">Disponible</label>
+                            <div class="input-group mb-3">
+                                <input type="text" name="disponible_lote" id="disponible_lote" class="form-control numhtml" disabled />
+                                <span class="input-group-text">kgs.</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class='col-md-8 col-12' id="div_producto">
+                    <!-- </div> -->
+                    <div class='col-12' id="div_producto">
                         <label for="producto" class="form-label">Producto</label>
                         <select name="producto" class="form-select" id="producto" style="">
                             <option value="" selected>--Selecciona--</option>

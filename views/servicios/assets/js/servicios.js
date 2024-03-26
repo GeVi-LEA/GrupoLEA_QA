@@ -647,6 +647,7 @@ $(document).ready(function () {
 
 	$("#btnNuevoServicio").click(function () {
 		$("#existencia").parent("div").hide();
+		$("#lote_confirm").parent("div").attr("hidden", true);
 		// $.fn.modal.Constructor.prototype.enforceFocus = function () {};
 		serv_entrada = $(this).parent("div").parent("div").parent().closest("div").find("[name='tipo_producto']:checked").val();
 		//console.log(serv_entrada);
@@ -907,7 +908,7 @@ $(document).ready(function () {
 							$(".calctarimas div").attr("hidden", true);
 							//console.log("r.lote: ", r.lote);
 							try {
-								getInfoLote(r.lote, "714");
+								getInfoLote(r.lote, "910");
 							} catch (error) {}
 							// console.log(
 							// "entrada salida: ",
@@ -1070,6 +1071,10 @@ $(document).ready(function () {
 		}
 	});
 
+	$("#lote, #lote_confirm").keyup(function () {
+		validarDatosServicio();
+	});
+
 	$("#barreduraSucia").blur(function () {
 		var bs = $(this).val();
 		if (isNumeric(bs)) {
@@ -1205,7 +1210,7 @@ $(document).ready(function () {
 		if (validaLiberacion()) {
 			$.confirm({
 				title: "<span class='material-icons i-warning'>warning</span><span>¡Atención!<span>",
-				content: "<b>¿Desea dar salida a la unidad?</b>",
+				content: "<b>¿Desea dar liberar la unidad?</b>",
 				type: "orange",
 				typeAnimated: true,
 				animation: "zoom",
@@ -1214,28 +1219,102 @@ $(document).ready(function () {
 				backgroundDismissAnimation: "shake",
 				buttons: {
 					tryAgain: {
-						text: "Salida",
+						text: "Liberar",
 						btnClass: "btn btn-warning",
 						action: function () {
 							var id = $("#ensacadoForm").find("#id").val();
-							if (id != "") {
-								$.ajax({
-									data: { id: id },
-									url: "?ajax&controller=Servicios&action=salidaUnidad",
-									type: "POST",
-									dataType: "json",
-									success: function (r) {
-										// //console.log(r);
-										if (r.error != false) {
-											mensajeCorrecto(r.mensaje);
+							if ($("#seccionServicios div").length > 0) {
+								if (id != "") {
+									$.ajax({
+										data: { id: id },
+										url: "?ajax&controller=Servicios&action=salidaUnidad",
+										type: "POST",
+										dataType: "json",
+										success: function (r) {
+											// //console.log(r);
+											if (r.error != false) {
+												mensajeCorrecto(r.mensaje);
+											} else {
+												mensajeError(r.mensaje);
+											}
+										},
+										error: function (r) {
+											//console.log(r.responseText);
+											mensajeError("Algo salio mal,  contacte al administrador.");
+										},
+									});
+								}
+							} else {
+								/* PEDIR OBSERVACIÖN OBLIGATORIA */
+								Swal.fire({
+									title: /*html*/ `<h4>UNIDAD SIN SERVICIOS</span>`,
+									confirmButtonText: "Guardar",
+									cancelButtonText: "Cancelar",
+									showCancelButton: true,
+									cancelButtonColor: "#d33",
+									html: /*html*/ `<h4 class="form-section">La unidad no tiene registrados servicios, favor de justificar la finalización de la unidad</h4>
+                                                    </br>            
+                                                    <input type="text" name="observaciones_salida" id="observaciones_salida" class="form-control" /> 
+                                                                
+                                                    `,
+									preConfirm: () => {
+										if ($("#observaciones_salida").val().length < 10) {
+											$("#observaciones_salida").addClass("required");
+											erpalert1("error", "", "La observación es muy corta");
+											return false; // Prevent confirmed
 										} else {
-											mensajeError(r.mensaje);
+											$("#observaciones_salida").removeClass("required");
 										}
 									},
-									error: function (r) {
-										//console.log(r.responseText);
-										mensajeError("Algo salio mal,  contacte al administrador.");
-									},
+								}).then((result) => {
+									if (result.isConfirmed) {
+										$("#ensacadoForm").find("input, select").removeAttr("disabled");
+										$("#observaciones").val($("#observaciones").val() + " " + $("#observaciones_salida").val());
+										var datosForm = new FormData($("#ensacadoForm")[0]);
+										console.log(datosForm);
+										jQuery
+											.ajax({
+												url: __url__ + "?ajax&controller=Servicios&action=guardarEnsacado",
+												data: datosForm,
+												processData: false,
+												contentType: false,
+												enctype: "multipart/form-data",
+												method: "post",
+												dataType: "json",
+											})
+											.then((resp) => {
+												console.log(resp);
+												if (resp.error) {
+													$.ajax({
+														data: { id: id },
+														url: "?ajax&controller=Servicios&action=salidaUnidad",
+														type: "POST",
+														dataType: "json",
+														success: function (r) {
+															// //console.log(r);
+															if (r.error != false) {
+																mensajeCorrecto(r.mensaje);
+															} else {
+																mensajeError(r.mensaje);
+															}
+														},
+														error: function (r) {
+															//console.log(r.responseText);
+															mensajeError("Algo salio mal,  contacte al administrador.");
+														},
+													});
+												} else {
+													erpalert("error", "Error", resp.mensaje);
+													mensajeError(resp.mensaje);
+												}
+											})
+											.fail((resp) => {})
+											.catch((resp) => {
+												swal("Ocurrio un problema en la peticion en el servidor, favor de reportar a los administradores", {
+													icon: "error",
+												});
+											});
+									}
 								});
 							}
 						},
@@ -1897,6 +1976,7 @@ function agregarLotesEnsacado(form, tipo_producto = "") {
 	$(form).find($("#idTipoServicio")).attr("disabled", false);
 	var servicio = $(form).find("#idTipoServicio option:selected").text();
 	var lote = $(form).find($("#lote"));
+	$("#lote_confirm").parent("div").attr("hidden", true);
 	if (tipo_producto == "") {
 		tipo_producto = serv_entrada;
 	}
@@ -1961,11 +2041,11 @@ function agregarLotesEnsacado(form, tipo_producto = "") {
 										'" data-idAlmacen="' +
 										v.almacen_id +
 										'">' +
+										v.almacen_nombre +
+										" - " +
 										v.lote +
 										" - " +
 										v.nombre +
-										" - " +
-										v.alias +
 										"</option>"
 								);
 							} else {
@@ -2003,6 +2083,8 @@ function agregarLotesEnsacado(form, tipo_producto = "") {
 
 		if (servicio.includes("ENSACADO") || servicio.includes("REEMPAQUE")) {
 			$(".programacion").attr("style", "display:block1 !important");
+			$("#lote_confirm").parent("div").attr("hidden", false);
+			$("#alias").attr("disabled", false).attr("hidden", false);
 		} else {
 			$("#fechaPrograma1").val("null");
 		}
@@ -2058,7 +2140,7 @@ function llenarComboLotesCliente(clienteId, form, lote = "", tipo_producto = "")
 				if (r.length != 0) {
 					$(r).each(function (i, v) {
 						// indice, valor
-						selectLote.append('<option value="' + v.lote + '">' + v.lote + " - " + v.nombre + " - " + v.alias + "</option>");
+						selectLote.append('<option value="' + v.lote + '">' + v.almacen_nombre + " - " + v.lote + " - " + v.nombre + "</option>");
 					});
 				} else {
 					selectLote.append('<option value="" disabled>No hay lotes registrados</option>');
@@ -2742,11 +2824,18 @@ function validarDatosServicio() {
 				$("#loteSelect").removeClass("required").addClass("success");
 			}
 
-			if ($("#lote").val() == "") {
+			if ($("#lote").val() == "" || $("#lote").val() != $("#lote_confirm").val()) {
 				valid = false;
-				$("#lote").addClass("required");
+				$("#lote").removeClass("success").addClass("required");
 			} else {
 				$("#lote").removeClass("required").addClass("success");
+			}
+
+			if ($("#lote_confirm").val() == "" || $("#lote").val() != $("#lote_confirm").val()) {
+				valid = false;
+				$("#lote_confirm").removeClass("success").addClass("required");
+			} else {
+				$("#lote_confirm").removeClass("required").addClass("success");
 			}
 
 			if ($("#idEmpaque").val() == "") {
@@ -2804,11 +2893,18 @@ function validarDatosServicio() {
 			$("#loteSelect").removeClass("required").addClass("success");
 		}
 
-		if ($("#lote").val() == "") {
+		if ($("#lote").val() == "" || $("#lote").val() != $("#lote_confirm").val()) {
 			valid = false;
-			$("#lote").addClass("required");
+			$("#lote").removeClass("success").addClass("required");
 		} else {
 			$("#lote").removeClass("required").addClass("success");
+		}
+
+		if ($("#lote_confirm").val() == "" || $("#lote").val() != $("#lote_confirm").val()) {
+			valid = false;
+			$("#lote_confirm").removeClass("success").addClass("required");
+		} else {
+			$("#lote_confirm").removeClass("required").addClass("success");
 		}
 
 		if ($("#idEmpaque").val() == "") {

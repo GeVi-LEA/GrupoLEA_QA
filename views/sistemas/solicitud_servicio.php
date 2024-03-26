@@ -183,17 +183,17 @@
         <fieldset class="field-datos">
             <legend class="legend-datos">Descripción general del servicio:</legend>
         <div class="row mt-2">
-            <div class="col-3 align-self-center"> <label class="ml-4">Descripción de la falla:</label></div>
-            <div class="col-8"> <textarea name="descripcion" id="descripcion" class="textarea-solicitud"><?=isset($solicitud) ? $solicitud['descripcion'] : ""?></textarea></div>
+            <div class="col-2 align-self-center"> <label class="ml-4">Descripción de la falla o solicitud:</label></div>
+            <div class="col-6"> <textarea name="descripcion" id="descripcion" class="textarea-solicitud"><?=isset($solicitud) ? $solicitud['descripcion'] : ""?></textarea></div>
         </div>
         <?php if(isset($solicitud) && $solicitud['estatus_id'] != 1):?>
         <div class="row mt-2">
-            <div class="col-3 align-self-center"> <label class="ml-4">Solución:</label></div>
-            <div class="col-8"> <textarea name="solucion" id="solucion" class="textarea-solicitud"><?=isset($solicitud) ? $solicitud['solucion'] : ""?></textarea></div>
+            <div class="col-2 align-self-center"> <label class="ml-4">Solución:</label></div>
+            <div class="col-6"> <textarea name="solucion" id="solucion" class="textarea-solicitud"><?=isset($solicitud) ? $solicitud['solucion'] : ""?></textarea></div>
         </div>
            <div class="row mt-2">
-            <div class="col-3 align-self-center"> <label class="ml-4">Observaciones/comentarios:</label></div>
-            <div class="col-8"> <textarea name="observaciones" class="textarea-solicitud"><?=isset($solicitud) ? $solicitud['observaciones'] : ""?></textarea></div>
+            <div class="col-2 align-self-center"> <label class="ml-4">Observaciones/comentarios:</label></div>
+            <div class="col-6"> <textarea name="observaciones" class="textarea-solicitud"><?=isset($solicitud) ? $solicitud['observaciones'] : ""?></textarea></div>
         </div>
         <?php endif;?>
         </fieldset>
