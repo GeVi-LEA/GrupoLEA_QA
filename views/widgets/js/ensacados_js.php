@@ -94,6 +94,9 @@ $(document).ready(function() {
         buscaServicios();
     });
     buscaServicios();
+    setTimeout(() => {
+        buscaServicios();
+    }, 30000);
 });
 
 
@@ -158,11 +161,12 @@ const chart_servicios = () => {
     var option;
     series_servicios = [];
     $.each(servicios_ens.servicios_grafica, function(idx, obj) {
-        //console.log((idx, obj))
+        // console.log("obj.nom_cliente: ", obj.nom_cliente, "   obj.colorweb: ", obj.colorweb);
         series_servicios.push({
             name: obj.nom_cliente,
             type: 'bar',
             stack: 'total',
+            color: obj.colorweb,
             label: {
                 show: true,
                 //formatter: function(param) {
@@ -176,8 +180,7 @@ const chart_servicios = () => {
             emphasis: {
                 focus: 'series'
             },
-            color: obj.colorweb,
-            data: [obj.cantidad]
+            data: [obj.cantidad],
         });
     });
 
@@ -215,8 +218,8 @@ const chart_servicios = () => {
         /*obtiene detalles*/
         // abreDetalle(params.seriesName, "null", "null", params.name);
     });
-    setTimeout(() => {
-        buscaServicios();
-    }, 30000);
+
+
+
 }
 </script>

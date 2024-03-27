@@ -7,7 +7,9 @@ let naves = [];
 $(document).ready(function() {
     armaInventarios();
 
-
+    setTimeout(() => {
+        armaInventarios();
+    }, 20000);
 });
 
 const armaInventarios = () => {
@@ -57,6 +59,7 @@ const armaInventarios = () => {
                     name: clientes[c],
                     type: 'bar',
                     stack: 'total',
+                    color: colors[c],
                     label: {
                         show: false,
                         //formatter: function(param) {
@@ -84,7 +87,7 @@ const armaInventarios = () => {
                     detalle_naves[clientes[c]].data.push({
                         value: total,
                         itemStyle: {
-                            color: getColorCliente(clientes[c])
+                            color: colors[c] //getColorCliente(clientes[c])
                         },
                     });
                 }
@@ -159,9 +162,9 @@ const chart_nave = () => {
         /*obtiene detalles*/
         //abreDetalle(params.seriesName, "null", "null", params.name);
     });
-    setTimeout(() => {
-        armaInventarios();
-    }, 20000);
+
+
+
 }
 
 
@@ -216,7 +219,7 @@ function getColorCliente(cliente) {
             break;
         }
     }
-    // console.log(color);
+    console.log("cliente: ", cliente, " color: ", color);
     return color;
 }
 </script>

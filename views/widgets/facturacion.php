@@ -2,6 +2,10 @@
 include 'js/facturacion_js.php';
 ?>
 
+<div class='row' id="fact_pnl">
+
+</div>
+<!-- 
 <div class="card sombra" style="border:none;">
     <div class="card-body">
         <div class="d-flex align-items-center justify-content-between">
@@ -17,4 +21,4 @@ include 'js/facturacion_js.php';
             </div>
         </div>
     </div>
-</div>
+</div> -->
