@@ -66,6 +66,15 @@ class Utils
         }
     }
 
+    public static function permisosCatalogos()
+    {
+        if (self::isAdmin() || self::isCatalogos()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static function permisosBascula()
     {
         if (self::isAdmin() || self::isBascula()) {
@@ -146,6 +155,16 @@ class Utils
         $permisos = self::getPermisosUser();
         if (!empty($permisos)) {
             return in_array('12', $permisos);
+        } else {
+            return false;
+        }
+    }
+
+    public static function isCatalogos()
+    {
+        $permisos = self::getPermisosUser();
+        if (!empty($permisos)) {
+            return in_array('13', $permisos);
         } else {
             return false;
         }
@@ -540,9 +559,9 @@ class Utils
             $data = $chofer->getById($id);
         }
 
-        //print_r('<pre>');
-        //print_r($data);
-        //print_r('</pre>');
+        // print_r('<pre>');
+        // print_r($data);
+        // print_r('</pre>');
         return json_encode($data);
     }
 

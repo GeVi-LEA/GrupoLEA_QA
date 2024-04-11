@@ -481,6 +481,7 @@ $(document).ready(function () {
 			$("#ensacadoForm").find("input, select").removeAttr("disabled");
 			var datosForm = new FormData($("#ensacadoForm")[0]);
 			//console.log(datosForm);
+			datosForm.append("peso_obligatorio", $("#peso_obligatorio").prop("checked") ? 1 : 0);
 			$.ajax({
 				data: datosForm,
 				enctype: "multipart/form-data",
@@ -1168,7 +1169,7 @@ $(document).ready(function () {
 		// //console.log("inicia servicio");
 		if (nombreServicio.includes("ENSACADO") || nombreServicio.includes("ALMACENAJE") || nombreServicio.includes("TRASPALEO") || nombreServicio.includes("REEMPAQUE")) {
 			var ticket = $("#ticket").val();
-			if (ticket != "") {
+			if (ticket != "" || $("#peso_obligatorio").prop("checked") == false) {
 				iniciarServicio(id);
 			} else {
 				Swal.fire({
@@ -1625,9 +1626,9 @@ $(document).ready(function () {
 
 	$("#idTipoServicio").change(function () {
 		if ($("#formAgregarServicio").find("#idTipoServicio option:selected").val() != "") {
-			$("#cantidad").attr("disabled", false);
+			$("#cantidad, #cantidad_lbs").attr("disabled", false);
 		} else {
-			$("#cantidad").attr("disabled", true);
+			$("#cantidad, #cantidad_lbs").attr("disabled", true);
 		}
 	});
 
@@ -1883,7 +1884,7 @@ $(document).ready(function () {
 			}
 			//$(this).trigger("blur");
 		} else {
-			$("#cantidadEnviar").attr("readonly", false);
+			$("#cantidadEnviar, .convertilbs").attr("readonly", false);
 		}
 	});
 
@@ -1921,10 +1922,27 @@ $(document).ready(function () {
 		$(this).val($(this).val().toUpperCase());
 	});
 
+	$("#cantidadEnviar").on("change", function () {
+		console.log("-->cantidadEnviar");
+		// setTimeout(() => {
+		convertiLBS("cantidadEnviar");
+		// }, 300);
+	});
+	$("#cantidadLBS1, #cantidad, #cantidad_lbs").on("change keyup", function () {
+		console.log("-->cantidadLBS");
+		// setTimeout(() => {
+		convertiLBS("cantidadLBS");
+		// }, 300);
+	});
+	$("#cantidad, #cantidad_lbs").on("change keyup", function (a, b) {
+		console.log("-->", a.target.id);
+		convertiLBS(a.target.id);
+	});
+
 	getPesos();
 	calcularPesos();
 });
-
+var cambio;
 /* FUNCIONES */
 
 function getInfoLote(lote, linea = "") {
@@ -2046,6 +2064,8 @@ function agregarLotesEnsacado(form, tipo_producto = "") {
 										v.lote +
 										" - " +
 										v.nombre +
+										" - " +
+										v.alias +
 										"</option>"
 								);
 							} else {
@@ -2796,7 +2816,7 @@ function validarDatosServicio() {
 		valid = false;
 	}
 	var servicio = $("#idTipoServicio option:selected").text();
-	$(".programacion").attr("style", "display:none !important;");
+	// $(".programacion").attr("style", "display:none !important;");
 	if ($("#lote").val() == "") {
 		if (servicio.includes("CARGA") || servicio.includes("AJUSTE")) {
 			if ($("#loteSelect").val() == "" || $("#loteSelect").val() == "--Selecciona--") {
@@ -2816,7 +2836,7 @@ function validarDatosServicio() {
 				$("#idEmpaque").addClass("required");
 			}
 		} else if (servicio.includes("ENSACADO")) {
-			$(".programacion").attr("style", "display:block !important;");
+			$(".programacion").attr("style", "display:flex !important;");
 			if ($("#loteServ").val() == "") {
 				valid = false;
 				$("#loteSelect").addClass("required");
@@ -2963,23 +2983,28 @@ function agregarArchivo(inputFile) {
 			tipoArchivo.toLowerCase().includes(".jpeg") ||
 			tipoArchivo.toLowerCase().includes(".png")
 		) {
-			$.confirm({
-				title: "<span class='material-icons i-correcto'>check_circle_outline</span><span>¡Correcto!<span>",
-				content: "Archivo agregado",
-				type: "green",
-				typeAnimated: true,
-				draggable: true,
-				buttons: {
-					tryAgain: {
-						text: "Ok",
-						btnClass: "btn-success",
-						action: function () {
-							$(div).find("#addDocumento").hide();
-							$(div).find("#delete").removeAttr("hidden");
-						},
-					},
-				},
-			});
+			erpalert1("", "Archivo agregado");
+			setTimeout(() => {
+				$(div).find("#addDocumento").hide();
+				$(div).find("#delete").removeAttr("hidden");
+			}, 1000);
+			// $.confirm({
+			// 	title: "<span class='material-icons i-correcto'>check_circle_outline</span><span>¡Correcto!<span>",
+			// 	content: "Archivo agregado",
+			// 	type: "green",
+			// 	typeAnimated: true,
+			// 	draggable: true,
+			// 	buttons: {
+			// 		tryAgain: {
+			// 			text: "Ok",
+			// 			btnClass: "btn-success",
+			// 			action: function () {
+			// 				$(div).find("#addDocumento").hide();
+			// 				$(div).find("#delete").removeAttr("hidden");
+			// 			},
+			// 		},
+			// 	},
+			// });
 		} else {
 			$.confirm({
 				title: "<span class='material-icons i-danger'>dangerous</span><span>¡Atención!<span>",
@@ -3461,4 +3486,40 @@ function getPDFEntrada(idEnt) {
 			mensajeError("Algo salio mal,  contacte al administrador.  ");
 		},
 	});
+}
+var cambiokg;
+function convertiLBS(quiencambio) {
+	// console.log(quiencambio);
+	cambiokg = quiencambio;
+	var libras = $("#cantidadLBS1").val() == "" ? 0 : quitarComasNumero($("#cantidadLBS1").val());
+	var kilos = $("#cantidadEnviar").val() == "" ? 0 : quitarComasNumero($("#cantidadEnviar").val());
+	// setTimeout(() => {
+	console.log("quiencambio: ", quiencambio);
+	if (quiencambio == "cantidadLBS") {
+		libras = $("#cantidadLBS").val() == "" ? 0 : quitarComasNumero($("#cantidadLBS1").val());
+		var kilos_conv = libras / 2.2046;
+		$("#cantidadEnviar").val(htmlNum(kilos_conv));
+		// $("#cantidadLBS").val(htmlNum(libras));
+		// console.log("kilos: ", kilos, " libras: ", libras);
+		// console.log("kilos_conv: ", kilos_conv, " libras_conv: ", libras_conv);
+		console.log("aa");
+	} else if (quiencambio == "cantidadEnviar") {
+		// var kilos = $("#cantidadEnviar").val() == "" ? 0 : quitarComasNumero($("#cantidadEnviar").val());
+		kilos = $("#cantidadEnviar").val() == "" ? 0 : quitarComasNumero($("#cantidadEnviar").val());
+		var libras_conv = kilos * 2.2046;
+		// $("#cantidadEnviar").val(htmlNum(kilos));
+		$("#cantidadLBS1").val(htmlNum(libras_conv));
+	} else if (quiencambio == "cantidad") {
+		kilos = $("#cantidad").val() == "" ? 0 : quitarComasNumero($("#cantidad").val());
+		var libras_conv = kilos * 2.2046;
+		// $("#cantidadEnviar").val(htmlNum(kilos));
+		$("#cantidad_lbs").val(htmlNum(libras_conv));
+	} else if (quiencambio == "cantidad_lbs") {
+		libras = $("#cantidad_lbs").val() == "" ? 0 : quitarComasNumero($("#cantidad_lbs").val());
+		var kilos_conv = libras / 2.2046;
+		$("#cantidad").val(htmlNum(kilos_conv));
+	}
+	console.log("kilos: ", kilos, " libras: ", libras);
+	console.log("kilos_conv: ", kilos_conv, " libras_conv: ", libras_conv);
+	// }, 500);
 }

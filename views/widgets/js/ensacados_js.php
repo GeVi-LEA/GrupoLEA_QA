@@ -82,7 +82,10 @@ $(document).ready(function() {
         var end = end.format('YYYY-MM-DD');
         ////console.log(start + "|" + end);
         $("#fechas-startend").val(start + "|" + end);
-        buscaServicios();
+        setTimeout(() => {
+            buscaServicios();
+        }, 1000);
+
         llenaclientes = 0;
     });
     $("#cmbClientes").find("option").remove();
@@ -91,7 +94,10 @@ $(document).ready(function() {
         width: 'resolve'
     });
     $("#cmbClientes").change(function() {
-        buscaServicios();
+        setTimeout(() => {
+            buscaServicios();
+        }, 1000);
+
     });
     buscaServicios();
     setTimeout(() => {

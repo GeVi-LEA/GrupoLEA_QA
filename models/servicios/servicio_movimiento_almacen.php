@@ -7,6 +7,7 @@ class ServicioMovimientoAlmacen
     private $almacen;
     private $operacion;
     private $fecha;
+    private $cliente_id;
     private $db;
 
     public function __construct()
@@ -64,16 +65,39 @@ class ServicioMovimientoAlmacen
         $this->fecha = $fecha;
     }
 
+    public function getClienteId()
+    {
+        return $this->cliente_id;
+    }
+
+    public function setClienteId($cliente_id): void
+    {
+        $this->fecha = $cliente_id;
+    }
+
     public function save()
     {
         // $sql = "insert into servicios_movimientos_almacen values({$this->getIdServicio()}, {$this->getAlmacen()}, {$this->getCantidad()}, '{$this->getOperacion()}', NOW())";
-        $sql = 'insert IGNORE  into servicios_movimientos_almacen values(
-            ' . $this->getIdServicio() . '
-            , ' . $this->getAlmacen() . '
-            , ' . $this->getCantidad() . '
-            , get_OperacionByEnsacado(' . $this->getIdServicio() . ')
-            , NOW()
-            , (select lote from servicios_ensacado se where se.id = ' . $this->getIdServicio() . '))';
+
+        $sql = 'insert IGNORE  into servicios_movimientos_almacen(
+            servicio_id,
+            cliente_id,
+            almacen_id,
+            cantidad,
+            operacion,
+            fecha,
+            lote,
+            alias
+            ) values(
+                        ' . $this->getIdServicio() . "
+                        , '" . (($this->getClienteId() != '') ? $this->getClienteId() : '0') . "'
+                        , " . $this->getAlmacen() . '
+                        , ' . $this->getCantidad() . '
+                        , get_OperacionByEnsacado(' . $this->getIdServicio() . ')
+                        , NOW()
+                        , (select lote from servicios_ensacado se where se.id = ' . $this->getIdServicio() . ')
+                        , (select alias from servicios_ensacado se where se.id = ' . $this->getIdServicio() . ')
+                    )';
         try {
             $save = $this->db->query($sql);
         } catch (\Throwable $th) {

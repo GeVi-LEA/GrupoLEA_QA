@@ -657,12 +657,23 @@ function ROFinaliza($estatus)
 
                                         <div class='col-12'>
 
-
-                                            <label for="cantidad" class="form-label">Cantidad</label>
-                                            <div class="input-group mb-3">
-                                                <input type="text" name="cantidad" id="cantidad" class="form-control numhtml" disabled />
-                                                <span class="input-group-text">kgs.</span>
+                                            <div class='row'>
+                                                <div class='col-md-6 col-12'>
+                                                    <label for="cantidad" class="form-label">Cantidad</label>
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" name="cantidad" id="cantidad" class="form-control numhtml" disabled />
+                                                        <span class="input-group-text">kgs.</span>
+                                                    </div>
+                                                </div>
+                                                <div class='col-md-6 col-12'>
+                                                    <label for="cantidad_lbs" class="form-label"> </label>
+                                                    <div class="input-group mb-3 mt-2">
+                                                        <input type="text" name="cantidad_lbs" id="cantidad_lbs" class="form-control numhtml" disabled />
+                                                        <span class="input-group-text">lbs.</span>
+                                                    </div>
+                                                </div>
                                             </div>
+
                                         </div>
                                         <div class='col-12'>
                                             <div class='row disponible_div' hidden>
@@ -1133,36 +1144,53 @@ function ROFinaliza($estatus)
                                 </div>
                             </div>
                             <div class='row'>
-                                <div class='col-md-4 col-12'>
-                                    <label for="cantidadEnviar" class="pt-1 pr-1"><strong>Cantidad Total:</strong></label>
-                                    <div class="input-group mt-4">
-                                        <input type="text" name="cantidadAlmacen[]" class="item-small form-control numhtml" id="cantidadEnviar" readonly required />
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">Kg.</div>
+                                <div class='col-12'>
+                                    <div class='row'>
+                                        <div class='col-md-4 col-12'>
+                                            <label for="cantidadEnviar" class="pt-1 pr-1"><strong>Cantidad Total:</strong></label>
+                                            <div class="input-group mt-4">
+                                                <input type="text" name="cantidadAlmacen[]" class="item-small form-control numhtml convertilbs" id="cantidadEnviar" readonly required />
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">Kg.</div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class='col-md-4 col-12'>
+                                            <label for="cantidadTarimas" class="pt-1 pr-1"><strong>Cantidad</strong></label>
+                                            <div class="input-group mt-4">
+                                                <input type="text" name="cantidadTarimas[]" class="item-small form-control numhtml" id="cantidadTarimas" required />
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">Tarimas</div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class='col-md-4 col-12'>
+                                            <label for="cantidadSacos" class="pt-1 pr-1"><strong>Ensacado:</strong></label>
+                                            <div class="input-group mt-4">
+                                                <input type="text" name="cantidadSacos[]" class="item-small form-control numhtml" id="cantidadSacos" required />
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">Sacos</div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class='row'>
+                                        <div class='col-md-4 col-12'>
+                                            <div class="input-group mt-4">
+                                                <input type="text" class="item-small form-control numhtml convertilbs" id="cantidadLBS1" readonly />
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">Lbs.</div>
+                                                </div>
+
+                                            </div>
                                         </div>
 
                                     </div>
                                 </div>
-                                <div class='col-md-4 col-12'>
-                                    <label for="cantidadTarimas" class="pt-1 pr-1"><strong>Cantidad</strong></label>
-                                    <div class="input-group mt-4">
-                                        <input type="text" name="cantidadTarimas[]" class="item-small form-control numhtml" id="cantidadTarimas" required />
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">Tarimas</div>
-                                        </div>
 
-                                    </div>
-                                </div>
-                                <div class='col-md-4 col-12'>
-                                    <label for="cantidadSacos" class="pt-1 pr-1"><strong>Ensacado:</strong></label>
-                                    <div class="input-group mt-4">
-                                        <input type="text" name="cantidadSacos[]" class="item-small form-control numhtml" id="cantidadSacos" required />
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">Sacos</div>
-                                        </div>
-
-                                    </div>
-                                </div>
                             </div>
                             <div class='row'>
                                 <div class='col-md-6 col-12'>

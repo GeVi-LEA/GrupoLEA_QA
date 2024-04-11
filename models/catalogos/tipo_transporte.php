@@ -85,10 +85,8 @@ class TipoTransporte
 
     public function save()
     {
-        $sql    = "insert into catalogo_tipos_transportes values(null, '{$this->getNombre()}', '{$this->getClave()}', '{$this->getDescripcion()}',  
-                   {$this->getCap_Maxima()}, {$this->getBascula()}, {$this->getPuertas()})";
-                   var_dump($sql);
-                   die();
+        $sql    = "insert into catalogo_tipos_transportes values({$this->getId()}, '{$this->getNombre()}', '{$this->getClave()}', '{$this->getDescripcion()}', 
+        {$this->getBascula()}, {$this->getPuertas()}, {$this->getCap_Maxima()})";
         $save   = $this->db->query($sql);
         $result = false;
         if ($save) {
@@ -166,4 +164,12 @@ class TipoTransporte
         }
         return $result;
     }
+
+        public function getUltimoId(){
+    $sql = "SELECT MAX(id)as id FROM catalogo_tipos_transportes";
+    $query = $this->db->query($sql);
+    $id = $query->fetch_object()->id;
+    var_dump($id);
+    return $id;
+}
 }

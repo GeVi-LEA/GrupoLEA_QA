@@ -168,6 +168,7 @@ const muestraGrafica = (latab) => {
         case "productos":
             //setTimeout(() => {
             $("#chart_productos").html("").attr("_echarts_instance_", "");
+            $("#cmbProductos").parent().parent().attr("hidden", false);
             chart_productos();
             swal.close();
             //}, 500);
@@ -176,6 +177,7 @@ const muestraGrafica = (latab) => {
         case "lotes":
             //setTimeout(() => {
             $("#chart_lotes").html("").attr("_echarts_instance_", "");
+            $("#cmbLotes").parent().parent().attr("hidden", false);
             chart_lotes();
             swal.close();
             //}, 500);
@@ -195,6 +197,7 @@ const muestraGrafica = (latab) => {
     }
 
 }
+
 const armaInventarios = (latab) => {
     var dfrd1 = $.Deferred();
     clientes = [];
@@ -365,43 +368,7 @@ const armaInventarios = (latab) => {
         }
 
         /* NAVES */
-        // for (c = 0; c < naves.length; c++) {
-        //     // console.log(naves[c]);
-        //     if (detalle_naves.hasOwnProperty(naves[c]) <= 0) {
-        //         detalle_naves[naves[c]] = ({
-        //             name: naves[c],
-        //             type: 'bar',
-        //             stack: 'total',
-        //             label: {
-        //                 show: true,
-        //                 formatter: function(param) {
-        //                     return param.data == 0 ? '' : numero2Decimales(param.data, false, 0) + ' KG (TARIMAS:' + (Math.floor((param.data / 25) / 55)) + ' SACOS:' + (Math
-        //                         .round((((param.data /
-        //                                 25) / 55) -
-        //                             Math.floor((param.data / 25) / 55)) * 55)) + ') ';
-        //                 },
-        //             },
-        //             emphasis: {
-        //                 focus: 'series'
-        //             },
-        //             data: []
-        //         });
-        //         let total = 0;
-        //         for (l = 0; l < lotes.length; l++) {
-        //             // console.log(lotes[l]);
-        //             total = 0;
-        //             for (x = 0; x < inventarios.inventarios.length; x++) {
-        //                 if ((naves[c] == inventarios.inventarios[x].Nombre_Almacen) && inventarios.inventarios[x].Lote == lotes[l]) {
-        //                     total = total + parseFloat(quitarComasNumero(inventarios.inventarios[x].disponible));
-        //                 }
-        //             }
-        //             detalle_naves[naves[c]].data.push(total);
-        //         }
-        //     }
 
-
-        // }
-        //for (n = 0; n < naves.length; n++) {
         for (c = 0; c < clientes.length; c++) {
             // console.log(naves[c]);
             if (detalle_naves.hasOwnProperty(clientes[c]) <= 0) {
@@ -409,6 +376,7 @@ const armaInventarios = (latab) => {
                     name: clientes[c],
                     type: 'bar',
                     stack: 'total',
+                    color: colors[c],
                     label: {
                         show: true,
                         formatter: function(param) {
@@ -436,7 +404,7 @@ const armaInventarios = (latab) => {
                     detalle_naves[clientes[c]].data.push({
                         value: total,
                         itemStyle: {
-                            color: getColorCliente(clientes[c])
+                            color: colors[c] //getColorCliente(clientes[c])
                         },
                     });
                 }
@@ -444,8 +412,6 @@ const armaInventarios = (latab) => {
 
 
         }
-        //}
-
 
         /*DETALLE PRODUCTOS */
         series_productos = [];
@@ -530,6 +496,8 @@ const armaInventarios = (latab) => {
             .appendTo($('.col-sm-6:eq(0)', table.table().container()));
         dfrd1.resolve();
         muestraGrafica(latab);
+        armaFiltros("Productos");
+        armaFiltros("Lotes");
     }).fail(resp => {}).catch(resp => {
         swal('Ocurrio un problema en la peticion en el servidor, favor de reportar a los administradores', {
             icon: 'error'
@@ -548,6 +516,9 @@ const chart_productos = () => {
     // $("#chart_productos").attr("style", "min-height:" + (productos.length * 100) + "px");
     console.log($("#chart_productos"));
     $("#productos .contenido").html("");
+    // armaFiltros("Productos");
+    $("#cmbProductos").parent().parent().attr("hidden", false);
+
     for (var xchart = 0; xchart < clientes_id.length; xchart++) {
 
         $("#productos .contenido").append(`<div class='col-md-${(((12/Math.round(clientes_id.length))/1) < 6) ? "6":((12/Math.round(clientes_id.length))/1)}'><div id='chart_productos_${clientes_id[xchart]}' style='min-height:600px;'></div></div>`);
@@ -746,6 +717,8 @@ const chart_lotes = () => {
     //import * as echarts from 'echarts';
     // $("#chart_lotes").attr("style", "height:" + (lotes.length * 100) + "px");
     console.log("#chart_lotes");
+    // armaFiltros("Lotes");
+    $("#cmbLotes").parent().parent().attr("hidden", false);
     $("#lotes .contenido").html("");
     for (var xchart = 0; xchart < clientes_id.length; xchart++) {
 
@@ -865,6 +838,7 @@ const chart_lotes = () => {
     }
 
 }
+
 const chart_nave = () => {
 
     //import * as echarts from 'echarts';
@@ -914,7 +888,8 @@ const chart_nave = () => {
 const armaFiltros = (filtro = "") => {
     console.log("aqui");
     $("#cmbProductos, #cmbLotes").find("option").remove();
-    $("#cmb" + filtro).parent().parent().attr("hidden", false);
+    // $("#cmb" + filtro).parent().parent().attr("hidden", false);
+    $("#cmb" + filtro).find("option").remove();
     var _lotes = [];
     var _productos = [];
     for (var x = 0; x < inventarios.inventarios.length; x++) {

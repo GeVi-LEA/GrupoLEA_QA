@@ -53,7 +53,9 @@
 
     function enviar(e) {
         validarForm(e);
+        if(!form.getAttribute("id") == "formularioChoferTransportista" || !form.getAttribute("id") == "formularioUsuario"){
         validarExiste(e);
+        }
     }
 
     function editar(e) {

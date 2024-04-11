@@ -371,7 +371,7 @@ class serviciosController
         // $tipo_trans         = new TipoTransporte();
         // $tipoT              = $tipo_trans->getById($transporte);
         // print_r('<pre>');
-        // print_r($_POST['peso_obligatorio']);
+        // print_r($_POST);
         // print_r('</pre>');
         $trenArray  = Utils::isTren();
         $arrayIdsTr = array();
@@ -379,11 +379,13 @@ class serviciosController
             array_push($arrayIdsTr, $tr->id);
         }
 
-        $peso_obligatorio = isset($_POST['peso_obligatorio']) && $_POST['peso_obligatorio'] != '' ? (($_POST['peso_obligatorio'] == 'on') ? 1 : 0) : 0;
+        $peso_obligatorio = 0;
         $isTren           = in_array($transporte, $arrayIdsTr);
         if ($isTren == 1) {
             $peso_obligatorio = 1;
         }
+        $peso_obligatorio = isset($_POST['peso_obligatorio']) && $_POST['peso_obligatorio'] != '' ? (($_POST['peso_obligatorio'] == 'on') ? 1 : 0) : $peso_obligatorio;
+
         $estatus = 1;
 
         if ($numeroFerro) {
@@ -778,6 +780,7 @@ class serviciosController
         $sello3          = isset($_POST['sello3']) ? $_POST['sello3'] : null;
         $entrada_id      = isset($_POST['entrada_id']) ? $_POST['entrada_id'] : null;
         $firma           = isset($_POST['firma']) ? $_POST['firma'] : null;
+        $cliente_id      = isset($_POST['cliente_id']) ? $_POST['cliente_id'] : null;
         $almacen_id      = isset($_POST['almacen_id']) && $_POST['almacen_id'] != '' ? $_POST['almacen_id'] : 1;
 
         if ($operacion != 'E') {
@@ -785,8 +788,10 @@ class serviciosController
             $m->setAlmacen($almacen_id);
             $m->setCantidad(Utils::quitarComas($cantidades));
             $m->setIdServicio($idServicio);
+            $m->setClienteId($cliente_id);
             $m->setOperacion($operacion);
-            $r        = $m->save();
+            $r = $m->save();
+
             $servicio = new ServicioEnsacado();
             $servicio->setId($idServicio);
             $r                = $servicio->finalizarServicio();
@@ -819,6 +824,7 @@ class serviciosController
                 $m->setAlmacen(intval($almacenes[$i]));
                 $m->setCantidad(Utils::quitarComas($cantidades[$i]));
                 $m->setIdServicio($idServicio);
+                $m->setClienteId($cliente_id);
                 $m->setOperacion($operacion);
                 $r = $m->save();
 

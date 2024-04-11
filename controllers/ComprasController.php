@@ -1845,7 +1845,7 @@ class comprasController
 
     public function getFact_MES()
     {
-        $orden = new OrdenCompra();
+        // $orden = new OrdenCompra();
         // $ordenes = $orden->getFact_MES();
         $ordenes[] = ['empresa' => 'GRUPO LEA DE MÉXICO S. DE R.L. DE C.V.',             'total_fact' => '$         000.00 '];
         $ordenes[] = ['empresa' => 'LEADER DE LUBRICANTES DE MÉXICO S. DE R.L. DE C.V.', 'total_fact' => '$         000.00 '];

@@ -306,7 +306,7 @@
 
                     <!-- start Catalogos Menu -->
                     <li class="nav-item">
-                        <a class="nav-link menu-link <?php if (!Utils::permisosSupervisor()) { echo 'disabled'; } ?>" href="#sidebarCatalogos" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarCatalogos">
+                        <a class="nav-link menu-link <?php if (!Utils::permisosSupervisor() and !Utils::permisosCatalogos()) { echo 'disabled'; } ?>" href="#sidebarCatalogos" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarCatalogos">
                             <i class="fa-solid fa-book fa-xl"></i>
                             <span class="item-name" data-key="t-landing" id="abrirCatalogo">Catálogos</span>
                             <!--  <i class="right-icon">

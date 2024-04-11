@@ -344,6 +344,7 @@ nav.menu span a{
 
 .formulario input[type="password"],
 .formulario input[type="text"], 
+.formulario input[type="number"],
 .formulario select{
     font-size: 15px;
     margin-top: 5px;
@@ -575,9 +576,25 @@ display:none;
      opacity: 1;
   }
 
+  .unidadMed{
+    font-size: 12px;
+  }
+
   .div-info label{
     border-bottom:1px solid;
     padding: 0px 3px 1px 3px;
   }
+
+  .div-pruebas-lab{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .div-pruebas-lab > div{
+    padding-right: 15px;
+  }
+
 
 

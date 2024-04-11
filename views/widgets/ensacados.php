@@ -2,7 +2,7 @@
 include 'js/ensacados_js.php';
 ?>
 <link rel="stylesheet" href="<?php echo URL; ?>assets/libs/daterangepicker/daterangepicker.css">
-<div class='card sombra'>
+<div class='card sombra h-100'>
     <div class='card-content'>
         <div class='card-body p-0'>
             <h4 class='card-title'>Ensacados</h4>
