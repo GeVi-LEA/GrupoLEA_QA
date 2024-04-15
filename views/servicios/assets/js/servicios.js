@@ -1593,8 +1593,8 @@ $(document).ready(function () {
 		e.preventDefault();
 		$("#idEntrada").val($("#id").val());
 		if (validarDatosServicio()) {
-			$("#formAgregarServicio input").attr("disabled", false);
-			$("#formAgregarServicio select").attr("disabled", false);
+			$("#formAgregarServicio input").attr("disabled", false).attr("hidden", false);
+			$("#formAgregarServicio select").attr("disabled", false).attr("hidden", false);
 			var datosForm = new FormData($("#formAgregarServicio")[0]);
 			$.ajax({
 				data: datosForm,
@@ -1606,6 +1606,7 @@ $(document).ready(function () {
 				dataType: "json",
 				success: function (r) {
 					// //console.log(r);
+					// alert(r);
 					if (r.error) {
 						mensajeCorrecto(r.mensaje, true);
 					} else {
@@ -1625,6 +1626,7 @@ $(document).ready(function () {
 	});
 
 	$("#idTipoServicio").change(function () {
+		$("#disponible_lote").parent("div").parent().attr("hidden", true);
 		if ($("#formAgregarServicio").find("#idTipoServicio option:selected").val() != "") {
 			$("#cantidad, #cantidad_lbs").attr("disabled", false);
 		} else {
@@ -1635,7 +1637,7 @@ $(document).ready(function () {
 	$("#btnEditarServicio").click(function (e) {
 		e.preventDefault();
 		var formEditar = $("#formEditarServicio");
-		formEditar.find("input, select").attr("disabled", false);
+		formEditar.find("input, select").attr("disabled", false).attr("hidden", false);
 
 		var datosForm = new FormData($(formEditar)[0]);
 		$.ajax({
@@ -1922,7 +1924,7 @@ $(document).ready(function () {
 		$(this).val($(this).val().toUpperCase());
 	});
 
-	$("#cantidadEnviar").on("change", function () {
+	$("#cantidadEnviar").on("change blur", function () {
 		console.log("-->cantidadEnviar");
 		// setTimeout(() => {
 		convertiLBS("cantidadEnviar");
@@ -1995,6 +1997,7 @@ function agregarLotesEnsacado(form, tipo_producto = "") {
 	var servicio = $(form).find("#idTipoServicio option:selected").text();
 	var lote = $(form).find($("#lote"));
 	$("#lote_confirm").parent("div").attr("hidden", true);
+	$("#disponible_lote").parent("div").parent().attr("hidden", true);
 	if (tipo_producto == "") {
 		tipo_producto = serv_entrada;
 	}
@@ -2100,7 +2103,7 @@ function agregarLotesEnsacado(form, tipo_producto = "") {
 	} else if (servicio.includes("ENSACADO") || servicio.includes("ALMACENAJE") || servicio.includes("TRASPALEO") || servicio.includes("REEMPAQUE")) {
 		lote.attr("disabled", false).attr("hidden", false);
 		$(".disponible_div").attr("disabled", true).attr("hidden", false);
-
+		$("#disponible_lote").parent("div").parent().attr("hidden", true);
 		if (servicio.includes("ENSACADO") || servicio.includes("REEMPAQUE")) {
 			$(".programacion").attr("style", "display:block1 !important");
 			$("#lote_confirm").parent("div").attr("hidden", false);
@@ -2128,6 +2131,7 @@ function agregarLotesEnsacado(form, tipo_producto = "") {
 			$("#formAgregarServicio").find("#loteSelect").parent("div").find(".select2").hide();
 			$("#formEditarServicio").find("#existencia").parent("div").parent("div").hide();
 			$(".div-form").attr("hidden", false);
+			$("#disponible_lote").parent("div").parent().attr("hidden", true);
 		}, 100);
 	} else {
 		$(lote).attr("hidden", true);
@@ -2200,6 +2204,7 @@ function validaInventario(form, linea = "") {
 			$(form)
 				.find("#disponible_lote")
 				.val(htmlNum($(form).find("#loteSelect").find(":selected").attr("data-disponible")));
+			$("#disponible_lote").parent("div").parent().attr("hidden", false);
 			// $(form).find("#idTipoServicio option:selected").val()
 			// );
 			// ////console.log("tiposerv: ", $("#idTipoServicio option:selected").val());

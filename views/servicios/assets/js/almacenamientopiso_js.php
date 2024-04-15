@@ -59,19 +59,20 @@ $(document).ready(function() {
     });
     setInterval(() => {
         // console.log("moving: ", moving);
-        // if (moving >= 0) {
-        armaInventarios(selectedtab);
-        //console.log("armó los inventarios");
-        setTimeout(() => {
-            chart_productos();
-            chart_lotes();
-            chart_nave();
-            //console.log("terminó las graficas");
-        }, 3000);
+        if (!$("#table_detalle").is(":visible")) {
+            armaInventarios(selectedtab);
+            //console.log("armó los inventarios");
+            setTimeout(() => {
+                chart_productos();
+                chart_lotes();
+                chart_nave();
+                //console.log("terminó las graficas");
+            }, 3000);
 
 
 
-        // } else {
+        }
+        //else {
         // moving = 0;
         // }
     }, 60000);
@@ -248,46 +249,7 @@ const armaInventarios = (latab) => {
             }
         }
         /* PRODUCTOS */
-        /*for (c = 0; c < productos.length; c++) {
-            //console.log(clientes[c]);
-            if ((detalle_productos.hasOwnProperty(productos[c]) <= 0)) {
-                colors_productos.push(getRandomColor());
-                detalle_productos[productos[c]] = ({
-                    name: productos[c],
-                    type: 'bar',
-                    stack: 'total',
-                    label: {
-                        show: true,
-                        formatter: function(param) {
-                            return param.data == 0 ? '' : numero2Decimales(param.data, false, 0) + ' KG (TARIMAS:' + (Math.floor((param.data / 25) / 55)) + ' SACOS:' + (Math.round((((param.data / 25) / 55) - Math.floor((param.data / 25) / 55)) * 55)) + ') ';
-                        },
-                        shadowColor: 'rgba(0, 0, 0, 0.5)',
-                        shadowBlur: 10
-                    },
-                    emphasis: {
-                        focus: 'series'
-                    },
-                    data: [],
-                });
-                let total = 0;
-                for (l = 0; l < clientes.length; l++) {
-                    // console.log(productos[l]);
-                    //if (llenaclientes == 0) {
-                    //$("#cmbClientes").append('<option value="' + clientes_id[c] + '">' + clientes[c] + '</option>');
-                    //}
-                    total = 0;
-                    for (x = 0; x < inventarios.inventarios.length; x++) {
-                        if ((clientes[l] == inventarios.inventarios[x].Nombre_Cliente) && inventarios.inventarios[x].Producto == productos[c]) {
-                            // if ((clientes[l] == inventarios.inventarios[x].Nombre_Cliente)) {
-                            total = total + parseFloat(quitarComasNumero(inventarios.inventarios[x].disponible));
-                            // detalle_productos[productos[c]].data.push(total);
-                        }
-                    }
-                    detalle_productos[productos[c]].data.push(total);
-                }
-            }
 
-        }*/
         for (c = 0; c < clientes.length; c++) {
             detalle_productos[clientes[c]] = ({
                 type: 'bar',
@@ -614,103 +576,6 @@ const chart_productos = () => {
     // armaFiltros("Productos");
 }
 
-/*
-    const chart_productos = () => {
-
-        //import * as echarts from 'echarts';
-        // $("#chart_productos").attr("style", "min-height:" + (productos.length * 100) + "px");
-        console.log($("#chart_productos"));
-        // $("#chart_productos").html("").attr("_echarts_instance_", "");
-        var chartDom = document.getElementById('chart_productos');
-        var myChart = echarts.init(chartDom);
-        var option;
-
-        /*option = {
-            color: colors_productos, //clientes.map(obj => obj.color),
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    // Use axis to trigger tooltip
-                    type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
-                }
-            },
-            legend: {},
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
-            },
-            xAxis: {
-                type: 'value'
-            },
-            yAxis: {
-                type: 'category',
-                data: clientes //['L500', 'LS222ER25']
-            },
-            series: series_productos //clientes //series_productos
-
-        };
-        /
-
-        option = {
-            angleAxis: {},
-            radiusAxis: {
-                type: 'category',
-                data: productos, //["Syrus", "Adland"],
-                z: 10
-            },
-            polar: {},
-            series: series_productos,
-            /*[{
-                    type: 'bar',
-                    data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-                    coordinateSystem: 'polar',
-                    name: 'A',
-                    stack: 'a',
-                    emphasis: {
-                        focus: 'series'
-                    }
-                },
-                {
-                    type: 'bar',
-                    data: [2, 4, 6, 8],
-                    coordinateSystem: 'polar',
-                    name: 'B',
-                    stack: 'a',
-                    emphasis: {
-                        focus: 'series'
-                    }
-                },
-                {
-                    type: 'bar',
-                    data: [1, 2, 3, 4],
-                    coordinateSystem: 'polar',
-                    name: 'C',
-                    stack: 'a',
-                    emphasis: {
-                        focus: 'series'
-                    }
-                }
-            ],*
-        legend: {
-            show: true,
-            data: clientes //["PP HYS 6200", "PE MLLD 7118A SUPER", "PE MLLD FLLH18-0|10", "LDPE ADITIVO", "H521GR", "PP RP250", "PP RP650", "PP D115A", "HDI0653U1", "HDB0355"]
-        }
-        };
-
-        option && myChart.setOption(option);
-        myChart.on('click', function(params) {
-            // Print name in console
-            myChart.on('click', function(params) {
-                // Print name in console
-                // console.log(params);
-                /*obtiene detalles*
-                abreDetalle(params.seriesName, "null", params.name, "null");
-            });
-        });
-    }
-*/
 
 const chart_lotes = () => {
 
@@ -940,11 +805,11 @@ const abreDetalle = (cliente = "", lote = "", producto = "", almacen = "") => {
                 title: "<strong>" + ((cliente != "null") ? cliente : almacen) + "</strong>",
                 // icon: 'info',
                 position: "top",
-                width: "80%",
+                width: "90%",
                 html: `El ${(lote!="null")?"Lote":(producto!="null")?"Producto":"Almacen"} seleccionado es ${(lote!="null")?lote:(producto!="null")?producto:almacen}
                                     <table class="display" id="table_detalle" style="width:100%">
                                     <thead>
-                                          <th>FECHA</th><th>CARRO</th><th>TOLVA/PLACA</th><th>CLIENTE</th><th>TIPO</th><th>CANTIDAD</th><th>#ORDEN</th><th>FIN SERVICIO</th><th>ALMACÉN</th>
+                                          <th>FECHA</th><th>CARRO</th><th>TOLVA/PLACA</th><th>CLIENTE</th><th>TIPO</th><th>LOTE</th><th>ROTULO</th><th>CANTIDAD</th><th>#ORDEN</th><th>FIN SERVICIO</th><th>ALMACÉN</th>
                                     </thead>
                                     <tbody>
                                     </tbody>
@@ -975,7 +840,14 @@ const abreDetalle = (cliente = "", lote = "", producto = "", almacen = "") => {
                                     class: 'clase'
                                 },
                                 {
-                                    data: 'cant_mov'
+                                    data: 'Lote'
+                                },
+                                {
+                                    data: 'Rotulo'
+                                },
+                                {
+                                    data: 'cant_mov',
+                                    class: 'cant_movs'
                                 },
                                 {
                                     data: 'orden'
@@ -1010,6 +882,15 @@ const abreDetalle = (cliente = "", lote = "", producto = "", almacen = "") => {
                             language: {
                                 url: '<?php echo URL; ?>assets/libs/datatables/es-MX.json',
                             },
+                            initComplete: function() {
+                                for (x = 0; x < $(".cant_movs").length; x++) {
+                                    //console.log($(".cant_movs")[x].innerText)
+                                    if ($(".cant_movs")[x].innerText.indexOf("-") >= 0) {
+                                        //$(".cant_movs")[x].innerText = "<color='red'>"+$(".cant_movs")[x].innerText+"</color>";
+                                        $(".cant_movs")[x].className = $(".cant_movs")[x].className + " i-red"
+                                    }
+                                }
+                            }
                         });
                     }, 500);
 

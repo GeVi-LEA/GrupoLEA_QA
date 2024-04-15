@@ -1432,7 +1432,7 @@ class comprasController
         if ($ordenar != 3) {
             $embarques = $emb->getEmbarqueByFechasProdProv($proveedor, $producto, $fechaInicio, $fechaFinal, $aduana, $ordenar, false, true);
         } else {
-            $embarques = $emb->getEmbarqueByFechasPedimentoProdProv($proveedor, $producto, $fechaInicio, $fechaFinal, $aduana, false, true);
+            $embarques = $emb->getEmbarqueByFechasPedimentoProdProv($proveedor, $producto, $fechaInicio, $fechaFinal, $aduana, true);
         }
         require_once utils_root . 'toExcel/excel.php';
         if ($tipoReporte == 1) {

@@ -514,6 +514,7 @@ class Embarque
         if ($isFile) {
             $file = ' e.estatus_id != 2 and ';
         }
+
         $fecha = $this->getFechasPedimento($fechaIni, $fechaFin);
         if ($producto != null && $proveedor == null && $aduana == null) {
             $sql = ' where ' . $file . " e.requisicion_producto in (select req.id from compras_requisiciones req where req.producto_id = {$producto}) " . $fecha . ' order by p.fecha_pedimento asc;';
@@ -538,6 +539,7 @@ class Embarque
         } else {
             $sql = null;
         }
+        error_log($sql,3,logs_root);
         $result = $this->getAll($sql);
 
         return $result;
