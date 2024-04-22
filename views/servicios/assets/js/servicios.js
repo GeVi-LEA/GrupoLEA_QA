@@ -428,6 +428,7 @@ $(document).ready(function () {
 		}
 	});
 	$("#chofer").change(function () {
+		console.log($("#chofer option:selected").val());
 		if ($("#chofer option:selected").val() == "nuevo") {
 			windowToOpen = window.open(__url__ + "views/catalogos/?controller=Catalogo&action=showChoferesTransportistas", "_blank");
 			windowToOpen.addEventListener(
@@ -454,6 +455,7 @@ $(document).ready(function () {
 			);
 		} else {
 			// getChoferes($("#transportista option:selected").val());
+			console.log("aca");
 		}
 	});
 
@@ -478,7 +480,7 @@ $(document).ready(function () {
 	$("#btnGuardar").click(function (e) {
 		e.preventDefault();
 		if (validarDatosEnsacado()) {
-			$("#ensacadoForm").find("input, select").removeAttr("disabled");
+			$("#ensacadoForm").find("input, select").removeAttr("disabled").removeAttr("readonly");
 			var datosForm = new FormData($("#ensacadoForm")[0]);
 			//console.log(datosForm);
 			datosForm.append("peso_obligatorio", $("#peso_obligatorio").prop("checked") ? 1 : 0);
@@ -629,7 +631,7 @@ $(document).ready(function () {
 						false
 					);
 				} else {
-					getChoferes($("#transportista option:selected").val());
+					// getChoferes($("#transportista option:selected").val());
 				}
 			});
 		}
@@ -1842,7 +1844,7 @@ $(document).ready(function () {
 					false
 				);
 			} else {
-				getChoferes($("#transportista option:selected").val());
+				// getChoferes($("#transportista option:selected").val());
 			}
 		});
 	}

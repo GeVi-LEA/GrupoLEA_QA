@@ -586,13 +586,15 @@ class ServicioEnsacado
         return $result;
     }
 
-    public function getServicios($fecha_ini, $fecha_fin, $clientes)
+    public function getServicios($fecha_ini, $fecha_fin, $clientes, $tiposervicios = '1')
     {
         ini_set('memory_limit', '-1');
         $result = array();
         $sql    = "      
                 select                
                 ens.folio
+                ,serv.id id_tipo_serv
+                ,serv.nombre tipo_serv
                 ,ent.numUnidad
                 ,cli.nombre as nom_cliente
                 ,cli.id id_cliente
@@ -611,21 +613,23 @@ class ServicioEnsacado
                 ,FORMAT(ens.barredura_limpia,2) barredura_limpia
                 
                 from servicios_ensacado ens
-                inner join servicios_entradas ent on ent.id = ens.entrada_id and ent.entrada_salida = 0
+                inner join servicios_entradas ent on ent.id = ens.entrada_id /*and ent.entrada_salida = 0*/
                 inner join catalogo_clientes cli on cli.id = ent.cliente_id
                 inner join catalogo_productos_resinas_liquidos prod on prod.id = ens.producto_id
                 inner join catalogo_usuarios usu_ini on usu_ini.id = ens.usuario_inicio
                 inner join catalogo_usuarios usu_fin on usu_fin.id = ens.usuario_fin
+                inner join catalogo_servicios serv on serv.id = ens.servicio_id
                 where 
-                ens.servicio_id = 1
+                ens.servicio_id in(" . $tiposervicios . ")
                 and ens.fecha_fin >= '" . $fecha_ini . " 00:00:00'
                 and ens.fecha_fin <= '" . $fecha_fin . " 23:00:00'
                 ";
         if ($clientes != '') {
-            $sql .= ' and ent.cliente_id in (' . $clientes . ') order by ens.fecha_fin desc';
-        } else {
-            $sql .= 'order by ens.fecha_fin desc ';
+            $sql .= ' and ent.cliente_id in (' . $clientes . ') ';
         }
+        // else {
+        $sql .= 'order by cli.nombre, serv.nombre, ens.fecha_fin desc ';
+        // }
 
         // print_r('<pre>');
         // print_r($sql);
@@ -640,27 +644,31 @@ class ServicioEnsacado
         return $result;
     }
 
-    public function getServiciosGrafica($fecha_ini, $fecha_fin, $clientes)
+    public function getServiciosGrafica($fecha_ini, $fecha_fin, $clientes, $tiposervicios = '1')
     {
         ini_set('memory_limit', '-1');
         $result = array();
-        $sql    = "      
+        $sql    = '      
             select                
-            cli.nombre as nom_cliente
+            max(cli.id) as id_cliente
+            ,cli.nombre as nom_cliente
             ,count(*) cantidad
             ,max(cli.colorweb) colorweb
             from servicios_ensacado ens
-            inner join servicios_entradas ent on ent.id = ens.entrada_id and ent.entrada_salida = 0
+            inner join servicios_entradas ent on ent.id = ens.entrada_id /*and ent.entrada_salida = 0*/
             inner join catalogo_clientes cli on cli.id = ent.cliente_id
             where 
-            ens.servicio_id = 1
+            ens.servicio_id in(' . $tiposervicios . ")
             and ens.fecha_fin >= '" . $fecha_ini . " 00:00:00'
             and ens.fecha_fin <= '" . $fecha_fin . " 23:00:00'
             ";
         if ($clientes != '') {
-            $sql .= ' and ent.cliente_id in (' . $clientes . ') group by cli.nombre';
+            $sql .= ' and ent.cliente_id in (' . $clientes . ') 
+            group by cli.nombre 
+            order by count(*) desc';
         } else {
-            $sql .= 'group by cli.nombre ';
+            $sql .= 'group by cli.nombre 
+            order by count(*) desc, cli.nombre ';
         }
         // print_r('<pre>');
         // print_r($sql);

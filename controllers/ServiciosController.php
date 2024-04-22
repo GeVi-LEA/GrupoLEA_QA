@@ -1333,15 +1333,23 @@ class serviciosController
 
     public function getServicios()
     {
-        $fecha_ini = isset($_POST['fechas']) && $_POST['fechas'] != '' ? explode(' - ', $_POST['fechas'])[0] : null;
-        $fecha_fin = isset($_POST['fechas']) && $_POST['fechas'] != '' ? explode(' - ', $_POST['fechas'])[1] : null;
-        $clientes  = isset($_POST['clientes']) && $_POST['clientes'] != '' ? $_POST['clientes'] : null;
+        $fecha_ini     = isset($_POST['fechas']) && $_POST['fechas'] != '' ? explode(' - ', $_POST['fechas'])[0] : null;
+        $fecha_fin     = isset($_POST['fechas']) && $_POST['fechas'] != '' ? explode(' - ', $_POST['fechas'])[1] : null;
+        $clientes      = isset($_POST['clientes']) && $_POST['clientes'] != '' ? $_POST['clientes'] : null;
+        $tiposervicios = isset($_POST['tiposervicios']) && $_POST['tiposervicios'] != '' ? $_POST['tiposervicios'] : '1';
 
         $servicio = new ServicioEnsacado();
-        $s        = $servicio->getServicios($fecha_ini, $fecha_fin, $clientes);
-        $sg       = $servicio->getServiciosGrafica($fecha_ini, $fecha_fin, $clientes);
+        $s        = $servicio->getServicios($fecha_ini, $fecha_fin, $clientes, $tiposervicios);
+        $sg       = $servicio->getServiciosGrafica($fecha_ini, $fecha_fin, $clientes, $tiposervicios);
 
         echo json_encode(['mensaje' => 'OK', 'servicios' => $s, 'servicios_grafica' => $sg]);
         return true;
+    }
+
+    /* LISTADO DE SERVICIOS */
+    public function lista_servicios()
+    {
+        Utils::noLoggin();
+        require_once views_root . 'servicios/lista_servicios.php';
     }
 }
