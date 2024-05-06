@@ -1,44 +1,63 @@
 <?php
 
-class TipoEmpaque {
-
+class TipoEmpaque
+{
     private $id;
     private $nombre;
     private $descripcion;
+    private $peso_sugerido;
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = Database::connect();
     }
 
-    function getId() {
+    function getId()
+    {
         return $this->id;
     }
 
-    public function getNombre() {
+    public function getNombre()
+    {
         return $this->nombre;
     }
 
-    public function setNombre($nombre): void {
+    public function setNombre($nombre): void
+    {
         $this->nombre = $this->db->real_escape_string(UtilsHelp::fixString($nombre));
     }
 
-    function getDescripcion() {
-    return $this->descripcion;
+    function getDescripcion()
+    {
+        return $this->descripcion;
     }
 
-    function setId($id): void {
+    function setId($id): void
+    {
         $this->id = $id;
     }
 
-    function setDescripcion($descripcion): void {
-        $desc = $this->db-> real_escape_string(UtilsHelp::fixString($descripcion));
-        $this->descripcion = $desc != null ? $desc : "S/D";
+    function setDescripcion($descripcion): void
+    {
+        $desc              = $this->db->real_escape_string(UtilsHelp::fixString($descripcion));
+        $this->descripcion = $desc != null ? $desc : 'S/D';
     }
 
-    public function save() {
-        $sql = "insert into catalogo_tipos_empaques values(null, '{$this->getNombre()}', '{$this->getDescripcion()}')";
-        $save = $this->db->query($sql);
+    public function getPesoSugerido()
+    {
+        return $this->peso_sugerido;
+    }
+
+    public function setPesoSugerido($peso_sugerido): void
+    {
+        $this->peso_sugerido = $peso_sugerido;
+    }
+
+    public function save()
+    {
+        $sql    = "insert into catalogo_tipos_empaques values(null, '{$this->getNombre()}', '{$this->getDescripcion()}', '{$this->getPesoSugerido()}')";
+        $save   = $this->db->query($sql);
         $result = false;
         if ($save) {
             $result = true;
@@ -47,11 +66,12 @@ class TipoEmpaque {
         return $result;
     }
 
-    public function edit() {
-        $sql = "update catalogo_tipos_empaques set "
-                . "nombre= '{$this->getNombre()}', descripcion = '{$this->getDescripcion()}'"
-                . " where id={$this->getId()}";
-        $save = $this->db->query($sql);
+    public function edit()
+    {
+        $sql = 'update catalogo_tipos_empaques set '
+            . "nombre= '{$this->getNombre()}', descripcion = '{$this->getDescripcion()}', peso_sugerido = '{$this->getPesoSugerido()}'"
+            . " where id={$this->getId()}";
+        $save   = $this->db->query($sql);
         $result = false;
         if ($save) {
             $result = true;
@@ -59,16 +79,18 @@ class TipoEmpaque {
         return $result;
     }
 
-    public function getAll() {
-        $result = array();
-        $tiposEmp = $this->db->query("select te.* from catalogo_tipos_empaques te order by te.nombre asc");
+    public function getAll()
+    {
+        $result   = array();
+        $tiposEmp = $this->db->query('select te.* from catalogo_tipos_empaques te order by te.nombre asc');
         while ($t = $tiposEmp->fetch_object()) {
             array_push($result, $t);
         }
         return $result;
     }
 
-    public function delete() {
+    public function delete()
+    {
         $delete = $this->db->query("delete from catalogo_tipos_empaques where id={$this->id}");
         $result = false;
         if ($delete) {
@@ -76,5 +98,4 @@ class TipoEmpaque {
         }
         return $result;
     }
-
 }

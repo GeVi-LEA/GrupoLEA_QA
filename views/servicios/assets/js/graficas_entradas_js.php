@@ -8,6 +8,7 @@ var data_colores = [];
 var id_estatus_sel = 0;
 var estatus_sel;
 var clave_sel;
+var table;
 $(document).ready(function() {
 
     $("#div-lista").hide()
@@ -176,12 +177,12 @@ function llenatablaestatus(id_estatus, estatus, clave) {
         html = "";
         for (var x = 0; x < resp.servicios.length; x++) {
             html += `
-                <tr>
+                <tr id="showEnsacado">
                     <td id="" hidden>${resp.servicios[x].id}</td>
                     <td id="idEnsacado" hidden>${resp.servicios[x].id}</td>
                     <td class="w-td-30 p-0 m-0">
-                        <span id="showEnsacado" class="material-icons i-recibir">${((jQuery.inArray(resp.servicios[x].tipo_transporte_id, arrayIdsTr)) >=0) ? 'directions_subway' : 'local_shipping'}</span>
-                        <strong>${getOperacionServicios(resp.servicios[x].servicio)}</strong>    
+                        <span  class="material-icons i-recibir">${((jQuery.inArray(resp.servicios[x].tipo_transporte_id, arrayIdsTr)) >=0) ? 'directions_subway' : 'local_shipping'}</span>
+                        <strong>${getOperacionServicios2(resp.servicios[x].entrada_salida)}</strong>    
                     </td>
 
                     <td class="px-0 mx-0"><strong>${resp.servicios[x].numeroUnidad}</strong></td>
@@ -195,10 +196,25 @@ function llenatablaestatus(id_estatus, estatus, clave) {
         $("#tabla_estatus tbody").html("");
         $('#tabla_estatus').DataTable().clear().destroy();
         $("#tabla_estatus tbody").html(html);
-        new DataTable('#tabla_estatus', {
+
+        $('#tabla_estatus tfoot th').each(function(i) {
+            var title = $('#tabla_estatus thead th')
+                .eq($(this).index())
+                .text();
+            $(this).html(
+                '<input type="text" placeholder="' + title + '" data-index="' + i + '" />'
+            );
+        });
+        table = new DataTable('#tabla_estatus', {
             dom: 'Bfrtip',
-            retrieve: true,
+            // retrieve: true,
+            paging: false,
+            // responsive: false,            
             scrollY: '40vh',
+            scrollCollapse: true,
+            scrollX: true,
+            // scrollX: true,
+            // fixedColumns: false,
             language: {
                 url: '<?php echo URL; ?>assets/libs/datatables/es-MX.json',
             },
@@ -206,7 +222,7 @@ function llenatablaestatus(id_estatus, estatus, clave) {
                 [5, 'desc']
             ],
             columns: [null, null, {
-                    "width": "5%"
+                    "width": "2%"
                 },
                 {
                     "width": "15%"
@@ -231,7 +247,18 @@ function llenatablaestatus(id_estatus, estatus, clave) {
                 'pdf',
             ],
         });
+        setTimeout(() => {
 
+            // Filter event handler
+            $(table.table().container()).on('keyup', 'tfoot input', function() {
+                console.log($(this));
+                table
+                    .column($(this).data('index'))
+                    .search(this.value)
+                    .draw();
+            });
+            // table.columns.adjust().draw();
+        }, 1000);
     }).fail(resp => {}).catch(resp => {
         // mensajeError('Ocurrio un problema en la peticion en el servidor, favor de reportar a los administradores');
         erpalert("error", "Ocurrio un problema en la peticion en el servidor, favor de reportar a los administradores");

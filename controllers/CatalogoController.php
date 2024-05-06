@@ -1141,8 +1141,8 @@ class catalogoController
                 } else {
                     $errores = UtilsHelp::validarNombreClaveExiste($transportes, $nombre, $clave);
                     if (count($errores) == 0) {
-                         $ultimo = ($trans->getUltimoId()) + 1;
-                         $trans->setId($ultimo);
+                        $ultimo = ($trans->getUltimoId()) + 1;
+                        $trans->setId($ultimo);
                         $save                = $trans->save();
                         $_SESSION['errores'] = $errores;
                     } else {
@@ -1946,6 +1946,7 @@ class catalogoController
             $tipo = new TipoEmpaque();
             $tipo->setNombre($_POST['nombre']);
             $tipo->setDescripcion($_POST['descripcion']);
+            $tipo->setPesoSugerido($_POST['peso_sugerido']);
 
             if ($_POST['id'] != null || $_POST['id'] != '') {
                 $tipo->setId($_POST['id']);
@@ -1982,6 +1983,13 @@ class catalogoController
         $servicio  = new Servicio();
         $servicios = $servicio->getAll();
         require '../../views/catalogos/servicios.php';
+    }
+
+    public function getServicios()
+    {
+        $servicio  = new Servicio();
+        $servicios = $servicio->getAll();
+        print_r(json_encode($servicios));
     }
 
     public function saveServicio()
@@ -2302,9 +2310,9 @@ class catalogoController
         print_r(json_encode($pruebas));
     }
 
-        public function showMarcasEquiposLaboratorio()
+    public function showMarcasEquiposLaboratorio()
     {
-        $a       = new MarcaEquipoLaboratorio();
+        $a      = new MarcaEquipoLaboratorio();
         $marcas = $a->getAll();
         require '../../views/catalogos/marcas_equipos_laboratorio.php';
     }
@@ -2361,12 +2369,12 @@ class catalogoController
         $equipo  = new EquipoLaboratorio();
         $equipos = $equipo->getAll();
 
-        $m = new MarcaEquipoLaboratorio();
+        $m      = new MarcaEquipoLaboratorio();
         $marcas = $m->getAll();
 
-        $p= new PruebaLaboratorio();
+        $p       = new PruebaLaboratorio();
         $pruebas = $p->getAll();
-        
+
         require '../../views/catalogos/equipos_laboratorio.php';
     }
 
@@ -2376,50 +2384,50 @@ class catalogoController
         Utils::deleteSession('errores');
 
         var_dump($_POST);
-       // die();
-  
+        // die();
+
         if (isset($_POST['marcaId']) && $_POST['modelo'] != '' && isset($_POST['nombre'])) {
-            $id              = $_POST['id'] != '' ? $_POST['id'] : null;
-            $nombre =$_POST['nombre'];
-            $marca     = $_POST['marcaId'];
-            $modelo          = $_POST['modelo'];
-            $serie           = $_POST['serie'];
-            $estatus         = $_POST['estatus'];
-            $unidadMedida    = $_POST['unidadMedida'];
-            $factura         = $_POST['factura'];
-            $intervaloUso = $_POST['intervaloUso'];
+            $id               = $_POST['id'] != '' ? $_POST['id'] : null;
+            $nombre           = $_POST['nombre'];
+            $marca            = $_POST['marcaId'];
+            $modelo           = $_POST['modelo'];
+            $serie            = $_POST['serie'];
+            $estatus          = $_POST['estatus'];
+            $unidadMedida     = $_POST['unidadMedida'];
+            $factura          = $_POST['factura'];
+            $intervaloUso     = $_POST['intervaloUso'];
             $intervaloTrabajo = $_POST['intervaloTrabajo'];
-            $intervaloPrueba= $_POST['intervaloPrueba'];
-            $puntosCalibrar = $_POST['puntosCalibrar'];
-            $fechaAlta       = $_POST['fechaAlta'] == '' ? null : str_replace('/', '-', $_POST['fechaAlta']);
-            
-            $observaciones   = $_POST['observaciones'];
+            $intervaloPrueba  = $_POST['intervaloPrueba'];
+            $puntosCalibrar   = $_POST['puntosCalibrar'];
+            $fechaAlta        = $_POST['fechaAlta'] == '' ? null : str_replace('/', '-', $_POST['fechaAlta']);
+
+            $observaciones = $_POST['observaciones'];
 
             $equipo = new EquipoLaboratorio();
-            
+
             $equipo->setEstatusId($estatus);
             $equipo->setUnidadId($unidadMedida);
             $equipo->setModelo($modelo);
             $equipo->setNombre($nombre);
             $equipo->setNumeroSerie($serie);
             $equipo->setMarca($marca);
-            $equipo->setIntervaloUso(empty($intervaloUso) ? "" : implode(",",$intervaloUso));
-            $equipo->setIntervaloTrabajo(empty($intervaloTrabajo) ? "" : implode(",",$intervaloTrabajo));
-            $equipo->setIntervaloPrueba(empty($intervaloPrueba) ? "" : $intervaloPrueba);
+            $equipo->setIntervaloUso(empty($intervaloUso) ? '' : implode(',', $intervaloUso));
+            $equipo->setIntervaloTrabajo(empty($intervaloTrabajo) ? '' : implode(',', $intervaloTrabajo));
+            $equipo->setIntervaloPrueba(empty($intervaloPrueba) ? '' : $intervaloPrueba);
             $equipo->setPuntosCalibrar($puntosCalibrar);
             $equipo->setFechaAlta($fechaAlta != null ? date('Y-m-d', strtotime($fechaAlta)) : null);
-           // $equipo->setFechaAsignacion($fechaAsignacion != null ? date('Y-m-d', strtotime($fechaAsignacion)) : null);
+            // $equipo->setFechaAsignacion($fechaAsignacion != null ? date('Y-m-d', strtotime($fechaAsignacion)) : null);
             $equipo->setObservaciones($observaciones);
 
             if ($id != null) {
                 $equipo->setId($id);
                 $save = $equipo->edit();
             } else {
-                $ultimo      = $equipo->ultimoEquipoLaboratorio();
-            
-                $codigo      = $ultimo != null ? $ultimo->codigo : 'LEQ-0';
+                $ultimo = $equipo->ultimoEquipoLaboratorio();
+
+                $codigo       = $ultimo != null ? $ultimo->codigo : 'LEQ-0';
                 $ultimoCodigo = substr($codigo, strrpos($codigo, '-') + 1);
-                $sigFolio    = 'LEQ-' . ($ultimoCodigo + 1);
+                $sigFolio     = 'LEQ-' . ($ultimoCodigo + 1);
                 $equipo->setCodigo($sigFolio);
                 $save = $equipo->save();
             }

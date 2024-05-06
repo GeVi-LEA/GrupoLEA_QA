@@ -21,6 +21,8 @@ class ServicioEnsacado
     private $bultos;
     private $tarimas;
     private $tipoTarima;
+    private $sacoxtarima;
+    private $peso_empaque;
     private $parcial;
     private $orden;
     private $docOrden;
@@ -302,6 +304,16 @@ class ServicioEnsacado
         $this->tarima_por = $tarima_por;
     }
 
+    public function getPesoEmpaque()
+    {
+        return $this->peso_empaque;
+    }
+
+    public function setPesoEmpaque($peso_empaque): void
+    {
+        $this->peso_empaque = $peso_empaque;
+    }
+
     public function save()
     {
         $sql = "insert into servicios_ensacado values(
@@ -327,8 +339,9 @@ class ServicioEnsacado
                         , null
                         , {$this->getBultos()}
                         , {$this->getTarimas()}
-                        , {$this->getTipoTarima()}
+                        , " . (($this->getTipoTarima() == '') ? '1' : $this->getTipoTarima()) . "
                         , {$this->getSacoXTarima()}
+                        , {$this->getPesoEmpaque()}
                         , {$this->getTarimaPor()}
                         , {$this->getParcial()}
                         , '{$this->getOrden()}'
@@ -378,6 +391,8 @@ class ServicioEnsacado
         , (select cli.nombre from catalogo_clientes cli where cli.id =  serEnt.cliente_id) as cliente
         , serEnt.cliente_id 
         , prod.nombre nombre_producto 
+        , s.sacoxtarima 
+        , s.peso_empaque 
         from servicios_ensacado s
         left join catalogo_productos_resinas_liquidos prod on prod.id = s.producto_id
         inner join servicios_entradas serEnt on serEnt.id = s.entrada_id 
@@ -609,6 +624,8 @@ class ServicioEnsacado
                 ,get_DiffDates(ens.fecha_inicio, ens.fecha_fin) tiempo_invertido
                 ,ens.tarimas
                 ,ens.parcial
+                ,ens.sacoxtarima
+                ,ens.peso_empaque
                 ,FORMAT(ens.barredura_sucia,2) barredura_sucia
                 ,FORMAT(ens.barredura_limpia,2) barredura_limpia
                 

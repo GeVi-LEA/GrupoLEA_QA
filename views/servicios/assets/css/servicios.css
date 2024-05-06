@@ -71,15 +71,28 @@ html {
 }
 
 .estatus-proceso {
-	background-color: #dad73f;
-	color: #ffff;
-	font-weight: 700;
+	background-color: #dad73f !important;
+	color: #ffff !important;
+	font-weight: 700 !important;
+}
+.estatus-proceso:not(.collapsed) {
+	/* background-color: #dad73fa8 !important; */
+	background-image: repeating-linear-gradient(45deg, #dad73f, #dad73f 50px, #d6d440 50px, #d6d440 100px) !important;
+	color: #ffff !important;
+	font-weight: bolder !important;
 }
 
 .estatus-fin {
-	background-color: #2501a5;
-	color: #ffff;
-	font-weight: 700;
+	background-color: #2501a5 !important;
+	color: #ffff !important;
+	font-weight: 700 !important;
+}
+.estatus-fin:not(.collapsed) {
+	background-color: #2501a544 !important;
+	background-image: repeating-linear-gradient(45deg, #2501a5, #2501a5 50px, #2b04bb 50px, #2b04bb 100px) !important;
+
+	color: #ffff !important;
+	font-weight: bolder !important;
 }
 
 .estatus-pagado {
@@ -95,9 +108,14 @@ html {
 }
 
 .estatus-programa {
-	background-color: #d8813a;
-	color: #ffff;
-	font-weight: 700;
+	background-color: #d8813a !important;
+	color: #ffff !important;
+	font-weight: 700 !important;
+}
+.estatus-programa:not(.collapsed) {
+	background-image: repeating-linear-gradient(45deg, #d8813a, #d8813a 50px, #d17e3a 50px, #d17e3a 100px) !important;
+	color: #ffff !important;
+	font-weight: bolder !important;
 }
 .estatus-liberado {
 	background-color: #001e48;
@@ -128,6 +146,7 @@ html {
 
 .estatus span {
 	padding: 5px;
+	font-size: 0.8rem;
 }
 
 .green {
@@ -590,7 +609,8 @@ button {
 	overflow-x: hidden;
 	overflow-y: scroll;
 	min-height: 20em;
-	height: 25rem;
+	/* height: 25rem; */
+	height: 90vh;
 	line-height: 1.5em;
 	padding-bottom: 150px;
 }
@@ -647,4 +667,46 @@ button {
 .emsg {
 	color: #990033 !important;
 	font-style: italic !important;
+}
+
+#ensacadoForm .form-label {
+	font-weight: bold;
+}
+#ensacadoForm .row {
+	margin-top: 10px;
+}
+
+#secBascula input,
+.numhtml {
+	text-align: right;
+}
+
+.foliohead {
+	color: white !important;
+	background-color: #2501a5;
+	font-weight: bold;
+}
+
+#det_servicios .detalles_serv {
+	overflow-x: hidden;
+	overflow-y: scroll;
+	height: 50vh;
+}
+
+th input {
+	background-color: #dee6f2 !important;
+	border-radius: 10px !important;
+	padding: 5px !important;
+	color: rgba(161, 161, 161, 0.541);
+}
+
+th input:not(:placeholder-shown) {
+	background-color: #9cc5f5 !important;
+	border-radius: 15px !important;
+	padding: 5px !important;
+	color: rgb(22, 21, 21);
+}
+
+#showEnsacado {
+	cursor: pointer;
 }

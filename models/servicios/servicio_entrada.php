@@ -447,8 +447,8 @@ class ServicioEntrada
                 , (se.peso_teorico - se.peso_cliente) as diferenciaTeorica
                 , TIMESTAMPDIFF(MINUTE, se.fecha_entrada, if(se.fecha_salida is null, now(), se.fecha_salida)) as tiempoTranscurrido
                 , case
-                        when tipo_transporte_id = 6 or tipo_transporte_id = 12 then concat(\'<span id="showEnsacado" data-idserv="\',se.id,\'" class="showEnsacado material-icons i-recibir">directions_subway</span>\')
-                        else concat(\'<span id ="showEnsacado"  data-idserv="\',se.id,\'" class = " showEnsacado material-icons i-recibir">local_shipping</span>\')
+                        when tipo_transporte_id = 6 or tipo_transporte_id = 12 then concat(\'<span id="showEnsacado" data-idserv="\',se.id,\'" class="showEnsacado material-icons i-recibir">directions_subway</span>Entrada\')
+                        else concat(\'<span id ="showEnsacado"  data-idserv="\',se.id,\'" class = " showEnsacado material-icons i-recibir">local_shipping</span>Salida\')
                     end as iconounidad 
                 , c.direccion direccion_cliente
                 ,(SELECT sum(ifnull(total_ensacado,cantidad)) FROM servicios_ensacado where entrada_id = se.id and estatus_id <>0 and servicio_id in(1,4,5) ) totalensacado
@@ -457,6 +457,8 @@ class ServicioEntrada
                     when (tipo_transporte_id = 6 or tipo_transporte_id = 12) and (SELECT count(*) FROM servicios_ensacado where entrada_id = se.id and estatus_id not in(0, 5)) = 0 and se.estatus_bascula <> \'C\' then concat(\'<div class=\"pendiente\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Pendiente pesar en vacío\">\',numUnidad,\'</div>\')
                     else numUnidad
                     end numeroUnidad
+                ,(select COALESCE(SUM(ifnull(total_ensacado,cantidad)), 0) from servicios_ensacado where entrada_id = se.id and estatus_id not in (0)) total_por_ensacar
+                ,(select COALESCE(SUM(total_ensacado), 0) from servicios_ensacado where entrada_id = se.id and estatus_id in (5)) total_ensacado
                 from servicios_entradas se 
                 inner join catalogo_estatus es on es.id = se.estatus_id 
                 left join catalogo_clientes c on c.id = se.cliente_id ';
@@ -658,9 +660,9 @@ class ServicioEntrada
     public function unidadRegistrada()
     {
         if (!$this->getId()) {
-            $sql = "select * from servicios_entradas where numUnidad = '{$this->getNumUnidad()}' and estatus_id not in( 5,15) ";
+            $sql = "select * from servicios_entradas where numUnidad = '{$this->getNumUnidad()}' and estatus_id not in(0, 5, 15) ";
         } else {
-            $sql = "select * from servicios_entradas where numUnidad = '{$this->getNumUnidad()}' and estatus_id not in( 5,15)  and id !=  {$this->getId()}";
+            $sql = "select * from servicios_entradas where numUnidad = '{$this->getNumUnidad()}' and estatus_id not in(0, 5, 15)  and id !=  {$this->getId()}";
         }
         return $this->db->query($sql);
     }

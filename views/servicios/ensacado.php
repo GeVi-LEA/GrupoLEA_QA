@@ -122,9 +122,9 @@ function ROFinaliza($estatus)
                         </div>
                         <div id="divRadios" class="div-radios">
                             <strong for="entrada_salida">Entrada:</strong>
-                            <input class="ml-1 mr-3" id="entrada_salida" type="radio" name="entrada_salida" value="0" disabled <?= ($ensacado['entrada_salida'] == 0) ? 'checked' : ''; ?> />
+                            <input class="ml-1 mr-3" id="entrada_salida" type="radio" name="entrada_salida" value="0" <?= ($ensacado['entrada_salida'] == 0) ? 'checked' : ''; ?> />
                             <strong for="entrada_salida">Salida:</strong>
-                            <input class="ml-1" type="radio" name="entrada_salida" value="1" disabled <?= ($ensacado['entrada_salida'] == 1) ? 'checked' : ''; ?> />
+                            <input class="ml-1" type="radio" name="entrada_salida" value="1" <?= ($ensacado['entrada_salida'] == 1) ? 'checked' : ''; ?> />
                         </div>
                         <div class='form-check form-switch'>
                             <input class="form-check-input" type="checkbox" role="switch" id="peso_obligatorio" name="peso_obligatorio" <?= ($ensacado['peso_obligatorio'] == 1) ? 'checked' : ''; ?>>
