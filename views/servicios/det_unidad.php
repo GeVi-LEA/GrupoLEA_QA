@@ -47,7 +47,7 @@ function ROFinaliza($estatus)
 
 
     <!-- <script src="<?= root_url ?>views/servicios/assets/js/servicios.js"></script> -->
-    <script src="<?= root_url ?>views/servicios/assets/js/det_unidad.js"></script>
+    <script src="<?= root_url ?>views/servicios/assets/js/det_unidad.js?v=1.2.0"></script>
 
 
 
@@ -560,7 +560,7 @@ function ROFinaliza($estatus)
                                                     <?php if ($serv['estatus_id'] == 3 || $serv['estatus_id'] == 133): ?>
                                                     <button id="detenerServicio" type="button" class="btn btn-transparent" data-nombreserv="<?= $serv['nombreServ'] ?>" data-folio="<?= $serv['folio'] ?>" data-idservicio="<?= $serv['id'] ?>"><span class="fa-regular fa-circle-stop material-icons i-pdf "></span></button>
                                                     <?php endif; ?>
-                                                    <?php if ($serv['estatus_id'] != 5 && Utils::permisosGerente()): ?>
+                                                    <?php if ($serv['estatus_id'] != 5 && (Utils::permisosGerente() or Utils::permisosSupervisor())): ?>
                                                     <button id="editarServicio" type="button" class="btn btn-transparent" data-idservicio="<?= $serv['id'] ?>"><span class="material-icons i-edit" title="Editar">edit</span></button>
                                                     <button id="deleteServicio" type="button" class="btn btn-transparent" data-idservicio="<?= $serv['id'] ?>"><span class="material-icons i-delete" title="Eliminar">delete_forever</span></button>
                                                     <?php endif; ?>
@@ -984,7 +984,7 @@ function ROFinaliza($estatus)
                     <!-- </div> -->
                     <div class='col-12' id="div_producto">
                         <label for="producto" class="form-label">Producto</label>
-                        <select name="producto" class="form-select" id="producto" style="">
+                        <select name="producto" class="form-select producto_sel" id="producto" style="">
                             <option value="" selected>--Selecciona--</option>
                             <option value="nuevo"> >>Nuevo Producto<< </option>
                                     <?php

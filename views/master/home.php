@@ -1,6 +1,6 @@
 <script src='<?php echo URL; ?>assets/js/charts/echarts/echarts.js' type='text/javascript'></script>
 
-<div class='row'>
+<div class='row mb-5'>
     <div class='col-6'>
         <div class='row'>
             <div class='col-12'>
@@ -27,4 +27,14 @@
         </div>
 
     </div>
+    <div class='col-9'>
+        <div class='row'>
+            <div class='col-12'>
+                <?php require_once views_root . 'widgets/servicios.php'; ?>
+
+            </div>
+        </div>
+    </div>
 </div>
+
+<br />

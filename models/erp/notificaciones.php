@@ -82,13 +82,13 @@ class Notificaciones
         if ($this->getTitulo() == null) {
             $sql .= " 'Mensaje del sistema', ";
         } else {
-            $sql .= " '{$this->getTitulo()}',  ";
+            $sql .= " UPPER('{$this->getTitulo()}'),  ";
         }
 
         if ($this->getMensaje() == null) {
             $sql .= " 'Mensaje del sistema', ";
         } else {
-            $sql .= " '{$this->getMensaje()}',  ";
+            $sql .= " UPPER('{$this->getMensaje()}'),  ";
         }
 
         $save   = $this->db->query($sql);
@@ -155,7 +155,7 @@ class Notificaciones
                         VALUES(
                         ' . $u->user_id . ",
                         '" . $u->titulo . "',
-                        '" . $u->mensaje . (($mensaje != '') ? ' ... ' . $mensaje : '') . "'
+                        UPPER('" . $u->mensaje . (($mensaje != '') ? ' ... ' . $mensaje : '') . "')
                         );";
             $this->db->query($queryins);
         }

@@ -211,7 +211,8 @@
                             </li>
                             <!-- start Reportes Menu -->
                             <li class=" nav-item ">
-                                <a class="nav-link menu-link <?php activeSubMenu('rep') ?> <?php if (!Utils::permisosSupervisor()) { echo 'disabled'; } ?>" href=" #sidebarServiciosReportes" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarServiciosReportes">
+                                <a class="nav-link menu-link <?php activeSubMenu('rep') ?> <?php activeSubMenu('lista') ?> <?php if (!Utils::permisosSupervisor()) { echo 'disabled'; } ?>" href=" #sidebarServiciosReportes" data-bs-toggle="collapse" role="button" aria-expanded="false"
+                                    aria-controls="sidebarServiciosReportes">
                                     <i class="fa-solid fa-square-poll-vertical fa-xl"></i>
                                     <span class="item-name">Reportes</span>
                                     <i class="right-icon">
@@ -230,12 +231,23 @@
                                                     </g>
                                                 </svg>
                                             </i>
-
                                             <i class="sidenav-mini-icon">RSE</i>
                                             <span class="item-name">Rep. Serv. Ensacado</span>
                                         </a>
                                     </li>
-
+                                    <li class=" nav-item ">
+                                        <a class="nav-link <?php activeRoute(principalUrl . '?controller=Servicios&action=lista_servicios', 'Listado de Servicios') ?>" href="<?= principalUrl ?>?controller=Servicios&action=lista_servicios">
+                                            <i class="icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
+                                                    <g>
+                                                        <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                                                    </g>
+                                                </svg>
+                                            </i>
+                                            <i class="sidenav-mini-icon">LS</i>
+                                            <span class="item-name">Listado de Servicios</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <!-- end Reportes Menu -->
@@ -306,7 +318,7 @@
 
                     <!-- start Catalogos Menu -->
                     <li class="nav-item">
-                        <a class="nav-link menu-link <?php if (!Utils::permisosSupervisor() and !Utils::permisosCatalogos()) { echo 'disabled'; } ?>" href="#sidebarCatalogos" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarCatalogos">
+                        <a class="nav-link menu-link <?php if (!Utils::permisosSupervisor()) { echo 'disabled'; } ?>" href="#sidebarCatalogos" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarCatalogos">
                             <i class="fa-solid fa-book fa-xl"></i>
                             <span class="item-name" data-key="t-landing" id="abrirCatalogo">Catálogos</span>
                             <!--  <i class="right-icon">

@@ -19,7 +19,7 @@ let servicio;
 var $regexname = /[A-Z]{4}\d{6}/;
 
 $(document).ready(function () {
-	// //console.log("entra a servicios js");
+	console.log("entra a servicios js");
 	if (typeof __url__ !== "undefined" && __url__) {
 		// vriable is set and isnt falsish so it can be used;
 	} else {
@@ -369,9 +369,9 @@ $(document).ready(function () {
 		// swal.close();
 	});
 
-	$("#producto").change(function () {
+	$(".producto_sel").change(function () {
 		// //console.log($("#producto option:selected").val());
-		if ($("#producto option:selected").val() == "nuevo") {
+		if ($(".producto_sel option:selected").val() == "nuevo") {
 			windowToOpen = window.open(__url__ + "views/catalogos/?controller=Catalogo&action=showProductosResinasLiquidos", "_blank");
 			windowToOpen.addEventListener(
 				"submit",
@@ -667,9 +667,9 @@ $(document).ready(function () {
 		//console.log(serv_entrada);
 		$(".calctarimas div").attr("hidden", true);
 		$("#agregarServicioModal").modal("show");
-		$("#formAgregarServicio #producto").select2({
+		$("#formAgregarServicio .producto_sel").select2({
 			theme: "bootstrap-5",
-			dropdownParent: $("#formAgregarServicio").find("#producto").parent(),
+			dropdownParent: $("#formAgregarServicio").find(".producto_sel").parent(),
 		});
 
 		$("#formAgregarServicio")
@@ -889,7 +889,11 @@ $(document).ready(function () {
 		$(div).find("#show, #delete").removeAttr("hidden");
 	}
 
-	$("#lote, #lote_confirm").keyup(function () {
+	$("#formAgregarServicio").find("#lote").keyup(function () {
+		validarDatosServicio();
+	});
+    
+	$("#formAgregarServicio").find("#lote_confirm").keyup(function () {
 		validarDatosServicio();
 	});
 
@@ -1167,15 +1171,15 @@ $(document).ready(function () {
 									formEditar.find("#loteSelect").parent("div").find(".select2").hide();
 									formEditar.find("#producto").attr("disabled", false).attr("hidden", false);
 									formEditar.find("#producto").val(r.producto_id);
-									$("#producto").select2({
+									$(".producto_sel").select2({
 										theme: "bootstrap-5",
-										dropdownParent: formEditar.find("#producto").parent(),
+										dropdownParent: formEditar.find(".producto_sel").parent(),
 									});
 									$("#tipoTarima").select2({
 										theme: "bootstrap-5",
 										dropdownParent: formEditar.find("#tipoTarima").parent(),
 									});
-									$("#formEditarServicio").find("#producto").val(servicio_edit.producto_id).trigger("change");
+									$("#formEditarServicio").find(".producto_sel").val(servicio_edit.producto_id).trigger("change");
 									formEditar.find("#existencia").attr("disabled", false).attr("hidden", false);
 									formEditar.find("#existencia").parent("div").attr("hidden", true);
 
@@ -1200,13 +1204,13 @@ $(document).ready(function () {
 									// formEditar.find("#loteSelect").val(servicio_edit.lote).trigger("change");
 									console.log("servicio_edit.lote: ", servicio_edit.lote);
 									$("#formEditarServicio").find("#loteSelect").val(servicio_edit.lote).trigger("change");
-									$("#formEditarServicio").find("#producto").val(servicio_edit.producto_id).trigger("change");
+									$("#formEditarServicio").find(".producto_sel").val(servicio_edit.producto_id).trigger("change");
 									$("#formEditarServicio").find("#tipoTarima").val(servicio_edit.tipo_tarima).trigger("change");
 								}, 1000);
 								setTimeout(() => {
 									// formEditar.find("#loteSelect").val(servicio_edit.lote).trigger("change");
 									$("#formEditarServicio").find("#loteSelect").val(servicio_edit.lote).trigger("change");
-									$("#formEditarServicio").find("#producto").val(servicio_edit.producto_id).trigger("change");
+									$("#formEditarServicio").find(".producto_sel").val(servicio_edit.producto_id).trigger("change");
 									$("#formEditarServicio").find("#tipoTarima").val(servicio_edit.tipo_tarima).trigger("change");
 								}, 2000);
 							} catch (error1) {
@@ -1966,12 +1970,13 @@ $(document).ready(function () {
 		convertiLBS("cantidadEnviar");
 		// }, 300);
 	});
-	/*$("#cantidadLBS1, #cantidad, #cantidad_lbs").on("change keyup", function () {
-    	console.log("-->cantidadLBS");
-    	// setTimeout(() => {
-    	convertiLBS("cantidadLBS");
-    	// }, 300);
-    });*/
+	// $("#cantidadLBS1, #cantidad, #cantidad_lbs").on("change keyup", function () {
+	$("#cantidadLBS1").on("change keyup", function () {
+		console.log("-->cantidadLBS");
+		// setTimeout(() => {
+		convertiLBS("cantidadLBS");
+		// }, 300);
+	});
 	$("#cantidad, #cantidad_lbs, #pesounidad_cantidad, #pesounidad_cantidad_lbs").on("change keyup", function (a, b) {
 		console.log("-->", a.target.id);
 		convertiLBS(a.target.id);
@@ -2155,11 +2160,14 @@ function agregarLotesEnsacado(form, tipo_producto = "") {
 	} else if (servicio.includes("ENSACADO") || servicio.includes("ALMACENAJE") || servicio.includes("TRASPALEO") || servicio.includes("REEMPAQUE")) {
 		lote.attr("disabled", false).attr("hidden", false);
 		$(".disponible_div").attr("disabled", true).attr("hidden", false);
-		$("#disponible_lote").parent("div").parent().attr("hidden", true);
+		// $("#disponible_lote").parent("div").parent().attr("hidden", true);
+
 		if (servicio.includes("ENSACADO") || servicio.includes("REEMPAQUE")) {
 			$(".programacion").attr("style", "display:block1 !important");
 			$("#lote_confirm").parent("div").attr("hidden", false);
+			$("#lote_confirm").parent("div").parent("div").attr("hidden", false);
 			$("#alias").attr("disabled", false).attr("hidden", false);
+			console.log("AQUI");
 		} else {
 			$("#fechaPrograma1").val("null");
 		}
@@ -2177,19 +2185,20 @@ function agregarLotesEnsacado(form, tipo_producto = "") {
 		$("#loteSelect").attr("disabled", true).attr("hidden", true);
 		$("#loteSelect").parent("div").find(".select2").hide();
 
-		$("#producto").select2({
+		$(".producto_sel").select2({
 			theme: "bootstrap-5",
-			dropdownParent: $(form).find("#producto").parent(),
+			dropdownParent: $(form).find(".producto_sel").parent(),
 		});
 		$("#tipoTarima").select2({
 			theme: "bootstrap-5",
 			dropdownParent: $(form).find("#tipoTarima").parent(),
 		});
+
 		setTimeout(() => {
 			$("#formAgregarServicio").find("#loteSelect").parent("div").find(".select2").hide();
 			$("#formEditarServicio").find("#existencia").parent("div").parent("div").hide();
 			$(".div-form").attr("hidden", false);
-			$("#disponible_lote").parent("div").parent().attr("hidden", true);
+			// $("#disponible_lote").parent("div").parent().attr("hidden", true);
 		}, 100);
 	} else {
 		$(lote).attr("hidden", true);
@@ -2201,9 +2210,9 @@ function agregarLotesEnsacado(form, tipo_producto = "") {
 	try {
 		$(form).find("#loteSelect").val(servicio.lote).trigger("change");
 	} catch (error) {}
-	$("#producto").select2({
+	$(".producto_sel").select2({
 		theme: "bootstrap-5",
-		dropdownParent: $(form).find("#producto").parent(),
+		dropdownParent: $(form).find(".producto_sel").parent(),
 	});
 }
 
@@ -2265,14 +2274,17 @@ function validaInventario(form, linea = "") {
 				sacoxtarima = 55;
 			}
 			console.log("sacoxtarima: ", sacoxtarima);
-			$(form)
-				.find("#disponible_lote")
-				.val(htmlNum($(form).find("#loteSelect").find(":selected").attr("data-disponible")));
-			$("#disponible_lote").parent("div").parent().attr("hidden", false);
-			$("#disponible_lote").parent("div").attr("hidden", false);
+            console.log("tiposerv: ", $("#idTipoServicio option:selected").val());
+            if($("#idTipoServicio option:selected").val()!="1"){
+			    $(form)
+			    	.find("#disponible_lote")
+			    	.val(htmlNum($(form).find("#loteSelect").find(":selected").attr("data-disponible")));
+			    $("#disponible_lote").parent("div").parent().attr("hidden", false);
+			    $("#disponible_lote").parent("div").attr("hidden", false);
+            }
 			// $(form).find("#idTipoServicio option:selected").val()
 			// );
-			// ////console.log("tiposerv: ", $("#idTipoServicio option:selected").val());
+			// ////
 			// ////console.log("cantidad", cantidad);
 			$(form)
 				.find("#bultos")
@@ -2487,18 +2499,18 @@ function llenaComboProductos() {
 
 			productos = resp;
 			var maxid = getMax(productos, "id").id;
-			$("#producto").empty().append(`<option value="" selected>--Selecciona--</option> <option value="nuevo"> >>Nuevo Producto<< </option>`);
+			$(".producto_sel").empty().append(`<option value="" selected>--Selecciona--</option> <option value="nuevo"> >>Nuevo Producto<< </option>`);
 			for (let x = 0; x < productos.length; x++) {
 				////console.log(productos[x]);
 				var newOption = new Option(productos[x].nombre, productos[x].id, true, true);
 				// Append it to the select
 				if (maxid == productos[x].id) {
-					$("#producto").append(newOption).trigger("change");
+					$(".producto_sel").append(newOption).trigger("change");
 				} else {
-					$("#producto").append(newOption);
+					$(".producto_sel").append(newOption);
 				}
 			}
-			$("#producto").val(getMax(productos, "id").id).trigger("change");
+			$(".producto_sel").val(getMax(productos, "id").id).trigger("change");
 		})
 		.fail((resp) => {})
 		.catch((resp) => {
@@ -2904,7 +2916,7 @@ function validarDatosServicio() {
 	}
 	var servicio = $("#idTipoServicio option:selected").text();
 	// $(".programacion").attr("style", "display:none !important;");
-	if ($("#lote").val() == "") {
+	if ($("#formAgregarServicio").find("#lote").val() == "") {
 		if (servicio.includes("CARGA") || servicio.includes("AJUSTE")) {
 			if ($("#loteSelect").val() == "" || $("#loteSelect").val() == "--Selecciona--") {
 				valid = false;
@@ -2999,15 +3011,16 @@ function validarDatosServicio() {
 		} else {
 			$("#loteSelect").removeClass("required").addClass("success");
 		}
-
-		if ($("#lote").val() == "" || $("#lote").val() != $("#lote_confirm").val()) {
+        console.log("$('#formAgregarServicio').find('#lote').val(): ",$("#formAgregarServicio").find("#lote").val());
+        console.log("$('#lote_confirm').val(): ", $("#lote_confirm").val());
+		if ($("#formAgregarServicio").find("#lote").val() == "" || $("#formAgregarServicio").find("#lote").val() != $("#lote_confirm").val()) {
 			valid = false;
-			$("#lote").removeClass("success").addClass("required");
+			$("#formAgregarServicio").find("#lote").removeClass("success").addClass("required");
 		} else {
-			$("#lote").removeClass("required").addClass("success");
+			$("#formAgregarServicio").find("#lote").removeClass("required").addClass("success");
 		}
 
-		if ($("#lote_confirm").val() == "" || $("#lote").val() != $("#lote_confirm").val()) {
+		if ($("#lote_confirm").val() == "" || $("#formAgregarServicio").find("#lote").val() != $("#lote_confirm").val()) {
 			valid = false;
 			$("#lote_confirm").removeClass("success").addClass("required");
 		} else {

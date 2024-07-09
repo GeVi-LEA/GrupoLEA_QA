@@ -24,6 +24,8 @@ let detalles;
 let chart_lotes_;
 let jason = {};
 let selectedtab;
+
+
 $(document).ready(function() {
     console.log("entra inventario");
     $("#cmbClientes").find("option").remove();
@@ -408,6 +410,9 @@ const armaInventarios = (latab) => {
                     data: 'Nombre_Almacen'
                 },
                 {
+                    data: 'Fecha_Servicio'
+                },
+                {
                     data: 'Producto'
                 },
                 {
@@ -420,7 +425,16 @@ const armaInventarios = (latab) => {
                     data: 'disponible'
                 },
                 {
+                    data: 'disponible_lbs'
+                },
+                {
                     data: 'sacoxtarima'
+                },
+                {
+                    data: 'empaque'
+                },
+                {
+                    data: 'peso_empaque'
                 },
                 {
                     data: 'tarimas'
@@ -574,8 +588,8 @@ const chart_productos = () => {
         });
     }
     // armaFiltros("Productos");
-}
 
+}
 
 const chart_lotes = () => {
 
@@ -809,7 +823,7 @@ const abreDetalle = (cliente = "", lote = "", producto = "", almacen = "") => {
                 html: `El ${(lote!="null")?"Lote":(producto!="null")?"Producto":"Almacen"} seleccionado es ${(lote!="null")?lote:(producto!="null")?producto:almacen}
                                     <table class="display" id="table_detalle" style="width:100%">
                                     <thead>
-                                          <th>FECHA</th><th>CARRO</th><th>TOLVA/PLACA</th><th>CLIENTE</th><th>TIPO</th><th>LOTE</th><th>ROTULO</th><th>CANTIDAD</th><th>#ORDEN</th><th>FIN SERVICIO</th><th>ALMACÉN</th>
+                                          <th>FECHA ENTRADA</th><th>CARRO</th><th>TOLVA/PLACA</th><th>CLIENTE</th><th>TIPO</th><th>LOTE</th><th>PRODUCTO</th><th>ROTULO</th><th>CANTIDAD</th><th>#ORDEN</th><th>FIN SERVICIO</th><th>ALMACÉN</th>
                                     </thead>
                                     <tbody>
                                     </tbody>
@@ -841,6 +855,9 @@ const abreDetalle = (cliente = "", lote = "", producto = "", almacen = "") => {
                                 },
                                 {
                                     data: 'Lote'
+                                },
+                                {
+                                    data: 'Producto'
                                 },
                                 {
                                     data: 'Rotulo'

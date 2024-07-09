@@ -361,8 +361,8 @@ $(document).ready(function () {
 		// swal.close();
 	});
 
-	$("#producto").change(function () {
-		// //console.log($("#producto option:selected").val());
+	$("#producto, .producto").change(function () {
+		console.log("producto: ",$("#producto option:selected").val());
 		if ($("#producto option:selected").val() == "nuevo") {
 			windowToOpen = window.open(__url__ + "views/catalogos/?controller=Catalogo&action=showProductosResinasLiquidos", "_blank");
 			windowToOpen.addEventListener(
@@ -1074,7 +1074,13 @@ $(document).ready(function () {
 		}
 	});
 
-	$("#lote, #lote_confirm").keyup(function () {
+	$("#formAgregarServicio").find("#lote_confirm").keyup(function () {
+        console.log("aqui: ",$(this));
+		validarDatosServicio();
+	});
+    
+	$("#formAgregarServicio").find("#lote").keyup(function () {
+        console.log("aqui: ",$(this));
 		validarDatosServicio();
 	});
 
@@ -2203,13 +2209,14 @@ function validaInventario(form, linea = "") {
 				sacoxtarima = 55;
 			}
 			console.log("sacoxtarima: ", sacoxtarima);
+            console.log("tiposerv: ", $("#idTipoServicio option:selected").val());
 			$(form)
 				.find("#disponible_lote")
 				.val(htmlNum($(form).find("#loteSelect").find(":selected").attr("data-disponible")));
 			$("#disponible_lote").parent("div").parent().attr("hidden", false);
 			// $(form).find("#idTipoServicio option:selected").val()
 			// );
-			// ////console.log("tiposerv: ", $("#idTipoServicio option:selected").val());
+			
 			// ////console.log("cantidad", cantidad);
 			$(form)
 				.find("#bultos")
@@ -2835,7 +2842,8 @@ function validarDatosServicio() {
 	}
 	var servicio = $("#idTipoServicio option:selected").text();
 	// $(".programacion").attr("style", "display:none !important;");
-	if ($("#lote").val() == "") {
+    // console.log("aca: ",($("#formAgregarServicio").find("#lote").val());
+	if ($("#formAgregarServicio").find("#lote").val() == "") {
 		if (servicio.includes("CARGA") || servicio.includes("AJUSTE")) {
 			if ($("#loteSelect").val() == "" || $("#loteSelect").val() == "--Selecciona--") {
 				valid = false;
@@ -2931,14 +2939,16 @@ function validarDatosServicio() {
 			$("#loteSelect").removeClass("required").addClass("success");
 		}
 
-		if ($("#lote").val() == "" || $("#lote").val() != $("#lote_confirm").val()) {
+        console.log("$('#formAgregarServicio').find('#lote').val(): ",$("#formAgregarServicio").find("#lote").val());
+        console.log("$('#lote_confirm').val(): ", $("#lote_confirm").val());
+		if ($("#formAgregarServicio").find("#lote").val() == "" || $("#formAgregarServicio").find("#lote").val() != $("#lote_confirm").val()) {
 			valid = false;
-			$("#lote").removeClass("success").addClass("required");
+			$("#formAgregarServicio").find("#lote").removeClass("success").addClass("required");
 		} else {
-			$("#lote").removeClass("required").addClass("success");
+			$("#formAgregarServicio").find("#lote").removeClass("required").addClass("success");
 		}
 
-		if ($("#lote_confirm").val() == "" || $("#lote").val() != $("#lote_confirm").val()) {
+		if ($("#lote_confirm").val() == "" || $("#formAgregarServicio").find("#lote").val() != $("#lote_confirm").val()) {
 			valid = false;
 			$("#lote_confirm").removeClass("success").addClass("required");
 		} else {

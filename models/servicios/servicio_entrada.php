@@ -510,7 +510,7 @@ class ServicioEntrada
             // if ($idEst == 5) {
             //    $sql = " where estatus_id = {$idEst} /*and se.fecha_salida >= DATE_ADD(curdate(), INTERVAL -1 month)*/ order by se.id desc";
             // } else {
-            $sql = " where estatus_id = {$idEst} order by se.id desc";
+            $sql = " where estatus_id = {$idEst} and tipo_producto = 0 order by se.id desc";
             // }
         } else {
             $sql = null;

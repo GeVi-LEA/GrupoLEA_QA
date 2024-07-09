@@ -101,11 +101,15 @@ menusel = 'almacenamientoPiso';
             <th>Nombre del Cliente</th>
             <th>Num Ferrotolva</th>
             <th>Almacen</th>
+            <th>Fecha Servicio</th>
             <th>Producto</th>
             <th>Lote</th>
             <th>Rótulo</th>
-            <th>Cant. Disponible</th>
+            <th>Cant. Disponible (kgs)</th>
+            <th>Cant. Disponible (lbs)</th>
             <th>Sacos por Tarima</th>
+            <th>Empaque</th>
+            <th>Peso por empaque (kgs)</th>
             <th>Tarimas</th>
             <th>Parcial</th>
         </thead>
