@@ -15,6 +15,7 @@ var tipoempaque = 0;
 
 var loteSelected = [];
 var elparent;
+var thiss;
 let servicio;
 var $regexname = /[A-Z]{4}\d{6}/;
 
@@ -1731,42 +1732,7 @@ $(document).ready(function () {
 			console.log("lote: ", lote);
 			if (lote != null && lote != "" && lote != "--Selecciona--" && $("[name='entrada_salida']:checked").val() == "1") {
 				getInfoLote(lote, "1337");
-				setTimeout(() => {
-					// getInfoLote(lote, "2287");
-					console.log("loteSelected: ", loteSelected);
-					elparent = $(this).parents("form")[0];
-					// console.log($(this).parents("form")[0]);
-					$("#" + $(this).closest("form").attr("id"))
-						.find("#lote")
-						.val(loteSelected.lote);
-					$("#" + $(this).closest("form").attr("id"))
-						.find("#producto")
-						.val(loteSelected.producto_id);
-
-					elparent.elements.almacen_id.value = loteSelected.almacenId;
-					elparent.elements.producto_id.value = loteSelected.producto_id;
-					elparent.elements.alias.value = loteSelected.alias;
-					$("#" + $(this).closest("form").attr("id"))
-						.find("#alias")
-						.val(loteSelected.alias);
-					$("#" + $(this).closest("form").attr("id"))
-						.find("#existencia")
-						.parent("div")
-						.show();
-					$("#" + $(this).closest("form").attr("id"))
-						.find("#existencia")
-						.val(loteSelected.disponible)
-						.change();
-					$("#" + $(this).closest("form").attr("id"))
-						.find("#existencia")
-						.trigger("blur");
-					setTimeout(() => {
-						//	//getInfoLote(loteSelected[0].lote, "2320");
-						//	$(".loteSelect").select2({ theme: "bootstrap-5" });
-						//	validaInventario("#" + $(this).closest("form").attr("id"), "2300");
-						//$("#formEditarServicio").find("#loteSelect").val(servicio_edit.lote).trigger("change");
-					}, 500);
-				}, 1000);
+                thiss = $(this);
 			}
 		}
 		// $(".calctarimas").attr("style", "display:block");
@@ -1998,9 +1964,50 @@ $(document).ready(function () {
 var cambio;
 /* FUNCIONES */
 
+function llenalote(){
+			                                            	setTimeout(() => {
+			                                            		// getInfoLote(lote, "2287");
+			                                            		console.log("loteSelected: ", loteSelected);
+			                                            		elparent = thiss.parents("form")[0];
+			                                            		// console.log($(this).parents("form")[0]);
+			                                            		$("#" + thiss.closest("form").attr("id"))
+			                                            			.find("#lote")
+			                                            			.val(loteSelected.lote);
+			                                            		$("#" + thiss.closest("form").attr("id"))
+			                                            			.find("#producto")
+			                                            			.val(loteSelected.producto_id);
+                                                            
+			                                            		elparent.elements.almacen_id.value = loteSelected.almacenId;
+			                                            		elparent.elements.producto_id.value = loteSelected.producto_id;
+			                                            		elparent.elements.alias.value = loteSelected.alias;
+			                                            		$("#" + thiss.closest("form").attr("id"))
+			                                            			.find("#alias")
+			                                            			.val(loteSelected.alias);
+			                                            		$("#" + thiss.closest("form").attr("id"))
+			                                            			.find("#existencia")
+			                                            			.parent("div")
+			                                            			.show();
+			                                            		$("#" + thiss.closest("form").attr("id"))
+			                                            			.find("#existencia")
+			                                            			.val(loteSelected.disponible)
+			                                            			.change();
+			                                            		$("#" + thiss.closest("form").attr("id"))
+			                                            			.find("#existencia")
+			                                            			.trigger("blur");
+                                                                    $("#btnGenerarServicio").show();
+			                                            		setTimeout(() => {
+			                                            			//	//getInfoLote(loteSelected[0].lote, "2320");
+			                                            			//	$(".loteSelect").select2({ theme: "bootstrap-5" });
+			                                            			//	validaInventario("#" + $(this).closest("form").attr("id"), "2300");
+			                                            			//$("#formEditarServicio").find("#loteSelect").val(servicio_edit.lote).trigger("change");
+			                                            		}, 500);
+			                                            	}, 1000);
+                                                        }
+
 function getInfoLote(lote, linea = "") {
 	console.log("data: { lote: " + lote + " } linea: ", linea);
-	if (lote != "") {
+    $("#btnGenerarServicio").hide();
+    if (lote != "") {
 		$.ajax({
 			data: {
 				lote: lote,
@@ -2027,6 +2034,7 @@ function getInfoLote(lote, linea = "") {
 				} catch (error) {
 					console.log("errorlote: ", error);
 				}
+                llenalote();
 			},
 			error: function (errorajax) {
 				mensajeError("Algo salio mal, contacte al administrador.");

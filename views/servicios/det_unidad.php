@@ -47,7 +47,7 @@ function ROFinaliza($estatus)
 
 
     <!-- <script src="<?= root_url ?>views/servicios/assets/js/servicios.js"></script> -->
-    <script src="<?= root_url ?>views/servicios/assets/js/det_unidad.js?v=1.2.0"></script>
+    <script src="<?= root_url ?>views/servicios/assets/js/det_unidad.js?v=1.3.0"></script>
 
 
 

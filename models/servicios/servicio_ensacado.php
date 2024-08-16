@@ -321,7 +321,7 @@ class ServicioEnsacado
                         , {$this->getEntradaId()}
                         , {$this->getServicioId()}
                         , {$this->getProductoId()}
-                        , {$this->getAlmacenId()}
+                        , " . (($this->getAlmacenId() == 'undefined') ? '1' :$this->getAlmacenId())."
                         , {$this->getEmpaqueId()}
                         , {$this->getInsumoPor()}
                         , " . (($this->getServicioId() == '5') ? '13' : (($this->getFechaProgramacion() != 'null') ? '13' : $this->getEstatusId())) . "
